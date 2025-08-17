@@ -4,12 +4,13 @@
 void menu_principal(void); 
 void consumo_alimentos(void);
 void consumo_agua(void);
-
+void relatorios(void);
 
 int main(void){
     menu_principal();
     consumo_alimentos();
     consumo_agua();
+    relatorios();
     
 }
 
@@ -95,6 +96,33 @@ void consumo_agua(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
 }
+
+
+void relatorios(void){
+    char opcao;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =  Relatórios  = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    1. Alimentos mais Consumidos                         ///\n");
+    printf("///                    2. Total de Calorias(Dia)                            ///\n");
+    printf("///                    3. Meta Diária de Calorias                           ///\n");
+    printf("///                    4. Meta Diária de Água                               ///\n");
+    printf("///                    5. Excluir Registro de Consumo                       ///\n");
+    printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
 
 
 
