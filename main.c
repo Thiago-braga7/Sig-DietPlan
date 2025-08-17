@@ -3,10 +3,14 @@
 
 void menu_principal(void); 
 void consumo_alimentos(void);
+void consumo_agua(void);
+
 
 int main(void){
     menu_principal();
     consumo_alimentos();
+    consumo_agua();
+    
 }
 
 
@@ -68,7 +72,29 @@ void consumo_alimentos(void){
     getchar();
 }
 
-
+void consumo_agua(void){
+    char opcao;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =  Consumo Diário(Água)  = = = = =           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    1. Registrar Consumo de Água                         ///\n");
+    printf("///                    2. Consultar Consumo(Dia) de Água                    ///\n");
+    printf("///                    3. Alterar Registro de Consumo de Água               ///\n");
+    printf("///                    4. Excluir Registro de Consumo de Água               ///\n");
+    printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
 
 
 
