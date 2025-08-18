@@ -5,6 +5,7 @@
 void bem_vindo(void);
 void menu_principal(void);
 void usuarios(void); 
+void alimentos(void);
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
@@ -13,6 +14,7 @@ void relatorios(void);
 int main(void){
     menu_principal();
     usuarios();
+    alimentos();
     consumo_alimentos();
     consumo_agua();
     relatorios();
@@ -106,6 +108,30 @@ void usuarios(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar(); 
+}
+
+void alimentos(void){
+    char opcao;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =   Alimentos   = = = = =                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    1. Cadastrar Alimento na Dieta                       ///\n");
+    printf("///                    2. Buscar Alimento na Dieta                          ///\n");
+    printf("///                    3. Alterar Alimento da Dieta                         ///\n");
+    printf("///                    4. Excluir Alimento da Dieta                         ///\n");
+    printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
 }
 
 void consumo_alimentos(void){
