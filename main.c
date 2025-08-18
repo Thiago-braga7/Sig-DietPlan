@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h> 
 
+
+void bem_vindo(void);
 void menu_principal(void); 
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
+
 
 int main(void){
     menu_principal();
@@ -13,6 +16,35 @@ int main(void){
     relatorios();
     
 }
+
+void bem_vindo(void) {
+    char nome[50];
+    char genero;
+
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                           SIG-DietPlan                                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
+    printf("\nInforme seu nome: ");
+    scanf("%[^\n]", nome);  
+
+    printf("Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): ");
+    scanf(" %c", &genero);
+
+    if (genero == 'M' || genero == 'm') {
+        printf("\nBem-vindo 😁, %s!\n", nome);
+    } else if (genero == 'F' || genero == 'f') {
+        printf("\nBem-vinda 😁, %s!\n", nome);
+    } else {
+        printf("\nBem-vindo(a) 😁, %s!\n", nome);
+    }
+
+    printf("Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n");
+}
+
 
 
 void menu_principal(void){
