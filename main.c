@@ -12,6 +12,7 @@ void relatorios(void);
 
 int main(void){
     menu_principal();
+    usuarios();
     consumo_alimentos();
     consumo_agua();
     relatorios();
@@ -81,6 +82,30 @@ void menu_principal(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+}
+
+void usuarios(void){
+    char opcao;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =   Usuários   = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    1. Cadastrar Usuário                                 ///\n");
+    printf("///                    2. Buscar Usuário                                    ///\n");
+    printf("///                    3. Alterar Dados do Usuário                          ///\n");
+    printf("///                    4. Excluir Usuário                                   ///\n");
+    printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar(); 
 }
 
 void consumo_alimentos(void){
