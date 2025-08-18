@@ -13,6 +13,7 @@ void relatorios(void);
 
 
 int main(void){
+    bem_vindo();
     menu_principal();
     usuarios();
     alimentos();
