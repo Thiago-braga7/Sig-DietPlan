@@ -6,6 +6,7 @@ void bem_vindo(void);
 void menu_principal(void);
 void usuarios(void); 
 void alimentos(void);
+void cardapio(void);
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
@@ -15,6 +16,7 @@ int main(void){
     menu_principal();
     usuarios();
     alimentos();
+    cardapio();
     consumo_alimentos();
     consumo_agua();
     relatorios();
@@ -121,6 +123,30 @@ void alimentos(void){
     printf("///                    2. Buscar Alimento na Dieta                          ///\n");
     printf("///                    3. Alterar Alimento da Dieta                         ///\n");
     printf("///                    4. Excluir Alimento da Dieta                         ///\n");
+    printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+void cardapio(void){
+    char opcao;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =   Cardápio   = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    1. Cadastrar Refeição                                ///\n");
+    printf("///                    2. Buscar Refeição                                   ///\n");
+    printf("///                    3. Alterar Dados da Refeição                         ///\n");
+    printf("///                    4. Excluir Refeição                                  ///\n");
+    printf("///                    5. Listar Refeições do Usuário                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
