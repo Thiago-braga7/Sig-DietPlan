@@ -51,7 +51,20 @@ void bem_vindo(void) {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
     }
 
+    printf("Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN\n");
+    printf("para auxiliar no planejamento e acompanhamento de dietas.\n");
+    printf("\n");
+    printf("Ele permite:\n");
+    printf("- Cadastro de usuários;\n");
+    printf("- Gestão de alimentos e valores nutricionais;\n");
+    printf("- Registro de consumos diários;\n");
+    printf("- Planejamento de refeições personalizadas.\n");
+    printf("\n");
+
+    
     printf("Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n");
+    printf("Gerencie sua saúde de forma prática: cadastre usuários, registre alimentos, acompanhe a quantidade de água ingerida e controle suas calorias diárias!");
+    printf("\n");
 }
 
 
