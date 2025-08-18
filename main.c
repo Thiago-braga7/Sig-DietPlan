@@ -3,7 +3,8 @@
 
 
 void bem_vindo(void);
-void menu_principal(void); 
+void menu_principal(void);
+void usuarios(void); 
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
@@ -81,6 +82,7 @@ void menu_principal(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
 }
+
 void consumo_alimentos(void){
     char opcao;
     printf("\n");
@@ -104,6 +106,7 @@ void consumo_alimentos(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
 }
+
 
 void consumo_agua(void){
     char opcao;
