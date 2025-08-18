@@ -10,6 +10,7 @@ void cardapio(void);
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
+void sair(void);
 
 
 int main(void){
@@ -21,6 +22,7 @@ int main(void){
     consumo_alimentos();
     consumo_agua();
     relatorios();
+    sair();
     
 }
 
@@ -235,7 +237,19 @@ void relatorios(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
 }
+void sair(){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                 Obrigado por usar o SIG-DietPlan!                       ///\n");
+    printf("///                         Até a proxima!                                  ///\n");
+    printf("///              📷 Instagram: @thiago.braga9a e gabrieluchoa_1             ///\n");
+    printf("///              🐙 GitHub: github.com/Thiago-braga7                        ///\n");
+    printf("///                         github/GabrielUchoa17                           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
 
+}
 
 
 
