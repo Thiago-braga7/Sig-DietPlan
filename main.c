@@ -13,6 +13,8 @@ void relatorios(void);
 void sair(void);
 void cadastrar_usuario(void);
 void buscar_usuario(void);
+void alterar_usuario(void);
+
 
 
 int main(void){
@@ -27,6 +29,8 @@ int main(void){
     sair();
     cadastrar_usuario();
     buscar_usuario();
+    alterar_usuario();
+
     
 }
 
@@ -297,6 +301,28 @@ void buscar_usuario(void){
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações do Usuário                           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome Completo:                                  ///\n");
+    printf("///                         CPF:                                            ///\n");
+    printf("///                         Telefone:                                       ///\n");
+    printf("///                         Idade:                                          ///\n");
+    printf("///                         Peso(Kg):                                       ///\n");
+    printf("///                         Altura(m):                                      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+void alterar_usuario(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Usuários                                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Alterar Dados do Usuário = = = = =            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o CPF(Apenas números):                  ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novos Dados do Usuário                           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     printf("///                         CPF:                                            ///\n");
