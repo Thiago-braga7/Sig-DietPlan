@@ -11,6 +11,7 @@ void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
 void sair(void);
+void cadastrar_usuario(void);
 
 
 int main(void){
@@ -23,6 +24,7 @@ int main(void){
     consumo_agua();
     relatorios();
     sair();
+    cadastrar_usuario();
     
 }
 
@@ -263,7 +265,25 @@ void sair(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
 }
-
+void cadastrar_usuario(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Usuários                                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Cadastrar Usuário = = = = =                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome Completo:                                  ///\n");
+    printf("///                         CPF(Apenas números):                            ///\n");
+    printf("///                         Telefone(Apenas números):                       ///\n");
+    printf("///                         Idade:                                          ///\n");
+    printf("///                         Peso(Kg):                                       ///\n");
+    printf("///                         Altura(m):                                      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
 
 
 
