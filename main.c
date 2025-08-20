@@ -17,7 +17,7 @@ void alterar_usuario(void);
 void excluir_usuario(void);
 void cadastrar_alimento(void);
 void buscar_alimento(void);
-
+void alterar_alimento(void);
 
 int main(void){
     bem_vindo();
@@ -35,6 +35,7 @@ int main(void){
     excluir_usuario();
     cadastrar_alimento();
     buscar_alimento();
+    alterar_alimento();
 
     
 }
@@ -395,6 +396,28 @@ void buscar_alimento(void){
     printf("///                         Informe o nome do Alimento:                     ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações do Alimento                          ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome do Alimento:                                ///\n");
+    printf("///                         Tipo(Fruta, Carne):                             ///\n");
+    printf("///                         Calorias(kcal):                                 ///\n");
+    printf("///                         Proteínas:                                      ///\n");
+    printf("///                         Carboidratos:                                   ///\n");
+    printf("///                         Gorduras:                                       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+void alterar_alimento(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Alimentos                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Alterar Alimento na Dieta = = = = =           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o nome do Alimento:                     ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novas Informações do ALimento                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome do Alimento:                                ///\n");
     printf("///                         Tipo(Fruta, Carne):                             ///\n");
