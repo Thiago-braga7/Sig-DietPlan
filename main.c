@@ -111,7 +111,7 @@ void menu_principal(void){
     printf("///                      4. Consumo Diário(Alimentos)                       ///\n");
     printf("///                      5. Consumo Diário(Água)                            ///\n");
     printf("///                      6. Relatórios                                      ///\n");
-    printf("///                      0. Voltar ao Menu Principal                        ///\n");
+    printf("///                      0. Sair                                            ///\n");
     printf("///                                                                         ///\n");
     getchar();
     printf("///                                                                         ///\n");
