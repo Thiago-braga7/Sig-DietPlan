@@ -38,7 +38,7 @@ int main(void){
             case '5': consumo_agua(); break;
             case '6': relatorios(); break;
             case '0': sair(); break;
-            default: printf("Opção inválida!\n");
+            
         }
     } while(opcao != '0');
 
