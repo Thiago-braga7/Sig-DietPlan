@@ -21,24 +21,28 @@ void alterar_alimento(void);
 void excluir_alimento(void);
 
 int main(void){
+    char opcao;
     bem_vindo();
-    menu_principal();
-    usuarios();
-    alimentos();
-    cardapio();
-    consumo_alimentos();
-    consumo_agua();
-    relatorios();
-    sair();
-    cadastrar_usuario();
-    buscar_usuario();
-    alterar_usuario();
-    excluir_usuario();
-    cadastrar_alimento();
-    buscar_alimento();
-    alterar_alimento();
-    excluir_alimento();
-    
+
+    do {
+        menu_principal();
+        printf("Escolha uma opção: ");
+        scanf(" %c", &opcao);
+        getchar();
+
+        switch(opcao){
+            case '1': usuarios(); break;
+            case '2': alimentos(); break;
+            case '3': cardapio(); break;
+            case '4': consumo_alimentos(); break;
+            case '5': consumo_agua(); break;
+            case '6': relatorios(); break;
+            case '0': sair(); break;
+            default: printf("Opção inválida!\n");
+        }
+    } while(opcao != '0');
+
+    return 0;
 }
 
 void bem_vindo(void) {
@@ -109,8 +113,6 @@ void menu_principal(void){
     printf("///                      6. Relatórios                                      ///\n");
     printf("///                      0. Voltar ao Menu Principal                        ///\n");
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: ");
-    scanf("%c", &opcao);
     getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
