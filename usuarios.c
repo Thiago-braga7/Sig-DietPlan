@@ -3,23 +3,6 @@
 #include "usuarios.h"
 
 
-void modulo_usuario(void) {
-    char opcao;
-    do {
-        opcao = usuarios();
-        switch(opcao) {
-            case '1': cadastrar_usuario()	;
-                        break;
-            case '2': 	buscar_usuario();
-                        break;
-            case '3': 	alterar_usuario();
-                        break;
-            case '4': 	excluir_usuario();
-                        break;
-        } 		
-    } while (opcao != '0');
-}
-
 char usuarios(void){
     char opcao;
     printf("\n");
