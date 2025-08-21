@@ -86,7 +86,6 @@ void bem_vindo(void) {
 
 
 void menu_principal(void){
-    char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
