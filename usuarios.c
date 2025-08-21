@@ -54,6 +54,8 @@ void cadastrar_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return usuarios();
+
 }
 
 void buscar_usuario(void){
@@ -77,6 +79,8 @@ void buscar_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return usuarios();
+
 }
 void alterar_usuario(void){
     printf("\n");
@@ -99,6 +103,8 @@ void alterar_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return usuarios();
+
 }
 void excluir_usuario(void){
     printf("\n");
@@ -125,5 +131,7 @@ void excluir_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return usuarios();
+
 }
 
