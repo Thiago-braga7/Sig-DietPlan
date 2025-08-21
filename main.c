@@ -1,21 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include "usuarios.h"
+#include "alimentos.h"
+
 
 
 void bem_vindo(void);
 void menu_principal(void);
-void alimentos(void);
+
 void cardapio(void);
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
 void sair(void);
 
-void cadastrar_alimento(void);
-void buscar_alimento(void);
-void alterar_alimento(void);
-void excluir_alimento(void);
+
 
 int main(void){
     char opcao;
@@ -118,28 +117,7 @@ void menu_principal(void){
 
 
 
-void alimentos(void){
-    char opcao;
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Alimentos   = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    1. Cadastrar Alimento na Dieta                       ///\n");
-    printf("///                    2. Buscar Alimento na Dieta                          ///\n");
-    printf("///                    3. Alterar Alimento da Dieta                         ///\n");
-    printf("///                    4. Excluir Alimento da Dieta                         ///\n");
-    printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: ");
-    scanf("%c", &opcao);
-    getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-}
+
 void cardapio(void){
     char opcao;
     printf("\n");
@@ -249,92 +227,3 @@ void sair(void){
 
 }
 
-void cadastrar_alimento(void){
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Alimentos                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Cadastrar Alimento na Dieta  = = = = =       ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
-    printf("///                         Tipo(Fruta, Carne):                             ///\n");
-    printf("///                         Calorias(kcal):                                 ///\n");
-    printf("///                         Proteínas:                                      ///\n");
-    printf("///                         Carboidratos:                                   ///\n");
-    printf("///                         Gorduras:                                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-}
-void buscar_alimento(void){
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Alimentos                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Buscar Alimento na Dieta= = = = =            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o nome do Alimento:                     ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Informações do Alimento                          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
-    printf("///                         Tipo(Fruta, Carne):                             ///\n");
-    printf("///                         Calorias(kcal):                                 ///\n");
-    printf("///                         Proteínas:                                      ///\n");
-    printf("///                         Carboidratos:                                   ///\n");
-    printf("///                         Gorduras:                                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-}
-void alterar_alimento(void){
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Alimentos                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Alterar Alimento na Dieta = = = = =           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o nome do Alimento:                     ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novas Informações do ALimento                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
-    printf("///                         Tipo(Fruta, Carne):                             ///\n");
-    printf("///                         Calorias(kcal):                                 ///\n");
-    printf("///                         Proteínas:                                      ///\n");
-    printf("///                         Carboidratos:                                   ///\n");
-    printf("///                         Gorduras:                                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-}
-void excluir_alimento(void){
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Alimentos                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Excluir Alimento da Dieta = = = = =           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o nome do Alimento:                     ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Alimento                            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                            Informações do Alimento                      ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
-    printf("///                         Tipo(Fruta, Carne):                             ///\n");
-    printf("///                         Calorias(kcal):                                 ///\n");
-    printf("///                         Proteínas:                                      ///\n");
-    printf("///                         Carboidratos:                                   ///\n");
-    printf("///                         Gorduras:                                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-}
