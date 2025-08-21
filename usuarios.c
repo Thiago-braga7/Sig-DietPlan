@@ -3,7 +3,8 @@
 #include "usuarios.h"
 
 
-char usuarios(void){
+
+void usuarios(void){
     char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -20,8 +21,20 @@ char usuarios(void){
     printf("///                      Escolha a opção desejada: ");
     scanf("%c", &opcao);
     getchar();
-    return opcao;
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar(); 
+    switch(opcao){
+        case '1': cadastrar_usuario(); break;
+        case '2': buscar_usuario(); break;
+        case '3': alterar_usuario(); break;
+        case '4': excluir_usuario(); break;
+        case '0': return; 
+    }
 }
+
 
 void cadastrar_usuario(void){
     printf("\n");
