@@ -115,7 +115,6 @@ void menu_principal(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 }
 
 
@@ -141,7 +140,6 @@ void alimentos(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 }
 void cardapio(void){
     char opcao;
@@ -165,7 +163,6 @@ void cardapio(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 }
 
 void consumo_alimentos(void){
@@ -189,7 +186,6 @@ void consumo_alimentos(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 }
 
 
@@ -214,7 +210,6 @@ void consumo_agua(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 }
 
 
@@ -240,7 +235,6 @@ void relatorios(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 }
 void sair(void){
     printf("\n");
