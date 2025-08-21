@@ -37,11 +37,7 @@ char usuarios(void){
     printf("///                      Escolha a opção desejada: ");
     scanf("%c", &opcao);
     getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar(); 
+    return opcao;
 }
 
 void cadastrar_usuario(void){
