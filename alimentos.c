@@ -23,6 +23,13 @@ void alimentos(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    switch(opcao){
+        case '1': cadastrar_alimento(); break;
+        case '2': buscar_alimento(); break;
+        case '3': alterar_alimento(); break;
+        case '4': excluir_alimento(); break;
+        case '0': return; 
+    }
 }
 
 void cadastrar_alimento(void){
@@ -43,6 +50,8 @@ void cadastrar_alimento(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return alimentos();
+
 }
 void buscar_alimento(void){
     printf("\n");
@@ -65,6 +74,8 @@ void buscar_alimento(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return alimentos();
+
 }
 void alterar_alimento(void){
     printf("\n");
@@ -87,6 +98,8 @@ void alterar_alimento(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return alimentos();
+
 }
 void excluir_alimento(void){
     printf("\n");
@@ -113,4 +126,6 @@ void excluir_alimento(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return alimentos();
+
 }
