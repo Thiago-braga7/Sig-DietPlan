@@ -127,12 +127,6 @@ void menu_principal(void){
 }
 
 
-
-
-
-
-
-
 void relatorios(void){
     char opcao;
     printf("\n");
