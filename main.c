@@ -161,7 +161,7 @@ void cadastrar_refeicao(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return cardapio();   
+    return refeicoes();   
 }
 
 
