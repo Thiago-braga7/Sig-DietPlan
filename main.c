@@ -12,6 +12,7 @@ void refeicoes(void);
 void cadastrar_refeicao(void);
 void buscar_refeicao(void);
 void alterar_refeicao(void);
+void excluir_refeicao(void);
 
 
 void consumo_alimentos(void);
@@ -196,6 +197,23 @@ void alterar_refeicao(void){
     printf("///                      Proteínas (g):                                     ///\n");
     printf("///                      Carboidratos (g):                                  ///\n");
     printf("///                      Gorduras (g):                                      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return refeicoes();   
+}
+void excluir_refeicao(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Cardápio                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Excluir Refeição = = = = =                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  Informe o nome da Refeição a excluir:                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                      Deseja excluir esta refeição?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
