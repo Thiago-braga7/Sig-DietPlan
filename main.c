@@ -21,6 +21,8 @@ void menu_principal(void);
 
 void consumo_agua(void);
 void cadastrar_consumoAgua(void);
+void buscar_consumoAgua(void);
+
 
 
 void relatorios(void);
@@ -163,6 +165,23 @@ void cadastrar_consumoAgua(void){
     printf("///                                                                         ///\n");
     printf("///                         Informe a quantidade (ml):                      ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void buscar_consumoAgua(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Água                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Buscar Consumo de Água = = = = =             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
