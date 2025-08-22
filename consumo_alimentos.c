@@ -4,6 +4,30 @@
 
 
 
+
+void consumo_alimentos(void){
+    char opcao;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =  Consumo Diário(Alimentos)  = = = = =      ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    1. Registrar Consumo de Alimentos                    ///\n");
+    printf("///                    2. Consultar Consumo(Dia) de Alimentos               ///\n");
+    printf("///                    3. Alterar Registro de Consumo de Alimentos          ///\n");
+    printf("///                    4. Excluir Registro de Consumo de Alimentos          ///\n");
+    printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+}
+
 void cadastrar_consumoAlimentos(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
