@@ -15,6 +15,8 @@ void menu_principal(void);
 
 
 void consumo_alimentos(void);
+void cadastrar_consumoAlimentos(void);
+
 void consumo_agua(void);
 void relatorios(void);
 void sair(void);
@@ -147,6 +149,23 @@ void consumo_alimentos(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
 
+void cadastrar_consumoAlimentos(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Alimentos                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Cadastrar Consumo de Alimentos = = = = =     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o Alimento:                             ///\n");
+    printf("///                         Quantidade(kcal):                               ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+   
+}
 
 void consumo_agua(void){
     char opcao;
