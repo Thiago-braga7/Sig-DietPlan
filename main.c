@@ -22,7 +22,7 @@ void menu_principal(void);
 void consumo_agua(void);
 void cadastrar_consumoAgua(void);
 void buscar_consumoAgua(void);
-
+void alterar_consumoAgua(void);
 
 
 void relatorios(void);
@@ -182,6 +182,28 @@ void buscar_consumoAgua(void){
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void alterar_consumoAgua(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Água                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Alterar Consumo de Água = = = = =            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Registro de Consumo(Água) no dia (DD/MM/AAAA)       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Novas Informações Consumo de Água                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a quantidade (ml):                      ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
