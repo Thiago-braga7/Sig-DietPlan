@@ -11,6 +11,7 @@ void menu_principal(void);
 void refeicoes(void);
 void cadastrar_refeicao(void);
 void buscar_refeicao(void);
+void alterar_refeicao(void);
 
 
 void consumo_alimentos(void);
@@ -173,6 +174,28 @@ void buscar_refeicao(void){
     printf("///                                                                         ///\n");
     printf("///                        Informe o nome da Refeição:                      ///\n");
     printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return refeicoes();   
+}
+void alterar_refeicao(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Cardápio                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Alterar Refeição = = = = =                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  Informe o nome da Refeição a alterar:                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  Novos dados:                                           ///\n");
+    printf("///                      Nome da Refeição:                                  ///\n");
+    printf("///                      Tipo (Café, Almoço, Jantar, Lanche):               ///\n");
+    printf("///                      Calorias (kcal):                                   ///\n");
+    printf("///                      Proteínas (g):                                     ///\n");
+    printf("///                      Carboidratos (g):                                  ///\n");
+    printf("///                      Gorduras (g):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
