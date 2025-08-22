@@ -23,6 +23,13 @@ void consumo_agua(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    switch(opcao){
+        case '1': cadastrar_consumoAgua(); break;
+        case '2': buscar_consumoAgua(); break;
+        case '3': alterar_consumoAgua(); break;
+        case '4': excluir_consumoAgua(); break;
+        case '0': return; 
+    }
 }
 
 void cadastrar_consumoAgua(void){
