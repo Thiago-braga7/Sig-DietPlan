@@ -9,7 +9,7 @@ void bem_vindo(void);
 void menu_principal(void);
 
 void refeicoes(void);
-
+void cadastrar_refeicao(void);
 
 
 void consumo_alimentos(void);
@@ -144,7 +144,25 @@ void refeicoes(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
-
+void cadastrar_refeicao(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Cardápio                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Cadastrar Refeição = = = = =                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome da Refeição:                               ///\n");
+    printf("///                         Tipo (Café, Almoço, Jantar, Lanche):            ///\n");
+    printf("///                         Calorias (kcal):                                ///\n");
+    printf("///                         Proteínas (g):                                  ///\n");
+    printf("///                         Carboidratos (g):                               ///\n");
+    printf("///                         Gorduras (g):                                   ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return cardapio();   
+}
 
 
 void consumo_alimentos(void){
