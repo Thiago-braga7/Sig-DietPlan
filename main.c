@@ -153,6 +153,22 @@ void consumo_agua(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
 
+void cadastrar_consumoAgua(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Água                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Cadastrar Consumo de Água = = = = =          ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a quantidade (ml):                      ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
 
 
 
