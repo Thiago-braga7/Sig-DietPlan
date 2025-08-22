@@ -8,7 +8,10 @@
 void bem_vindo(void);
 void menu_principal(void);
 
-void cardapio(void);
+void refeicoes(void);
+
+
+
 void consumo_alimentos(void);
 void consumo_agua(void);
 void relatorios(void);
@@ -29,7 +32,7 @@ int main(void){
         switch(opcao){
             case '1': usuarios(); break;
             case '2': alimentos(); break;
-            case '3': cardapio(); break;
+            case '3': refeicoes(); break;
             case '4': consumo_alimentos(); break;
             case '5': consumo_agua(); break;
             case '6': relatorios(); break;
@@ -102,7 +105,7 @@ void menu_principal(void){
     printf("///                                                                         ///\n");
     printf("///                      1. Usuários                                        ///\n");
     printf("///                      2. Alimentos                                       ///\n");
-    printf("///                      3. Cardápio                                        ///\n");
+    printf("///                      3. Refeições                                       ///\n");
     printf("///                      4. Consumo Diário(Alimentos)                       ///\n");
     printf("///                      5. Consumo Diário(Água)                            ///\n");
     printf("///                      6. Relatórios                                      ///\n");
@@ -118,12 +121,12 @@ void menu_principal(void){
 
 
 
-void cardapio(void){
+void refeicoes(void){
     char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Cardápio   = = = = =                     ///\n");
+    printf("///                    = = = = =   Refeições   = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                    1. Cadastrar Refeição                                ///\n");
     printf("///                    2. Buscar Refeição                                   ///\n");
@@ -141,6 +144,8 @@ void cardapio(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
+
+
 
 void consumo_alimentos(void){
     char opcao;
