@@ -25,6 +25,13 @@ void refeicoes(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    switch(opcao){
+        case '1': cadastrar_refeicao(); break;
+        case '2': buscar_refeicao(); break;
+        case '3': alterar_refeicao(); break;
+        case '4': excluir_refeicao(); break;
+        case '0': return; 
+    }
 }
 void cadastrar_refeicao(void){
     printf("\n");
