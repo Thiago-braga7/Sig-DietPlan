@@ -38,7 +38,7 @@ int main(void){
         getchar();
 
         switch(opcao){
-            case '1': usuarios(); break;
+            case '1': moduloUsuarios(); break;
             case '2': alimentos(); break;
             case '3': refeicoes(); break;
             case '4': consumo_alimentos(); break;

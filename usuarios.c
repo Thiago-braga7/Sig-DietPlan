@@ -4,6 +4,21 @@
 
 
 
+void moduloUsuarios(void) {
+    char opcao;
+    do {
+        opcao = usuarios();
+        switch(opcao) {
+            case '1': cadastrar_usuario(); break;
+            case '2': buscar_usuario(); break;
+            case '3': alterar_usuario(); break;
+            case '4': excluir_usuario(); break;
+            case '0': 
+        }
+    } while (opcao != '0');  
+}
+
+
 char usuarios(void){
     char opcao;
     printf("\n");
@@ -18,16 +33,13 @@ char usuarios(void){
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: ");
+    printf("///                      Escolha a opção desejada:                          ///\n");
     scanf("%c", &opcao);
     getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar(); 
-    
     return opcao;
+
+    
+    
 }
 
 
