@@ -13,7 +13,7 @@ void moduloUsuarios(void) {
             case '2': buscar_usuario(); break;
             case '3': alterar_usuario(); break;
             case '4': excluir_usuario(); break;
-            case '0': 
+            
         }
     } while (opcao != '0');  
 }
