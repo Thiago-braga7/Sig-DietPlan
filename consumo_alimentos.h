@@ -1,3 +1,4 @@
+void modulo_consumoAlimentos(void);
 char consumo_alimentos(void);
 void cadastrar_consumoAlimentos(void);
 void buscar_consumoAlimentos(void);
