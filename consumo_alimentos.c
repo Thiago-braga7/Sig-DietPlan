@@ -5,7 +5,7 @@
 
 
 
-void consumo_alimentos(void){
+char consumo_alimentos(void){
     char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -26,13 +26,7 @@ void consumo_alimentos(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    switch(opcao){
-        case '1': cadastrar_consumoAlimentos(); break;
-        case '2': buscar_consumoAlimentos(); break;
-        case '3': alterar_consumoAlimentos(); break;
-        case '4': excluir_consumoAlimentos(); break;
-        case '0': return; 
-    }
+    return opcao;
 }
 
 void cadastrar_consumoAlimentos(void){
