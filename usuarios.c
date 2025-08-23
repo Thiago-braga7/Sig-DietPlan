@@ -4,7 +4,7 @@
 
 
 
-void usuarios(void){
+char usuarios(void){
     char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -26,13 +26,8 @@ void usuarios(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar(); 
-    switch(opcao){
-        case '1': cadastrar_usuario(); break;
-        case '2': buscar_usuario(); break;
-        case '3': alterar_usuario(); break;
-        case '4': excluir_usuario(); break;
-        case '0': return; 
-    }
+    
+    return opcao;
 }
 
 
@@ -54,7 +49,7 @@ void cadastrar_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return usuarios();
+    
 
 }
 
@@ -79,7 +74,7 @@ void buscar_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return usuarios();
+    
 
 }
 void alterar_usuario(void){
@@ -103,7 +98,6 @@ void alterar_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return usuarios();
 
 }
 void excluir_usuario(void){
@@ -131,7 +125,6 @@ void excluir_usuario(void){
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return usuarios();
 
 }
 
