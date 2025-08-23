@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include "alimentos.h"
 
+void moduloAlimentos(void) {
+    char opcao;
+    do {
+        opcao = alimentos();
+        switch(opcao) {
+            case '1': cadastrar_alimento(); break;
+            case '2': buscar_alimento(); break;
+            case '3': alterar_alimento(); break;
+            case '4': excluir_alimento(); break;
+            
+        }
+    } while (opcao != '0');  
+}
+
+
 char alimentos(void){
     char opcao;
     printf("\n");
