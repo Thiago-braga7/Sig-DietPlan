@@ -47,7 +47,7 @@ char refeicoes(void){
 void cadastrar_refeicao(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Cardápio                                 ///\n");
+    printf("///                                Refeições                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Cadastrar Refeição = = = = =                 ///\n");
     printf("///                                                                         ///\n");
@@ -66,7 +66,7 @@ void cadastrar_refeicao(void){
 void buscar_refeicao(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Cardápio                                 ///\n");
+    printf("///                                Refeições                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                   = = = = =  Buscar Refeição = = = = =                  ///\n");
     printf("///                                                                         ///\n");
@@ -81,7 +81,7 @@ void buscar_refeicao(void){
 void alterar_refeicao(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Cardápio                                 ///\n");
+    printf("///                                Refeições                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Alterar Refeição = = = = =                   ///\n");
     printf("///                                                                         ///\n");
@@ -103,7 +103,7 @@ void alterar_refeicao(void){
 void excluir_refeicao(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Cardápio                                 ///\n");
+    printf("///                                Refeições                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Excluir Refeição = = = = =                   ///\n");
     printf("///                                                                         ///\n");

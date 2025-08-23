@@ -39,8 +39,8 @@ int main(void){
 
         switch(opcao){
             case '1': moduloUsuarios(); break;
-            case '2': moduloRefeicoes(); break;
-            case '3': refeicoes(); break;
+            case '2': alimentos(); break;
+            case '3': moduloRefeicoes(); break;
             case '4': consumo_alimentos(); break;
             case '5': consumo_agua(); break;
             case '6': relatorios(); break;
