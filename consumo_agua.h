@@ -1,3 +1,4 @@
+void modulo_consumoAgua(void);
 char consumo_agua(void);
 void cadastrar_consumoAgua(void);
 void buscar_consumoAgua(void);

@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include "consumo_agua.h"
 
+void modulo_consumoAgua(void) {
+    char opcao;
+    do {
+        opcao = consumo_agua();
+        switch(opcao) {
+            case '1': cadastrar_consumoAgua(); break;
+            case '2': buscar_consumoAgua(); break;
+            case '3': alterar_consumoAgua(); break;
+            case '4': excluir_consumoAgua(); break;
+
+            
+        }
+    } while (opcao != '0');  
+}
+
 char consumo_agua(void){
     char opcao;
     printf("\n");
