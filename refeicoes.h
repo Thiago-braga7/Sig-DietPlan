@@ -1,4 +1,4 @@
-
+void moduloRefeicoes(void);
 char refeicoes(void);
 void cadastrar_refeicao(void);
 void buscar_refeicao(void);

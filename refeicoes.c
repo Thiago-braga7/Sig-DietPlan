@@ -3,6 +3,21 @@
 #include "refeicoes.h"
 
 
+
+void moduloRefeicoes(void) {
+    char opcao;
+    do {
+        opcao = refeicoes();
+        switch(opcao) {
+            case '1': cadastrar_refeicao(); break;
+            case '2': buscar_refeicao(); break;
+            case '3': alterar_refeicao(); break;
+            case '4': excluir_refeicao(); break;
+            
+        }
+    } while (opcao != '0');  
+}
+
 char refeicoes(void){
     char opcao;
     printf("\n");
