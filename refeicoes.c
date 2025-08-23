@@ -13,6 +13,8 @@ void moduloRefeicoes(void) {
             case '2': buscar_refeicao(); break;
             case '3': alterar_refeicao(); break;
             case '4': excluir_refeicao(); break;
+            case '5': refeicoes_usuario(); break;
+
             
         }
     } while (opcao != '0');  
@@ -114,4 +116,20 @@ void excluir_refeicao(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
      
+}
+void refeicoes_usuario(void){
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Refeições                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Refeições Usuário = = = = =                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                        Informe o nome do Usuário:                       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                           Refeições do Usuário                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+
 }
