@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "consumo_agua.h"
 
-void consumo_agua(void){
+char consumo_agua(void){
     char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -23,13 +23,8 @@ void consumo_agua(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    switch(opcao){
-        case '1': cadastrar_consumoAgua(); break;
-        case '2': buscar_consumoAgua(); break;
-        case '3': alterar_consumoAgua(); break;
-        case '4': excluir_consumoAgua(); break;
-        case '0': return; 
-    }
+    return opcao;
+
 }
 
 void cadastrar_consumoAgua(void){
@@ -102,7 +97,7 @@ void excluir_consumoAgua(void){
     printf("///                         Quantidade Água(ml):                            ///\n");
     printf("///                         Data(DD/MM/AAAA):                               ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-     printf("///                      Deseja excluir este registro?(S/N):               ///\n");
+    printf("///                      Deseja excluir este registro?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");

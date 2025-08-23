@@ -1,4 +1,4 @@
-void consumo_agua(void);
+char consumo_agua(void);
 void cadastrar_consumoAgua(void);
 void buscar_consumoAgua(void);
 void alterar_consumoAgua(void);
