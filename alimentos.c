@@ -75,6 +75,7 @@ void cadastrar_alimento(void){
 
 }
 void buscar_alimento(void){
+    char nome_alimento[100];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -82,19 +83,18 @@ void buscar_alimento(void){
     printf("///                 = = = = =  Buscar Alimento na Dieta= = = = =            ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o nome do Alimento:                     ///\n");
+    scanf("%[^\n]", nome_alimento);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações do Alimento                          ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
+    printf("///                         Nome do Alimento:                               ///\n");
     printf("///                         Tipo(Fruta, Carne):                             ///\n");
     printf("///                         Calorias(kcal):                                 ///\n");
     printf("///                         Proteínas:                                      ///\n");
     printf("///                         Carboidratos:                                   ///\n");
     printf("///                         Gorduras:                                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 
 }
 void alterar_alimento(void){
