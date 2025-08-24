@@ -98,6 +98,8 @@ void buscar_alimento(void){
 
 }
 void alterar_alimento(void){
+    char nome_alimento[100], novoTipo[50];
+    float novasCalorias, novasProteinas, novosCarboidratos, novasGorduras;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -105,19 +107,30 @@ void alterar_alimento(void){
     printf("///                 = = = = = Alterar Alimento na Dieta = = = = =           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o nome do Alimento:                     ///\n");
+    scanf("%[^\n]", nome_alimento);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novas Informações do ALimento                    ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
-    printf("///                         Tipo(Fruta, Carne):                             ///\n");
-    printf("///                         Calorias(kcal):                                 ///\n");
-    printf("///                         Proteínas:                                      ///\n");
-    printf("///                         Carboidratos:                                   ///\n");
-    printf("///                         Gorduras:                                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    printf("///                         Nome do Alimento:                               ///\n");
+    scanf("%[^\n]", nome_alimento);
     getchar();
+    printf("///                         Tipo(Fruta, Carne):                             ///\n");
+    scanf("%[^\n]", novoTipo);
+    getchar();
+    printf("///                         Calorias(kcal):                                 ///\n");
+    scanf("%f", &novasCalorias);
+    getchar();
+    printf("///                         Proteínas:                                      ///\n");
+    scanf("%f", &novasProteinas);
+    getchar();
+    printf("///                         Carboidratos:                                   ///\n");
+    scanf("%f", &novosCarboidratos);
+    getchar();
+    printf("///                         Gorduras:                                       ///\n");
+    scanf("%f", &novasGorduras);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
 
 }
 void excluir_alimento(void){
