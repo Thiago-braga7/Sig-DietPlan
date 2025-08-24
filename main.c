@@ -5,6 +5,7 @@
 #include "refeicoes.h"
 #include "consumo_alimentos.h"
 #include "consumo_agua.h"
+#include "relatorios.h"
 
 
 
@@ -22,7 +23,6 @@ void menu_principal(void);
 
 
 
-void relatorios(void);
 void sair(void);
 
 
@@ -127,29 +127,6 @@ void menu_principal(void){
 }
 
 
-void relatorios(void){
-    char opcao;
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =  Relatórios  = = = = =                     ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    1. Alimentos mais Consumidos                         ///\n");
-    printf("///                    2. Total de Calorias(Dia)                            ///\n");
-    printf("///                    3. Meta Diária de Calorias                           ///\n");
-    printf("///                    4. Meta Diária de Água                               ///\n");
-    printf("///                    5. Excluir Registro de Consumo                       ///\n");
-    printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: ");
-    scanf("%c", &opcao);
-    getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-}
 void sair(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
