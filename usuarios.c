@@ -44,6 +44,9 @@ char usuarios(void){
 
 
 void cadastrar_usuario(void){
+    char nome[100], cpf[12], telefone[15];
+    int idade;
+    float peso, altura;   
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -52,11 +55,23 @@ void cadastrar_usuario(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
+    scanf("%[^\n]", nome);
+    getchar();
     printf("///                         CPF(Apenas números):                            ///\n");
+    scanf("%s", cpf);
+    getchar();
     printf("///                         Telefone(Apenas números):                       ///\n");
+    scanf("%s", telefone);
+    getchar();
     printf("///                         Idade:                                          ///\n");
+    scanf("%d", &idade);
+    getchar();
     printf("///                         Peso(Kg):                                       ///\n");
+    scanf("%f", &peso);
+    getchar();
     printf("///                         Altura(m):                                      ///\n");
+    scanf("%f", &altura);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
