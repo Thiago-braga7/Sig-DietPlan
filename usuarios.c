@@ -166,5 +166,10 @@ void excluir_usuario(void){
     printf("///                      Deseja excluir este usuário?(S/N):                  ///\n");
     scanf("%c", &confirmacao);
     getchar();
+    if (confirmacao == 'S' || confirmacao == 's') {
+        printf("///                    Usuário excluído com sucesso!                      ///\n");
+    } else {
+        printf("///                    Operação de exclusão cancelada!                    ///\n");
+    }
 
 }
