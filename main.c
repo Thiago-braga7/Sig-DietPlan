@@ -12,6 +12,7 @@
 
 
 void bem_vindo(void);
+void sobre(void);
 void menu_principal(void);
 
 
@@ -30,6 +31,7 @@ void sair(void);
 int main(void){
     char opcao;
     bem_vindo();
+    sobre();
 
     do {
         menu_principal();
@@ -77,6 +79,10 @@ void bem_vindo(void) {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
     }
 
+   
+}
+
+void sobre(void){
     printf("Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN\n");
     printf("para auxiliar no planejamento e acompanhamento de dietas.\n");
     printf("\n");
@@ -91,6 +97,7 @@ void bem_vindo(void) {
     printf("Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n");
     printf("Gerencie sua saúde de forma prática: cadastre usuários, registre alimentos, acompanhe a quantidade de água ingerida e controle suas calorias diárias!");
     printf("\n");
+
 }
 
 
