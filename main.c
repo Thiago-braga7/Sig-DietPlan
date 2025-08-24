@@ -125,12 +125,8 @@ void menu_principal(void){
     printf("///                      5. Consumo Diário(Água)                            ///\n");
     printf("///                      6. Relatórios                                      ///\n");
     printf("///                      0. Sair                                            ///\n");
-    printf("///                                                                         ///\n");
-    getchar();
-    printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
 
 
