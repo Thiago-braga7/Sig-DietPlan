@@ -42,6 +42,8 @@ char alimentos(void){
 }
 
 void cadastrar_alimento(void){
+    char nome_alimento[100], tipo[50];
+    float calorias, proteinas, carboidratos, gorduras;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -49,16 +51,27 @@ void cadastrar_alimento(void){
     printf("///                 = = = = =  Cadastrar Alimento na Dieta  = = = = =       ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
-    printf("///                         Tipo(Fruta, Carne):                             ///\n");
-    printf("///                         Calorias(kcal):                                 ///\n");
-    printf("///                         Proteínas:                                      ///\n");
-    printf("///                         Carboidratos:                                   ///\n");
-    printf("///                         Gorduras:                                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    printf("///                         Nome do Alimento:                               ///\n");
+    scanf("%[^\n]", nome_alimento);
     getchar();
+    printf("///                         Tipo(Fruta, Carne):                             ///\n");
+    scanf("%[^\n]", tipo);
+    getchar();
+    printf("///                         Calorias(kcal):                                 ///\n");
+    scanf("%f", &calorias);
+    getchar();
+    printf("///                         Proteínas:                                      ///\n");
+    scanf("%f", &proteinas);
+    getchar();
+    printf("///                         Carboidratos:                                   ///\n");
+    scanf("%f", &carboidratos);
+    getchar();
+    printf("///                         Gorduras:                                       ///\n");
+    scanf("%f", &gorduras);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Alimento cadastrado com sucesso!                     ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
 
 }
 void buscar_alimento(void){
