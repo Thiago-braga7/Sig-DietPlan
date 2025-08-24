@@ -44,7 +44,7 @@ char usuarios(void){
 
 
 void cadastrar_usuario(void){
-    char nome[100], cpf[12], telefone[15];
+    char nome[100], cpf[15], telefone[15];
     int idade;
     float peso, altura;   
     printf("\n");
@@ -103,7 +103,7 @@ void buscar_usuario(void){
 
 }
 void alterar_usuario(void){
-    char cpf[12], nome[100], telefone[15];
+    char cpf[15], nome[100], telefone[15];
     int idade;
     float peso, altura;
     printf("\n");
