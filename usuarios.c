@@ -141,6 +141,7 @@ void alterar_usuario(void){
 
 }
 void excluir_usuario(void){
+    char cpf[15], confirmacao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -148,6 +149,8 @@ void excluir_usuario(void){
     printf("///                 = = = = = Excluir Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
+    scanf("%s", cpf);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Excluindo Usuário                             ///\n");
     printf("///                                                                         ///\n");
@@ -161,10 +164,7 @@ void excluir_usuario(void){
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir este usuário?(S/N):                  ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    scanf("%c", &confirmacao);
     getchar();
 
 }
-
