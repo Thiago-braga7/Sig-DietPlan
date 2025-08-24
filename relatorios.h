@@ -1,1 +1,1 @@
-void relatorios(void);
+char relatorios(void);

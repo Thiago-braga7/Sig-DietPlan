@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "relatorios.h"
 
-void relatorios(void){
+char relatorios(void){
     char opcao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -20,5 +20,6 @@ void relatorios(void){
     printf("///                      Escolha a opção desejada: ");
     scanf("%c", &opcao);
     getchar();
+    return opcao;
     
 }
