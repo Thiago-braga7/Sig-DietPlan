@@ -103,6 +103,9 @@ void buscar_usuario(void){
 
 }
 void alterar_usuario(void){
+    char cpf[12], nome[100], telefone[15];
+    int idade;
+    float peso, altura;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -110,19 +113,31 @@ void alterar_usuario(void){
     printf("///                 = = = = = Alterar Dados do Usuário = = = = =            ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
+    scanf("%s", cpf);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novos Dados do Usuário                           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
-    printf("///                         CPF:                                            ///\n");
-    printf("///                         Telefone:                                       ///\n");
-    printf("///                         Idade:                                          ///\n");
-    printf("///                         Peso(Kg):                                       ///\n");
-    printf("///                         Altura(m):                                      ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    scanf("%[^\n]", nome);
     getchar();
+    printf("///                         CPF:                                            ///\n");
+    scanf("%s", cpf);
+    getchar();
+    printf("///                         Telefone:                                       ///\n");
+    scanf("%s", telefone);
+    getchar();
+    printf("///                         Idade:                                          ///\n");
+    scanf("%d", &idade);
+    getchar();
+    printf("///                         Peso(Kg):                                       ///\n");
+    scanf("%f", &peso);
+    getchar();
+    printf("///                         Altura(m):                                      ///\n");
+    scanf("%f", &altura);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    
 
 }
 void excluir_usuario(void){
