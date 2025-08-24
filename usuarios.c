@@ -81,6 +81,7 @@ void cadastrar_usuario(void){
 }
 
 void buscar_usuario(void){
+    char cpf[15];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -88,6 +89,7 @@ void buscar_usuario(void){
     printf("///                 = = = = =  Buscar Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
+    scanf("%s", cpf);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações do Usuário                           ///\n");
     printf("///                                                                         ///\n");
@@ -98,10 +100,6 @@ void buscar_usuario(void){
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-    
 
 }
 void alterar_usuario(void){
