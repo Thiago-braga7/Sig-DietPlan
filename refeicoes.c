@@ -4,7 +4,7 @@
 
 
 
-void moduloRefeicoes(void) {
+void modulo_refeicoes(void) {
     char opcao;
     do {
         opcao = refeicoes();
