@@ -134,6 +134,7 @@ void alterar_alimento(void){
 
 }
 void excluir_alimento(void){
+    char nome_alimento[100];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -141,12 +142,14 @@ void excluir_alimento(void){
     printf("///                 = = = = = Excluir Alimento da Dieta = = = = =           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o nome do Alimento:                     ///\n");
+    scanf("%[^\n]", nome_alimento);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Excluindo Alimento                            ///\n");
     printf("///                                                                         ///\n");
     printf("///                            Informações do Alimento                      ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                                ///\n");
+    printf("///                         Nome do Alimento:                               ///\n");
     printf("///                         Tipo(Fruta, Carne):                             ///\n");
     printf("///                         Calorias(kcal):                                 ///\n");
     printf("///                         Proteínas:                                      ///\n");
@@ -155,8 +158,6 @@ void excluir_alimento(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+   
 
 }
