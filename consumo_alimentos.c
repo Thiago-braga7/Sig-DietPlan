@@ -10,7 +10,7 @@ void modulo_consumo_alimentos(void) {
             case '1': cadastrar_consumo_alimentos(); break;
             case '2': buscar_consumo_alimentos(); break;
             case '3': alterar_consumo_alimentos(); break;
-            case '4': excluir_consumoAlimentos(); break;
+            case '4': excluir_consumo_alimentos(); break;
             
         }
     } while (opcao != '0');  
