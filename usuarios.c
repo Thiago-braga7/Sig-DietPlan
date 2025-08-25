@@ -103,9 +103,9 @@ void buscar_usuario(void){
 
 }
 void alterar_usuario(void){
-    char cpf[15], nome[100], telefone[15];
-    int idade;
-    float peso, altura;
+    char cpf[15], novoCpf[15], novoNome[100], novoTelefone[15];
+    int novaIdade;
+    float novoPeso, novaAltura;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -119,22 +119,22 @@ void alterar_usuario(void){
     printf("///                        Novos Dados do Usuário                           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
-    scanf("%[^\n]", nome);
+    scanf("%[^\n]", novoNome);
     getchar();
     printf("///                         CPF:                                            ///\n");
-    scanf("%s", cpf);
+    scanf("%s", novoCpf);
     getchar();
     printf("///                         Telefone:                                       ///\n");
-    scanf("%s", telefone);
+    scanf("%s", novoTelefone);
     getchar();
     printf("///                         Idade:                                          ///\n");
-    scanf("%d", &idade);
+    scanf("%d", &novaIdade);
     getchar();
     printf("///                         Peso(Kg):                                       ///\n");
-    scanf("%f", &peso);
+    scanf("%f", &novoPeso);
     getchar();
     printf("///                         Altura(m):                                      ///\n");
-    scanf("%f", &altura);
+    scanf("%f", &novaAltura);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     
