@@ -134,7 +134,7 @@ void alterar_alimento(void){
 
 }
 void excluir_alimento(void){
-    char nome_alimento[100];
+    char nome_alimento[100], confirmacao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -158,6 +158,13 @@ void excluir_alimento(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-   
+    scanf("%c", &confirmacao);
+    getchar();
+    
+    if (confirmacao == 'S' || confirmacao == 's') {
+        printf("///                    Alimento excluído com sucesso!                      ///\n");
+    } else {
+        printf("///                    Operação de exclusão cancelada!                    ///\n");
 
+}
 }
