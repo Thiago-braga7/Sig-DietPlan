@@ -45,6 +45,8 @@ char refeicoes(void){
     return opcao;
 }
 void cadastrar_refeicao(void){
+    char nome_refeição[100], tipo[50];
+    float calorias, proteinas, carboidratos, gorduras;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
@@ -52,15 +54,27 @@ void cadastrar_refeicao(void){
     printf("///                 = = = = =  Cadastrar Refeição = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome da Refeição:                               ///\n");
-    printf("///                         Tipo (Café, Almoço, Jantar, Lanche):            ///\n");
-    printf("///                         Calorias (kcal):                                ///\n");
-    printf("///                         Proteínas (g):                                  ///\n");
-    printf("///                         Carboidratos (g):                               ///\n");
-    printf("///                         Gorduras (g):                                   ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    scanf("%[^\n]", nome_refeição);
     getchar();
+    printf("///                         Tipo (Café, Almoço, Jantar, Lanche):            ///\n");
+    scanf("%[^\n]", tipo);
+    getchar();
+    printf("///                         Calorias (kcal):                                ///\n");
+    scanf("%f", &calorias);
+    getchar();
+    printf("///                         Proteínas (g):                                  ///\n");
+    scanf("%f", &proteinas);
+    getchar();
+    printf("///                         Carboidratos (g):                               ///\n");
+    scanf("%f", &carboidratos);
+    getchar();
+    printf("///                         Gorduras (g):                                   ///\n");
+    scanf("%f", &gorduras);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Refeição cadastrada com sucesso!                     ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     
 }
 void buscar_refeicao(void){
