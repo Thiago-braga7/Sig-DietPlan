@@ -173,6 +173,7 @@ void excluir_refeicao(void){
     }
 }
 void refeicoes_usuario(void){
+    char nome[100];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
@@ -180,11 +181,19 @@ void refeicoes_usuario(void){
     printf("///                 = = = = =  Refeições Usuário = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                        Informe o nome do Usuário:                       ///\n");
+    scanf("%[^\n]", nome);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Refeições do Usuário                          ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                 Usuário:                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         1. Café da Manhã                                ///\n");
+    printf("///                         2. Almoço                                       ///\n");
+    printf("///                         3. Lanche da Tarde                              ///\n");
+    printf("///                         4. Jantar                                       ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Total do dia:                                   ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-
+  
 }
