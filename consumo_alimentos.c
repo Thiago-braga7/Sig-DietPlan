@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include "consumo_alimentos.h"
 
-void modulo_consumoAlimentos(void) {
+void modulo_consumo_alimentos(void) {
     char opcao;
     do {
         opcao = consumo_alimentos();
         switch(opcao) {
-            case '1': cadastrar_consumoAlimentos(); break;
-            case '2': buscar_consumoAlimentos(); break;
-            case '3': alterar_consumoAlimentos(); break;
+            case '1': cadastrar_consumo_alimentos(); break;
+            case '2': buscar_consumo_alimentos(); break;
+            case '3': alterar_consumo_alimentos(); break;
             case '4': excluir_consumoAlimentos(); break;
             
         }
@@ -41,7 +41,7 @@ char consumo_alimentos(void){
     return opcao;
 }
 
-void cadastrar_consumoAlimentos(void){
+void cadastrar_consumo_alimentos(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -59,7 +59,7 @@ void cadastrar_consumoAlimentos(void){
    
 }
 
-void buscar_consumoAlimentos(void){
+void buscar_consumo_alimentos(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -76,7 +76,7 @@ void buscar_consumoAlimentos(void){
     getchar();
 }
 
-void alterar_consumoAlimentos(void){
+void alterar_consumo_alimentos(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -97,7 +97,7 @@ void alterar_consumoAlimentos(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
 }
-void excluir_consumoAlimentos(void){
+void excluir_consumo_alimentos(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");

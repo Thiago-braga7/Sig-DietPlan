@@ -42,7 +42,7 @@ int main(void){
             case '1': modulo_usuarios(); break;
             case '2': modulo_alimentos(); break;
             case '3': modulo_refeicoes(); break;
-            case '4': modulo_consumoAlimentos(); break;
+            case '4': modulo_consumo_alimentos(); break;
             case '5': modulo_consumoAgua(); break;
             case '6': relatorios(); break;
             case '0': sair(); break;
