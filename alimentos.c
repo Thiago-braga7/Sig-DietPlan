@@ -131,7 +131,7 @@ void alterar_alimento(void){
     scanf("%f", &novasGorduras);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Refeição alterada com sucesso!                       ///\n");
+    printf("///                    Alimento alterado com sucesso!                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
    
