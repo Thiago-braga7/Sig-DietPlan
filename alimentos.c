@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "alimentos.h"
 
-void moduloAlimentos(void) {
+void modulo_alimentos(void) {
     char opcao;
     do {
         opcao = alimentos();
