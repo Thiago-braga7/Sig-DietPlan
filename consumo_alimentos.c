@@ -54,8 +54,7 @@ void cadastrar_consumo_alimentos(void){
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
    
 }
 
@@ -72,8 +71,7 @@ void buscar_consumo_alimentos(void){
     printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 }
 
 void alterar_consumo_alimentos(void){
@@ -94,8 +92,7 @@ void alterar_consumo_alimentos(void){
     printf("///                         Quantidade(kcal):                               ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 }
 void excluir_consumo_alimentos(void){
     printf("\n");
@@ -117,6 +114,5 @@ void excluir_consumo_alimentos(void){
     printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 }
