@@ -4,7 +4,7 @@
 
 
 
-void moduloUsuarios(void) {
+void modulo_usuarios(void) {
     char opcao;
     do {
         opcao = usuarios();

@@ -39,7 +39,7 @@ int main(void){
         getchar();
 
         switch(opcao){
-            case '1': moduloUsuarios(); break;
+            case '1': modulo_usuarios(); break;
             case '2': moduloAlimentos(); break;
             case '3': moduloRefeicoes(); break;
             case '4': modulo_consumoAlimentos(); break;
