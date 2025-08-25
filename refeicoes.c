@@ -142,6 +142,7 @@ void alterar_refeicao(void){
 
 }
 void excluir_refeicao(void){
+    char nome_refeicao[100];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
@@ -149,13 +150,21 @@ void excluir_refeicao(void){
     printf("///                 = = = = =  Excluir Refeição = = = = =                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                  Informe o nome da Refeição a excluir:                  ///\n");
+    scanf("%[^\n]", nome_refeicao);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                         Informação da Refeição                          ///\n");
     printf("///                                                                         ///\n");
+    printf("///                         Nome:                                           ///\n");
+    printf("///                         Tipo:                                           ///\n");
+    printf("///                         Calorias:                                       ///\n");
+    printf("///                         Proteínas:                                      ///\n");
+    printf("///                         Carboidratos:                                   ///\n");
+    printf("///                         Gorduras:                                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir esta refeição?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+   
      
 }
 void refeicoes_usuario(void){
