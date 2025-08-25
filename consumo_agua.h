@@ -1,6 +1,6 @@
-void modulo_consumoAgua(void);
+void modulo_consumo_agua(void);
 char consumo_agua(void);
-void cadastrar_consumoAgua(void);
-void buscar_consumoAgua(void);
-void alterar_consumoAgua(void);
-void excluir_consumoAgua(void);
+void cadastrar_consumo_agua(void);
+void buscar_consumo_agua(void);
+void alterar_consumo_agua(void);
+void excluir_consumo_agua(void);

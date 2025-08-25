@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "consumo_agua.h"
 
-void modulo_consumoAgua(void) {
+void modulo_consumo_agua(void) {
     char opcao;
     do {
         opcao = consumo_agua();
         switch(opcao) {
-            case '1': cadastrar_consumoAgua(); break;
-            case '2': buscar_consumoAgua(); break;
-            case '3': alterar_consumoAgua(); break;
-            case '4': excluir_consumoAgua(); break;
+            case '1': cadastrar_consumo_agua(); break;
+            case '2': buscar_consumo_agua(); break;
+            case '3': alterar_consumo_agua(); break;
+            case '4': excluir_consumo_agua(); break;
 
             
         }
@@ -42,7 +42,7 @@ char consumo_agua(void){
 
 }
 
-void cadastrar_consumoAgua(void){
+void cadastrar_consumo_agua(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -58,7 +58,7 @@ void cadastrar_consumoAgua(void){
     getchar();
 }
 
-void buscar_consumoAgua(void){
+void buscar_consumo_agua(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -75,7 +75,7 @@ void buscar_consumoAgua(void){
     getchar();
 }
 
-void alterar_consumoAgua(void){
+void alterar_consumo_agua(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -97,7 +97,7 @@ void alterar_consumoAgua(void){
     getchar();
 }
 
-void excluir_consumoAgua(void){
+void excluir_consumo_agua(void){
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
