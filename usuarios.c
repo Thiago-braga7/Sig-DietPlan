@@ -73,9 +73,8 @@ void cadastrar_usuario(void){
     scanf("%f", &altura);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    printf("///                    Usuário cadastrado com sucesso!                      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     
 
 }
@@ -137,6 +136,9 @@ void alterar_usuario(void){
     scanf("%f", &novaAltura);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Usuário alterado com sucesso!                        ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
     
 
 }
