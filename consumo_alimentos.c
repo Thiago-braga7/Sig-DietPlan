@@ -42,6 +42,8 @@ char consumo_alimentos(void){
 }
 
 void cadastrar_consumo_alimentos(void){
+    char alimento[100], data[15];
+    float quantidade;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -50,8 +52,14 @@ void cadastrar_consumo_alimentos(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o Alimento:                             ///\n");
+    scanf("%[^\n]", alimento);
+    getchar();
     printf("///                         Quantidade(kcal):                               ///\n");
+    scanf("%f", &quantidade);
+    getchar();
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%[^\n]", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     
