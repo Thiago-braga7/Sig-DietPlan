@@ -54,8 +54,7 @@ void cadastrar_consumo_agua(void){
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 }
 
 void buscar_consumo_agua(void){
@@ -71,8 +70,7 @@ void buscar_consumo_agua(void){
     printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    ;
 }
 
 void alterar_consumo_agua(void){
@@ -93,8 +91,7 @@ void alterar_consumo_agua(void){
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 }
 
 void excluir_consumo_agua(void){
@@ -115,6 +112,5 @@ void excluir_consumo_agua(void){
     printf("///                      Deseja excluir este registro?(S/N):                ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 }
