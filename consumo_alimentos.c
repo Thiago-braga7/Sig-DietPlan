@@ -86,6 +86,8 @@ void buscar_consumo_alimentos(void){
 }
 
 void alterar_consumo_alimentos(void){
+    char data[15], alimento[100], nova_data[11];
+    float nova_quantidade;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -94,14 +96,28 @@ void alterar_consumo_alimentos(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%[^\n]", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
+    printf("///                     Qual alimento deseja alterar? (número):             ///\n");
+    printf("///                                                                         ///\n");
+    int opcaoAlimento;
+    scanf("%d", &opcaoAlimento);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Novas Informações Consumo de Alimentos              ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o Alimento:                             ///\n");
+    scanf("%[^\n]", alimento);
+    getchar();
     printf("///                         Quantidade(kcal):                               ///\n");
+    scanf("%f", &nova_quantidade);
+    getchar();
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%[^\n]", nova_data);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     
 }
