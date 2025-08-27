@@ -67,6 +67,7 @@ void cadastrar_consumo_alimentos(void){
 }
 
 void buscar_consumo_alimentos(void){
+    char data[15];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -75,6 +76,8 @@ void buscar_consumo_alimentos(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%[^\n]", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
