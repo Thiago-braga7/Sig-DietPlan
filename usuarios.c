@@ -21,6 +21,7 @@ void modulo_usuarios(void) {
 
 char usuarios(void){
     char opcao;
+    system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -47,6 +48,7 @@ void cadastrar_usuario(void){
     char nome[100], cpf[15], telefone[15];
     int idade;
     float peso, altura;   
+    system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -81,6 +83,7 @@ void cadastrar_usuario(void){
 
 void buscar_usuario(void){
     char cpf[15];
+    system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -105,6 +108,8 @@ void alterar_usuario(void){
     char cpf[15], novoCpf[15], novoNome[100], novoTelefone[15];
     int novaIdade;
     float novoPeso, novaAltura;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -143,6 +148,7 @@ void alterar_usuario(void){
 
 }
 void excluir_usuario(void){
+    system("clear||cls");
     char cpf[15], confirmacao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
