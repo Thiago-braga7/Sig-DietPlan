@@ -58,6 +58,7 @@ int main(void){
 
 
 void menu_principal(void){
+    system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
