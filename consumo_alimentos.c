@@ -121,6 +121,7 @@ void alterar_consumo_alimentos(void){
     
 }
 void excluir_consumo_alimentos(void){
+    char data[15], alimento[100];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Alimentos                         ///\n");
@@ -129,7 +130,11 @@ void excluir_consumo_alimentos(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%[^\n]", data);
+    getchar();
     printf("///                         Informe o Alimento:                             ///\n");
+    scanf("%[^\n]", alimento);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                       Informações Consumo de Alimentos                  ///\n");
     printf("///                                                                         ///\n");
