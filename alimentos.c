@@ -19,6 +19,8 @@ void modulo_alimentos(void) {
 
 char alimentos(void){
     char opcao;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -44,6 +46,8 @@ char alimentos(void){
 void cadastrar_alimento(void){
     char nome_alimento[100], tipo[50];
     float calorias, proteinas, carboidratos, gorduras;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -76,6 +80,8 @@ void cadastrar_alimento(void){
 }
 void buscar_alimento(void){
     char nome_alimento[100];
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -100,6 +106,8 @@ void buscar_alimento(void){
 void alterar_alimento(void){
     char nome_alimento[100], novoTipo[50];
     float novasCalorias, novasProteinas, novosCarboidratos, novasGorduras;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
@@ -139,6 +147,8 @@ void alterar_alimento(void){
 }
 void excluir_alimento(void){
     char nome_alimento[100], confirmacao;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Alimentos                                 ///\n");
