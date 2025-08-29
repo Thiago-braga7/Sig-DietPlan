@@ -105,8 +105,8 @@ void buscar_refeicao(void){
       
 }
 void alterar_refeicao(void){
-    char nome_refeicao[100], novo_nomeRefeicao[100], novoTipo[50];
-    float novasCalorias, novasProteinas, novosCarboidratos, novasGorduras;
+    char nome_refeicao[100], novo_nome_refeicao[100], novo_tipo[50];
+    float novas_calorias, novas_proteinas, novos_carboidratos, novas_gorduras;
     system("clear||cls");
 
     printf("\n");
@@ -123,22 +123,22 @@ void alterar_refeicao(void){
     printf("///                              Novos dados:                               ///\n");
     printf("///                                                                         ///\n");
     printf("///                      Nome da Refeição:                                  ///\n");
-    scanf("%[^\n]", novo_nomeRefeicao);
+    scanf("%[^\n]", novo_nome_refeicao);
     getchar();
     printf("///                      Tipo (Café, Almoço, Jantar, Lanche):               ///\n");
-    scanf("%[^\n]", novoTipo);
+    scanf("%[^\n]", novo_tipo);
     getchar();
     printf("///                      Calorias (kcal):                                   ///\n");
-    scanf("%f", &novasCalorias);
+    scanf("%f", &novas_calorias);
     getchar();
     printf("///                      Proteínas (g):                                     ///\n");
-    scanf("%f", &novasProteinas);
+    scanf("%f", &novas_proteinas);
     getchar();
     printf("///                      Carboidratos (g):                                  ///\n");
-    scanf("%f", &novosCarboidratos);
+    scanf("%f", &novos_carboidratos);
     getchar();
     printf("///                      Gorduras (g):                                      ///\n");
-    scanf("%f", &novasGorduras);
+    scanf("%f", &novas_gorduras);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Refeição alterada com sucesso!                       ///\n");
