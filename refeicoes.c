@@ -22,6 +22,7 @@ void modulo_refeicoes(void) {
 
 char refeicoes(void){
     char opcao;
+    system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -47,6 +48,7 @@ char refeicoes(void){
 void cadastrar_refeicao(void){
     char nome_refeição[100], tipo[50];
     float calorias, proteinas, carboidratos, gorduras;
+    system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
@@ -78,6 +80,8 @@ void cadastrar_refeicao(void){
 }
 void buscar_refeicao(void){
     char nome_refeicao[100];
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
@@ -103,6 +107,8 @@ void buscar_refeicao(void){
 void alterar_refeicao(void){
     char nome_refeicao[100], novo_nomeRefeicao[100], novoTipo[50];
     float novasCalorias, novasProteinas, novosCarboidratos, novasGorduras;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
@@ -143,6 +149,8 @@ void alterar_refeicao(void){
 }
 void excluir_refeicao(void){
     char nome_refeicao[100], confirmacao;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Refeições                                ///\n");
