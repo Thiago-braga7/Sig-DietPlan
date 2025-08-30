@@ -114,6 +114,7 @@ void alterar_consumo_agua(void){
 }
 
 void excluir_consumo_agua(void){
+    char data[15];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -122,6 +123,8 @@ void excluir_consumo_agua(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%10s", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                       Informações Consumo de Água                       ///\n");
     printf("///                                                                         ///\n");
