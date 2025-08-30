@@ -84,7 +84,7 @@ void buscar_consumo_agua(void){
 
 void alterar_consumo_agua(void){
     char data[15];
-    int nova_quantidade_agua;
+    int nova_quantidade;
     char nova_data[15];
     
     printf("\n");
@@ -103,19 +103,15 @@ void alterar_consumo_agua(void){
     printf("///                     Novas Informações Consumo de Água                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a quantidade (ml):                      ///\n");
-    scanf("%d", &nova_quantidade_agua);
+    scanf("%d", &nova_quantidade_a);
     getchar();
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-    scanf("%10s", nova_data);
-    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     
 }
 
 void excluir_consumo_agua(void){
-    char data[15];
-    char confirmacao;
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -124,8 +120,6 @@ void excluir_consumo_agua(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-    scanf("%10s", data);
-    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                       Informações Consumo de Água                       ///\n");
     printf("///                                                                         ///\n");
@@ -133,14 +127,7 @@ void excluir_consumo_agua(void){
     printf("///                         Data(DD/MM/AAAA):                               ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir este registro?(S/N):                ///\n");
-    scanf("%c", &confirmacao);
-    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    if (confirmacao == 'S' || confirmacao == 's') {
-        printf("///            Registro de Consumo  de Água excluído com sucesso!       ///\n");
-    } else {
-        printf("///                    Operação de exclusão cancelada!                    ///\n");
-    }
     
 }
