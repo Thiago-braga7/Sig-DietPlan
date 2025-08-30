@@ -64,6 +64,7 @@ void cadastrar_consumo_agua(void){
 }
 
 void buscar_consumo_agua(void){
+    char data[15];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -72,6 +73,8 @@ void buscar_consumo_agua(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%10s", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
