@@ -43,6 +43,8 @@ char consumo_agua(void){
 }
 
 void cadastrar_consumo_agua(void){
+    int quantidade_agua;
+    char data[15];
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -51,7 +53,11 @@ void cadastrar_consumo_agua(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a quantidade (ml):                      ///\n");
+    scanf("%d", &quantidade_agua);
+    getchar();
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%10s", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     
