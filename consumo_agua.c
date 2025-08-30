@@ -83,6 +83,10 @@ void buscar_consumo_agua(void){
 }
 
 void alterar_consumo_agua(void){
+    char data[15];
+    int nova_quantidade_agua;
+    char nova_data[15];
+    
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Consumo Água                              ///\n");
@@ -91,13 +95,19 @@ void alterar_consumo_agua(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%10s", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Registro de Consumo(Água) no dia (DD/MM/AAAA)       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Novas Informações Consumo de Água                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a quantidade (ml):                      ///\n");
+    scanf("%d", &nova_quantidade_agua);
+    getchar();
     printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    scanf("%10s", nova_data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     
