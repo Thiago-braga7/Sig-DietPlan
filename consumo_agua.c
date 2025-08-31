@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include "consumo_agua.h"
 
+
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define CYAN    "\033[36m"
+#define RESET   "\033[0m"
+
+
+
+
+
+
+
+
 void modulo_consumo_agua(void) {
     char opcao;
     do {
@@ -20,66 +33,63 @@ void modulo_consumo_agua(void) {
 char consumo_agua(void){
     char opcao;
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("///                                                                         ///\n");
-    printf("///                    = = = = =  Consumo Diário(Água)  = = = = =           ///\n");
+    printf(RED"///                    = = = = =  Consumo Diário(Água)  = = = = =           ///\n"RESET);
     printf("///                                                                         ///\n");
-    printf("///                    1. Registrar Consumo de Água                         ///\n");
+    printf(CYAN"///                    1. Registrar Consumo de Água                         ///\n");
     printf("///                    2. Consultar Consumo(Dia) de Água                    ///\n");
     printf("///                    3. Alterar Registro de Consumo de Água               ///\n");
     printf("///                    4. Excluir Registro de Consumo de Água               ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: ");
+    printf("///                      Escolha a opção desejada: "RESET);
     scanf("%c", &opcao);
     getchar();
     printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     return opcao;
-
 }
 
 void cadastrar_consumo_agua(void){
     int quantidade_agua;
     char data[15];
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Consumo Água                              ///\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                               Consumo Água                              ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///                 = = = = =  Cadastrar Consumo de Água = = = = =          ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Cadastrar Consumo de Água = = = = =          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe a quantidade (ml):                      ///\n");
+    printf("///                         Informe a quantidade (ml):                      ///\n"RESET);
     scanf("%d", &quantidade_agua);
     getchar();
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf(CYAN"///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
     scanf("%10s", data);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
-    
 }
 
 void buscar_consumo_agua(void){
     char data[15];
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Consumo Água                              ///\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                               Consumo Água                              ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///                 = = = = =  Buscar Consumo de Água = = = = =             ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Buscar Consumo de Água = = = = =             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
     scanf("%10s", data);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n"RESET);
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
-    ;
 }
 
 void alterar_consumo_agua(void){
@@ -88,51 +98,49 @@ void alterar_consumo_agua(void){
     char nova_data[15];
     
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Consumo Água                              ///\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                               Consumo Água                              ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///                 = = = = =  Alterar Consumo de Água = = = = =            ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Alterar Consumo de Água = = = = =            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
     scanf("%10s", data);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                     Registro de Consumo(Água) no dia (DD/MM/AAAA)       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                     Novas Informações Consumo de Água                   ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe a quantidade (ml):                      ///\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                     Registro de Consumo(Água) no dia (DD/MM/AAAA)       ///\n"RESET);
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                     Novas Informações Consumo de Água                   ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
+    printf("///                         Informe a quantidade (ml):                      ///\n"RESET);
     scanf("%d", &nova_quantidade_agua);
     getchar();
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf(CYAN"///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
     scanf("%10s", nova_data);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
-    
 }
 
 void excluir_consumo_agua(void){
     char data[15];
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Consumo Água                              ///\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                               Consumo Água                              ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///                 = = = = =  Excluir Consumo de Água = = = = =            ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Excluir Consumo de Água = = = = =            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
     scanf("%10s", data);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                       Informações Consumo de Água                       ///\n");
-    printf("///                                                                         ///\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///                       Informações Consumo de Água                       ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
     printf("///                         Quantidade Água(ml):                            ///\n");
     printf("///                         Data(DD/MM/AAAA):                               ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("///                      Deseja excluir este registro?(S/N):                ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
-    
 }
