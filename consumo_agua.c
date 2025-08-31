@@ -129,7 +129,7 @@ void alterar_consumo_agua(void){
 }
 
 void excluir_consumo_agua(void){
-    char data[15];
+    char data[15], confirmacao;
     system("clear||cls");
 
     printf("\n");
@@ -151,4 +151,13 @@ void excluir_consumo_agua(void){
     printf("///                      Deseja excluir este registro?(S/N):                ///\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    scanf("%c", &confirmacao);
+    getchar();
+    
+    if (confirmacao == 'S' || confirmacao == 's') {
+        printf(RED"///                    Alimento excluído com sucesso!                      ///\n"RESET);
+    } else {
+        printf(RED"///                    Operação de exclusão cancelada!                    ///\n"RESET);
+    }
 }
