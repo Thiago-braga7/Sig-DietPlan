@@ -156,7 +156,7 @@ void excluir_consumo_agua(void){
     getchar();
     
     if (confirmacao == 'S' || confirmacao == 's') {
-        printf(RED"///                    Alimento excluído com sucesso!                      ///\n"RESET);
+        printf(RED"///            Registro de Consumo de Água excluído com sucesso  ///\n"RESET);
     } else {
         printf(RED"///                    Operação de exclusão cancelada!                    ///\n"RESET);
     }
