@@ -187,6 +187,8 @@ void excluir_refeicao(void){
 
 void refeicoes_usuario(void){
     char nome[100];
+    system("clear||cls");
+
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf(RED"///                                Refeições                                ///\n");
