@@ -32,6 +32,7 @@ void modulo_consumo_agua(void) {
 
 char consumo_agua(void){
     char opcao;
+    system("clear||cls");
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("///                                                                         ///\n");
@@ -57,6 +58,8 @@ char consumo_agua(void){
 void cadastrar_consumo_agua(void){
     int quantidade_agua;
     char data[15];
+    system("clear||cls");
+
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf(RED"///                               Consumo Água                              ///\n"RESET);
@@ -76,6 +79,8 @@ void cadastrar_consumo_agua(void){
 
 void buscar_consumo_agua(void){
     char data[15];
+    system("clear||cls");
+
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf(RED"///                               Consumo Água                              ///\n"RESET);
@@ -96,6 +101,7 @@ void alterar_consumo_agua(void){
     char data[15];
     int nova_quantidade_agua;
     char nova_data[15];
+    system("clear||cls");
     
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -124,6 +130,8 @@ void alterar_consumo_agua(void){
 
 void excluir_consumo_agua(void){
     char data[15];
+    system("clear||cls");
+
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf(RED"///                               Consumo Água                              ///\n"RESET);
