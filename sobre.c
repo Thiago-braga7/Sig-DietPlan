@@ -3,16 +3,25 @@
 #include "sobre.h"
 
 
+
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define CYAN    "\033[36m"
+
+
+
+
 void bem_vindo(void) {
     char nome[50];
     char genero;
 
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                           SIG-DietPlan                                  ///\n");
+    printf(RED"///                           SIG-DietPlan                                  ///\n"RESET);
     printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
     printf("\nInforme seu nome: ");
     scanf("%[^\n]", nome);  
@@ -27,38 +36,33 @@ void bem_vindo(void) {
     } else {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
     }
-
-   
 }
 
 void sobre(void){
-    printf("Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN\n");
-    printf("para auxiliar no planejamento e acompanhamento de dietas.\n");
+    printf(CYAN"Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN\n"RESET);
+    printf(CYAN"para auxiliar no planejamento e acompanhamento de dietas.\n"RESET);
     printf("\n");
-    printf("Ele permite:\n");
-    printf("- Cadastro de usuários;\n");
-    printf("- Gestão de alimentos e valores nutricionais;\n");
-    printf("- Registro de consumos diários;\n");
-    printf("- Planejamento de refeições personalizadas.\n");
-    printf("\n");
-
-    
-    printf("Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n");
-    printf("Gerencie sua saúde de forma prática: cadastre usuários, registre alimentos, acompanhe a quantidade de água ingerida e controle suas calorias diárias!");
+    printf(CYAN"Ele permite:\n"RESET);
+    printf(CYAN"- Cadastro de usuários;\n"RESET);
+    printf(CYAN"- Gestão de alimentos e valores nutricionais;\n"RESET);
+    printf(CYAN"- Registro de consumos diários;\n"RESET);
+    printf(CYAN"- Planejamento de refeições personalizadas.\n"RESET);
     printf("\n");
 
+    printf(CYAN"Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n"RESET);
+    printf(CYAN"Gerencie sua saúde de forma prática: cadastre usuários, registre alimentos, acompanhe a quantidade de água ingerida e controle suas calorias diárias!\n"RESET);
+    printf("\n");
 }
 
 void sair(void){
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                 Obrigado por usar o SIG-DietPlan!                       ///\n");
+    printf(RED"///                 Obrigado por usar o SIG-DietPlan!                       ///\n");
     printf("///                         Até a proxima!                                  ///\n");
     printf("///              📷 Instagram: @thiago.braga9a e gabrieluchoa_1             ///\n");
     printf("///              🐙 GitHub: github.com/Thiago-braga7                        ///\n");
     printf("///                         github/GabrielUchoa17                           ///\n");
     printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-
+    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
