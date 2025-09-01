@@ -22,6 +22,7 @@ void modulo_usuarios(void) {
             case '2': buscar_usuario(); break;
             case '3': alterar_usuario(); break;
             case '4': excluir_usuario(); break;
+            case '5': calcular_imc(); break;
             
         }
     } while (opcao != '0');  
@@ -40,6 +41,7 @@ char usuarios(void){
     printf("///                    2. Buscar Usuário                                    ///\n");
     printf("///                    3. Alterar Dados do Usuário                          ///\n");
     printf("///                    4. Excluir Usuário                                   ///\n");
+    printf("///                    5. Calcular IMC                                      ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("///                                                                         ///\n");
@@ -181,4 +183,48 @@ void excluir_usuario(void){
     } else {
         printf(RED"///                    Operação de exclusão cancelada!                    ///\n"RESET);
     }
+}
+void calcular_imc(void){
+    float peso, altura, imc;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                 Usuários                                    ///\n");
+    printf("///                                                                             ///\n");
+    printf("///                     = = = = = Calcular IMC = = = = =                        ///\n");
+    printf("///                                                                             ///\n");
+    printf("///                           Informe seu peso (kg):                            ///\n");
+    scanf(" %f", &peso);  
+    printf("///                           Informe sua altura (m):                           ///\n");
+    scanf(" %f", &altura); 
+    printf("///////////////////////////////////////////////////////////////////////////////////\n");
+
+    if (altura <= 0) {
+        printf("Altura inválida!\n");
+        return;
+    }
+
+    imc = peso / (altura * altura);
+
+    printf("///                                   IMC                                       ///\n");
+    printf("///                                                                             ///\n");
+    printf("\nIMC é: %.2f\n", imc);
+
+    if (imc < 18.5) {
+        printf("Classificação: Abaixo do peso\n");
+    } else if (imc < 24.9) {
+        printf("Classificação: Peso normal\n");
+    } else if (imc < 29.9) {
+        printf("Classificação: Sobrepeso\n");
+    } else if (imc < 34.9) {
+        printf("Classificação: Obesidade grau I\n");
+    } else if (imc < 39.9) {
+        printf("Classificação: Obesidade grau II\n");
+    } else {
+        printf("Classificação: Obesidade grau III\n");
+    }
+
+    printf("///////////////////////////////////////////////////////////////////////////////////\n");
+    printf("\nPressione ENTER para voltar ao menu...");
+    getchar(); 
+    getchar(); 
 }
