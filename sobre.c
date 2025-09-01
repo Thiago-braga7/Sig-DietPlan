@@ -19,8 +19,8 @@ void bem_vindo(void) {
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf(RED"///                           SIG-DietPlan                                  ///\n"RESET);
-    printf("///                                                                         ///\n");
+    printf(CYAN"///                           SIG-DietPlan                                  ///\n"RESET);
+    printf(CYAN"///                                                                         ///\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
     printf("\nInforme seu nome: ");
@@ -58,7 +58,7 @@ void sair(void){
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf(RED"///                 Obrigado por usar o SIG-DietPlan!                       ///\n");
+    printf(CYAN"///                 Obrigado por usar o SIG-DietPlan!                       ///\n");
     printf("///                         Até a proxima!                                  ///\n");
     printf("///              📷 Instagram: @thiago.braga9a e gabrieluchoa_1             ///\n");
     printf("///              🐙 GitHub: github.com/Thiago-braga7                        ///\n");

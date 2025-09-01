@@ -67,17 +67,19 @@ void menu_principal(void){
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);
-    printf(GREEN"///             Universidade Federal do Rio Grande do Norte                 ///\n");
+    printf(CYAN"///             Universidade Federal do Rio Grande do Norte                 ///\n");
     printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
     printf("///               Departamento de Computação e Tecnologia                   ///\n");
     printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
     printf("///               Projeto Sistema de Planejamento de Dietas                 ///\n");
     printf("///                           SIG-DietPlan                                  ///\n");
     printf("///         Criado por @thiagobraga9a e gabrieluchoa_1 -- desde Ago, 2025   ///\n");
-    printf("///                                                                         ///\n"RESET);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf(RED"///            = = = = = Planejamento de Dietas = = = = =                   ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = Planejamento de Dietas = = = = =                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                      1. Usuários                                        ///\n");
     printf("///                      2. Alimentos                                       ///\n");
@@ -85,8 +87,8 @@ void menu_principal(void){
     printf("///                      4. Consumo Diário(Alimentos)                       ///\n");
     printf("///                      5. Consumo Diário(Água)                            ///\n");
     printf("///                      6. Relatórios                                      ///\n");
-    printf("///                      0. Sair                                            ///\n"RESET);
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///                      0. Sair                                            ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
 }
 
