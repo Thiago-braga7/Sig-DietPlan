@@ -3,10 +3,10 @@
 #include "alimentos.h"
 
 
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define CYAN    "\033[36m"
-#define RESET   "\033[0m"
+#define RED   "\033[31m"
+#define GREEN  "\033[32m"
+#define CYAN   "\033[36m"
+#define RESET  "\033[0m"
 
 
 
@@ -33,22 +33,22 @@ char alimentos(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf(RED"///                    = = = = =   Alimentos   = = = = =                    ///\n"RESET);
+    printf("///                    = = = = =   Alimentos   = = = = =                    ///\n");
     printf("///                                                                         ///\n");
-    printf(CYAN"///                    1. Cadastrar Alimento na Dieta                       ///\n");
+    printf("///                    1. Cadastrar Alimento na Dieta                       ///\n");
     printf("///                    2. Buscar Alimento na Dieta                          ///\n");
     printf("///                    3. Alterar Alimento da Dieta                         ///\n");
     printf("///                    4. Excluir Alimento da Dieta                         ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: "RESET);
+    printf("///                      Escolha a opção desejada: ");
     scanf("%c", &opcao);
     getchar();
     printf("///                                                                         ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     return opcao;
@@ -60,33 +60,33 @@ void cadastrar_alimento(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf(RED"///                               Alimentos                                 ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = =  Cadastrar Alimento na Dieta  = = = = =       ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Alimentos                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                               ///\n"RESET);
+    printf("///                 = = = = =  Cadastrar Alimento na Dieta  = = = = =       ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome do Alimento:                               ///\n");
     scanf("%[^\n]", nome_alimento);
     getchar();
-    printf(CYAN"///                         Tipo(Fruta, Carne):                             ///\n"RESET);
+    printf("///                         Tipo(Fruta, Carne):                             ///\n");
     scanf("%[^\n]", tipo);
     getchar();
-    printf(CYAN"///                         Calorias(kcal):                                 ///\n"RESET);
+    printf("///                         Calorias(kcal):                                 ///\n");
     scanf("%f", &calorias);
     getchar();
-    printf(CYAN"///                         Proteínas:                                      ///\n"RESET);
+    printf("///                         Proteínas:                                      ///\n");
     scanf("%f", &proteinas);
     getchar();
-    printf(CYAN"///                         Carboidratos:                                   ///\n"RESET);
+    printf("///                         Carboidratos:                                   ///\n");
     scanf("%f", &carboidratos);
     getchar();
-    printf(CYAN"///                         Gorduras:                                       ///\n"RESET);
+    printf("///                         Gorduras:                                       ///\n");
     scanf("%f", &gorduras);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                    Alimento cadastrado com sucesso!                     ///\n"RESET);
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Alimento cadastrado com sucesso!                     ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
 }
 
@@ -95,24 +95,24 @@ void buscar_alimento(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf(RED"///                               Alimentos                                 ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = =  Buscar Alimento na Dieta= = = = =            ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf("///                         Informe o nome do Alimento:                     ///\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Alimentos                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Buscar Alimento na Dieta= = = = =            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o nome do Alimento:                     ///\n");
     scanf("%[^\n]", nome_alimento);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                        Informações do Alimento                          ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Informações do Alimento                          ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         Nome do Alimento:                               ///\n");
     printf("///                         Tipo(Fruta, Carne):                             ///\n");
     printf("///                         Calorias(kcal):                                 ///\n");
     printf("///                         Proteínas:                                      ///\n");
     printf("///                         Carboidratos:                                   ///\n");
     printf("///                         Gorduras:                                       ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
 }
 
@@ -121,39 +121,39 @@ void alterar_alimento(void){
     float novas_calorias, novas_proteinas, novos_carboidratos, novas_gorduras;
     system("clear||cls");
 
-    printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf(RED"///                               Alimentos                                 ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = = Alterar Alimento na Dieta = = = = =           ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf("///                         Informe o nome do Alimento:                     ///\n"RESET);
+    printf(RED"\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Alimentos                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Alterar Alimento na Dieta = = = = =           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o nome do Alimento:                     ///\n");
     scanf("%[^\n]", nome_alimento);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                        Novas Informações do ALimento                    ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf("///                         Nome do Alimento:                               ///\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novas Informações do ALimento                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome do Alimento:                               ///\n");
     scanf("%[^\n]", novo_nome_alimento);
     getchar();
-    printf(CYAN"///                         Tipo(Fruta, Carne):                             ///\n"RESET);
+    printf("///                         Tipo(Fruta, Carne):                             ///\n");
     scanf("%[^\n]", novo_tipo);
     getchar();
-    printf(CYAN"///                         Calorias(kcal):                                 ///\n"RESET);
+    printf("///                         Calorias(kcal):                                 ///\n");
     scanf("%f", &novas_calorias);
     getchar();
-    printf(CYAN"///                         Proteínas:                                      ///\n"RESET);
+    printf("///                         Proteínas:                                      ///\n");
     scanf("%f", &novas_proteinas);
     getchar();
-    printf(CYAN"///                         Carboidratos:                                   ///\n"RESET);
+    printf("///                         Carboidratos:                                   ///\n");
     scanf("%f", &novos_carboidratos);
     getchar();
-    printf(CYAN"///                         Gorduras:                                       ///\n"RESET);
+    printf("///                         Gorduras:                                       ///\n");
     scanf("%f", &novas_gorduras);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                    Alimento alterado com sucesso!                       ///\n"RESET);
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Alimento alterado com sucesso!                       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
 }
 
@@ -162,34 +162,34 @@ void excluir_alimento(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf(RED"///                               Alimentos                                 ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = = Excluir Alimento da Dieta = = = = =           ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf("///                         Informe o nome do Alimento:                     ///\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Alimentos                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Excluir Alimento da Dieta = = = = =           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o nome do Alimento:                     ///\n");
     scanf("%[^\n]", nome_alimento);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                           Excluindo Alimento                            ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                            Informações do Alimento                      ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                           Excluindo Alimento                            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                            Informações do Alimento                      ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         Nome do Alimento:                               ///\n");
     printf("///                         Tipo(Fruta, Carne):                             ///\n");
     printf("///                         Calorias(kcal):                                 ///\n");
     printf("///                         Proteínas:                                      ///\n");
     printf("///                         Carboidratos:                                   ///\n");
     printf("///                         Gorduras:                                       ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     scanf("%c", &confirmacao);
     getchar();
     
     if (confirmacao == 'S' || confirmacao == 's') {
-        printf(RED"///                    Alimento excluído com sucesso!                      ///\n"RESET);
+        printf("///                    Alimento excluído com sucesso!                      ///\n");
     } else {
-        printf(RED"///                    Operação de exclusão cancelada!                    ///\n"RESET);
+        printf("///                    Operação de exclusão cancelada!                    ///\n");
     }
 }

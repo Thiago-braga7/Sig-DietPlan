@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "consumo_alimentos.h"
 
-#define RED     "\x1b[31m"
+#define RED    "\x1b[31m"
 #define CYAN    "\x1b[36m"
-#define RESET   "\x1b[0m"
+#define RESET  "\x1b[0m"
 
 
 
@@ -31,22 +31,22 @@ char consumo_alimentos(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf(RED"///                    = = = = =  Consumo Diário(Alimentos)  = = = = =      ///\n"RESET);
+    printf("///                    = = = = =  Consumo Diário(Alimentos)  = = = = =      ///\n");
     printf("///                                                                         ///\n");
-    printf(CYAN"///                    1. Registrar Consumo de Alimentos                    ///\n");
+    printf("///                    1. Registrar Consumo de Alimentos                    ///\n");
     printf("///                    2. Consultar Consumo(Dia) de Alimentos               ///\n");
     printf("///                    3. Alterar Registro de Consumo de Alimentos          ///\n");
     printf("///                    4. Excluir Registro de Consumo de Alimentos          ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: "RESET);
+    printf("///                      Escolha a opção desejada: ");
     scanf("%c", &opcao);
     getchar();
     printf("///                                                                         ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     return opcao;
@@ -58,22 +58,22 @@ void cadastrar_consumo_alimentos(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                               Consumo Alimentos                         ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = =  Cadastrar Consumo de Alimentos = = = = =     ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Alimentos                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o Alimento:                             ///\n"RESET);
+    printf("///                 = = = = =  Cadastrar Consumo de Alimentos = = = = =     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o Alimento:                             ///\n");
     scanf("%[^\n]", alimento);
     getchar();
-    printf(CYAN"///                         Quantidade(kcal):                               ///\n"RESET);
+    printf("///                         Quantidade(kcal):                               ///\n");
     scanf("%f", &quantidade);
     getchar();
-    printf(CYAN"///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     scanf("%[^\n]", data);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
 }
 
@@ -82,18 +82,18 @@ void buscar_consumo_alimentos(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                               Consumo Alimentos                         ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = =  Buscar Consumo de Alimentos = = = = =        ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Alimentos                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
+    printf("///                 = = = = =  Buscar Consumo de Alimentos = = = = =        ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     scanf("%[^\n]", data);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n"RESET);
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
 }
 
@@ -103,32 +103,32 @@ void alterar_consumo_alimentos(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                               Consumo Alimentos                         ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = =  Alterar Consumo de Alimentos = = = = =       ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Alimentos                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
+    printf("///                 = = = = =  Alterar Consumo de Alimentos = = = = =       ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     scanf("%[^\n]", data);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf("///                     Qual alimento deseja alterar? (número):             ///\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                     Qual alimento deseja alterar? (número):             ///\n");
     int opcaoAlimento;
     scanf("%d", &opcaoAlimento);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                     Novas Informações Consumo de Alimentos              ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf("///                         Informe o Alimento:                             ///\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Novas Informações Consumo de Alimentos              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o Alimento:                             ///\n");
     scanf("%[^\n]", alimento);
     getchar();
-    printf(CYAN"///                         Quantidade(kcal):                               ///\n"RESET);
+    printf("///                         Quantidade(kcal):                               ///\n");
     scanf("%f", &nova_quantidade);
     getchar();
-    printf(CYAN"///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
     scanf("%[^\n]", nova_data);
     getchar();
     printf("\n");
@@ -139,26 +139,26 @@ void excluir_consumo_alimentos(void){
     system("clear||cls");
 
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                               Consumo Alimentos                         ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(RED"///                 = = = = =  Excluir Consumo de Alimentos = = = = =       ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Alimentos                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
+    printf("///                 = = = = =  Excluir Consumo de Alimentos = = = = =       ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
     scanf("%[^\n]", data);
     getchar();
-    printf(CYAN"///                         Informe o Alimento:                             ///\n"RESET);
+    printf("///                         Informe o Alimento:                             ///\n");
     scanf("%[^\n]", alimento);
     getchar();
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(RED"///                       Informações Consumo de Alimentos                  ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                       Informações Consumo de Alimentos                  ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         Alimento:                                       ///\n");
     printf("///                         Quantidade(kcal):                               ///\n");
     printf("///                         Data(DD/MM/AAAA):                               ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
 }
