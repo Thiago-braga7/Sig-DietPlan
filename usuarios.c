@@ -186,6 +186,8 @@ void excluir_usuario(void){
 }
 void calcular_imc(void){
     float peso, altura, imc;
+    system("clear||cls");
+
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                 Usuários                                    ///\n");
