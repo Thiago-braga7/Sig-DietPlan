@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sobre.h"
+#include "util.h"
 
 
 
@@ -25,12 +26,11 @@ void bem_vindo(void) {
     printf("\nInforme seu nome: ");
     scanf("%[^\n]", nome);  
 
-    printf("Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): ");
-    scanf(" %c", &genero);
+    genero = ler_genero();
 
-    if (genero == 'M' || genero == 'm') {
+     if (genero == 'M') {
         printf("\nBem-vindo 😁, %s!\n", nome);
-    } else if (genero == 'F' || genero == 'f') {
+    } else if (genero == 'F') {
         printf("\nBem-vinda 😁, %s!\n", nome);
     } else {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
