@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "alimentos.h"
+#include "util.h"
+
 
 
 #define RED   "\033[31m"
@@ -157,7 +159,7 @@ void alterar_alimento(void){
 }
 
 void excluir_alimento(void){
-    char nome_alimento[100], confirmacao;
+    char nome_alimento[100];
     system("clear||cls");
 
     printf("\n");
@@ -181,14 +183,11 @@ void excluir_alimento(void){
     printf("///                         Carboidratos:                                   ///\n");
     printf("///                         Gorduras:                                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    scanf("%c", &confirmacao);
-    getchar();
+    char resposta = confirmar_acao();
     
-    if (confirmacao == 'S' || confirmacao == 's') {
-        printf("///                    Alimento excluído com sucesso!                      ///\n");
+    if (resposta == 'S') {
+        printf(RED"///                    Alimento excluído com sucesso!                      ///\n");
     } else {
-        printf("///                    Operação de exclusão cancelada!                    ///\n");
+        printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
     }
 }

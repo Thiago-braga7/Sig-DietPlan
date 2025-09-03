@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "refeicoes.h"
-
+#include "util.h"
 
 
 #define RESET  "\033[0m"
@@ -153,7 +153,7 @@ void alterar_refeicao(void){
 }
 
 void excluir_refeicao(void){
-    char nome_refeicao[100], confirmacao;
+    char nome_refeicao[100];
     system("clear||cls");
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -174,11 +174,9 @@ void excluir_refeicao(void){
     printf("///                         Carboidratos:                                   ///\n");
     printf("///                         Gorduras:                                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Deseja excluir esta refeição?(S/N):                ///\n"RESET);
-    scanf("%c", &confirmacao);
-    getchar();
+    char resposta = confirmar_acao();
     
-    if (confirmacao == 'S' || confirmacao == 's') {
+    if (resposta == 'S') {
         printf(RED"///                    Refeição excluída com sucesso!                      ///\n"RESET);
     } else {
         printf(RED"///                    Operação de exclusão cancelada!                    ///\n"RESET);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "consumo_agua.h"
+#include "util.h"
 
 
 #define RED   "\033[31m"
@@ -128,7 +129,7 @@ void alterar_consumo_agua(void){
 }
 
 void excluir_consumo_agua(void){
-    char data[15], confirmacao;
+    char data[15];
     system("clear||cls");
 
     printf("\n");
@@ -147,14 +148,9 @@ void excluir_consumo_agua(void){
     printf("///                         Quantidade Água(ml):                            ///\n");
     printf("///                         Data(DD/MM/AAAA):                               ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Deseja excluir este registro?(S/N):                ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    scanf("%c", &confirmacao);
-    getchar();
+    char resposta = confirmar_acao();
     
-    if (confirmacao == 'S' || confirmacao == 's') {
+    if (resposta == 'S') {
         printf("///            Registro de Consumo de Água excluído com sucesso  ///\n");
     } else {
         printf("///                    Operação de exclusão cancelada!                    ///\n");

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "consumo_alimentos.h"
+#include "util.h"
 
 #define RED    "\x1b[31m"
 #define CYAN    "\x1b[36m"
@@ -158,7 +159,11 @@ void excluir_consumo_alimentos(void){
     printf("///                         Quantidade(kcal):                               ///\n");
     printf("///                         Data(DD/MM/AAAA):                               ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Deseja excluir este alimento?(S/N):                ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf("\n");
+    char resposta = confirmar_acao();
+    
+    if (resposta == 'S') {
+        printf(RED"///                    Consumo de Alimentos excluído com sucesso!    ///\n");
+    } else {
+        printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
+    }
 }

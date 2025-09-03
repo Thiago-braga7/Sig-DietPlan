@@ -21,13 +21,13 @@ char confirmar_acao(void) {
     char confirmacao;
 
     do {
-        printf("///   Deseja confirmar a ação? (S/N): ");
+        printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &confirmacao);  
         getchar(); 
         confirmacao = toupper(confirmacao);
 
         if (confirmacao != 'S' && confirmacao != 'N') {
-            printf("///   Opção inválida! Digite apenas S ou N.\n");
+            printf("Opção inválida! Digite apenas S ou N.\n");
         }
     } while (confirmacao != 'S' && confirmacao != 'N');
 
