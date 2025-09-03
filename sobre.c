@@ -25,7 +25,6 @@ void bem_vindo(void) {
 
     printf("\nInforme seu nome: ");
     scanf("%[^\n]", nome);  
-
     genero = ler_genero();
 
      if (genero == 'M') {
