@@ -1,1 +1,0 @@
-char ler_genero(void);

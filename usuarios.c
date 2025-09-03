@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "usuarios.h"
+#include "util.h"
 
 
 #define RESET   "\033[0m"
@@ -152,7 +153,7 @@ void alterar_usuario(void){
 
 void excluir_usuario(void){
     system("clear||cls");
-    char cpf[15], confirmacao;
+    char cpf[15];
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -174,10 +175,8 @@ void excluir_usuario(void){
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Deseja excluir este usuário?(S/N):                  ///\n"RESET);
-    scanf("%c", &confirmacao);
-    getchar();
-    if (confirmacao == 'S' || confirmacao == 's') {
+    char resposta = confirmar_acao();
+    if (resposta == 'S') {
         printf(RED"///                    Usuário excluído com sucesso!                      ///\n");
     } else {
         printf(RED"///                    Operação de exclusão cancelada!                    ///\n");

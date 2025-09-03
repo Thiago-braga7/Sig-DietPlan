@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sobre.h"
-#include "útil.h"
+#include "util.h"
 #include "validacao_nome.h"
 
 
