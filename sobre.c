@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sobre.h"
-#include "util.h"
+#include "útil.h"
+#include "validacao_nome.h"
 
 
 
@@ -15,19 +16,29 @@
 void bem_vindo(void) {
     char nome[50];
     char genero;
+    bool valido = false;
 
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf(CYAN"///                           SIG-DietPlan                                  ///\n"RESET);
-    printf(CYAN"///                                                                         ///\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///                           SIG-DietPlan                                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
-    printf("\nInforme seu nome: ");
-    scanf("%[^\n]", nome);  
+    do {
+        printf("\nInforme seu nome: ");
+        scanf(" %[^\n]", nome);  
+
+        if(validar_nome(nome)) {
+            valido = true;
+        } else {
+            printf("Nome inválido! Use apenas letras e espaços, palavras com no mínimo 2 letras, sem repetições absurdas.\n");
+        }
+    } while(!valido);
+
     genero = ler_genero();
 
-     if (genero == 'M') {
+    if (genero == 'M') {
         printf("\nBem-vindo 😁, %s!\n", nome);
     } else if (genero == 'F') {
         printf("\nBem-vinda 😁, %s!\n", nome);
@@ -35,6 +46,7 @@ void bem_vindo(void) {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
     }
 }
+
 
 void sobre(void){
     printf(CYAN"Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN\n"RESET);
