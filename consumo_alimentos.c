@@ -29,7 +29,7 @@ void modulo_consumo_alimentos(void) {
 
 char consumo_alimentos(void){
     char opcao;
-    system("clear||cls");
+    limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -56,7 +56,7 @@ char consumo_alimentos(void){
 void cadastrar_consumo_alimentos(void){
     char alimento[100], data[15];
     float quantidade;
-    system("clear||cls");
+    limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -80,7 +80,7 @@ void cadastrar_consumo_alimentos(void){
 
 void buscar_consumo_alimentos(void){
     char data[15];
-    system("clear||cls");
+    limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -101,7 +101,7 @@ void buscar_consumo_alimentos(void){
 void alterar_consumo_alimentos(void){
     char data[15], alimento[100], nova_data[15];
     float nova_quantidade;
-    system("clear||cls");
+    limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -137,7 +137,7 @@ void alterar_consumo_alimentos(void){
 
 void excluir_consumo_alimentos(void){
     char data[15], alimento[100];
-    system("clear||cls");
+    limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");

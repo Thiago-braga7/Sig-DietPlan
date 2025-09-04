@@ -31,7 +31,7 @@ void modulo_usuarios(void) {
 
 char usuarios(void){
     char opcao;
-    system("clear||cls");
+    limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -55,7 +55,7 @@ void cadastrar_usuario(void){
     char nome[100], cpf[15], telefone[15];
     int idade;
     float peso, altura;   
-    system("clear||cls");
+    limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -88,7 +88,7 @@ void cadastrar_usuario(void){
 
 void buscar_usuario(void){
     char cpf[15];
-    system("clear||cls");
+    limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -113,8 +113,7 @@ void alterar_usuario(void){
     char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
     int nova_idade;
     float novo_peso, nova_altura;
-    system("clear||cls");
-
+    limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Usuários                                  ///\n");
@@ -152,7 +151,7 @@ void alterar_usuario(void){
 }
 
 void excluir_usuario(void){
-    system("clear||cls");
+    limpar_tela();
     char cpf[15];
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -186,7 +185,7 @@ void calcular_imc(void){
     char opcao;
     float peso, altura, imc;
     do {
-        system("clear||cls");
+        limpar_tela();
         printf("\n");
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");

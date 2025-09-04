@@ -30,6 +30,9 @@ char confirmar_acao(void) {
             printf("Opção inválida! Digite apenas S ou N.\n");
         }
     } while (confirmacao != 'S' && confirmacao != 'N');
-
     return confirmacao;
+}
+
+void limpar_tela(void){
+    system("clear||cls");
 }
