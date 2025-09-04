@@ -36,3 +36,7 @@ char confirmar_acao(void) {
 void limpar_tela(void){
     system("clear||cls");
 }
+void pausar(void) {
+    printf("\nPressione ENTER para continuar...");
+    getchar();
+}
