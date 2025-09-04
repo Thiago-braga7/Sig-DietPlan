@@ -16,6 +16,7 @@
 void modulo_usuarios(void) {
     char opcao;
     do {
+        limpar_tela();
         opcao = usuarios();
         switch(opcao) {
             case '1': cadastrar_usuario(); break;
@@ -84,6 +85,7 @@ void cadastrar_usuario(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Usuário cadastrado com sucesso!                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    
 }
 
 void buscar_usuario(void){
@@ -107,6 +109,8 @@ void buscar_usuario(void){
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    
+
 }
 
 void alterar_usuario(void){
@@ -148,6 +152,8 @@ void alterar_usuario(void){
     printf("///                    Usuário alterado com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
+   
+
 }
 
 void excluir_usuario(void){
@@ -180,6 +186,8 @@ void excluir_usuario(void){
     } else {
         printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
     }
+    
+
 }
 void calcular_imc(void){
     char opcao;
@@ -229,8 +237,7 @@ void calcular_imc(void){
                     }
                 }
                 getchar();
-                printf("\nPressione ENTER para continuar...");
-                getchar();
+                pausar();
               
                 break;
 
