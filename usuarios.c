@@ -201,7 +201,7 @@ void excluir_usuario(void){
 
 void calcular_imc(void){
     char opcao;
-    float peso, altura, imc;
+    float peso, altura, resultado;
     do {
         limpar_tela();
         printf("\n");
@@ -226,21 +226,20 @@ void calcular_imc(void){
                 printf("Informe sua altura (m): ");
                 scanf("%f", &altura);
 
-                if (altura <= 0) {
-                    printf("Altura inválida!\n");
-                } else {
-                    imc = peso / (altura * altura);
-                    printf("\nSeu IMC é: %.2f\n", imc);
+                 resultado = imc(peso, altura);
 
-                    if (imc < 18.5) {
+                if (resultado > 0) { 
+                    printf("\nSeu IMC é: %.2f\n", resultado);
+
+                    if (resultado < 18.5) {
                         printf("Classificação: Abaixo do peso\n");
-                    } else if (imc < 24.9) {
+                    } else if (resultado < 24.9) {
                         printf("Classificação: Peso normal\n");
-                    } else if (imc < 29.9) {
+                    } else if (resultado < 29.9) {
                         printf("Classificação: Sobrepeso\n");
-                    } else if (imc < 34.9) {
+                    } else if (resultado < 34.9) {
                         printf("Classificação: Obesidade grau I\n");
-                    } else if (imc < 39.9) {
+                    } else if (resultado < 39.9) {
                         printf("Classificação: Obesidade grau II\n");
                     } else {
                         printf("Classificação: Obesidade grau III\n");
