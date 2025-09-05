@@ -40,3 +40,11 @@ void pausar(void) {
     printf("\nPressione ENTER para continuar...");
     getchar();
 }
+
+float imc(float peso, float altura) {
+    if (altura <= 0) {
+        printf("Altura inválida!\n");
+        return 0; 
+    }
+    return peso / (altura * altura);
+}
