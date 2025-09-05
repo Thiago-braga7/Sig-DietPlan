@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "usuarios.h"
 #include "util.h"
-
+#include <ctype.h>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -23,7 +23,8 @@ void modulo_usuarios(void) {
             case '2': buscar_usuario(); break;
             case '3': alterar_usuario(); break;
             case '4': excluir_usuario(); break;
-            case '5': calcular_imc(); break;
+            // case '5': calcular_imc(); break;
+            case '6': calcular_bf(); break;
             
         }
     } while (opcao != '0');  
@@ -43,6 +44,7 @@ char usuarios(void){
     printf("///                    3. Alterar Dados do Usuário                          ///\n");
     printf("///                    4. Excluir Usuário                                   ///\n");
     printf("///                    5. Calcular IMC                                      ///\n");
+    printf("///                    6. Calcular BF                                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -207,7 +209,7 @@ void calcular_bf(void) {
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                                 Usuários                                    ///\n");
         printf("///                                                                             ///\n");
-        printf("///                     = = = = = Classificar % de Gordura = = = = =           ///\n");
+        printf("///                     = = = = = Classificar Porcentagem de Gordura = = = = =  ///\n");
         printf("///                                                                             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                             1. Calcular por BF                              ///\n");
