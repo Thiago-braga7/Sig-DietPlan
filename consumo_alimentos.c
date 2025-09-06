@@ -117,8 +117,8 @@ void alterar_consumo_alimentos(void){
     printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
     printf("///                                                                         ///\n");
     printf("///                     Qual alimento deseja alterar? (número):             ///\n");
-    int opcaoAlimento;
-    scanf("%d", &opcaoAlimento);
+    int opcao_alimento;
+    scanf("%d", &opcao_alimento);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Novas Informações Consumo de Alimentos              ///\n");
