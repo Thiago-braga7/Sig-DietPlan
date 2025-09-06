@@ -24,6 +24,7 @@ void modulo_consumo_agua(void) {
             case '2': buscar_consumo_agua(); break;
             case '3': alterar_consumo_agua(); break;
             case '4': excluir_consumo_agua(); break;
+            case '5': quantidade_agua(); break;
 
             
         }
@@ -157,9 +158,10 @@ void excluir_consumo_agua(void){
         printf("///                    Operação de exclusão cancelada!                    ///\n");
     }
 }
-
 void quantidade_agua(void){
-    
+    char genero;
+    float peso, agua;
+
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -169,5 +171,22 @@ void quantidade_agua(void){
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
+    
+    genero = ler_genero();
 
+    do {
+        printf("Informe seu peso (Kg): ");
+        scanf("%f", &peso);
+        getchar(); 
+
+        if(peso <= 0){
+            printf("Peso inválido! Digite um valor maior que 0.\n");
+        }
+    } while(peso <= 0);
+
+    
+    agua = calcular_quantidade_agua(peso, genero);
+
+    printf("\nVocê deve consumir aproximadamente: %.2f L de água por dia.\n", agua);
+    pausar(); 
 }

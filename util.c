@@ -48,3 +48,14 @@ float imc(float peso, float altura) {
     }
     return peso / (altura * altura);
 }
+
+float calcular_quantidade_agua(float peso, char genero){
+     if(genero == 'M') {
+        return peso * 0.04;    
+    } else if(genero == 'F') {
+        return peso * 0.035;   
+    } else {
+        return peso * 0.0375;  
+    }
+
+}
