@@ -42,6 +42,7 @@ char consumo_agua(void){
     printf("///                    2. Consultar Consumo(Dia) de Água                    ///\n");
     printf("///                    3. Alterar Registro de Consumo de Água               ///\n");
     printf("///                    4. Excluir Registro de Consumo de Água               ///\n");
+    printf("///                    5. Quantidade de Água p/Dia                          ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -155,4 +156,18 @@ void excluir_consumo_agua(void){
     } else {
         printf("///                    Operação de exclusão cancelada!                    ///\n");
     }
+}
+
+void quantidade_agua(void){
+    
+    limpar_tela();
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consumo Água                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Quantidade de Água p/Dia = = = = =           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+
 }
