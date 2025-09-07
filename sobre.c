@@ -71,6 +71,7 @@ void sobre(void){
     printf(CYAN"Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n"RESET);
     printf(CYAN"Gerencie sua saúde de forma prática: cadastre usuários, registre alimentos, acompanhe a quantidade de água ingerida e controle suas calorias diárias!\n"RESET);
     printf("\n");
+    pausar();
 }
 
 void sair(void){
