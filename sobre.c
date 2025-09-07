@@ -49,7 +49,7 @@ void bem_vindo(void) {
     } else {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
     }
-    
+    pausar();
 }
 
 
