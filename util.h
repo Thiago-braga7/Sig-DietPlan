@@ -5,3 +5,4 @@ void pausar(void);
 float imc(float peso, float altura);
 float calcular_quantidade_agua(float peso, char genero);
 void faixa_peso_ideal(float altura);
+void classificar_bf(char sexo, float bf);

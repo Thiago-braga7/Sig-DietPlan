@@ -285,54 +285,23 @@ void calcular_bf(void) {
             case '1':
                 printf("Informe seu sexo (M/F): ");
                 scanf(" %c", &sexo);
-                sexo = toupper(sexo);
-
-                if (sexo != 'M' && sexo != 'F') {
-                    printf("Sexo inválido!\n");
-                    break;
-                }
 
                 printf("Informe seu percentual de gordura corporal (BF %%): ");
                 scanf("%f", &bf);
 
-                printf("\nSeu percentual de gordura é: %.1f%%\n", bf);
+                
+                classificar_bf(sexo, bf);
 
-                if (sexo == 'M') {
-                    if (bf < 6) {
-                        printf("Classificação: Muito abaixo do ideal\n");
-                    } else if (bf <= 13) {
-                        printf("Classificação: Atleta\n");
-                    } else if (bf <= 17) {
-                        printf("Classificação: Fitness\n");
-                    } else if (bf <= 24) {
-                        printf("Classificação: Normal\n");
-                    } else if (bf <= 29) {
-                        printf("Classificação: Acima do ideal\n");
-                    } else {
-                        printf("Classificação: Obeso\n");
-                    }
-                } else if (sexo == 'F') {
-                    if (bf < 14) {
-                        printf("Classificação: Muito abaixo do ideal\n");
-                    } else if (bf <= 20) {
-                        printf("Classificação: Atleta\n");
-                    } else if (bf <= 24) {
-                        printf("Classificação: Fitness\n");
-                    } else if (bf <= 31) {
-                        printf("Classificação: Normal\n");
-                    } else if (bf <= 37) {
-                        printf("Classificação: Acima do ideal\n");
-                    } else {
-                        printf("Classificação: Obesa\n");
-                    }
-                }
-
-                getchar();
                 pausar();
                 break;
 
             case '0':
                 printf("Voltando ao menu...\n");
+                break;
+
+            default:
+                printf("Opção inválida!\n");
+                pausar();
                 break;
         }
 
