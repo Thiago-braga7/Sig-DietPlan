@@ -63,8 +63,8 @@ int main(void){
 
 
 void menu_principal(void){
-    system("clear||cls");
     printf("\n");
+    system("clear||cls");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);
     printf(CYAN"///             Universidade Federal do Rio Grande do Norte                 ///\n");

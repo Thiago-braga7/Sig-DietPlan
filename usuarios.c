@@ -33,7 +33,6 @@ void modulo_usuarios(void) {
 
 char usuarios(void){
     char opcao;
-    limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");

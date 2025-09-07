@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
+
+
 
 char ler_genero(void) {
     char genero;
@@ -39,6 +42,7 @@ void limpar_tela(void){
 void pausar(void) {
     printf("\nPressione ENTER para continuar...");
     getchar();
+    getchar();
 }
 
 float imc(float peso, float altura) {
@@ -59,3 +63,4 @@ float calcular_quantidade_agua(float peso, char genero){
     }
 
 }
+

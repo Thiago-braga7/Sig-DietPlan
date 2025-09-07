@@ -6,6 +6,7 @@
 
 
 
+
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define CYAN    "\033[36m"
@@ -26,7 +27,7 @@ void bem_vindo(void) {
     printf("░█▄▄▄█ ▄█▄ ░█▄▄█ ── ░█▄▄▀ ▀▀▀ ▀▀▀ ──▀── ░█─── ▀▀▀ ▀──▀ ▀──▀ \n");                                                                                       
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-
+   
     do {
         printf("\nInforme seu nome: ");
         scanf(" %[^\n]", nome);  
@@ -40,6 +41,7 @@ void bem_vindo(void) {
 
     genero = ler_genero();
 
+
     if (genero == 'M') {
         printf("\nBem-vindo 😁, %s!\n", nome);
     } else if (genero == 'F') {
@@ -47,7 +49,12 @@ void bem_vindo(void) {
     } else {
         printf("\nBem-vindo(a) 😁, %s!\n", nome);
     }
+    
 }
+
+
+    
+
 
 
 void sobre(void){
