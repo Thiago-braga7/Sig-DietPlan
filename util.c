@@ -64,3 +64,15 @@ float calcular_quantidade_agua(float peso, char genero){
 
 }
 
+void faixa_peso_ideal(float altura) {
+    if (altura <= 0) {
+        printf("Altura inválida!\n");
+        return;
+    }
+
+    float peso_min = 18.5 * altura * altura;
+    float peso_max = 24.9 * altura * altura;
+
+    printf("Peso ideal para sua altura: entre %.1fkg e %.1fkg\n", peso_min, peso_max);
+}
+

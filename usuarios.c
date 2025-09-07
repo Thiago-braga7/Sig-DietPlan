@@ -243,6 +243,8 @@ void calcular_imc(void){
                     } else {
                         printf("Classificação: Obesidade grau III\n");
                     }
+                    faixa_peso_ideal(altura);
+
                 }
                 getchar();
                 pausar();
