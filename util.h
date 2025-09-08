@@ -6,3 +6,5 @@ float imc(float peso, float altura);
 float calcular_quantidade_agua(float peso, char genero);
 void faixa_peso_ideal(float altura);
 void classificar_bf(char sexo, float bf);
+void logo(void);
+void mensagem_boas_vindas(const char *nome, char genero);
