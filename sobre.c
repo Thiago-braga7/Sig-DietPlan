@@ -19,14 +19,7 @@ void bem_vindo(void) {
     char genero;
     bool valido = false;
 
-    printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("░█▀▀▀█ ▀█▀ ░█▀▀█ ── ░█▀▀▄ ─▀─ █▀▀ ▀▀█▀▀ ░█▀▀█ █── █▀▀█ █▀▀▄ \n");
-    printf("─▀▀▀▄▄ ░█─ ░█─▄▄ ▀▀ ░█─░█ ▀█▀ █▀▀ ──█── ░█▄▄█ █── █▄▄█ █──█ \n");
-    printf("░█▄▄▄█ ▄█▄ ░█▄▄█ ── ░█▄▄▀ ▀▀▀ ▀▀▀ ──▀── ░█─── ▀▀▀ ▀──▀ ▀──▀ \n");                                                                                       
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    logo();
    
     do {
         printf("\nInforme seu nome: ");
@@ -41,15 +34,9 @@ void bem_vindo(void) {
 
     genero = ler_genero();
 
-
-    if (genero == 'M') {
-        printf("\nBem-vindo 😁, %s!\n", nome);
-    } else if (genero == 'F') {
-        printf("\nBem-vinda 😁, %s!\n", nome);
-    } else {
-        printf("\nBem-vindo(a) 😁, %s!\n", nome);
-    }
-    pausar();
+    
+    mensagem_boas_vindas(nome, genero);
+    
 }
 
 
@@ -77,12 +64,11 @@ void sobre(void){
 void sair(void){
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf(CYAN"///                 Obrigado por usar o SIG-DietPlan!                       ///\n");
-    printf("///                         Até a proxima!                                  ///\n");
-    printf("///              📷 Instagram: @thiago.braga9a e gabrieluchoa_1             ///\n");
-    printf("///              🐙 GitHub: github.com/Thiago-braga7                        ///\n");
-    printf("///                         github/GabrielUchoa17                           ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                          ///\n");
+    printf(CYAN"///                 Obrigado por usar o SIG-DietPlan!                    ///\n");
+    printf("///                         Até a proxima!                                   ///\n");
+    printf("///             📷 Instagram: @thiago.braga9a | @gabrieluchoa_1              ///\n");
+    printf("///         🐙 GitHub: github.com/Thiago-braga7 | github.com/GabrielUchoa17  ///\n");
+    printf("///                                                                          ///\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
