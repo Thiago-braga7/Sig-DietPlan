@@ -8,3 +8,4 @@ void faixa_peso_ideal(float altura);
 void classificar_bf(char sexo, float bf);
 void logo(void);
 void mensagem_boas_vindas(const char *nome, char genero);
+float ler_peso(void);

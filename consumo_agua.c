@@ -174,15 +174,7 @@ void quantidade_agua(void){
     
     genero = ler_genero();
 
-    do {
-        printf("Informe seu peso (Kg): ");
-        scanf("%f", &peso);
-        getchar(); 
-
-        if(peso <= 0){
-            printf("Peso inválido! Digite um valor maior que 0.\n");
-        }
-    } while(peso <= 0);
+    peso = ler_peso();
 
     
     agua = calcular_quantidade_agua(peso, genero);
