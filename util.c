@@ -138,3 +138,16 @@ void mensagem_boas_vindas(const char *nome, char genero){
     }
     pausar();
 }
+float ler_peso(void) {
+    float peso;
+    do {
+        printf("Informe seu peso (Kg): ");
+        scanf("%f", &peso);
+        getchar();
+        if (peso <= 0) {
+            printf("Peso inválido! Digite um valor maior que 0.\n");
+        }
+    } while (peso <= 0);
+    return peso;
+}
+
