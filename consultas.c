@@ -16,7 +16,7 @@ void modulo_consultas(void) {
         opcao = consultas();
         switch(opcao) {
             case '1': cadastrar_consulta(); break;
-            // case '2': buscar_consulta(); break;
+            case '2': buscar_consulta(); break;
             // case '3': alterar_consulta(); break;
             // case '4': excluir_consulta(); break;
         }
@@ -77,4 +77,27 @@ void cadastrar_consulta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Consulta cadastrada com sucesso!                     ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+}
+void buscar_consulta(void){
+    char nome[100], data[15];
+    limpar_tela();
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Buscar Consulta = = = = =                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                     Informe o nome do Usuário:                          ///\n");
+    scanf("%s", nome);
+    printf("///                     Data da Consulta (DD/MM/AAAA):                      ///\n");
+    scanf("%s", data);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Informações da Consulta                          ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome do Usuário:                                ///\n");
+    printf("///                         Data da Consulta (DD/MM/AAAA)::                 ///\n");
+    printf("///                         Hora da Consulta (HH:MM):                       ///\n");
+    printf("///                         Nome do Médico:                                 ///\n");
+    printf("///                         Observações:                                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
 }
