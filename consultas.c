@@ -17,7 +17,7 @@ void modulo_consultas(void) {
         switch(opcao) {
             case '1': cadastrar_consulta(); break;
             case '2': buscar_consulta(); break;
-            // case '3': alterar_consulta(); break;
+            case '3': alterar_consulta(); break;
             // case '4': excluir_consulta(); break;
         }
     } while (opcao != '0');  
@@ -85,7 +85,7 @@ void buscar_consulta(void){
     printf("///                                                                         ///\n");
     printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Buscar Consulta = = = = =                    ///\n");
+    printf("///                   = = = = = Buscar Consulta = = = = =                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                     Informe o nome do Usuário:                          ///\n");
     scanf("%s", nome);
@@ -95,9 +95,47 @@ void buscar_consulta(void){
     printf("///                        Informações da Consulta                          ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome do Usuário:                                ///\n");
-    printf("///                         Data da Consulta (DD/MM/AAAA)::                 ///\n");
+    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
     printf("///                         Hora da Consulta (HH:MM):                       ///\n");
     printf("///                         Nome do Médico:                                 ///\n");
     printf("///                         Observações:                                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+}
+
+void alterar_consulta(void){
+    char data[15];
+    char novo_nome[100], nova_data[15], nova_hora[10];
+    char novo_medico[100], novas_observacoes[200];
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                   = = = = = Alterar Consulta = = = = =                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a Data(DD/MM/AAAA)::                    ///\n");
+    scanf("%s", data);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novos Dados da Consulta                          ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome do Usuário:                                ///\n");
+    scanf("%s", novo_nome);
+    getchar();
+    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
+    scanf("%s", nova_data);
+    getchar();
+    printf("///                         Hora da Consulta (HH:MM:                        ///\n");
+    scanf("%s", nova_hora);
+    getchar();
+    printf("///                         Nome do Médico:                                 ///\n");
+    scanf("%s", novo_medico);
+    getchar();
+    printf("///                         Observações:                                    ///\n");
+    scanf("%s", novas_observacoes);
+    getchar();
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Consulta alterada com sucesso!                        ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("\n");
 }
