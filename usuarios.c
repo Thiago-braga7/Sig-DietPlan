@@ -198,12 +198,12 @@ void excluir_usuario(void){
 }
 
 
-void calcular_imc(void){
+void calcular_imc(void) {
     char opcao;
     float peso, altura, resultado;
+
     do {
         limpar_tela();
-        printf("\n");
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                                 Usuários                                    ///\n");
@@ -214,20 +214,32 @@ void calcular_imc(void){
         printf("///                             1. Calcular IMC                                 ///\n");
         printf("///                             0. Voltar                                       ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("Escolha a opção desejada: "RESET);
-        scanf(" %c", &opcao);
-        getchar();
+        
+        do {
+            printf("Escolha a opção desejada (0 ou 1): "RESET);
+            scanf(" %c", &opcao);
+            getchar();
 
-        switch(opcao) {
+            if (opcao != '0' && opcao != '1') {
+                printf("Opção inválida! Digite apenas 0 ou 1.\n");
+                pausar();
+                limpar_tela();
+            }
+        } while (opcao != '0' && opcao != '1'); 
+        
+
+        switch (opcao) {
             case '1':
                 printf("Informe seu peso (kg): ");
                 scanf("%f", &peso);
                 printf("Informe sua altura (m): ");
                 scanf("%f", &altura);
 
-                 resultado = imc(peso, altura);
+                resultado = imc(peso, altura);
 
-                if (resultado > 0) { 
+                if (resultado < 0) {
+                    printf("Altura inválida!\n");
+                } else {
                     printf("\nSeu IMC é: %.2f\n", resultado);
 
                     if (resultado < 18.5) {
@@ -243,12 +255,11 @@ void calcular_imc(void){
                     } else {
                         printf("Classificação: Obesidade grau III\n");
                     }
-                    faixa_peso_ideal(altura);
 
+                    faixa_peso_ideal(altura);
                 }
-                getchar();
+
                 pausar();
-              
                 break;
 
             case '0':
@@ -258,6 +269,7 @@ void calcular_imc(void){
 
     } while (opcao != '0');
 }
+
     
 void calcular_bf(void) {
     char opcao;

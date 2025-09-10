@@ -48,8 +48,7 @@ void pausar(void) {
 
 float imc(float peso, float altura) {
     if (altura <= 0) {
-        printf("Altura inválida!\n");
-        return 0; 
+        return -1.0f; 
     }
     return peso / (altura * altura);
 }
