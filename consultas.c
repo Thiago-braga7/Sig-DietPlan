@@ -18,7 +18,7 @@ void modulo_consultas(void) {
             case '1': cadastrar_consulta(); break;
             case '2': buscar_consulta(); break;
             case '3': alterar_consulta(); break;
-            // case '4': excluir_consulta(); break;
+            case '4': excluir_consulta(); break;
         }
     } while (opcao != '0');  
 }
@@ -124,7 +124,7 @@ void alterar_consulta(void){
     printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
     scanf("%s", nova_data);
     getchar();
-    printf("///                         Hora da Consulta (HH:MM:                        ///\n");
+    printf("///                         Hora da Consulta (HH:MM):                        ///\n");
     scanf("%s", nova_hora);
     getchar();
     printf("///                         Nome do Médico:                                 ///\n");
@@ -138,4 +138,36 @@ void alterar_consulta(void){
     printf("///                    Consulta alterada com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
+}
+void excluir_consulta(void){
+    limpar_tela();
+    char data[15];
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Consultas                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Excluir Consulta = = = = =                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
+    scanf("%s", data);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                           Excluindo Consulta                            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                            Dados da Consulta                            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome do Usuário:                                ///\n");
+    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
+    printf("///                         Hora da Consulta (HH:MM):                       ///\n");
+    printf("///                         Nome do Médico:                                 ///\n");
+    printf("///                         Observações:                                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    char resposta = confirmar_acao();
+    if (resposta == 'S') {
+        printf(RED"///                    Consulta excluída com sucesso!                      ///\n");
+    } else {
+        printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
+    }
+    
+
 }
