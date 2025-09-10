@@ -3,8 +3,7 @@
 #include "usuarios.h"
 #include "alimentos.h"
 #include "refeicoes.h"
-#include "consumo_alimentos.h"
-#include "consumo_agua.h"
+#include "consumo.h"
 #include "relatorios.h"
 #include "sobre.h"
 
@@ -47,9 +46,8 @@ int main(void){
             case '1': modulo_usuarios(); break;
             case '2': modulo_alimentos(); break;
             case '3': modulo_refeicoes(); break;
-            case '4': modulo_consumo_alimentos(); break;
-            case '5': modulo_consumo_agua(); break;
-            case '6': relatorios(); break;
+            case '4': modulo_consumo(); break;
+            case '5': relatorios(); break;
             case '0': sair(); break;
             
         }
@@ -84,9 +82,8 @@ void menu_principal(void){
     printf("///                      1. Usuários                                        ///\n");
     printf("///                      2. Alimentos                                       ///\n");
     printf("///                      3. Refeições                                       ///\n");
-    printf("///                      4. Consumo Diário(Alimentos)                       ///\n");
-    printf("///                      5. Consumo Diário(Água)                            ///\n");
-    printf("///                      6. Relatórios                                      ///\n");
+    printf("///                      4. Consumo(Alimentos/Água)                         ///\n");
+    printf("///                      5. Relatórios                                      ///\n");
     printf("///                      0. Sair                                            ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
