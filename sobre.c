@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "sobre.h"
 #include "util.h"
-#include "validacao_nome.h"
+
 
 
 
