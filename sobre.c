@@ -45,28 +45,28 @@ void bem_vindo(void) {
 
 
 void sobre(void){
-    // Título estilizado
+    // peguei do textart a formatação diferente
     printf(CYAN"====================================================\n"RESET);
     printf(CYAN"                𝕾 𝖎 𝖌 - 𝕯 𝖎 𝖊 𝖙 𝕻 𝖑 𝖆 𝖓\n"RESET);
     printf(CYAN"====================================================\n\n"RESET);
 
-    // Introdução
+    
     printf(CYAN"Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN,\n"RESET);
     printf(CYAN"para auxiliar no planejamento e acompanhamento de dietas.\n\n"RESET);
 
-    // Funcionalidades
+    
     printf(CYAN"Ele permite:\n"RESET);
     printf(CYAN"  • Cadastro de usuários\n"RESET);
     printf(CYAN"  • Gestão dieta\n"RESET);
     printf(CYAN"  • Registro de consumos diários\n"RESET);
     printf(CYAN"  • Agendamento de consultas\n\n"RESET);
 
-    // Saudação e dicas
+    
     printf(RED"🆄 🅼 🅰   🅰 🅻 🅴 🅶 🆁 🅸 🅰  🆃 🅴 🆁  🅶 🅴 🅽 🆃 🅴  🅽 🅾  🆂 🅸 🅶 - 🅳 🅸 🅴 🆃 🅿 🅻 🅰 🅽 ❗ 😊👍\n\n"RESET);
-    // Rodapé
+   
     printf(CYAN"====================================================\n\n"RESET);
 
-    // Pausa para o usuário ler
+    
     pausar();
 }
 void sair(void){

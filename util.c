@@ -120,7 +120,7 @@ void classificar_bf(char sexo, float bf) {
 }
 
 void logo(void){
-    printf("\n");
+    printf("\n"); // peguei do textart as formatações diferentes
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("░█▀▀▀█ ▀█▀ ░█▀▀█ ── ░█▀▀▄ ─▀─ █▀▀ ▀▀█▀▀ ░█▀▀█ █── █▀▀█ █▀▀▄ \n");
@@ -153,7 +153,7 @@ float ler_peso(void) {
     return peso;
 }
 
-// chat gpt
+// chat gpt 5
 bool palavra_valida(const char *palavra) {
     int tamanho = strlen(palavra);
     if(tamanho < 2) return false; 
