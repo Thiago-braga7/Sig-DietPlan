@@ -5,17 +5,19 @@
 #include <stdbool.h>
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
+#define CYAN "\x1B[36m"
 
 
 char ler_genero(void) {
     char genero;
     do {
-        printf("Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): ");
+        
+        printf(CYAN"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
         scanf(" %c", &genero);
         genero = toupper(genero);
 
         if (genero != 'M' && genero != 'F' && genero != 'N') {
-            printf("Opção inválida! Digite apenas M, F ou N.\n");
+            printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
         }
     } while (genero != 'M' && genero != 'F' && genero != 'N');
 
@@ -130,11 +132,11 @@ void logo(void){
 
 void mensagem_boas_vindas(const char *nome, char genero){
     if (genero == 'M') {
-        printf("\nBem-vindo 😁, %s!\n", nome);
+        printf(RED"\n🅱 🅴 🅼 - 🆅 🅸 🅽 🅳 🅾  😁, %s!\n"RESET, nome);
     } else if (genero == 'F') {
-        printf("\nBem-vinda 😁, %s!\n", nome);
+        printf(RED"\n🅱 🅴 🅼 - 🆅 🅸 🅽 🅳 🅰  😁, %s!\n"RESET, nome);
     } else {
-        printf("\nBem-vindo(a) 😁, %s!\n", nome);
+        printf(RED"\n🅱 🅴 🅼 - 🆅 🅸 🅽 🅳 🅾 ( 🅰 )  😁, %s!\n"RESET, nome);
     }
     pausar();
 }

@@ -22,13 +22,13 @@ void bem_vindo(void) {
     logo();
    
     do {
-        printf("\nInforme seu nome: ");
+        printf(CYAN"\nInforme seu nome: "RESET);
         scanf(" %[^\n]", nome);  
 
         if(validar_nome(nome)) {
             valido = true;
         } else {
-            printf("Nome inválido! Use apenas letras e espaços, palavras com no mínimo 2 letras, sem repetições absurdas.\n");
+            printf(CYAN"Nome inválido! Use apenas letras e espaços, palavras com no mínimo 2 letras, sem repetições absurdas.\n"RESET);
         }
     } while(!valido);
 
@@ -45,22 +45,30 @@ void bem_vindo(void) {
 
 
 void sobre(void){
-    printf(CYAN"Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN\n"RESET);
-    printf(CYAN"para auxiliar no planejamento e acompanhamento de dietas.\n"RESET);
-    printf("\n");
-    printf(CYAN"Ele permite:\n"RESET);
-    printf(CYAN"- Cadastro de usuários;\n"RESET);
-    printf(CYAN"- Gestão de alimentos e valores nutricionais;\n"RESET);
-    printf(CYAN"- Registro de consumos diários;\n"RESET);
-    printf(CYAN"- Planejamento de refeições personalizadas.\n"RESET);
-    printf("\n");
+    // Título estilizado
+    printf(CYAN"====================================================\n"RESET);
+    printf(CYAN"                𝕾 𝖎 𝖌 - 𝕯 𝖎 𝖊 𝖙 𝕻 𝖑 𝖆 𝖓\n"RESET);
+    printf(CYAN"====================================================\n\n"RESET);
 
-    printf(CYAN"Estamos felizes em ter você no SIG-DietPlan! 😊👍\n\n"RESET);
-    printf(CYAN"Gerencie sua saúde de forma prática: cadastre usuários, registre alimentos, acompanhe a quantidade de água ingerida e controle suas calorias diárias!\n"RESET);
-    printf("\n");
+    // Introdução
+    printf(CYAN"Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN,\n"RESET);
+    printf(CYAN"para auxiliar no planejamento e acompanhamento de dietas.\n\n"RESET);
+
+    // Funcionalidades
+    printf(CYAN"Ele permite:\n"RESET);
+    printf(CYAN"  • Cadastro de usuários\n"RESET);
+    printf(CYAN"  • Gestão dieta\n"RESET);
+    printf(CYAN"  • Registro de consumos diários\n"RESET);
+    printf(CYAN"  • Agendamento de consultas\n\n"RESET);
+
+    // Saudação e dicas
+    printf(RED"🆄 🅼 🅰   🅰 🅻 🅴 🅶 🆁 🅸 🅰  🆃 🅴 🆁  🅶 🅴 🅽 🆃 🅴  🅽 🅾  🆂 🅸 🅶 - 🅳 🅸 🅴 🆃 🅿 🅻 🅰 🅽 ❗ 😊👍\n\n"RESET);
+    // Rodapé
+    printf(CYAN"====================================================\n\n"RESET);
+
+    // Pausa para o usuário ler
     pausar();
 }
-
 void sair(void){
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
