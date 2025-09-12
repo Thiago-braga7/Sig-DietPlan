@@ -46,7 +46,7 @@ void cadastrar_dieta(void){
     
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Dieta                                    ///\n");
+    printf("///                                Dietas                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
@@ -72,7 +72,7 @@ void buscar_dieta(void){
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Dieta                                    ///\n");
+    printf("///                                Dietas                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Buscar Dieta  = = = = =                     ///\n");
     printf("///                                                                         ///\n");
@@ -97,7 +97,7 @@ void alterar_dieta(void){
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Dieta                                    ///\n");
+    printf("///                                Dietas                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Dieta  = = = = =                    ///\n");
     printf("///                                                                         ///\n");
@@ -122,8 +122,34 @@ void alterar_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Dieta Alterada com sucesso!                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-
-
-
 }
 
+void excluir_dieta(void){
+    char nome_dieta[50];
+    limpar_tela();
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Dietas                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Excluir Dieta = = = = =                       ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o nome da Dieta:                        ///\n");
+    scanf("%s", nome_dieta);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                           Excluindo Dieta                               ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                           Dados da Dieta                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome da Dieta:                                  ///\n");
+    printf("///                         Total de Calorias por dia:                      ///\n");
+    printf("///                         Refeições:                                      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    char resposta = confirmar_acao();
+    if (resposta == 'S') {
+        printf(RED"///                    Dieta excluída com sucesso!                        ///\n");
+    } else {
+        printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
+    }
+    
+}
