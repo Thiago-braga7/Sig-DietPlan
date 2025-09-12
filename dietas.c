@@ -36,3 +36,30 @@ char menu_dietas(void){
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     return opcao;
 }
+
+void cadastrar_dieta(void){
+    char cpf[15];               
+    char refeicoes[200];                    
+    int calorias;   
+    limpar_tela();
+    
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Dieta                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         CPF do Usuário:                                 ///\n");
+    scanf("%s", cpf);
+    getchar();
+    printf("///                         Total de calorias por dia:                      ///\n");
+    scanf("%d", &calorias);
+    getchar();
+    printf("///                         Refeições (breve descrição):                    ///\n");
+    scanf("%[^\n]", refeicoes);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Dieta cadastrada com sucesso!                        ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+}
+
