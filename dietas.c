@@ -38,7 +38,8 @@ char menu_dietas(void){
 }
 
 void cadastrar_dieta(void){
-    char cpf[15];               
+    char cpf[15]; 
+    char nome_dieta[50];              
     char refeicoes[200];                    
     int calorias;   
     limpar_tela();
@@ -52,7 +53,10 @@ void cadastrar_dieta(void){
     printf("///                         CPF do Usuário:                                 ///\n");
     scanf("%s", cpf);
     getchar();
-    printf("///                         Total de calorias por dia:                      ///\n");
+    printf("///                         Nome da Dieta:                                  ///\n");
+    scanf("%s", nome_dieta);
+    getchar();
+    printf("///                         Total de Calorias por dia:                      ///\n");
     scanf("%d", &calorias);
     getchar();
     printf("///                         Refeições (breve descrição):                    ///\n");
@@ -62,4 +66,27 @@ void cadastrar_dieta(void){
     printf("///                    Dieta cadastrada com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
+void buscar_dieta(void){
+    char nome_dieta[50];
+    limpar_tela();
+
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Dieta                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Buscar Dieta  = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                        Informe o nome da Dieta:                         ///\n");
+    scanf("%s", nome_dieta);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Informações da Dieta                             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome da Dieta:                                  ///\n");
+    printf("///                         Total de Calorias por dia:                      ///\n");
+    printf("///                         Refeições:                                      ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+}
+
 
