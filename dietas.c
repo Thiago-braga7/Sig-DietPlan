@@ -88,5 +88,42 @@ void buscar_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
 }
+void alterar_dieta(void){
+    char nome_dieta[50];
+    char novo_cpf[15]; 
+    char novo_nome_dieta[50];              
+    char novas_refeicoes[200];                    
+    int novas_calorias;   
+    limpar_tela();
+    printf("\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                Dieta                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Alterar Dieta  = = = = =                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                        Informe o nome da Dieta:                         ///\n");
+    scanf("%s", nome_dieta);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novos Dados da Dieta                             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         CPF do Usuário:                                 ///\n");
+    scanf("%s", novo_cpf);
+    getchar();
+    printf("///                         Nome da Dieta:                                  ///\n");
+    scanf("%s", novo_nome_dieta);
+    getchar();
+    printf("///                         Total de Calorias por dia:                      ///\n");
+    scanf("%d", &novas_calorias);
+    getchar();
+    printf("///                         Refeições (breve descrição):                    ///\n");
+    scanf("%[^\n]", novas_refeicoes);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Dieta Alterada com sucesso!                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
+
+
+}
 
