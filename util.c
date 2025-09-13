@@ -67,6 +67,94 @@ float calcular_quantidade_agua(float peso, char genero){
 
 }
 
+
+void classificação_imc(float resultado){
+
+if (resultado < 18.5) {
+    printf(RED"| >> < 18.5       |   Abaixo do peso       |       ~7%%      << |\n"RESET);
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 24.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"| >> 18.5-24.9    |   Peso normal          |      ~38%%      << |\n"RESET);
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 29.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf(RED"| >> 25-29.9      |   Sobrepeso            |      ~35%%      << |\n"RESET);
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 34.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf(RED"| >> 30-34.9      |   Obesidade grau I     |      ~12%%      << |\n"RESET);
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 39.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf(RED"| >> 35-39.9      |   Obesidade grau II    |       ~5%%      << |\n"RESET);
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf(RED"| >>   >=40       |   Obesidade grau III   |       ~3%%      << |\n"RESET);
+    printf("-------------------------------------------------------------\n");
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void faixa_peso_ideal(float altura) {
     if (altura <= 0) {
         printf("Altura inválida!\n");
@@ -186,4 +274,59 @@ bool validar_nome(const char *nome) {
     }
 
     return true;
+}
+
+
+//Chat GPT 5
+
+
+int validar_cpf(const char *cpf) {
+    int i, j, soma, resto, digito1, digito2;
+    char numeros[12];
+
+    
+    int k = 0;
+    for (i = 0; cpf[i] != '\0'; i++) {
+        if (isdigit(cpf[i])) {
+            numeros[k++] = cpf[i];
+        }
+    }
+    numeros[k] = '\0';
+
+    if (strlen(numeros) != 11) {
+        return 0;
+    }
+
+    
+    int todos_iguais = 1;
+    for (i = 1; i < 11; i++) {
+        if (numeros[i] != numeros[0]) {
+            todos_iguais = 0;
+            break;
+        }
+    }
+    if (todos_iguais) {
+        return 0;
+    }
+
+    soma = 0;
+    for (i = 0, j = 10; i < 9; i++, j--) {
+        soma += (numeros[i] - '0') * j;
+    }
+    resto = soma % 11;
+    digito1 = (resto < 2) ? 0 : 11 - resto;
+
+    soma = 0;
+    for (i = 0, j = 11; i < 10; i++, j--) {
+        soma += (numeros[i] - '0') * j;
+    }
+    resto = soma % 11;
+    digito2 = (resto < 2) ? 0 : 11 - resto;
+
+    
+    if ((numeros[9] - '0') == digito1 && (numeros[10] - '0') == digito2) {
+        return 1; 
+    } else {
+        return 0; 
+}
 }
