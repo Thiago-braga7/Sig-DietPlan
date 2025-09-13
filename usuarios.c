@@ -54,7 +54,7 @@ char usuarios(void){
 }
 
 void cadastrar_usuario(void){
-    char nome[100], cpf[15], telefone[15];
+    char nome[100], cpf[12], telefone[15];
     int idade;
     float peso, altura, bf;   
     limpar_tela();
@@ -68,9 +68,15 @@ void cadastrar_usuario(void){
     printf("///                         Nome Completo:                                  ///\n");
     scanf("%[^\n]", nome);
     getchar();
-    printf("///                         CPF(Apenas números):                            ///\n");
-    scanf("%s", cpf);
+    do {
+    printf("/// CPF(Apenas números): ///\n");
+    scanf("%11s", cpf);
     getchar();
+
+    if (!validar_cpf(cpf)) {
+        printf(RED "CPF inválido! Tente novamente.\n" RESET);
+    }
+} while (!validar_cpf(cpf));  
     printf("///                         Telefone(Apenas números):                       ///\n");
     scanf("%s", telefone);
     getchar();
@@ -114,7 +120,6 @@ void buscar_usuario(void){
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     
-
 }
 
 void alterar_usuario(void){
