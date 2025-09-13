@@ -67,6 +67,94 @@ float calcular_quantidade_agua(float peso, char genero){
 
 }
 
+
+void classificação_imc(float resultado){
+
+if (resultado < 18.5) {
+    printf(RED"| >> < 18.5       |   Abaixo do peso       |       ~7%%      << |\n"RESET);
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 24.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"| >> 18.5-24.9    |   Peso normal          |      ~38%%      << |\n"RESET);
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 29.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf(RED"| >> 25-29.9      |   Sobrepeso            |      ~35%%      << |\n"RESET);
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 34.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf(RED"| >> 30-34.9      |   Obesidade grau I     |      ~12%%      << |\n"RESET);
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else if (resultado < 39.9) {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf(RED"| >> 35-39.9      |   Obesidade grau II    |       ~5%%      << |\n"RESET);
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+} else {
+    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
+    printf(RED"| >>   >=40       |   Obesidade grau III   |       ~3%%      << |\n"RESET);
+    printf("-------------------------------------------------------------\n");
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void faixa_peso_ideal(float altura) {
     if (altura <= 0) {
         printf("Altura inválida!\n");

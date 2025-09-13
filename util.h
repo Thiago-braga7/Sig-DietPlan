@@ -13,3 +13,4 @@ float ler_peso(void);
 bool palavra_valida(const char *palavra);
 bool validar_nome(const char *nome);
 int validar_cpf(const char *cpf);
+void classificação_imc(float);
