@@ -8,10 +8,24 @@
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 
+void modulo_dietas(void) {
+    char opcao;
+    do {
+        limpar_tela();
+        opcao = dietas();
+        switch(opcao) {
+            case '1': cadastrar_dieta(); break;
+            case '2': buscar_dieta(); break;
+            case '3': alterar_dieta(); break;
+            case '4': excluir_dieta(); break;
+            
+        }
+    } while (opcao != '0');  
+}
 
 
 
-char menu_dietas(void){
+char dietas(void){
     char opcao;
     limpar_tela();
 

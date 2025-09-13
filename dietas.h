@@ -1,4 +1,5 @@
-char menu_dietas(void);
+void modulo_dietas(void);
+char dietas(void);
 void cadastrar_dieta(void);
 void buscar_dieta(void);
 void alterar_dieta(void);

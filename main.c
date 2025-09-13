@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include "usuarios.h"
-#include "alimentos.h"
-#include "refeicoes.h"
+#include "dietas.h"
 #include "consultas.h"
 #include "consumo.h"
 #include "relatorios.h"
@@ -20,18 +19,6 @@
 
 void menu_principal(void);
 
-
-
-
-
-
-
-
-
-
-
-
-
 int main(void){
     char opcao;
     bem_vindo();
@@ -45,11 +32,10 @@ int main(void){
 
         switch(opcao){
             case '1': modulo_usuarios(); break;
-            case '2': modulo_alimentos(); break;
-            case '3': modulo_refeicoes(); break;
-            case '4': modulo_consultas(); break;
-            case '5': modulo_consumo(); break;
-            case '6': relatorios(); break;
+            case '2': modulo_dietas(); break;
+            case '3': modulo_consultas(); break;
+            case '4': modulo_consumo(); break;
+            case '5': relatorios(); break;
             case '0': sair(); break;
             
         }
@@ -82,11 +68,10 @@ void menu_principal(void){
     printf("///            = = = = = Planejamento de Dietas = = = = =                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                      1. Usuários                                        ///\n");
-    printf("///                      2. Alimentos                                       ///\n");
-    printf("///                      3. Refeições                                       ///\n");
-    printf("///                      4. Consultas                                       ///\n");
-    printf("///                      5. Consumo(Alimentos/Água)                         ///\n");
-    printf("///                      6. Relatórios                                      ///\n");
+    printf("///                      2. Dietas                                          ///\n");
+    printf("///                      3. Consultas                                       ///\n");
+    printf("///                      4. Consumo(Alimentos/Água)                         ///\n");
+    printf("///                      5. Relatórios                                      ///\n");
     printf("///                      0. Sair                                            ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
