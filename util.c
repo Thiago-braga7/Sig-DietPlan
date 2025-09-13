@@ -116,45 +116,6 @@ if (resultado < 18.5) {
 }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void faixa_peso_ideal(float altura) {
     if (altura <= 0) {
         printf("Altura inválida!\n");
