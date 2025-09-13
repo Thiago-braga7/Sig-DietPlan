@@ -54,7 +54,7 @@ char usuarios(void){
 }
 
 void cadastrar_usuario(void){
-    char nome[100], cpf[15], telefone[15];
+    char nome[100], cpf[12], telefone[15];
     int idade;
     float peso, altura, bf;   
     limpar_tela();
@@ -68,9 +68,15 @@ void cadastrar_usuario(void){
     printf("///                         Nome Completo:                                  ///\n");
     scanf("%[^\n]", nome);
     getchar();
-    printf("///                         CPF(Apenas números):                            ///\n");
-    scanf("%s", cpf);
+    do {
+    printf("/// CPF(Apenas números): ///\n");
+    scanf("%11s", cpf);
     getchar();
+
+    if (!validar_cpf(cpf)) {
+        printf(RED "CPF inválido! Tente novamente.\n" RESET);
+    }
+} while (!validar_cpf(cpf));  
     printf("///                         Telefone(Apenas números):                       ///\n");
     scanf("%s", telefone);
     getchar();
@@ -114,7 +120,6 @@ void buscar_usuario(void){
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     
-
 }
 
 void alterar_usuario(void){
@@ -229,7 +234,7 @@ void calcular_imc(void) {
         
 
         switch (opcao) {
-            case '1':
+            case '1': {
                 printf("Informe seu peso (kg): ");
                 scanf("%f", &peso);
                 printf("Informe sua altura (m): ");
@@ -241,35 +246,23 @@ void calcular_imc(void) {
                     printf("Altura inválida!\n");
                 } else {
                     printf("\nSeu IMC é: %.2f\n", resultado);
-
-                    if (resultado < 18.5) {
-                        printf("Classificação: Abaixo do peso\n");
-                    } else if (resultado < 24.9) {
-                        printf("Classificação: Peso normal\n");
-                    } else if (resultado < 29.9) {
-                        printf("Classificação: Sobrepeso\n");
-                    } else if (resultado < 34.9) {
-                        printf("Classificação: Obesidade grau I\n");
-                    } else if (resultado < 39.9) {
-                        printf("Classificação: Obesidade grau II\n");
-                    } else {
-                        printf("Classificação: Obesidade grau III\n");
-                    }
-
-                    faixa_peso_ideal(altura);
+                    classificação_imc(resultado);
                 }
+
+                faixa_peso_ideal(altura);
 
                 pausar();
                 break;
+            }
 
-            case '0':
+            case '0': {
                 printf("Voltando ao menu...\n");
                 break;
+            }
         }
 
-    } while (opcao != '0');
+    } while (opcao != '0'); 
 }
-
     
 void calcular_bf(void) {
     char opcao;
