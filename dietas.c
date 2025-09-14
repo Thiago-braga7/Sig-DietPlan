@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "dietas.h"
 #include "util.h"
-
+#include <string.h>
 
 
 
@@ -93,7 +93,7 @@ void cadastrar_dieta(void){
     
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                                Dietas                                   ///\n"RESET);
+    printf(CYAN"///                             🅳 🅸 🅴 🆃 🅰 🆂                            ///\n"RESET);
     printf(RED"///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
@@ -115,27 +115,50 @@ void cadastrar_dieta(void){
     pausar();
 }
 void buscar_dieta(void){
-    char nome_dieta[50];
+    char dieta_busca[15];
+    int resp;
+    int continuar = 1;
     limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Dietas                                   ///\n");
+    printf("///                             🅳 🅸 🅴 🆃 🅰 🆂                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Buscar Dieta  = = = = =                     ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                        Informe o nome da Dieta:                         ///\n");
-    scanf("%s", nome_dieta);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Informações da Dieta                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome da Dieta:                                  ///\n");
-    printf("///                         Total de Calorias por dia:                      ///\n");
-    printf("///                         Refeições:                                      ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///                                                                         ///\n"RESET);
+    while (continuar) {
+        printf(RED"\nDigite o nome da dieta: "RESET);
+        scanf(" %[^\n]", dieta_busca);
 
+        if (strcmp(dieta_busca, nome_dieta) == 0) {
+          
+            printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(CYAN"///                          Informações do Dieta                            ///\n"RESET);
+            printf(RED"/////////////////////////////////////////////////////////////////////////////////\n");
+
+            printf("/// %-15s | %-45s ///\n", "Nome da Dieta", nome_dieta);
+            printf("/// %-15s | %-45.2d ///\n", "Calorias por dia", calorias);
+            printf("/// %-200s | %-45s ///\n", "Refeições", refeicoes);
+            
+            printf("/////////////////////////////////////////////////////////////////////////////////\n");
+
+            pausar();
+            continuar = 0; 
+        } else {
+            
+            printf("\nDieta não encontrada! Deseja tentar novamente?\n");
+            printf("Digite 1 para tentar novamente ou 10 para sair: "RESET);
+            scanf("%d", &resp);
+            if (resp == 10) {
+                printf(RED"\nSaindo da busca...\n"RESET);
+                continuar = 0; 
+            }
+            
+        }
+    }
 }
+
+
 void alterar_dieta(void){
     char nome_dieta[50];
     char novo_cpf[15]; 
