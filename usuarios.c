@@ -58,7 +58,7 @@ void usuarios(void){
 }
 
 void cadastrar_usuario(void){
-    char nome[100], cpf[12], telefone[15];
+    char nome[100], cpf[12], telefone[10];
     int idade;
     float peso, altura, bf;   
     limpar_tela();
@@ -74,7 +74,7 @@ void cadastrar_usuario(void){
     getchar();
     do {
     printf("/// CPF(Apenas números): ///\n");
-    scanf("%11s", cpf);
+    scanf("%s", cpf);
     getchar();
 
     if (!validar_cpf(cpf)) {

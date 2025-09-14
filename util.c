@@ -243,18 +243,22 @@ bool validar_nome(const char *nome) {
 
 int validar_cpf(const char *cpf) {
     int i, j, soma, resto, digito1, digito2;
-    char numeros[12];
+    char numeros[12]; 
 
-    
     int k = 0;
     for (i = 0; cpf[i] != '\0'; i++) {
-        if (isdigit(cpf[i])) {
+        if (isdigit((unsigned char)cpf[i])) {
+            if (k >= 11) { 
+                
+                return 0;
+            }
             numeros[k++] = cpf[i];
         }
     }
     numeros[k] = '\0';
 
-    if (strlen(numeros) != 11) {
+    
+    if (k != 11) {
         return 0;
     }
 
@@ -270,6 +274,7 @@ int validar_cpf(const char *cpf) {
         return 0;
     }
 
+ 
     soma = 0;
     for (i = 0, j = 10; i < 9; i++, j--) {
         soma += (numeros[i] - '0') * j;
@@ -277,6 +282,7 @@ int validar_cpf(const char *cpf) {
     resto = soma % 11;
     digito1 = (resto < 2) ? 0 : 11 - resto;
 
+    
     soma = 0;
     for (i = 0, j = 11; i < 10; i++, j--) {
         soma += (numeros[i] - '0') * j;
@@ -289,10 +295,8 @@ int validar_cpf(const char *cpf) {
         return 1; 
     } else {
         return 0; 
+    }
 }
-}
-
-
 
 
 // chat gpt 5
