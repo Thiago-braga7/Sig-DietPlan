@@ -301,7 +301,7 @@ int validar_telefone(const char *telefone) {
     int len = strlen(telefone);
 
     
-    if (len != 10 && len != 11) {
+    if (len != 10) {
         return 0;
     }
 
