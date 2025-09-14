@@ -2,8 +2,9 @@
 #include <stdlib.h> 
 #include "usuarios.h"
 #include "dietas.h"
-#include "consultas.h"
 #include "consumo.h"
+#include "consultas.h"
+#include "agendamentos.h"
 #include "relatorios.h"
 #include "sobre.h"
 
@@ -33,9 +34,10 @@ int main(void){
         switch(opcao){
             case '1': modulo_usuarios(); break;
             case '2': modulo_dietas(); break;
-            case '3': modulo_consultas(); break;
-            case '4': modulo_consumo(); break;
-            case '5': relatorios(); break;
+            case '3': modulo_consumo(); break;
+            case '4': modulo_consultas(); break;
+            case '5': modulo_agendamentos(); break;
+            case '6': relatorios(); break;
             case '0': sair(); break;
             
         }
@@ -69,9 +71,10 @@ void menu_principal(void){
     printf("///                                                                         ///\n");
     printf("///                      1. Usuários                                        ///\n");
     printf("///                      2. Dietas                                          ///\n");
-    printf("///                      3. Consultas                                       ///\n");
-    printf("///                      4. Consumo(Alimentos/Água)                         ///\n");
-    printf("///                      5. Relatórios                                      ///\n");
+    printf("///                      3. Consumo(Alimentos/Água)                         ///\n");
+    printf("///                      4. Consultas                                       ///\n");
+    printf("///                      5. Agendamentos                                    ///\n");
+    printf("///                      6. Relatórios                                      ///\n");
     printf("///                      0. Sair                                            ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
