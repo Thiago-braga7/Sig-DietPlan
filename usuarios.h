@@ -1,5 +1,5 @@
 void modulo_usuarios(void);
-char usuarios(void); 
+void usuarios(void); 
 void cadastrar_usuario(void);
 void buscar_usuario(void);
 void alterar_usuario(void);
