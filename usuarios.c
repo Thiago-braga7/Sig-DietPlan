@@ -194,37 +194,47 @@ void alterar_usuario(void){
     printf(RED"///                                                                         ///\n");
     printf("///                 = = = = = Alterar Dados do Usuário = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novos Dados do Usuário                           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome Completo:                                  ///\n");
-    scanf("%[^\n]", novo_nome);
-    getchar();
-    printf("///                         CPF:                                            ///\n");
-    scanf("%s", novo_cpf);
-    getchar();
-    printf("///                         Telefone:                                       ///\n");
-    scanf("%s", novo_telefone);
-    getchar();
-    printf("///                         Idade:                                          ///\n");
-    scanf("%d", &nova_idade);
-    getchar();
-    printf("///                         Peso(Kg):                                       ///\n");
-    scanf("%f", &novo_peso);
-    getchar();
-    printf("///                         Altura(m):                                      ///\n");
-    scanf("%f", &nova_altura);
-    getchar();
-    printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
-    scanf("%f", &novo_bf);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"   🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗    \n"RESET);
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf("\n");
+    do {
+        printf("\nDigite o CPF do usuário: ");
+        scanf("%s", cpf_busca);
+        printf("\nDigite 10 caso queira sair e qualquer outro número p/ continuar: ");
+        scanf("%d", &resp);
+
+        if (resp == 1) {
+            printf("\nSaindo da busca...\n");
+            break;
+        }
+    
+    if (strcmp(cpf_busca, cpf) == 0) {
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                        Novos Dados do Usuário                           ///\n");
+        printf("///                                                                         ///\n");
+        printf("///                         Nome Completo:                                  ///\n");
+        scanf("%s[^\n]", novo_nome);
+        getchar();
+        printf("///                         CPF:                                            ///\n");
+        scanf("%s", novo_cpf);
+        getchar();
+        printf("///                         Telefone:                                       ///\n");
+        scanf("%s", novo_telefone);
+        getchar();
+        printf("///                         Idade:                                          ///\n");
+        scanf("%d", &nova_idade);
+        getchar();
+        printf("///                         Peso(Kg):                                       ///\n");
+        scanf("%f", &novo_peso);
+        getchar();
+        printf("///                         Altura(m):                                      ///\n");
+        scanf("%f", &nova_altura);
+        getchar();
+        printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
+        scanf("%f", &novo_bf);
+        getchar();
+        printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+        printf(CYAN"   🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗    \n"RESET);
+        printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+        printf("\n");
+    }
    
 
 }
