@@ -78,18 +78,24 @@ void cadastrar_usuario(void){
     }
 }   while (!validar_cpf(cpf));  
     do {
-    printf("/// Telefone (Apenas números): ///\n");
-    scanf("%s", telefone);
-    getchar();
+        printf("/// Telefone (Apenas números): ///\n");
+        scanf("%s", telefone);
+        getchar();
 
     if (!validar_telefone(telefone)) {
         printf("Telefone inválido! Tente novamente.\n");
     }
 }   while (!validar_telefone(telefone));
 
-    printf("///                         Idade:                                          ///\n");
-    scanf("%d", &idade);
-    getchar();
+    do {
+        printf("/// Idade: ///\n");
+        scanf("%d", &idade);
+        getchar();
+    if (!validar_idade(idade)) {
+        printf("Idade invalida! Tente novamente.\n");
+    }
+}   while (!validar_idade(idade));
+
     printf("///                         Peso(Kg):                                       ///\n");
     scanf("%f", &peso);
     getchar();

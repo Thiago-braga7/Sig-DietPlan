@@ -314,3 +314,9 @@ int validar_telefone(const char *telefone) {
 
     return 1; 
 }
+
+
+
+int validar_idade(int idade) {
+    return (idade >= 0 && idade <= 120);
+}
