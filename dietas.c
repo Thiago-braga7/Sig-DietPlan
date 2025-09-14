@@ -5,9 +5,29 @@
 
 
 
+
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define CYAN    "\033[36m"
+
+
+
+static char cpf[15]; 
+static char nome_dieta[50];              
+static char refeicoes[200];                    
+static int calorias;   
+
+
+
+
+
+
+
+
+
+
+
+
 
 void modulo_dietas(void) {
     char opcao;
