@@ -92,7 +92,7 @@ void cadastrar_usuario(void){
         scanf("%d", &idade);
         getchar();
     if (!validar_idade(idade)) {
-        printf("Idade invalida! Tente novamente.\n");
+        printf("Idade inválida! Tente novamente.\n");
     }
 }   while (!validar_idade(idade));
 
@@ -101,12 +101,18 @@ void cadastrar_usuario(void){
         scanf("%f", &peso);
         getchar();
     if (!validar_peso(peso)) {
-        printf("Peso invalido! Tente novamente.\n");
+        printf("Peso inválido! Tente novamente.\n");
     }
-} while (!validar_peso(peso));
-    printf("///                         Altura(m):                                      ///\n");
-    scanf("%f", &altura);
-    getchar();
+}   while (!validar_peso(peso));
+    do {
+        printf("/// Altura(m): ///\n");
+        scanf("%f", &altura);
+        getchar();
+    if (!validar_altura(altura)) {
+        printf("Altura inválida! Tente novamente.\n");
+    }
+}   while (!validar_altura(altura));
+
     printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
     scanf("%f", &bf);
     getchar();
