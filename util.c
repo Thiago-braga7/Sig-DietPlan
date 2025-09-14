@@ -327,3 +327,6 @@ int validar_peso(float peso) {
 int validar_altura(float altura) {
     return (altura >= 0.5 && altura <= 2.50);
 }
+int validar_bf(float bf) {
+    return (bf >= 0 && bf <= 100);
+}

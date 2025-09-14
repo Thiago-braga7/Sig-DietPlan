@@ -113,9 +113,14 @@ void cadastrar_usuario(void){
     }
 }   while (!validar_altura(altura));
 
-    printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
-    scanf("%f", &bf);
-    getchar();
+    do {
+        printf("/// Percentual de gordura(Porcentagem): ///\n");
+        scanf("%f", &bf);
+        getchar();
+    if (!validar_bf(bf)) {
+        printf("Percentual de gordura invalido! Tente novamente.\n");
+    }
+}   while (!validar_bf(bf));
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf(CYAN"  🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾   \n"RESET);
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
