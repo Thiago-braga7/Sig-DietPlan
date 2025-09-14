@@ -76,10 +76,17 @@ void cadastrar_usuario(void){
     if (!validar_cpf(cpf)) {
         printf("CPF inválido! Tente novamente.\n" );
     }
-} while (!validar_cpf(cpf));  
-    printf("///                         Telefone(Apenas números):                       ///\n");
+}   while (!validar_cpf(cpf));  
+    do {
+    printf("/// Telefone (Apenas números): ///\n");
     scanf("%s", telefone);
     getchar();
+
+    if (!validar_telefone(telefone)) {
+        printf("Telefone inválido! Tente novamente.\n");
+    }
+}   while (!validar_telefone(telefone));
+
     printf("///                         Idade:                                          ///\n");
     scanf("%d", &idade);
     getchar();

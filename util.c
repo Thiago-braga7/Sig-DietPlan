@@ -291,3 +291,26 @@ int validar_cpf(const char *cpf) {
         return 0; 
 }
 }
+
+
+
+
+// chat gpt 5
+
+int validar_telefone(const char *telefone) {
+    int len = strlen(telefone);
+
+    
+    if (len != 10 && len != 11) {
+        return 0;
+    }
+
+    
+    for (int i = 0; i < len; i++) {
+        if (!isdigit(telefone[i])) {
+            return 0;
+        }
+    }
+
+    return 1; 
+}
