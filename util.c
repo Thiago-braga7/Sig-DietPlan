@@ -28,13 +28,13 @@ char confirmar_acao(void) {
     char confirmacao;
 
     do {
-        printf("Deseja confirmar a ação? (S/N): ");
+        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
         scanf(" %c", &confirmacao);  
         getchar(); 
         confirmacao = toupper(confirmacao);
 
         if (confirmacao != 'S' && confirmacao != 'N') {
-            printf("Opção inválida! Digite apenas S ou N.\n");
+            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
         }
     } while (confirmacao != 'S' && confirmacao != 'N');
     return confirmacao;
@@ -44,7 +44,7 @@ void limpar_tela(void){
     system("clear||cls");
 }
 void pausar(void) {
-    printf("\nPressione ENTER para continuar...");
+    printf(CYAN"\nPressione ENTER para continuar..."RESET);
     getchar();
     getchar();
 }
@@ -71,48 +71,49 @@ float calcular_quantidade_agua(float peso, char genero){
 void classificação_imc(float resultado){
 
 if (resultado < 18.5) {
-    printf(RED"| >> < 18.5       |   Abaixo do peso       |       ~7%%      << |\n"RESET);
-    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf(RED"-------------------------------------------------------------\n"RESET);
+    printf(CYAN"| >> < 18.5       |   Abaixo do peso       |       ~7%%      << |\n"RESET);
+    printf(RED"|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
     printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
     printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 24.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
-    printf(RED"| >> 18.5-24.9    |   Peso normal          |      ~38%%      << |\n"RESET);
-    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n"RESET);
+    printf(CYAN"| >> 18.5-24.9    |   Peso normal          |      ~38%%      << |\n"RESET);
+    printf(RED"|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
     printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 29.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
-    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
-    printf(RED"| >> 25-29.9      |   Sobrepeso            |      ~35%%      << |\n"RESET);
-    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n"RESET);
+    printf(CYAN"| >> 25-29.9      |   Sobrepeso            |      ~35%%      << |\n"RESET);
+    printf(RED"|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 34.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
     printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
-    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
-    printf(RED"| >> 30-34.9      |   Obesidade grau I     |      ~12%%      << |\n"RESET);
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n"RESET);
+    printf(CYAN"| >> 30-34.9      |   Obesidade grau I     |      ~12%%      << |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 39.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
     printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
     printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
-    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
-    printf(RED"| >> 35-39.9      |   Obesidade grau II    |       ~5%%      << |\n"RESET);
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n"RESET);
+    printf(CYAN"| >> 35-39.9      |   Obesidade grau II    |       ~5%%      << |\n"RESET);
+    printf(RED"|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
     printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
     printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
     printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
-    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf(RED"| >>   >=40       |   Obesidade grau III   |       ~3%%      << |\n"RESET);
-    printf("-------------------------------------------------------------\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n"RESET);
+    printf(CYAN"| >>   >=40       |   Obesidade grau III   |       ~3%%      << |\n"RESET);
+    printf(RED"-------------------------------------------------------------\n"RESET);
 }
 }
 
