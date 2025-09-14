@@ -35,9 +35,9 @@ char usuarios(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Usuários   = = = = =                     ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///             = = = = =   🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂   = = = = =                ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                    1. Cadastrar Usuário                                 ///\n");
     printf("///                    2. Buscar Usuário                                    ///\n");
     printf("///                    3. Alterar Dados do Usuário                          ///\n");
@@ -59,9 +59,9 @@ void cadastrar_usuario(void){
     float peso, altura, bf;   
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Usuários                                  ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                          🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂                           ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                 = = = = =  Cadastrar Usuário = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -74,7 +74,7 @@ void cadastrar_usuario(void){
     getchar();
 
     if (!validar_cpf(cpf)) {
-        printf(RED "CPF inválido! Tente novamente.\n" RESET);
+        printf("CPF inválido! Tente novamente.\n" );
     }
 } while (!validar_cpf(cpf));  
     printf("///                         Telefone(Apenas números):                       ///\n");
@@ -92,9 +92,9 @@ void cadastrar_usuario(void){
     printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
     scanf("%f", &bf);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Usuário cadastrado com sucesso!                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"  🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾   \n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     
 }
 
@@ -102,9 +102,9 @@ void buscar_usuario(void){
     char cpf[15];
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Usuários                                  ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                       🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂                              ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                 = = = = =  Buscar Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
@@ -128,9 +128,9 @@ void alterar_usuario(void){
     float novo_peso, nova_altura, novo_bf;
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Usuários                                  ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                     🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂                                ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                 = = = = = Alterar Dados do Usuário = = = = =            ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
@@ -160,9 +160,9 @@ void alterar_usuario(void){
     printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
     scanf("%f", &novo_bf);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Usuário alterado com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"   🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗    \n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
    
 
@@ -172,9 +172,9 @@ void excluir_usuario(void){
     limpar_tela();
     char cpf[15];
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Usuários                                  ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                        🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂                             ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                 = = = = = Excluir Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
@@ -191,12 +191,12 @@ void excluir_usuario(void){
     printf("///                         Idade:                                          ///\n");
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     char resposta = confirmar_acao();
     if (resposta == 'S') {
-        printf(RED"///                    Usuário excluído com sucesso!                      ///\n");
+        printf(CYAN"  🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅴 🆇 🅲 🅻 🆄 🅸 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗   \n"RESET);
     } else {
-        printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
+        printf(CYAN"  🅴 🆇 🅲 🅻 🆄 🆂 🅰 🅾  🅲 🅰 🅽 🅲 🅴 🅻 🅰 🅳 🅰  🅴 🆇 🅲 🅻 🆄 🆂 🅰 🅾  🅲 🅰 🅽 🅲 🅴 🅻 🅰 🅳 🅰   \n"RESET);
     }
     
 
@@ -210,9 +210,9 @@ void calcular_imc(void) {
     do {
         limpar_tela();
         printf("\n");
-        printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                 Usuários                                    ///\n");
-        printf("///                                                                             ///\n");
+        printf(RED"///////////////////////////////////////////////////////////////////////////////////\n"RESET);
+        printf(CYAN"///                         🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂                                ///\n"RESET);
+        printf(RED"///                                                                             ///\n");
         printf("///                     = = = = = Calcular IMC = = = = =                        ///\n");
         printf("///                                                                             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
@@ -221,12 +221,12 @@ void calcular_imc(void) {
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
         
         do {
-            printf("Escolha a opção desejada (0 ou 1): "RESET);
+            printf("Escolha a opção desejada (0 ou 1): ");
             scanf(" %c", &opcao);
             getchar();
 
             if (opcao != '0' && opcao != '1') {
-                printf("Opção inválida! Digite apenas 0 ou 1.\n");
+                printf("Opção inválida! Digite apenas 0 ou 1.\n"RESET);
                 pausar();
                 limpar_tela();
             }
@@ -235,17 +235,17 @@ void calcular_imc(void) {
 
         switch (opcao) {
             case '1': {
-                printf("Informe seu peso (kg): ");
+                printf(RED"Informe seu peso (kg): ");
                 scanf("%f", &peso);
-                printf("Informe sua altura (m): ");
+                printf("Informe sua altura (m): "RESET);
                 scanf("%f", &altura);
 
                 resultado = imc(peso, altura);
 
                 if (resultado < 0) {
-                    printf("Altura inválida!\n");
+                    printf(RED"Altura inválida!\n");
                 } else {
-                    printf("\nSeu IMC é: %.2f\n", resultado);
+                    printf("\nSeu IMC é: %.2f\n"RESET, resultado);
                     classificação_imc(resultado);
                 }
 
@@ -256,7 +256,7 @@ void calcular_imc(void) {
             }
 
             case '0': {
-                printf("Voltando ao menu...\n");
+                printf(RED"Voltando ao menu...\n"RESET);
                 break;
             }
         }
@@ -273,16 +273,16 @@ void calcular_bf(void) {
         limpar_tela();
         printf("\n");
         printf("\n");
-        printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                 Usuários                                    ///\n");
-        printf("///                                                                             ///\n");
+        printf(RED"///////////////////////////////////////////////////////////////////////////////////\n"RESET);
+        printf(CYAN"///                            🆄 🆂 🆄 🅰 🆁 🅸 🅾 🆂                             ///\n"RESET);
+        printf(RED"///                                                                             ///\n");
         printf("///                     = = = = = Classificar Porcentagem de Gordura = = = = =  ///\n");
         printf("///                                                                             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                             1. Calcular por BF                              ///\n");
         printf("///                             0. Voltar                                       ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("Escolha a opção desejada: "RESET);
+        printf("Escolha a opção desejada: ");
         scanf(" %c", &opcao);
         getchar();
 
@@ -301,11 +301,11 @@ void calcular_bf(void) {
                 break;
 
             case '0':
-                printf("Voltando ao menu...\n");
+                printf("Voltando ao menu...\n"RESET);
                 break;
 
             default:
-                printf("Opção inválida!\n");
+                printf("Opção inválida!\n"RESET);
                 pausar();
                 break;
         }
