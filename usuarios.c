@@ -139,8 +139,8 @@ void cadastrar_usuario(void){
 
 void buscar_usuario(void){
     char cpf_busca[15];
-    int encontrado = 0;
     int resp;
+    int continuar = 1;
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -148,40 +148,40 @@ void buscar_usuario(void){
     printf(RED"///                                                                         ///\n");
     printf("///                 = = = = =  Buscar Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
-    do {
+    while (continuar) {
         printf("\nDigite o CPF do usuário: ");
         scanf("%s", cpf_busca);
-        printf("\nDigite 10 caso queira sair e qualquer outro número p/ continuar: ");
-        scanf("%d", &resp);
 
-        if (resp == 1) {
-            printf("\nSaindo da busca...\n");
-            break;
+        if (strcmp(cpf_busca, cpf) == 0) {
+          
+            printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(CYAN"///                          Informações do Usuário                           ///\n"RESET);
+            printf(RED"/////////////////////////////////////////////////////////////////////////////////\n");
+
+            printf("/// %-15s | %-45s ///\n", "Nome", nome);
+            printf("/// %-15s | %-45s ///\n", "CPF", cpf);
+            printf("/// %-15s | %-45s ///\n", "Telefone", telefone);
+            printf("/// %-15s | %-45d ///\n", "Idade", idade);
+            printf("/// %-15s | %-45.2f ///\n", "Peso (Kg)", peso);
+            printf("/// %-15s | %-45.2f ///\n", "Altura (m)", altura);
+            printf("/// %-15s | %-45.2f ///\n", "Body Fat %%", bf); 
+
+            printf("/////////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+            pausar();
+            continuar = 0; 
+        } else {
+            
+            printf("\nCPF não encontrado! Deseja tentar novamente?\n");
+            printf("Digite 1 para tentar novamente ou 10 para sair: ");
+            scanf("%d", &resp);
+            if (resp == 10) {
+                printf("\nSaindo da busca...\n");
+                continuar = 0; 
+            }
+            
         }
-    
-    if (strcmp(cpf_busca, cpf) == 0) {
-    printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                          Informações do Usuário                           ///\n"RESET);
-    printf(RED"/////////////////////////////////////////////////////////////////////////////////\n");
-
-    printf("/// %-15s | %-45s ///\n", "Nome", nome);
-    printf("/// %-15s | %-45s ///\n", "CPF", cpf);
-    printf("/// %-15s | %-45s ///\n", "Telefone", telefone);
-    printf("/// %-15s | %-45d ///\n", "Idade", idade);
-    printf("/// %-15s | %-45.2f ///\n", "Peso (Kg)", peso);
-    printf("/// %-15s | %-45.2f ///\n", "Altura (m)", altura);
-    printf("/// %-15s | %-45.2f ///\n", "Body Fat %%", bf); 
-
-    printf("/////////////////////////////////////////////////////////////////////////////////\n"RESET);
-    
-
-    pausar();
-    encontrado = 1;
-}  else {
-            printf("\nCPF não encontrado! Tente novamente.\n");
-        }
-
-    } while (!encontrado); 
+    }
 }
 void alterar_usuario(void){
     char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
@@ -189,6 +189,7 @@ void alterar_usuario(void){
     float novo_peso, nova_altura, novo_bf;
     char cpf_busca[15];
     int resp;
+    int encontrado = 0;
     
     limpar_tela();
     printf("\n");
@@ -203,7 +204,7 @@ void alterar_usuario(void){
         printf("\nDigite 10 caso queira sair e qualquer outro número p/ continuar: ");
         scanf("%d", &resp);
 
-        if (resp == 1) {
+        if (resp == 10) {
             printf("\nSaindo da busca...\n");
             break;
         }
@@ -246,9 +247,12 @@ void alterar_usuario(void){
         printf(CYAN"   🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗    \n"RESET);
         printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
+        pausar();
+        encontrado = 1;
     }
+    } while (!encontrado); 
    
-}
+
 }
 
 void excluir_usuario(void){
