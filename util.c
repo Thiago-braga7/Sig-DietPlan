@@ -8,6 +8,44 @@
 #define CYAN "\x1B[36m"
 
 
+
+
+
+char ler_sexo(void) {
+    char sexo;
+    do {
+        
+        printf(RED"Informe seu sexo (M = Masculino, F = Feminino): "RESET);
+        scanf(" %c", &sexo);
+        sexo = toupper(sexo);
+   
+
+
+        if (sexo != 'M' && sexo != 'F') {
+            printf(RED"Sexo inválido!\n"RESET);
+        } 
+    } while (sexo != 'M' && sexo != 'F');
+    return sexo;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 char ler_genero(void) {
     char genero;
     do {
@@ -28,13 +66,13 @@ char confirmar_acao(void) {
     char confirmacao;
 
     do {
-        printf("Deseja confirmar a ação? (S/N): ");
+        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
         scanf(" %c", &confirmacao);  
         getchar(); 
         confirmacao = toupper(confirmacao);
 
         if (confirmacao != 'S' && confirmacao != 'N') {
-            printf("Opção inválida! Digite apenas S ou N.\n");
+            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
         }
     } while (confirmacao != 'S' && confirmacao != 'N');
     return confirmacao;
@@ -44,7 +82,7 @@ void limpar_tela(void){
     system("clear||cls");
 }
 void pausar(void) {
-    printf("\nPressione ENTER para continuar...");
+    printf(CYAN"\nPressione ENTER para continuar..."RESET);
     getchar();
     getchar();
 }
@@ -71,102 +109,168 @@ float calcular_quantidade_agua(float peso, char genero){
 void classificação_imc(float resultado){
 
 if (resultado < 18.5) {
-    printf(RED"| >> < 18.5       |   Abaixo do peso       |       ~7%%      << |\n"RESET);
-    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
+    printf(RED"-------------------------------------------------------------\n"RESET);
+    printf(CYAN"| >> < 18.5       |   Abaixo do peso       |       ~7%%      << |\n"RESET);
+    printf(RED"|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
     printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
     printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 24.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
-    printf(RED"| >> 18.5-24.9    |   Peso normal          |      ~38%%      << |\n"RESET);
-    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n"RESET);
+    printf(CYAN"| >> 18.5-24.9    |   Peso normal          |      ~38%%      << |\n"RESET);
+    printf(RED"|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
     printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 29.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
-    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
-    printf(RED"| >> 25-29.9      |   Sobrepeso            |      ~35%%      << |\n"RESET);
-    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n"RESET);
+    printf(CYAN"| >> 25-29.9      |   Sobrepeso            |      ~35%%      << |\n"RESET);
+    printf(RED"|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 34.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
     printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
-    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
-    printf(RED"| >> 30-34.9      |   Obesidade grau I     |      ~12%%      << |\n"RESET);
+    printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n"RESET);
+    printf(CYAN"| >> 30-34.9      |   Obesidade grau I     |      ~12%%      << |\n");
     printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else if (resultado < 39.9) {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
     printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
     printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
-    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
-    printf(RED"| >> 35-39.9      |   Obesidade grau II    |       ~5%%      << |\n"RESET);
-    printf("|     >=40        |   Obesidade grau III   |       ~3%%      |\n");
+    printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n"RESET);
+    printf(CYAN"| >> 35-39.9      |   Obesidade grau II    |       ~5%%      << |\n"RESET);
+    printf(RED"|     >=40        |   Obesidade grau III   |       ~3%%      |\n"RESET);
 } else {
-    printf("|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
+    printf(RED"|    < 18.5       |   Abaixo do peso       |       ~7%%      |\n");
     printf("|    18.5-24.9    |   Peso normal          |      ~38%%      |\n");
     printf("|    25-29.9      |   Sobrepeso            |      ~35%%      |\n");
     printf("|    30-34.9      |   Obesidade grau I     |      ~12%%      |\n");
-    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n");
-    printf(RED"| >>   >=40       |   Obesidade grau III   |       ~3%%      << |\n"RESET);
-    printf("-------------------------------------------------------------\n");
+    printf("|    35-39.9      |   Obesidade grau II    |       ~5%%      |\n"RESET);
+    printf(CYAN"| >>   >=40       |   Obesidade grau III   |       ~3%%      << |\n"RESET);
+    printf(RED"-------------------------------------------------------------\n"RESET);
 }
 }
 
 void faixa_peso_ideal(float altura) {
     if (altura <= 0) {
-        printf("Altura inválida!\n");
+        printf(RED"Altura inválida!\n"RESET);
         return;
     }
 
     float peso_min = 18.5 * altura * altura;
     float peso_max = 24.9 * altura * altura;
 
-    printf("Peso ideal para sua altura: entre %.1fkg e %.1fkg\n", peso_min, peso_max);
+    printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, peso_min, peso_max);
 }
 void classificar_bf(char sexo, float bf) {
-    sexo = toupper(sexo);
 
-    if (sexo != 'M' && sexo != 'F') {
-        printf("Sexo inválido!\n");
-        return;
-    }
+    
 
-    printf("\nSeu percentual de gordura é: %.1f%%\n", bf);
+    printf(RED"\nSeu percentual de gordura é: %.1f%%\n"RESET, bf);
+
+
+    printf(RED"-------------------------------------------------------------\n"RESET);
 
     if (sexo == 'M') {
         if (bf < 6) {
-            printf("Classificação: Muito abaixo do ideal\n");
+            printf(CYAN"| >>   < 6        |   Muito abaixo do ideal   << |\n"RESET);
+            printf(RED "|    6-13         |   Atleta                     |\n");
+            printf("|    14-17        |   Fitness                    |\n");
+            printf("|    18-24        |   Normal                     |\n");
+            printf("|    25-29        |   Acima do ideal             |\n");
+            printf("|    >=30         |   Obeso                      |\n"RESET);
         } else if (bf <= 13) {
-            printf("Classificação: Atleta\n");
+            printf(RED "|    < 6          |   Muito abaixo do ideal      |\n"RESET);
+            printf(CYAN"| >> 6-13         |   Atleta                  << |\n"RESET);
+            printf(RED "|    14-17        |   Fitness                    |\n");
+            printf("|    18-24        |   Normal                     |\n");
+            printf("|    25-29        |   Acima do ideal             |\n");
+            printf("|    >=30         |   Obeso                      |\n"RESET);
         } else if (bf <= 17) {
-            printf("Classificação: Fitness\n");
+            printf(RED "|    < 6          |   Muito abaixo do ideal      |\n");
+            printf("|    6-13         |   Atleta                     |\n"RESET);
+            printf(CYAN"| >> 14-17        |   Fitness                 << |\n"RESET);
+            printf(RED "|    18-24        |   Normal                     |\n");
+            printf("|    25-29        |   Acima do ideal             |\n");
+            printf("|    >=30         |   Obeso                      |\n"RESET);
         } else if (bf <= 24) {
-            printf("Classificação: Normal\n");
+            printf(RED "|    < 6          |   Muito abaixo do ideal      |\n");
+            printf("|    6-13         |   Atleta                     |\n");
+            printf("|    14-17        |   Fitness                    |\n"RESET);
+            printf(CYAN"| >> 18-24        |   Normal                  << |\n"RESET);
+            printf(RED "|    25-29        |   Acima do ideal             |\n");
+            printf("|    >=30         |   Obeso                      |\n"RESET);
         } else if (bf <= 29) {
-            printf("Classificação: Acima do ideal\n");
+            printf(RED "|    < 6          |   Muito abaixo do ideal      |\n");
+            printf("|    6-13         |   Atleta                     |\n");
+            printf("|    14-17        |   Fitness                    |\n");
+            printf("|    18-24        |   Normal                     |\n"RESET);
+            printf(CYAN"| >> 25-29        |   Acima do ideal          << |\n"RESET);
+            printf(RED "|    >=30         |   Obeso                      |\n"RESET);
         } else {
-            printf("Classificação: Obeso\n");
+            printf(RED "|    < 6          |   Muito abaixo do ideal      |\n");
+            printf("|    6-13         |   Atleta                     |\n");
+            printf("|    14-17        |   Fitness                    |\n");
+            printf("|    18-24        |   Normal                     |\n");
+            printf("|    25-29        |   Acima do ideal             |\n"RESET);
+            printf(CYAN"| >> >=30         |   Obeso                   << |\n"RESET);
         }
-    } else if (sexo == 'F') {
+    } 
+    else if (sexo == 'F') {
         if (bf < 14) {
-            printf("Classificação: Muito abaixo do ideal\n");
+            printf(CYAN"| >>   < 14       |   Muito abaixo do ideal   << |\n"RESET);
+            printf(RED "|    14-20        |   Atleta                     |\n");
+            printf("|    21-24        |   Fitness                    |\n");
+            printf("|    25-31        |   Normal                     |\n");
+            printf("|    32-37        |   Acima do ideal             |\n");
+            printf("|    >=38         |   Obesa                      |\n"RESET);
         } else if (bf <= 20) {
-            printf("Classificação: Atleta\n");
+            printf(RED "|    < 14         |   Muito abaixo do ideal      |\n"RESET);
+            printf(CYAN"| >> 14-20        |   Atleta                  << |\n"RESET);
+            printf(RED "|    21-24        |   Fitness                    |\n");
+            printf("|    25-31        |   Normal                     |\n");
+            printf("|    32-37        |   Acima do ideal             |\n");
+            printf("|    >=38         |   Obesa                      |\n"RESET);
         } else if (bf <= 24) {
-            printf("Classificação: Fitness\n");
+            printf(RED "|    < 14         |   Muito abaixo do ideal      |\n");
+            printf("|    14-20        |   Atleta                     |\n"RESET);
+            printf(CYAN"| >> 21-24        |   Fitness                 << |\n"RESET);
+            printf(RED "|    25-31        |   Normal                     |\n");
+            printf("|    32-37        |   Acima do ideal             |\n");
+            printf("|    >=38         |   Obesa                      |\n"RESET);
         } else if (bf <= 31) {
-            printf("Classificação: Normal\n");
+            printf(RED "|    < 14         |   Muito abaixo do ideal      |\n");
+            printf("|    14-20        |   Atleta                     |\n");
+            printf("|    21-24        |   Fitness                    |\n"RESET);
+            printf(CYAN"| >> 25-31        |   Normal                  << |\n"RESET);
+            printf(RED "|    32-37        |   Acima do ideal             |\n");
+            printf("|    >=38         |   Obesa                      |\n"RESET);
         } else if (bf <= 37) {
-            printf("Classificação: Acima do ideal\n");
+            printf(RED "|    < 14         |   Muito abaixo do ideal      |\n");
+            printf("|    14-20        |   Atleta                     |\n");
+            printf("|    21-24        |   Fitness                    |\n");
+            printf("|    25-31        |   Normal                     |\n"RESET);
+            printf(CYAN"| >> 32-37        |   Acima do ideal          << |\n"RESET);
+            printf(RED "|    >=38         |   Obesa                      |\n"RESET);
         } else {
-            printf("Classificação: Obesa\n");
+            printf(RED "|    < 14         |   Muito abaixo do ideal      |\n");
+            printf("|    14-20        |   Atleta                     |\n");
+            printf("|    21-24        |   Fitness                    |\n");
+            printf("|    25-31        |   Normal                     |\n");
+            printf("|    32-37        |   Acima do ideal             |\n"RESET);
+            printf(CYAN"| >> >=38         |   Obesa                   << |\n"RESET);
         }
     }
+
+    printf(RED"-------------------------------------------------------------\n"RESET);
 }
+
+
+
 
 void logo(void){
     printf("\n"); // peguei do textart as formatações diferentes
@@ -243,18 +347,22 @@ bool validar_nome(const char *nome) {
 
 int validar_cpf(const char *cpf) {
     int i, j, soma, resto, digito1, digito2;
-    char numeros[12];
+    char numeros[12]; 
 
-    
     int k = 0;
     for (i = 0; cpf[i] != '\0'; i++) {
-        if (isdigit(cpf[i])) {
+        if (isdigit((unsigned char)cpf[i])) {
+            if (k >= 11) { 
+                
+                return 0;
+            }
             numeros[k++] = cpf[i];
         }
     }
     numeros[k] = '\0';
 
-    if (strlen(numeros) != 11) {
+    
+    if (k != 11) {
         return 0;
     }
 
@@ -270,6 +378,7 @@ int validar_cpf(const char *cpf) {
         return 0;
     }
 
+ 
     soma = 0;
     for (i = 0, j = 10; i < 9; i++, j--) {
         soma += (numeros[i] - '0') * j;
@@ -277,6 +386,7 @@ int validar_cpf(const char *cpf) {
     resto = soma % 11;
     digito1 = (resto < 2) ? 0 : 11 - resto;
 
+    
     soma = 0;
     for (i = 0, j = 11; i < 10; i++, j--) {
         soma += (numeros[i] - '0') * j;
@@ -289,5 +399,42 @@ int validar_cpf(const char *cpf) {
         return 1; 
     } else {
         return 0; 
+    }
 }
+
+
+// chat gpt 5
+
+int validar_telefone(const char *telefone) {
+    int len = strlen(telefone);
+
+    
+    if (len != 10) {
+        return 0;
+    }
+
+    
+    for (int i = 0; i < len; i++) {
+        if (!isdigit(telefone[i])) {
+            return 0;
+        }
+    }
+
+    return 1; 
+}
+
+
+
+int validar_idade(int idade) {
+    return (idade >= 0 && idade <= 120);
+}
+
+int validar_peso(float peso) {
+    return (peso >= 0 && peso <= 700);
+}
+int validar_altura(float altura) {
+    return (altura >= 0.5 && altura <= 2.50);
+}
+int validar_bf(float bf) {
+    return (bf >= 0 && bf <= 100);
 }
