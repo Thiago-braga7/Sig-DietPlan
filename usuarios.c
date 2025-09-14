@@ -80,7 +80,7 @@ void cadastrar_usuario(void){
     getchar();
     do {
     printf("/// CPF(Apenas números): ///\n");
-    scanf("%s", cpf);
+    scanf(" %[^\n]", cpf);
     getchar();
 
     if (!validar_cpf(cpf)) {
@@ -150,7 +150,7 @@ void buscar_usuario(void){
     printf("///                                                                         ///\n");
     while (continuar) {
         printf("\nDigite o CPF do usuário: ");
-        scanf("%s", cpf_busca);
+        scanf(" %[^\n]", cpf_busca);
 
         if (strcmp(cpf_busca, cpf) == 0) {
           
@@ -184,12 +184,13 @@ void buscar_usuario(void){
     }
 }
 void alterar_usuario(void){
-    char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
+    char novo_cpf[15], novo_nome[100], novo_telefone[15];
     int nova_idade;
     float novo_peso, nova_altura, novo_bf;
     char cpf_busca[15];
     int resp;
-    int encontrado = 0;
+    int continuar = 1;
+    
     
     limpar_tela();
     printf("\n");
@@ -198,63 +199,65 @@ void alterar_usuario(void){
     printf(RED"///                                                                         ///\n");
     printf("///                 = = = = = Alterar Dados do Usuário = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    do {
-        printf("\nDigite o CPF do usuário: ");
-        scanf("%s", cpf_busca);
-        printf("\nDigite 10 caso queira sair e qualquer outro número p/ continuar: ");
-        scanf("%d", &resp);
-
-        if (resp == 10) {
-            printf("\nSaindo da busca...\n");
-            break;
-        }
     
-    if (strcmp(cpf_busca, cpf) == 0) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                        Novos Dados do Usuário                           ///\n");
-        printf("///                                                                         ///\n");
-        printf("///                         Nome Completo:                                  ///\n");
-        scanf("%s[^\n]", novo_nome);
-        getchar();
-        strcpy(nome, novo_nome);
-        printf("///                         CPF:                                            ///\n");
-        scanf("%s", novo_cpf);
-        getchar();
-        strcpy(cpf, novo_cpf);
-        printf("///                         Telefone:                                       ///\n");
-        scanf("%s", novo_telefone);
-        getchar();
-        strcpy(telefone, novo_telefone);
-        printf("///                         Idade:                                          ///\n");
-        scanf("%d", &nova_idade);
-        getchar();
-        idade = nova_idade;
-        printf("///                         Peso(Kg):                                       ///\n");
-        scanf("%f", &novo_peso);
-        getchar();
-        peso = novo_peso;
-        printf("///                         Altura(m):                                      ///\n");
-        scanf("%f", &nova_altura);
-        getchar();
-        altura = nova_altura;
-        printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
-        scanf("%f", &novo_bf);
-        getchar();
-        bf = novo_bf;
-        printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+    while (continuar) {
+        printf("\nDigite o CPF do usuário: ");
+        scanf(" %[^\n]", cpf_busca);
+
+        if (strcmp(cpf_busca, cpf) == 0) {
+            
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            printf("///                        Novos Dados do Usuário                           ///\n");
+            printf("///                                                                         ///\n");
+
+            printf("///                         Nome Completo:                                  ///\n");
+            scanf(" %[^\n]", novo_nome);   
+            strcpy(nome, novo_nome);
+
+            printf("///                         CPF:                                            ///\n");
+            scanf(" %[^\n]", novo_cpf);
+            strcpy(cpf, novo_cpf);
+
+            printf("///                         Telefone:                                       ///\n");
+            scanf("%s", novo_telefone);
+            strcpy(telefone, novo_telefone);
+
+            printf("///                         Idade:                                          ///\n");
+            scanf("%d", &nova_idade);
+            idade = nova_idade;
+
+            printf("///                         Peso(Kg):                                       ///\n");
+            scanf("%f", &novo_peso);
+            peso = novo_peso;
+
+            printf("///                         Altura(m):                                      ///\n");
+            scanf("%f", &nova_altura);
+            altura = nova_altura;
+
+            printf("///                         Percentual de gordura(%%):                       ///\n");
+            scanf("%f", &novo_bf);
+            bf = novo_bf;
+
+            printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(CYAN"   🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗    \n"RESET);
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            pausar();
+
+            continuar = 0; 
+        } else {
         
-
-        printf(CYAN"   🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗    \n"RESET);
-        printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-        printf("\n");
-        pausar();
-        encontrado = 1;
+            printf("\nCPF não encontrado! Deseja tentar novamente?\n");
+            printf("Digite 1 para tentar novamente ou 10 para sair: ");
+            scanf("%d", &resp);
+            if (resp == 10) {
+                printf("\nSaindo da alteração...\n");
+                continuar = 0; 
+            }
+            
+        }
     }
-    } while (!encontrado); 
-   
-
 }
-
 void excluir_usuario(void){
     limpar_tela();
     char cpf[15];
@@ -265,7 +268,7 @@ void excluir_usuario(void){
     printf("///                 = = = = = Excluir Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf);
+    scanf(" %[^\n]", cpf);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Excluindo Usuário                             ///\n");
