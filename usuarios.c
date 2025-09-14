@@ -215,15 +215,15 @@ void alterar_usuario(void){
         printf("///                         Nome Completo:                                  ///\n");
         scanf("%s[^\n]", novo_nome);
         getchar();
-        nome = novo_nome;
+        strcpy(nome, novo_nome);
         printf("///                         CPF:                                            ///\n");
         scanf("%s", novo_cpf);
         getchar();
-        cpf = novo_cpf;
+        strcpy(cpf, novo_cpf);
         printf("///                         Telefone:                                       ///\n");
         scanf("%s", novo_telefone);
         getchar();
-        telefone = novo_telefone;
+        strcpy(telefone, novo_telefone);
         printf("///                         Idade:                                          ///\n");
         scanf("%d", &nova_idade);
         getchar();
