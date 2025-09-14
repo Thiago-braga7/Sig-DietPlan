@@ -56,3 +56,23 @@ void cadastrar_agendamento(void){
     printf("///                 Agendamento cadastrado com sucesso!                     ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
+void buscar_agendamento(void){
+    char cpf[15], data[15];
+    limpar_tela();
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     = = = = = Buscar Agendamento = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         CPF do Paciente:                                ///\n");
+    scanf("%s", cpf);
+    printf("///                         Data (DD/MM/AAAA):                              ///\n");
+    scanf("%s", data);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     Informações do Agendamento                          ///\n");
+    printf("///                         CPF:                                            ///\n");
+    printf("///                         Data:                                           ///\n");
+    printf("///                         Hora:                                           ///\n");
+    printf("///                         Tipo:                                           ///\n");
+    printf("///                         Profissional:                                   ///\n");
+    printf("///                         Observações:                                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+}
