@@ -136,9 +136,9 @@ void buscar_dieta(void){
             printf(CYAN"///                          Informações do Dieta                            ///\n"RESET);
             printf(RED"/////////////////////////////////////////////////////////////////////////////////\n");
 
-            printf("/// %-15s | %-45s ///\n", "Nome da Dieta", nome_dieta);
-            printf("/// %-15s | %-45.2d ///\n", "Calorias por dia", calorias);
-            printf("/// %-200s | %-45s ///\n", "Refeições", refeicoes);
+            printf("/// %-15s : %-45s ///\n", "Nome da Dieta", nome_dieta);
+            printf("/// %-15s : %-45.2d ///\n", "Calorias por dia", calorias);
+            printf("/// %-200s : %-45s ///\n", "Refeições", refeicoes);
             
             printf("/////////////////////////////////////////////////////////////////////////////////\n");
 
@@ -160,40 +160,68 @@ void buscar_dieta(void){
 
 
 void alterar_dieta(void){
-    char nome_dieta[50];
-    char novo_cpf[15]; 
-    char novo_nome_dieta[50];              
-    char novas_refeicoes[200];                    
-    int novas_calorias;   
+    char dieta_busca[15];
+    int resp, novas_calorias;
+    int continuar = 1;
+    char novo_cpf[15];          
+    char novo_nome_dieta[50];   
+    char novas_refeicoes[200];  
+
+
+
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Dietas                                   ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                             🅳 🅸 🅴 🆃 🅰 🆂                                ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Dieta  = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                        Informe o nome da Dieta:                         ///\n");
-    scanf("%s", nome_dieta);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novos Dados da Dieta                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         CPF do Usuário:                                 ///\n");
-    scanf("%s", novo_cpf);
-    getchar();
-    printf("///                         Nome da Dieta:                                  ///\n");
-    scanf("%s", novo_nome_dieta);
-    getchar();
-    printf("///                         Total de Calorias por dia:                      ///\n");
-    scanf("%d", &novas_calorias);
-    getchar();
-    printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%[^\n]", novas_refeicoes);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Dieta Alterada com sucesso!                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///                                                                         ///\n"RESET);
+    while (continuar) {
+        printf(RED"\nDigite o nome da dieta: "RESET);
+        scanf(" %[^\n]", dieta_busca);
+
+        if (strcmp(dieta_busca, nome_dieta) == 0) {
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(CYAN"///                        Novos Dados da Dieta                             ///\n"RESET);
+            printf(RED"///                                                                         ///\n");
+            printf("///                         CPF do Usuário:                                 ///\n");
+            scanf(" %14s", novo_cpf);
+            getchar();
+            printf("///                         Nome da Dieta:                                  ///\n");
+            scanf(" %49[^\n]", novo_nome_dieta);
+            getchar();
+            printf("///                         Total de Calorias por dia:                      ///\n");
+            scanf("%d", &novas_calorias);
+            getchar();
+            printf("///                         Refeições (breve descrição):                    ///\n"RESET);
+            scanf(" %199[^\n]", novas_refeicoes );
+            getchar();
+
+            
+            strcpy(cpf, novo_cpf);
+            strcpy(nome_dieta, novo_nome_dieta);
+            calorias = novas_calorias;
+            strcpy(refeicoes, novas_refeicoes);
+
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(CYAN"      🅳 🅸 🅴 🆃 🅰  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅰  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗      \n"RESET);
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            pausar();
+            continuar = 0;
+        }  else {
+            
+                printf(RED"\nDieta não encontrada! Deseja tentar novamente?\n");
+                printf("Digite 1 para tentar novamente ou 10 para sair: "RESET);
+                scanf("%d", &resp);
+                if (resp == 10) {
+                    printf(RED"\nSaindo da busca...\n"RESET);
+                    continuar = 0; 
+                }
+            }
+    }
 }
+        
+    
 
 void excluir_dieta(void){
     char nome_dieta[50];
