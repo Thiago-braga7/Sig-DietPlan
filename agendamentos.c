@@ -7,6 +7,19 @@
 #define RED     "\033[31m"
 
 
+void modulo_agendamentos(void) {
+    char opcao;
+    do {
+        limpar_tela();
+        opcao = agendamentos();
+        switch(opcao) {
+            case '1': cadastrar_agendamento(); break;
+            case '2': buscar_agendamento(); break;
+            case '3': alterar_agendamento(); break;
+            case '4': excluir_agendamento(); break;
+        }
+    } while (opcao != '0');  
+}
 
 char agendamentos(void){
     char opcao;
