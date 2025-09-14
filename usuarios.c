@@ -188,6 +188,7 @@ void alterar_usuario(void){
     int nova_idade;
     float novo_peso, nova_altura, novo_bf;
     char cpf_busca[15];
+    int resp;
     
     limpar_tela();
     printf("\n");
