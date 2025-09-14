@@ -321,8 +321,7 @@ void calcular_bf(void) {
 
         switch(opcao) {
             case '1':
-                printf("Informe seu sexo (M/F): ");
-                scanf(" %c", &sexo);
+                sexo =  ler_sexo();
 
                 printf("Informe seu percentual de gordura corporal (BF %%): ");
                 scanf("%f", &bf);

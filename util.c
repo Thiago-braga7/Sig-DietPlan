@@ -8,6 +8,44 @@
 #define CYAN "\x1B[36m"
 
 
+
+
+
+char ler_sexo(void) {
+    char sexo;
+    do {
+        
+        printf(RED"Informe seu sexo (M = Masculino, F = Feminino): "RESET);
+        scanf(" %c", &sexo);
+        sexo = toupper(sexo);
+   
+
+
+        if (sexo != 'M' && sexo != 'F') {
+            printf(RED"Sexo inválido!\n"RESET);
+        } 
+    } while (sexo != 'M' && sexo != 'F');
+    return sexo;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 char ler_genero(void) {
     char genero;
     do {
@@ -119,24 +157,20 @@ if (resultado < 18.5) {
 
 void faixa_peso_ideal(float altura) {
     if (altura <= 0) {
-        printf("Altura inválida!\n");
+        printf(RED"Altura inválida!\n"RESET);
         return;
     }
 
     float peso_min = 18.5 * altura * altura;
     float peso_max = 24.9 * altura * altura;
 
-    printf("Peso ideal para sua altura: entre %.1fkg e %.1fkg\n", peso_min, peso_max);
+    printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, peso_min, peso_max);
 }
 void classificar_bf(char sexo, float bf) {
-    sexo = toupper(sexo);
 
-    if (sexo != 'M' && sexo != 'F') {
-        printf("Sexo inválido!\n");
-        return;
-    }
+    
 
-    printf("\nSeu percentual de gordura é: %.1f%%\n", bf);
+    printf(RED"\nSeu percentual de gordura é: %.1f%%\n"RESET, bf);
 
     if (sexo == 'M') {
         if (bf < 6) {
@@ -167,6 +201,7 @@ void classificar_bf(char sexo, float bf) {
             printf("Classificação: Obesa\n");
         }
     }
+
 }
 
 void logo(void){

@@ -19,3 +19,4 @@ int validar_idade(int idade);
 int validar_peso(float peso);
 int validar_altura(float altura);
 int validar_bf(float bf);
+char ler_sexo(void);
