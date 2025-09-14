@@ -88,16 +88,13 @@ char dietas(void){
 }
 
 void cadastrar_dieta(void){
-    char cpf[15]; 
-    char nome_dieta[50];              
-    char refeicoes[200];                    
-    int calorias;   
+    
     limpar_tela();
     
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Dietas                                   ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                                Dietas                                   ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Usuário:                                 ///\n");
@@ -112,9 +109,10 @@ void cadastrar_dieta(void){
     printf("///                         Refeições (breve descrição):                    ///\n");
     scanf("%[^\n]", refeicoes);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Dieta cadastrada com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"  🅳 🅸 🅴 🆃 🅰  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅰  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗  \n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 }
 void buscar_dieta(void){
     char nome_dieta[50];
