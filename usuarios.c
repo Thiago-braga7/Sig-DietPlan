@@ -96,9 +96,14 @@ void cadastrar_usuario(void){
     }
 }   while (!validar_idade(idade));
 
-    printf("///                         Peso(Kg):                                       ///\n");
-    scanf("%f", &peso);
-    getchar();
+    do {
+        printf("/// Peso(Kg): ///\n");
+        scanf("%f", &peso);
+        getchar();
+    if (!validar_peso(peso)) {
+        printf("Peso invalido! Tente novamente.\n");
+    }
+} while (!validar_peso(peso));
     printf("///                         Altura(m):                                      ///\n");
     scanf("%f", &altura);
     getchar();

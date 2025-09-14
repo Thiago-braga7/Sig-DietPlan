@@ -320,3 +320,7 @@ int validar_telefone(const char *telefone) {
 int validar_idade(int idade) {
     return (idade >= 0 && idade <= 120);
 }
+
+int validar_peso(float peso) {
+    return (peso >= 0 && peso <= 700);
+}

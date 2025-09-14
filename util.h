@@ -16,3 +16,4 @@ int validar_cpf(const char *cpf);
 void classificação_imc(float);
 int validar_telefone(const char *telefone);
 int validar_idade(int idade);
+int validar_peso(float peso);
