@@ -76,3 +76,31 @@ void buscar_agendamento(void){
     printf("///                         Observações:                                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
+void alterar_agendamento(void){
+    char data[15];
+    char novo_cpf[15], nova_data[15], nova_hora[10];
+    char novo_tipo[50], novo_profissional[100], novas_observacoes[200];
+
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     = = = = = Alterar Agendamento = = = = =             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a Data (DD/MM/AAAA):                    ///\n");
+    scanf("%s", data); getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novos Dados do Agendamento                       ///\n");
+    printf("///                         CPF do Paciente:                                ///\n");
+    scanf("%s", novo_cpf); getchar();
+    printf("///                         Data (DD/MM/AAAA):                              ///\n");
+    scanf("%s", nova_data); getchar();
+    printf("///                         Hora (HH:MM):                                   ///\n");
+    scanf("%s", nova_hora); getchar();
+    printf("///                         Tipo:                                           ///\n");
+    scanf("%s", novo_tipo); getchar();
+    printf("///                         Profissional:                                   ///\n");
+    scanf("%s", novo_profissional); getchar();
+    printf("///                         Observações:                                    ///\n");
+    scanf("%s", novas_observacoes); getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                 Agendamento alterado com sucesso!                       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+}
