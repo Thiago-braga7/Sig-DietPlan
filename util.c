@@ -172,9 +172,7 @@ void classificar_bf(char sexo, float bf) {
 
     printf(RED"\nSeu percentual de gordura é: %.1f%%\n"RESET, bf);
 
-     printf(RED"-------------------------------------------------------------\n"RESET);
 
-    void classificacao_bf(char sexo, float bf) {
     printf(RED"-------------------------------------------------------------\n"RESET);
 
     if (sexo == 'M') {
@@ -270,7 +268,7 @@ void classificar_bf(char sexo, float bf) {
 
     printf(RED"-------------------------------------------------------------\n"RESET);
 }
-}
+
 
 
 
