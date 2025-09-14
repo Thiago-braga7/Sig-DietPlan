@@ -224,31 +224,114 @@ void alterar_dieta(void){
     
 
 void excluir_dieta(void){
-    char nome_dieta[50];
+    char dieta_busca[15];
+    int resp;
+    int continuar = 1;
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Dietas                                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Excluir Dieta = = = = =                       ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o nome da Dieta:                        ///\n");
-    scanf("%s", nome_dieta);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Dieta                               ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                           Dados da Dieta                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome da Dieta:                                  ///\n");
-    printf("///                         Total de Calorias por dia:                      ///\n");
-    printf("///                         Refeições:                                      ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                             🅳 🅸 🅴 🆃 🅰 🆂                                ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
+    printf("///                  = = = = =  Excluir Dieta  = = = = =                    ///\n");
+    printf("///                                                                         ///\n"RESET);
+    while (continuar) {
+        printf(RED"\nDigite o nome da dieta: "RESET);
+        scanf(" %[^\n]", dieta_busca);
+
+        if (strcmp(dieta_busca, nome_dieta) == 0) {
+
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(CYAN"                   🅴 🆇 🅲 🅻 🆄 🅸 🅽 🅳 🅾  🅳 🅸 🅴 🆃 🅰                      \n"RESET);
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            pausar();
+            continuar = 0;
+        }  else {
+            
+                printf(RED"\nDieta não encontrada! Deseja tentar novamente?\n");
+                printf("Digite 1 para tentar novamente ou 10 para sair: "RESET);
+                scanf("%d", &resp);
+                if (resp == 10) {
+                    printf(RED"\nSaindo da busca...\n"RESET);
+                    continuar = 0; 
+                }
+            }
+    }
+    pausar();
     char resposta = confirmar_acao();
     if (resposta == 'S') {
         printf(RED"///                    Dieta excluída com sucesso!                        ///\n");
+        cpf[0] = '\0';
+        nome_dieta[0] = '\0';
+        calorias = 0;
+        refeicoes[0] = '\0';
     } else {
         printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
     }
-    
+    pausar();
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
