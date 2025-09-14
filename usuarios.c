@@ -3,6 +3,7 @@
 #include "usuarios.h"
 #include "util.h"
 #include <ctype.h>
+#include <string.h>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -137,7 +138,7 @@ void cadastrar_usuario(void){
 }
 
 void buscar_usuario(void){
-    char cpf[15];
+    char cpf_busca[15];
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -146,20 +147,21 @@ void buscar_usuario(void){
     printf("///                 = = = = =  Buscar Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Informações do Usuário                           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome Completo:                                 ///\n");
-    printf("///                         CPF:                                            ///\n");
-    printf("///                         Telefone:                                       ///\n");
-    printf("///                         Idade:                                          ///\n");
-    printf("///                         Peso(Kg):                                       ///\n");
-    printf("///                         Altura(m):                                      ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    scanf("%s", cpf_busca);
     
+    if (strcmp(cpf_busca, cpf) == 0) {
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                        Informações do Usuário                           ///\n");
+        printf("///                                                                         ///\n");
+        printf("///                         Nome Completo:    %s                              ///\n", nome);
+        printf("///                         CPF:          %s                                  ///\n", cpf);
+        printf("///                         Telefone:                                       ///\n");
+        printf("///                         Idade:                                          ///\n");
+        printf("///                         Peso(Kg):                                       ///\n");
+        printf("///                         Altura(m):                                      ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);}
+    pausar();
 }
-
 void alterar_usuario(void){
     char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
     int nova_idade;
