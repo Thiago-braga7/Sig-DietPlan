@@ -150,17 +150,23 @@ void buscar_usuario(void){
     scanf("%s", cpf_busca);
     
     if (strcmp(cpf_busca, cpf) == 0) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                        Informações do Usuário                           ///\n");
-        printf("///                                                                         ///\n");
-        printf("///                         Nome Completo:    %s                              ///\n", nome);
-        printf("///                         CPF:          %s                                  ///\n", cpf);
-        printf("///                         Telefone:                                       ///\n");
-        printf("///                         Idade:                                          ///\n");
-        printf("///                         Peso(Kg):                                       ///\n");
-        printf("///                         Altura(m):                                      ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);}
+    printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                          Informações do Usuário                           ///\n"RESET);
+    printf(RED"/////////////////////////////////////////////////////////////////////////////////\n");
+
+    printf("/// %-15s | %-45s ///\n", "Nome", nome);
+    printf("/// %-15s | %-45s ///\n", "CPF", cpf);
+    printf("/// %-15s | %-45s ///\n", "Telefone", telefone);
+    printf("/// %-15s | %-45d ///\n", "Idade", idade);
+    printf("/// %-15s | %-45.2f ///\n", "Peso (Kg)", peso);
+    printf("/// %-15s | %-45.2f ///\n", "Altura (m)", altura);
+    printf("/// %-15s | %-45.2f ///\n", "Body Fat %%", bf); 
+
+    printf("/////////////////////////////////////////////////////////////////////////////////\n"RESET);
+    
+
     pausar();
+}
 }
 void alterar_usuario(void){
     char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
