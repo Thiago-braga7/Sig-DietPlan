@@ -9,6 +9,13 @@
 #define CYAN    "\033[36m"
 
 
+    static char nome[100], cpf[12], telefone[10];
+    static int idade;
+    static float peso, altura, bf;   
+
+
+
+
 
 
 
@@ -58,9 +65,7 @@ void usuarios(void){
 }
 
 void cadastrar_usuario(void){
-    char nome[100], cpf[12], telefone[10];
-    int idade;
-    float peso, altura, bf;   
+    
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -145,7 +150,7 @@ void buscar_usuario(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações do Usuário                           ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome Completo:                                  ///\n");
+    printf("///                         Nome Completo:                                 ///\n");
     printf("///                         CPF:                                            ///\n");
     printf("///                         Telefone:                                       ///\n");
     printf("///                         Idade:                                          ///\n");
