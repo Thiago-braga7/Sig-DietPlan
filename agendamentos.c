@@ -104,3 +104,28 @@ void alterar_agendamento(void){
     printf("///                 Agendamento alterado com sucesso!                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
+void excluir_agendamento(void){
+    char data[15];
+    limpar_tela();
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                     = = = = = Excluir Agendamento = = = = =             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe a Data (DD/MM/AAAA):                    ///\n");
+    scanf("%s", data); getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                           Excluindo Agendamento                         ///\n");
+    printf("///                         CPF:                                            ///\n");
+    printf("///                         Data:                                           ///\n");
+    printf("///                         Hora:                                           ///\n");
+    printf("///                         Tipo:                                           ///\n");
+    printf("///                         Profissional:                                   ///\n");
+    printf("///                         Observações:                                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
+    char resposta = confirmar_acao();
+    if (resposta == 'S') {
+        printf(RED"///                 Agendamento excluído com sucesso!                       ///\n");
+    } else {
+        printf(RED"///                 Operação de exclusão cancelada!                         ///\n");
+    }
+}
