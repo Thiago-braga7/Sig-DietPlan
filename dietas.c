@@ -7,6 +7,7 @@
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
+#define CYAN    "\033[36m"
 
 void modulo_dietas(void) {
     char opcao;
@@ -25,15 +26,30 @@ void modulo_dietas(void) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 char dietas(void){
     char opcao;
     limpar_tela();
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = = Dietas  = = = = =                          ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///                = = = = = 🅳 🅸 🅴 🆃 🅰 🆂  = = = = =                     ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                    1. Cadastrar Dieta                                   ///\n");
     printf("///                    2. Buscar Dieta                                      ///\n");
     printf("///                    3. Alterar Dieta                                     ///\n");
@@ -47,7 +63,7 @@ char dietas(void){
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    pausar();
     return opcao;
 }
 
