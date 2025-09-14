@@ -139,6 +139,8 @@ void cadastrar_usuario(void){
 
 void buscar_usuario(void){
     char cpf_busca[15];
+    int encontrado = 0;
+    int resp;
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -146,8 +148,16 @@ void buscar_usuario(void){
     printf(RED"///                                                                         ///\n");
     printf("///                 = = = = =  Buscar Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf_busca);
+    do {
+        printf("\nDigite o CPF do usuário: ");
+        scanf("%s", cpf_busca);
+        printf("\nDigite 10 caso queira sair e qualquer outro número p/ continuar: ");
+        scanf("%d", &resp);
+
+        if (resp == 1) {
+            printf("\nSaindo da busca...\n");
+            break;
+        }
     
     if (strcmp(cpf_busca, cpf) == 0) {
     printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -166,7 +176,12 @@ void buscar_usuario(void){
     
 
     pausar();
-}
+    encontrado = 1;
+}  else {
+            printf("\nCPF não encontrado! Tente novamente.\n");
+        }
+
+    } while (!encontrado); 
 }
 void alterar_usuario(void){
     char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
