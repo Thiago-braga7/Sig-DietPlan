@@ -16,8 +16,12 @@
 void modulo_usuarios(void) {
     char opcao;
     do {
-        limpar_tela();
-        opcao = usuarios();
+        usuarios();
+        printf("Escolha uma opção: ");
+        scanf(" %c", &opcao);
+        getchar();
+
+
         switch(opcao) {
             case '1': cadastrar_usuario(); break;
             case '2': buscar_usuario(); break;
@@ -28,11 +32,16 @@ void modulo_usuarios(void) {
             
         }
     } while (opcao != '0');  
+    
 }
 
 
-char usuarios(void){
-    char opcao;
+
+
+
+
+void usuarios(void){
+    system("clear||cls");
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);
@@ -45,12 +54,7 @@ char usuarios(void){
     printf("///                    5. Calcular IMC                                      ///\n");
     printf("///                    6. Calcular BF                                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada:                          ///\n"RESET);
-    scanf("%c", &opcao);
-    getchar();
-    return opcao;
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 
 void cadastrar_usuario(void){
