@@ -76,7 +76,7 @@ void cadastrar_usuario(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
-    scanf("%[^\n]", nome);
+    scanf("%s[^\n]", nome);
     getchar();
     do {
     printf("/// CPF(Apenas números): ///\n");
