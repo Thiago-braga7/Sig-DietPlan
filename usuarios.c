@@ -215,31 +215,31 @@ void alterar_usuario(void){
         printf("///                         Nome Completo:                                  ///\n");
         scanf("%s[^\n]", novo_nome);
         getchar();
-        nome = novo_nome
+        nome = novo_nome;
         printf("///                         CPF:                                            ///\n");
         scanf("%s", novo_cpf);
         getchar();
-        cpf = novo_cpf
+        cpf = novo_cpf;
         printf("///                         Telefone:                                       ///\n");
         scanf("%s", novo_telefone);
         getchar();
-        telefone = novo_telefone
+        telefone = novo_telefone;
         printf("///                         Idade:                                          ///\n");
         scanf("%d", &nova_idade);
         getchar();
-        idade = nova_idade
+        idade = nova_idade;
         printf("///                         Peso(Kg):                                       ///\n");
         scanf("%f", &novo_peso);
         getchar();
-        peso = novo_peso
+        peso = novo_peso;
         printf("///                         Altura(m):                                      ///\n");
         scanf("%f", &nova_altura);
         getchar();
-        altura = nova_altura
+        altura = nova_altura;
         printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
         scanf("%f", &novo_bf);
         getchar();
-        bf = novo_bf
+        bf = novo_bf;
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         
 
