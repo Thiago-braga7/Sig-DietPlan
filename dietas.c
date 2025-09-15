@@ -49,9 +49,9 @@ char dietas(void){
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n"RESET);
-    printf(CYAN"///                = = = = = 🅳 🅸 🅴 🆃 🅰 🆂  = = = = =                     ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                     = = = = = Dietas  = = = = =                         ///\n");
+    printf("///                                                                         ///\n");
     printf("///                    1. Cadastrar Dieta                                   ///\n");
     printf("///                    2. Buscar Dieta                                      ///\n");
     printf("///                    3. Alterar Dieta                                     ///\n");
@@ -70,7 +70,7 @@ char dietas(void){
 }
 
 void cadastrar_dieta(void){
-    static char cpf[15]; 
+    char cpf[15]; 
     char nome_dieta[50];              
     char refeicoes[200];                    
     int calorias;   
@@ -78,9 +78,9 @@ void cadastrar_dieta(void){
     limpar_tela();
     
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                             🅳 🅸 🅴 🆃 🅰 🆂                            ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Dietas                                    ///\n");
+    printf("///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Usuário:                                 ///\n");
@@ -93,11 +93,11 @@ void cadastrar_dieta(void){
     scanf("%d", &calorias);
     getchar();
     printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%[^\n]", refeicoes);
+    scanf("%s", refeicoes);
     getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("                        Dieta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"  🅳 🅸 🅴 🆃 🅰  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅰  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗  \n"RESET);
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
 }
 void buscar_dieta(void){
@@ -108,7 +108,7 @@ void buscar_dieta(void){
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             🅳 🅸 🅴 🆃 🅰 🆂                                ///\n");
+    printf("///                               Dietas                                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Buscar Dieta  = = = = =                     ///\n");
     printf("///                                                                         ///\n"RESET);
@@ -119,9 +119,9 @@ void buscar_dieta(void){
 
        
           
-        printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
-        printf(CYAN"///                          Informações do Dieta                            ///\n"RESET);
         printf(RED"/////////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                          Informações do Dieta                            ///\n");
+        printf("/////////////////////////////////////////////////////////////////////////////////\n"RESET);
 
         printf("/// %-15s : %-45s ///\n", "Nome da Dieta", "valor");
         printf("/// %-15s : %-45s ///\n", "Calorias por dia", "valor");
@@ -144,9 +144,9 @@ void alterar_dieta(void){
 
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                             🅳 🅸 🅴 🆃 🅰 🆂                                ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Dietas                                    ///\n");
+    printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Dieta  = = = = =                    ///\n");
     printf("///                                                                         ///\n"RESET);
     
@@ -165,9 +165,9 @@ void alterar_dieta(void){
             printf("///                         Total de Calorias por dia:                      ///\n");
             
             printf("///                         Refeições (breve descrição):                    ///\n"RESET);
-            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-            printf(CYAN"      🅳 🅸 🅴 🆃 🅰  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅰  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗      \n"RESET);
-            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+            printf("                            Dieta Alterada com Sucesso!                           \n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
             pausar();
 }
         
@@ -179,9 +179,9 @@ void excluir_dieta(void){
  
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                             🅳 🅸 🅴 🆃 🅰 🆂                                ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Dietas                                    ///\n");
+    printf("///                                                                         ///\n");
     printf("///                  = = = = =  Excluir Dieta  = = = = =                    ///\n");
     printf("///                                                                         ///\n"RESET);
     
@@ -190,9 +190,9 @@ void excluir_dieta(void){
         getchar();
 
         
-            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-            printf(CYAN"                   🅴 🆇 🅲 🅻 🆄 🅸 🅽 🅳 🅾  🅳 🅸 🅴 🆃 🅰                      \n"RESET);
-            printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+            printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+            printf("                            Excluindo Dieta !                                     \n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
             pausar();
             
     
