@@ -248,7 +248,7 @@ void calcular_imc(void) {
         limpar_tela();
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                Usuários                                 ///\n");
+        printf("///                                Usuários                                     ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Calcular IMC = = = = =                        ///\n");
         printf("///                                                                             ///\n");
