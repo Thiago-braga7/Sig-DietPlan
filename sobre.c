@@ -46,6 +46,7 @@ void bem_vindo(void) {
 
     
     mensagem_boas_vindas(nome, genero);
+    pausar();
     
 }
 

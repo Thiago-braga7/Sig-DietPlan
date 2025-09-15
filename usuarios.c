@@ -350,14 +350,21 @@ void calcular_imc(void) {
 
                 resultado = imc(peso, altura);
 
-                if (resultado < 0) {
+                if (resultado <= 0) {
                     printf(RED"Altura inválida!\n");
                 } else {
                     printf("\nSeu IMC é: %.2f\n"RESET, resultado);
                     classificação_imc(resultado);
-                }
 
-                faixa_peso_ideal(altura);
+                    float min = peso_ideal_min(altura);
+                    float max = peso_ideal_max(altura);
+
+                    if (min > 0 && max > 0) {
+                        printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, min, max);
+                    } else {
+                        printf(RED"Altura inválida!\n"RESET);
+                    }
+                }
 
                 pausar();
                 break;
@@ -375,7 +382,7 @@ void calcular_imc(void) {
 void calcular_bf(void) {
     char opcao;
     float bf;
-    char sexo;
+    char genero;
 
     do {
         limpar_tela();
@@ -396,13 +403,23 @@ void calcular_bf(void) {
 
         switch(opcao) {
             case '1':
-                sexo =  ler_sexo();
+                
+                do {
+                    printf(CYAN"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
+                    scanf(" %c", &genero);
+
+                    genero = ler_genero(genero); 
+
+                    if (genero == 0) {
+                        printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
+                    }
+                } while (genero == 0);
 
                 printf("Informe seu percentual de gordura corporal (BF %%): ");
                 scanf("%f", &bf);
 
                 
-                classificar_bf(sexo, bf);
+                classificar_bf(genero, bf);
 
                 pausar();
                 break;
