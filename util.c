@@ -282,7 +282,7 @@ bool palavra_valida(const char *palavra) {
     return true;
 }
 
-
+// créditos: chat gpt 5
 bool validar_nome(const char *nome) {
     char copia[100];
     strcpy(copia, nome);
@@ -298,83 +298,83 @@ bool validar_nome(const char *nome) {
 
 // créditos: chat gpt 5
 
-int validar_cpf(const char *cpf) {
-    int i, j, soma, resto, digito1, digito2;
-    char numeros[12]; 
+// int validar_cpf(const char *cpf) {
+//     int i, j, soma, resto, digito1, digito2;
+//     char numeros[12]; 
 
-    int k = 0;
-    for (i = 0; cpf[i] != '\0'; i++) {
-        if (isdigit((unsigned char)cpf[i])) {
-            if (k >= 11) { 
+//     int k = 0;
+//     for (i = 0; cpf[i] != '\0'; i++) {
+//         if (isdigit((unsigned char)cpf[i])) {
+//             if (k >= 11) { 
                 
-                return 0;
-            }
-            numeros[k++] = cpf[i];
-        }
-    }
-    numeros[k] = '\0';
+//                 return 0;
+//             }
+//             numeros[k++] = cpf[i];
+//         }
+//     }
+//     numeros[k] = '\0';
 
     
-    if (k != 11) {
-        return 0;
-    }
+//     if (k != 11) {
+//         return 0;
+//     }
 
     
-    int todos_iguais = 1;
-    for (i = 1; i < 11; i++) {
-        if (numeros[i] != numeros[0]) {
-            todos_iguais = 0;
-            break;
-        }
-    }
-    if (todos_iguais) {
-        return 0;
-    }
+//     int todos_iguais = 1;
+//     for (i = 1; i < 11; i++) {
+//         if (numeros[i] != numeros[0]) {
+//             todos_iguais = 0;
+//             break;
+//         }
+//     }
+//     if (todos_iguais) {
+//         return 0;
+//     }
 
  
-    soma = 0;
-    for (i = 0, j = 10; i < 9; i++, j--) {
-        soma += (numeros[i] - '0') * j;
-    }
-    resto = soma % 11;
-    digito1 = (resto < 2) ? 0 : 11 - resto;
+//     soma = 0;
+//     for (i = 0, j = 10; i < 9; i++, j--) {
+//         soma += (numeros[i] - '0') * j;
+//     }
+//     resto = soma % 11;
+//     digito1 = (resto < 2) ? 0 : 11 - resto;
 
     
-    soma = 0;
-    for (i = 0, j = 11; i < 10; i++, j--) {
-        soma += (numeros[i] - '0') * j;
-    }
-    resto = soma % 11;
-    digito2 = (resto < 2) ? 0 : 11 - resto;
+//     soma = 0;
+//     for (i = 0, j = 11; i < 10; i++, j--) {
+//         soma += (numeros[i] - '0') * j;
+//     }
+//     resto = soma % 11;
+//     digito2 = (resto < 2) ? 0 : 11 - resto;
 
     
-    if ((numeros[9] - '0') == digito1 && (numeros[10] - '0') == digito2) {
-        return 1; 
-    } else {
-        return 0; 
-    }
-}
+//     if ((numeros[9] - '0') == digito1 && (numeros[10] - '0') == digito2) {
+//         return 1; 
+//     } else {
+//         return 0; 
+//     }
+// }
 
 
 // créditos: Flavius Gorgônio
 
-int validar_telefone(const char *telefone) {
-    int len = strlen(telefone);
+// int validar_telefone(const char *telefone) {
+//     int len = strlen(telefone);
 
     
-    if (len != 10) {
-        return 0;
-    }
+//     if (len != 10) {
+//         return 0;
+//     }
 
     
-    for (int i = 0; i < len; i++) {
-        if (!isdigit(telefone[i])) {
-            return 0;
-        }
-    }
+//     for (int i = 0; i < len; i++) {
+//         if (!isdigit(telefone[i])) {
+//             return 0;
+//         }
+//     }
 
-    return 1; 
-}
+//     return 1; 
+// }
 
 
 
