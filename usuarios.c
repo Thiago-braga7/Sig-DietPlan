@@ -122,8 +122,7 @@ void buscar_usuario(void){
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    
-
+    pausar();
 }
 
  
@@ -169,7 +168,7 @@ void alterar_usuario(void){
     printf("///                    Usuário alterado com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
-   
+    pausar();
 
 }
 

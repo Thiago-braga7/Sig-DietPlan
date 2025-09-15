@@ -106,6 +106,7 @@ void buscar_dieta(void){
     printf("///                         Total de Calorias por dia:                      ///\n");
     printf("///                         Refeições:                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 
 }
 void alterar_dieta(void){
@@ -142,6 +143,7 @@ void alterar_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Dieta Alterada com sucesso!                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 }
 
     
