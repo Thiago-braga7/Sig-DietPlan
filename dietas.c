@@ -102,7 +102,7 @@ void cadastrar_dieta(void){
 }
 void buscar_dieta(void){
     
-    static char nome_dieta[50];              
+    char nome_dieta[50];              
 
     limpar_tela();
 
@@ -114,7 +114,8 @@ void buscar_dieta(void){
     printf("///                                                                         ///\n"RESET);
     
         printf(RED"\nDigite o nome da dieta: "RESET);
-        scanf(" %[^\n]", nome_dieta);
+        scanf("%s", nome_dieta); 
+        getchar();
 
        
           
@@ -150,7 +151,8 @@ void alterar_dieta(void){
     printf("///                                                                         ///\n"RESET);
     
         printf(RED"\nDigite o nome da dieta: "RESET);
-        scanf(" %[^\n]", nome_dieta);
+        scanf("%s", nome_dieta); 
+        getchar();
 
         
             printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -184,7 +186,8 @@ void excluir_dieta(void){
     printf("///                                                                         ///\n"RESET);
     
         printf(RED"\nDigite o nome da dieta: "RESET);
-        scanf(" %[^\n]", nome_dieta);
+        scanf("%s", nome_dieta); 
+        getchar();
 
         
             printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);

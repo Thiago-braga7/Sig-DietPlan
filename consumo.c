@@ -75,13 +75,13 @@ void cadastrar_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe o Alimento:                             ///\n");
-        scanf("%[^\n]", alimento);
+        scanf("%s", alimento); 
         getchar();
         printf("///                         Quantidade(kcal):                               ///\n");
         scanf("%f", &quantidade);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%[^\n]", data);
+        scanf("%s", data); 
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
@@ -102,7 +102,7 @@ void cadastrar_consumo(void){
         scanf("%d", &quantidade_agua);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%10s", data);
+        scanf("%s", data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
@@ -134,7 +134,7 @@ void buscar_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%[^\n]", data);
+        scanf("%s", data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
@@ -153,7 +153,7 @@ void buscar_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%10s", data);
+        scanf("%s", data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
@@ -187,7 +187,7 @@ void alterar_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%[^\n]", data);
+        scanf("%s", data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
@@ -200,13 +200,13 @@ void alterar_consumo(void){
         printf("///                     Novas Informações Consumo de Alimentos              ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe o Alimento:                             ///\n");
-        scanf("%[^\n]", alimento);
+        scanf("%s", alimento);
         getchar();
         printf("///                         Quantidade(kcal):                               ///\n");
         scanf("%f", &nova_quantidade);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n"RESET);
-        scanf("%[^\n]", nova_data);
+        scanf("%s", nova_data);
         getchar();
         printf("\n");
         }
@@ -224,7 +224,7 @@ void alterar_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%10s", data);
+        scanf("%s", data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                     Registro de Consumo(Água) no dia (DD/MM/AAAA)       ///\n");
@@ -235,7 +235,7 @@ void alterar_consumo(void){
         scanf("%d", &nova_quantidade_agua);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%10s", nova_data);
+        scanf("%s", nova_data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
@@ -266,10 +266,10 @@ void excluir_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%[^\n]", data);
+        scanf("%s", data);
         getchar();
         printf("///                         Informe o Alimento:                             ///\n");
-        scanf("%[^\n]", alimento);
+        scanf("%s", alimento);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                       Informações Consumo de Alimentos                  ///\n");
@@ -312,7 +312,7 @@ void excluir_consumo(void){
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%10s", data);
+        scanf("%s", data);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                       Informações Consumo de Água                       ///\n");
