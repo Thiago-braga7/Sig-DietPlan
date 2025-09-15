@@ -26,18 +26,19 @@ char agendamentos(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n"RESET);
-    printf(CYAN"///         = = = = =  🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾 🆂  = = = = =           ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Agendamentos  = = = = =                     ///\n");
+    printf("///                                                                         ///\n");
     printf("///                    1. Cadastrar Agendamento                             ///\n");
     printf("///                    2. Buscar Agendamento                                ///\n");
     printf("///                    3. Alterar Agendamento                               ///\n");
     printf("///                    4. Excluir Agendamento                               ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Escolha a opção desejada:                          ///\n"RESET);
+    printf("///                      Escolha a opção desejada:                          ///\n");
     scanf("%c", &opcao);
     getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     return opcao;
 }
 void cadastrar_agendamento(void){
@@ -45,9 +46,11 @@ void cadastrar_agendamento(void){
     char tipo[50], profissional[100], observacoes[200];
     limpar_tela();
 
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                   = = = = = Cadastrar Agendamento = = = = =             ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                             Agendamentos                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
     scanf("%s", cpf); 
     getchar();
@@ -67,15 +70,17 @@ void cadastrar_agendamento(void){
     scanf("%s", observacoes); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗\n");
+    printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 void buscar_agendamento(void){
     char cpf[15], data[15];
     limpar_tela();
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                     = = = = = Buscar Agendamento = = = = =              ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                             Agendamentos                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                   = = = = = Buscar Agendamento = = = = =                ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
     scanf("%s", cpf);
     printf("///                         Data (DD/MM/AAAA):                              ///\n");
@@ -94,10 +99,12 @@ void alterar_agendamento(void){
     char data[15];
     char novo_cpf[15], nova_data[15], nova_hora[10];
     char novo_tipo[50], novo_profissional[100], novas_observacoes[200];
-
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                     = = = = = Alterar Agendamento = = = = =             ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    limpar_tela();
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                             Agendamentos                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                   = = = = = Alterar Agendamento = = = = =               ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         Informe a Data (DD/MM/AAAA):                    ///\n");
     scanf("%s", data); 
     getchar();
@@ -122,15 +129,17 @@ void alterar_agendamento(void){
     scanf("%s", novas_observacoes); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗\n");
+    printf("///                  Agendamento Alterado com Sucesso !                     ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 void excluir_agendamento(void){
     char data[15];
     limpar_tela();
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"///                     = = = = = Excluir Agendamento = = = = =             ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                             Agendamentos                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                   = = = = = Excluir Agendamento = = = = =               ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         Informe a Data (DD/MM/AAAA):                    ///\n");
     scanf("%s", data); 
     getchar();
@@ -158,9 +167,9 @@ void excluir_agendamento(void){
         } while (resposta == 0); 
 
         if (resposta == 'S') {
-            printf(RED"/// Agendamento excluído com sucesso! ///\n");
+            printf(RED"///           Agendamento excluído com sucesso! ///\n");
         } else {
-            printf(RED"/// Operação de exclusão cancelada! ///\n");
+            printf(RED"///           Operação de exclusão cancelada! ///\n");
     }
     pausar();
 
