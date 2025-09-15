@@ -110,6 +110,7 @@ void alterar_agendamento(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novos Dados do Agendamento                       ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
     scanf("%s", novo_cpf); 
     getchar();
@@ -144,7 +145,8 @@ void excluir_agendamento(void){
     scanf("%s", data); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///         🅴 🆇 🅲 🅻 🆄 🅸 🅽 🅳 🅾  🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾           ///\n");
+    printf("///                         Excluindo Agendamento                           ///\n");
+    printf("///                                                                         ///\n");
     printf("///                         CPF:                                            ///\n");
     printf("///                         Data:                                           ///\n");
     printf("///                         Hora:                                           ///\n");
@@ -167,9 +169,9 @@ void excluir_agendamento(void){
         } while (resposta == 0); 
 
         if (resposta == 'S') {
-            printf(RED"///           Agendamento excluído com sucesso! ///\n");
+            printf(RED"///           Agendamento excluído com sucesso!                 ///\n");
         } else {
-            printf(RED"///           Operação de exclusão cancelada! ///\n");
+            printf(RED"///           Operação de exclusão cancelada!                   ///\n");
     }
     pausar();
 
