@@ -1,5 +1,5 @@
 char ler_genero(void);
-char confirmar_acao(void);
+char confirmar_acao(char valor);
 void limpar_tela(void);
 void pausar(void);
 float imc(float , float );

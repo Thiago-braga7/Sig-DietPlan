@@ -277,14 +277,28 @@ void excluir_consumo(void){
         printf("///                         Quantidade(kcal):                               ///\n");
         printf("///                         Data(DD/MM/AAAA):                               ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
-        char resposta = confirmar_acao();
-        
+        char resposta;
+
+        do {
+            printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+            scanf(" %c", &resposta);
+
+            resposta = confirmar_acao(resposta); 
+
+            if (resposta == 0) {  
+                printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+            }
+        } while (resposta == 0); 
+
         if (resposta == 'S') {
-            printf(RED"///                    Consumo de Alimentos excluído com sucesso!    ///\n");
+            printf(RED"/// Consumo de Alimentos excluído com sucesso! ///\n");
         } else {
-            printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
+            printf(RED"/// Operação de exclusão cancelada! ///\n");
+    }
+    pausar();
+
         }
-        }
+        
     else if(tipo == 2){
         char data[15];
         limpar_tela();
@@ -305,17 +319,27 @@ void excluir_consumo(void){
         printf("///                         Quantidade Água(ml):                            ///\n");
         printf("///                         Data(DD/MM/AAAA):                               ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
-        char resposta = confirmar_acao();
-        
+        char resposta;
+
+        do {
+            printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+            scanf(" %c", &resposta);
+
+            resposta = confirmar_acao(resposta); 
+
+            if (resposta == 0) {  
+                printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+            }
+        } while (resposta == 0); 
+
         if (resposta == 'S') {
-            printf("///            Registro de Consumo de Água excluído com sucesso  ///\n");
+            printf(RED"/// Consumo de Água excluído com sucesso! ///\n");
         } else {
-            printf("///                    Operação de exclusão cancelada!                    ///\n");
-        }
-        }
-    else {
-        printf("Opção inválida!\n");
+            printf(RED"/// Operação de exclusão cancelada! ///\n");
     }
+    pausar();
+
+}
 }
 
 void quantidade_agua(void){
