@@ -3,7 +3,7 @@
 #include "usuarios.h"
 #include "util.h"
 #include <ctype.h>
-#include <string.h>
+
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -95,8 +95,8 @@ void cadastrar_usuario(void){
     scanf("%f", &bf); 
     getchar();
 
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    printf(CYAN"                    Usuário Cadastrado com Sucesso!                         \n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("                    Usuário Cadastrado com Sucesso!                         \n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
         
 }
