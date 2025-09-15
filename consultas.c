@@ -113,7 +113,7 @@ void alterar_consulta(void){
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a Data(DD/MM/AAAA)::                    ///\n");
+    printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
     scanf("%s", data);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
