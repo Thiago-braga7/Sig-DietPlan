@@ -10,9 +10,9 @@
 #define CYAN    "\033[36m"
 
 
-    static char nome[100], cpf[12], telefone[10];
-    static int idade;
-    static float peso, altura, bf;   
+static char nome[100], cpf[12], telefone[10];
+static int idade;
+static float peso, altura, bf;   
 
 
 
