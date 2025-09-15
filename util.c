@@ -11,22 +11,7 @@
 
 
 
-char ler_sexo(void) {
-    char sexo;
-    do {
-        
-        printf(RED"Informe seu sexo (M = Masculino, F = Feminino): "RESET);
-        scanf(" %c", &sexo);
-        sexo = toupper(sexo);
-   
 
-
-        if (sexo != 'M' && sexo != 'F') {
-            printf(RED"Sexo inválido!\n"RESET);
-        } 
-    } while (sexo != 'M' && sexo != 'F');
-    return sexo;
-}
 
 
 char ler_genero(char genero) {
@@ -60,7 +45,7 @@ void pausar(void) {
 
 float imc(float peso, float altura) {
     if (altura <= 0) {
-        return -1.0f; 
+        return 0; 
     }
     return peso / (altura * altura);
 }
@@ -74,6 +59,28 @@ float calcular_quantidade_agua(float peso, char genero){
         return peso * 0.0375;  
     }
 
+}
+
+float validar_peso(float peso) {
+    if (peso > 0) {      
+        return peso;
+    }
+    return 0;             
+}
+
+
+float peso_ideal_min(float altura) {
+    if (altura <= 0) {
+        return 0;  
+    }
+    return 18.5f * altura * altura;
+}
+
+float peso_ideal_max(float altura) {
+    if (altura <= 0) {
+        return 0;  
+    }
+    return 24.9f * altura * altura;
 }
 
 
@@ -126,18 +133,7 @@ if (resultado < 18.5) {
 }
 }
 
-void faixa_peso_ideal(float altura) {
-    if (altura <= 0) {
-        printf(RED"Altura inválida!\n"RESET);
-        return;
-    }
-
-    float peso_min = 18.5 * altura * altura;
-    float peso_max = 24.9 * altura * altura;
-
-    printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, peso_min, peso_max);
-}
-void classificar_bf(char sexo, float bf) {
+void classificar_bf(char genero, float bf) {
 
     
 
@@ -146,7 +142,7 @@ void classificar_bf(char sexo, float bf) {
 
     printf(RED"-------------------------------------------------------------\n"RESET);
 
-    if (sexo == 'M') {
+    if (genero == 'M') {
         if (bf < 6) {
             printf(CYAN"| >>   < 6        |   Muito abaixo do ideal   << |\n"RESET);
             printf(RED "|    6-13         |   Atleta                     |\n");
@@ -191,7 +187,7 @@ void classificar_bf(char sexo, float bf) {
             printf(CYAN"| >> >=30         |   Obeso                   << |\n"RESET);
         }
     } 
-    else if (sexo == 'F') {
+    else if (genero == 'F') {
         if (bf < 14) {
             printf(CYAN"| >>   < 14       |   Muito abaixo do ideal   << |\n"RESET);
             printf(RED "|    14-20        |   Atleta                     |\n");
@@ -262,13 +258,6 @@ void mensagem_boas_vindas(const char *nome, char genero){
     } else {
         printf(RED"\n🅱 🅴 🅼 - 🆅 🅸 🅽 🅳 🅾 ( 🅰 )  😁, %s!\n"RESET, nome);
     }
-    pausar();
-}
-float validar_peso(float peso) {
-    if (peso > 0) {      
-        return peso;
-    }
-    return 0;             
 }
 
 

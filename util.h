@@ -5,7 +5,9 @@ void pausar(void);
 float imc(float , float );
 float validar_peso(float );
 float calcular_quantidade_agua(float , char );
-void faixa_peso_ideal(float );
+float peso_ideal_min(float );  
+float peso_ideal_max(float );
+
 void classificar_bf(char , float );
 void logo(void);
 void mensagem_boas_vindas(const char *, char );
@@ -16,7 +18,5 @@ int validar_cpf(const char *cpf);
 void classificação_imc(float);
 int validar_telefone(const char *telefone);
 int validar_idade(int idade);
-
 int validar_altura(float altura);
 int validar_bf(float bf);
-char ler_sexo(void);
