@@ -29,22 +29,15 @@ char ler_sexo(void) {
 }
 
 
-char ler_genero(void) {
-    char genero;
-    do {
-        
-        printf(CYAN"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
-        scanf(" %c", &genero);
-        genero = toupper(genero);
+char ler_genero(char genero) {
+    genero = toupper(genero);  
 
-        if (genero != 'M' && genero != 'F' && genero != 'N') {
-            printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
-        }
-    } while (genero != 'M' && genero != 'F' && genero != 'N');
+    if (genero == 'M' || genero == 'F' || genero == 'N') {
+        return genero; 
+    }
 
-    return genero;
+    return 0; 
 }
-
 
 char confirmar_acao(char valor) {
     valor = toupper(valor);  
@@ -271,18 +264,13 @@ void mensagem_boas_vindas(const char *nome, char genero){
     }
     pausar();
 }
-float ler_peso(void) {
-    float peso;
-    do {
-        printf("Informe seu peso (Kg): ");
-        scanf("%f", &peso);
-        getchar();
-        if (peso <= 0) {
-            printf("Peso inválido! Digite um valor maior que 0.\n");
-        }
-    } while (peso <= 0);
-    return peso;
+float validar_peso(float peso) {
+    if (peso > 0) {      
+        return peso;
+    }
+    return 0;             
 }
+
 
 // chat gpt 5
 bool palavra_valida(const char *palavra) {
@@ -407,9 +395,6 @@ int validar_idade(int idade) {
     return (idade >= 0 && idade <= 120);
 }
 
-int validar_peso(float peso) {
-    return (peso >= 0 && peso <= 700);
-}
 int validar_altura(float altura) {
     return (altura >= 0.5 && altura <= 2.50);
 }

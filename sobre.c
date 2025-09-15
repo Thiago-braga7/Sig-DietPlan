@@ -32,7 +32,17 @@ void bem_vindo(void) {
         }
     } while(!valido);
 
-    genero = ler_genero();
+    
+    do {
+        printf(CYAN"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
+        scanf(" %c", &genero);
+
+        genero = ler_genero(genero); 
+
+        if (genero == 0) {
+            printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
+        }
+    } while (genero == 0);
 
     
     mensagem_boas_vindas(nome, genero);

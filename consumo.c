@@ -6,6 +6,7 @@
 
 #define RED    "\x1b[31m"
 #define RESET  "\x1b[0m"
+#define CYAN    "\033[36m"
 
 
 void modulo_consumo(void) {
@@ -356,9 +357,28 @@ void quantidade_agua(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
     
-    genero = ler_genero();
+    do {
+        printf(CYAN"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
+        scanf(" %c", &genero);
 
-    peso = ler_peso();
+        genero = ler_genero(genero); 
+
+        if (genero == 0) {
+            printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
+        }
+    } while (genero == 0);
+
+    do {
+        printf("Informe seu peso (Kg): ");
+        scanf("%f", &peso);
+        getchar();
+
+        peso = validar_peso(peso);  
+
+        if (peso <= 0) {
+            printf("Peso inválido! Digite um valor maior que 0.\n");
+        }
+    } while (peso <= 0);
 
     
     agua = calcular_quantidade_agua(peso, genero);

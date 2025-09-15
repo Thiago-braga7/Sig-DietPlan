@@ -46,21 +46,6 @@ void modulo_dietas(void) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 char dietas(void){
     char opcao;
     limpar_tela();

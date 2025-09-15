@@ -1,14 +1,14 @@
-char ler_genero(void);
+char ler_genero(char );
 char confirmar_acao(char valor);
 void limpar_tela(void);
 void pausar(void);
 float imc(float , float );
+float validar_peso(float );
 float calcular_quantidade_agua(float , char );
 void faixa_peso_ideal(float );
 void classificar_bf(char , float );
 void logo(void);
 void mensagem_boas_vindas(const char *, char );
-float ler_peso(void);
 #include <stdbool.h>
 bool palavra_valida(const char *palavra);
 bool validar_nome(const char *nome);
@@ -16,7 +16,7 @@ int validar_cpf(const char *cpf);
 void classificação_imc(float);
 int validar_telefone(const char *telefone);
 int validar_idade(int idade);
-int validar_peso(float peso);
+
 int validar_altura(float altura);
 int validar_bf(float bf);
 char ler_sexo(void);
