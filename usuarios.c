@@ -271,7 +271,7 @@ void calcular_imc(void) {
                     if (min > 0 && max > 0) {
                         printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, min, max);
                     } else {
-                        printf(RED"Altura inválida!\n"RESET);
+                        printf(RED"Resultado inválida!\n"RESET);
                     }
                 }
 
