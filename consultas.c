@@ -5,7 +5,7 @@
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
-
+#define CYAN    "\033[36m"
 
 
 
@@ -28,9 +28,9 @@ char consultas(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///             = = = = =  🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰 🆂   = = = = =              ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                    1. Cadastrar Consulta                                ///\n");
     printf("///                    2. Buscar Consulta                                   ///\n");
     printf("///                    3. Alterar Consulta                                  ///\n");
@@ -53,9 +53,9 @@ void cadastrar_consulta(void){
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///             = = = = =  🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰 🆂  = = = = =               ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                 = = = = =  Cadastrar Consulta = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -71,20 +71,20 @@ void cadastrar_consulta(void){
     printf("///                         Nome do Médico:                                  ///\n");
     scanf("%s", medico);
     getchar();
-    printf("///                         Observações:                                    ///\n");
+    printf("///                         Observações:                                    ///\n"RESET);
     scanf("%s", observacoes);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Consulta cadastrada com sucesso!                     ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅰  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 void buscar_consulta(void){
     char nome[100], data[15];
     limpar_tela();
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///            = = = = = 🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰 🆂   = = = = =                ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                   = = = = = Buscar Consulta = = = = =                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                     Informe o nome do Usuário:                          ///\n");
@@ -107,9 +107,9 @@ void alterar_consulta(void){
     char novo_nome[100], nova_data[15], nova_hora[10];
     char novo_medico[100], novas_observacoes[200];
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Consultas   = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///              = = = = =   🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰 🆂   = = = = =            ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                   = = = = = Alterar Consulta = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a Data(DD/MM/AAAA)::                    ///\n");
@@ -130,30 +130,30 @@ void alterar_consulta(void){
     printf("///                         Nome do Médico:                                 ///\n");
     scanf("%s", novo_medico);
     getchar();
-    printf("///                         Observações:                                    ///\n");
+    printf("///                         Observações:                                    ///\n"RESET);
     scanf("%s", novas_observacoes);
     getchar();
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Consulta alterada com sucesso!                        ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"   🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅰  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗  \n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
 }
 void excluir_consulta(void){
     limpar_tela();
     char data[15];
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Consultas                                 ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                       🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰 🆂                           ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                 = = = = = Excluir Consulta = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
     scanf("%s", data);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Consulta                            ///\n");
-    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///            🅴 🆇 🅲 🅻 🆄 🅸 🅽 🅳 🅾  🅲 🅾 🅽 🆂 🆄 🅻 🆃 🅰             ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                            Dados da Consulta                            ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome do Usuário:                                ///\n");
@@ -161,7 +161,7 @@ void excluir_consulta(void){
     printf("///                         Hora da Consulta (HH:MM):                       ///\n");
     printf("///                         Nome do Médico:                                 ///\n");
     printf("///                         Observações:                                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     char resposta;
 
     do {

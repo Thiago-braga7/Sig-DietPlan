@@ -5,6 +5,7 @@
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
+#define CYAN    "\033[36m"
 
 
 void modulo_agendamentos(void) {
@@ -25,9 +26,9 @@ char agendamentos(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = =   Agendamentos   = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n"RESET);
+    printf(CYAN"///         = = = = =  🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾 🆂  = = = = =           ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                    1. Cadastrar Agendamento                             ///\n");
     printf("///                    2. Buscar Agendamento                                ///\n");
     printf("///                    3. Alterar Agendamento                               ///\n");
@@ -44,9 +45,9 @@ void cadastrar_agendamento(void){
     char tipo[50], profissional[100], observacoes[200];
     limpar_tela();
 
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                   = = = = = Cadastrar Agendamento = = = = =             ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
     scanf("%s", cpf); 
     getchar();
@@ -66,15 +67,15 @@ void cadastrar_agendamento(void){
     scanf("%s", observacoes); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                 Agendamento cadastrado com sucesso!                     ///\n");
+    printf("🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 void buscar_agendamento(void){
     char cpf[15], data[15];
     limpar_tela();
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                     = = = = = Buscar Agendamento = = = = =              ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                     = = = = = Buscar Agendamento = = = = =              ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
     scanf("%s", cpf);
     printf("///                         Data (DD/MM/AAAA):                              ///\n");
@@ -94,9 +95,9 @@ void alterar_agendamento(void){
     char novo_cpf[15], nova_data[15], nova_hora[10];
     char novo_tipo[50], novo_profissional[100], novas_observacoes[200];
 
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                     = = = = = Alterar Agendamento = = = = =             ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                     = = = = = Alterar Agendamento = = = = =             ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                         Informe a Data (DD/MM/AAAA):                    ///\n");
     scanf("%s", data); 
     getchar();
@@ -121,27 +122,27 @@ void alterar_agendamento(void){
     scanf("%s", novas_observacoes); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                 Agendamento alterado com sucesso!                       ///\n");
+    printf("🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾  🅰 🅻 🆃 🅴 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 void excluir_agendamento(void){
     char data[15];
     limpar_tela();
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                     = = = = = Excluir Agendamento = = = = =             ///\n");
-    printf("///                                                                         ///\n");
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(CYAN"///                     = = = = = Excluir Agendamento = = = = =             ///\n"RESET);
+    printf(RED"///                                                                         ///\n");
     printf("///                         Informe a Data (DD/MM/AAAA):                    ///\n");
     scanf("%s", data); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Agendamento                         ///\n");
+    printf("///         🅴 🆇 🅲 🅻 🆄 🅸 🅽 🅳 🅾  🅰 🅶 🅴 🅽 🅳 🅰 🅼 🅴 🅽 🆃 🅾           ///\n");
     printf("///                         CPF:                                            ///\n");
     printf("///                         Data:                                           ///\n");
     printf("///                         Hora:                                           ///\n");
     printf("///                         Tipo:                                           ///\n");
     printf("///                         Profissional:                                   ///\n");
     printf("///                         Observações:                                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
     char resposta;
 
