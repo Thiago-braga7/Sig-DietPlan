@@ -44,10 +44,12 @@ void pausar(void) {
 }
 
 float imc(float peso, float altura) {
-    if (altura <= 0) {
+    if (peso <= 0 || altura <= 0) {
         return 0; 
     }
-    return peso / (altura * altura);
+    else{
+        return peso / (altura * altura);
+    }
 }
 
 float calcular_quantidade_agua(float peso, char genero){
