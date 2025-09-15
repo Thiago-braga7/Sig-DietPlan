@@ -47,7 +47,7 @@ void modulo_usuarios(void) {
 
 
 void usuarios(void){
-    system("clear||cls");
+    limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);

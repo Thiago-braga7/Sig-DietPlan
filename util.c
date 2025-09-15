@@ -356,7 +356,7 @@ int validar_cpf(const char *cpf) {
 }
 
 
-// créditos: chat gpt 5
+// créditos: Flavius Gorgônio
 
 int validar_telefone(const char *telefone) {
     int len = strlen(telefone);
