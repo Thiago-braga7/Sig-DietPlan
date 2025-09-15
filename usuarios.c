@@ -282,12 +282,30 @@ void excluir_usuario(void){
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    char resposta = confirmar_acao();
+    char resposta;
+
+    do {
+        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+        scanf(" %c", &resposta);
+
+        resposta = confirmar_acao(resposta); 
+
+        if (resposta == 0) {  
+            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+        }
+    } while (resposta == 0); 
     if (resposta == 'S') {
-        printf(CYAN"  🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅴 🆇 🅲 🅻 🆄 🅸 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗   \n"RESET);
+        printf(RED"/// Usuário excluído com sucesso! ///\n");
     } else {
-        printf(CYAN"  🅴 🆇 🅲 🅻 🆄 🆂 🅰 🅾  🅲 🅰 🅽 🅲 🅴 🅻 🅰 🅳 🅰  🅴 🆇 🅲 🅻 🆄 🆂 🅰 🅾  🅲 🅰 🅽 🅲 🅴 🅻 🅰 🅳 🅰   \n"RESET);
-    }
+        printf(RED"/// Operação de exclusão cancelada! ///\n");
+} 
+    pausar();
+
+    // if (resposta == 'S') {
+    //     printf(CYAN"  🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅴 🆇 🅲 🅻 🆄 🅸 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾 ❗   \n"RESET);
+    // } else {
+    //     printf(CYAN"  🅴 🆇 🅲 🅻 🆄 🆂 🅰 🅾  🅲 🅰 🅽 🅲 🅴 🅻 🅰 🅳 🅰  🅴 🆇 🅲 🅻 🆄 🆂 🅰 🅾  🅲 🅰 🅽 🅲 🅴 🅻 🅰 🅳 🅰   \n"RESET);
+    // }
     
 
 }

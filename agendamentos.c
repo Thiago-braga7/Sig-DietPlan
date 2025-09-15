@@ -135,10 +135,24 @@ void excluir_agendamento(void){
     printf("///                         Observações:                                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    char resposta = confirmar_acao();
-    if (resposta == 'S') {
-        printf(RED"///                 Agendamento excluído com sucesso!                       ///\n");
-    } else {
-        printf(RED"///                 Operação de exclusão cancelada!                         ///\n");
+    char resposta;
+
+        do {
+            printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+            scanf(" %c", &resposta);
+
+            resposta = confirmar_acao(resposta); 
+
+            if (resposta == 0) {  
+                printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+            }
+        } while (resposta == 0); 
+
+        if (resposta == 'S') {
+            printf(RED"/// Agendamento excluído com sucesso! ///\n");
+        } else {
+            printf(RED"/// Operação de exclusão cancelada! ///\n");
     }
+    pausar();
+
 }

@@ -257,16 +257,33 @@ void excluir_dieta(void){
             }
     }
     pausar();
-    char resposta = confirmar_acao();
+    char resposta;
+
+    do {
+        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+        scanf(" %c", &resposta);
+
+        resposta = confirmar_acao(resposta); 
+
+        if (resposta == 0) {  
+            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+        }
+    } while (resposta == 0); 
+
     if (resposta == 'S') {
-        printf(RED"///                    Dieta excluída com sucesso!                        ///\n");
-        cpf[0] = '\0';
-        nome_dieta[0] = '\0';
-        calorias = 0;
-        refeicoes[0] = '\0';
+        printf(RED"/// Dieta excluída com sucesso! ///\n");
     } else {
-        printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
-    }
+        printf(RED"/// Operação de exclusão cancelada! ///\n");
+}
+    // if (resposta == 'S') {
+    //     printf(RED"///                    Dieta excluída com sucesso!                        ///\n");
+    //     cpf[0] = '\0';
+    //     nome_dieta[0] = '\0';
+    //     calorias = 0;
+    //     refeicoes[0] = '\0';
+    // } else {
+    //     printf(RED"///                    Operação de exclusão cancelada!                    ///\n");
+    // }
     pausar();
 
 }

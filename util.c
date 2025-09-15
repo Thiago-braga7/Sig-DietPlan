@@ -29,23 +29,6 @@ char ler_sexo(void) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 char ler_genero(void) {
     char genero;
     do {
@@ -62,20 +45,15 @@ char ler_genero(void) {
     return genero;
 }
 
-char confirmar_acao(void) {
-    char confirmacao;
 
-    do {
-        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
-        scanf(" %c", &confirmacao);  
-        getchar(); 
-        confirmacao = toupper(confirmacao);
+char confirmar_acao(char valor) {
+    valor = toupper(valor);  
 
-        if (confirmacao != 'S' && confirmacao != 'N') {
-            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
-        }
-    } while (confirmacao != 'S' && confirmacao != 'N');
-    return confirmacao;
+    if (valor == 'S' || valor == 'N') {
+        return valor; 
+    }
+
+    return 0; 
 }
 
 void limpar_tela(void){
