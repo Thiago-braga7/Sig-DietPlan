@@ -12,7 +12,7 @@
 
 
 
-
+// Funcões Criadas por Thiago
 
 char ler_genero(char genero) {
     genero = toupper(genero);  
@@ -83,6 +83,7 @@ float peso_ideal_max(float altura) {
     return 24.9f * altura * altura;
 }
 
+// Funcões Criadas por Gabriel
 
 void classificação_imc(float resultado){
 
@@ -260,8 +261,7 @@ void mensagem_boas_vindas(const char *nome, char genero){
     }
 }
 
-
-// chat gpt 5
+// créditos: chat gpt 5
 bool palavra_valida(const char *palavra) {
     int tamanho = strlen(palavra);
     if(tamanho < 2) return false; 
@@ -296,9 +296,7 @@ bool validar_nome(const char *nome) {
     return true;
 }
 
-
-//Chat GPT 5
-
+// créditos: chat gpt 5
 
 int validar_cpf(const char *cpf) {
     int i, j, soma, resto, digito1, digito2;
@@ -358,7 +356,7 @@ int validar_cpf(const char *cpf) {
 }
 
 
-// chat gpt 5
+// créditos: chat gpt 5
 
 int validar_telefone(const char *telefone) {
     int len = strlen(telefone);
@@ -380,13 +378,4 @@ int validar_telefone(const char *telefone) {
 
 
 
-int validar_idade(int idade) {
-    return (idade >= 0 && idade <= 120);
-}
 
-int validar_altura(float altura) {
-    return (altura >= 0.5 && altura <= 2.50);
-}
-int validar_bf(float bf) {
-    return (bf >= 0 && bf <= 100);
-}

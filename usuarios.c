@@ -76,65 +76,39 @@ void cadastrar_usuario(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
-    scanf("%s[^\n]", nome);
-    getchar();
-    do {
-    printf("/// CPF(Apenas números): ///\n");
-    scanf(" %[^\n]", cpf);
+    
+    printf("///                         Nome:                                         ///\n");
+    scanf("%s", nome); 
     getchar();
 
-    if (!validar_cpf(cpf)) {
-        printf("CPF inválido! Tente novamente.\n" );
-    }
-}   while (!validar_cpf(cpf));  
-    do {
-        printf("/// Telefone (Apenas números): ///\n");
-        scanf("%s", telefone);
-        getchar();
+    printf("///                         CPF (Apenas números):                         ///\n");
+    scanf("%s", cpf); 
+    getchar();
 
-    if (!validar_telefone(telefone)) {
-        printf("Telefone inválido! Tente novamente.\n");
-    }
-}   while (!validar_telefone(telefone));
+    printf("///                         Telefone (Apenas números):                     ///\n");
+    scanf("%s", telefone); 
+    getchar();
 
-    do {
-        printf("/// Idade: ///\n");
-        scanf("%d", &idade);
-        getchar();
-    if (!validar_idade(idade)) {
-        printf("Idade inválida! Tente novamente.\n");
-    }
-}   while (!validar_idade(idade));
+    printf("///                         Idade:                                         ///\n");
+    scanf("%d", &idade); 
+    getchar();
 
-    do {
-        printf("/// Peso(Kg): ///\n");
-        scanf("%f", &peso);
-        getchar();
-    if (!validar_peso(peso)) {
-        printf("Peso inválido! Tente novamente.\n");
-    }
-}   while (!validar_peso(peso));
-    do {
-        printf("/// Altura(m): ///\n");
-        scanf("%f", &altura);
-        getchar();
-    if (!validar_altura(altura)) {
-        printf("Altura inválida! Tente novamente.\n");
-    }
-}   while (!validar_altura(altura));
+    printf("///                         Peso (Kg):                                      ///\n");
+    scanf("%f", &peso); 
+    getchar();
 
-    do {
-        printf("/// Percentual de gordura(Porcentagem): ///\n");
-        scanf("%f", &bf);
-        getchar();
-    if (!validar_bf(bf)) {
-        printf("Percentual de gordura invalido! Tente novamente.\n");
-    }
-}   while (!validar_bf(bf));
+    printf("///                         Altura (m):                                     ///\n");
+    scanf("%f", &altura); 
+    getchar();
+
+    printf("///                         Percentual de Gordura (%%):                      ///\n");
+    scanf("%f", &bf); 
+    getchar();
+
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf(CYAN"  🆄 🆂 🆄 🅰 🆁 🅸 🅾  🅲 🅰 🅳 🅰 🆂 🆃 🆁 🅰 🅳 🅾  🅲 🅾 🅼  🆂 🆄 🅲 🅴 🆂 🆂 🅾   \n"RESET);
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    
+        
 }
 
 void buscar_usuario(void){
@@ -150,7 +124,7 @@ void buscar_usuario(void){
     printf("///                                                                         ///\n");
 
     printf("\nDigite o CPF do usuário: ");
-    scanf(" %[^\n]", cpf);
+    scanf("%s", cpf); 
 
         
     printf(RED"/////////////////////////////////////////////////////////////////////////////////\n"RESET);
@@ -186,7 +160,7 @@ void alterar_usuario(void){
 
 
     printf("\nDigite o CPF do usuário: ");
-    scanf(" %[^\n]", cpf);
+    scanf("%s", cpf); 
 
         
             
@@ -231,7 +205,7 @@ void excluir_usuario(void){
     printf("///                 = = = = = Excluir Usuário = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf(" %[^\n]", cpf);
+    scanf("%s", cpf); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Excluindo Usuário                             ///\n");
