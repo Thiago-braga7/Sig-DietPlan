@@ -7,6 +7,7 @@
 #include "agendamentos.h"
 #include "relatorios.h"
 #include "sobre.h"
+#include "util.h"
 
 
 #define RED     "\033[31m"
@@ -51,7 +52,7 @@ int main(void){
 
 
 void menu_principal(void){
-    system("clear||cls");
+    limpar_tela();
     printf("\n");
     printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);
