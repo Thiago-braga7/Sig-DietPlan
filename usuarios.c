@@ -98,7 +98,7 @@ void cadastrar_usuario(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Usuário Cadastrado com Sucesso!                         \n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
-        
+    pausar();
 }
 
 void buscar_usuario(void){
@@ -260,7 +260,7 @@ void calcular_imc(void) {
                 resultado = imc(peso, altura);
 
                 if (resultado <= 0) {
-                    printf(RED"Altura inválida!\n");
+                    printf(RED"Resultado inválida!\n");
                 } else {
                     printf(RED"\nSeu IMC é: %.2f\n"RESET, resultado);
                     classificação_imc(resultado);
