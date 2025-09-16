@@ -260,7 +260,7 @@ void calcular_imc(void) {
                 resultado = imc(peso, altura);
 
                 if (resultado <= 0) {
-                    printf(RED"Resultado inválida!\n");
+                    printf(RED"Resultado inválido!\n");
                 } else {
                     printf(RED"\nSeu IMC é: %.2f\n"RESET, resultado);
                     classificação_imc(resultado);
@@ -271,7 +271,7 @@ void calcular_imc(void) {
                     if (min > 0 && max > 0) {
                         printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, min, max);
                     } else {
-                        printf(RED"Resultado inválida!\n"RESET);
+                        printf(RED"Resultado inválido!\n"RESET);
                     }
                 }
 

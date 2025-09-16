@@ -101,6 +101,7 @@ void buscar_consulta(void){
     printf("///                         Nome do Médico:                                 ///\n");
     printf("///                         Observações:                                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 }
 
 void alterar_consulta(void){

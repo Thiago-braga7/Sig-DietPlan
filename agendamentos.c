@@ -72,6 +72,7 @@ void cadastrar_agendamento(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 }
 void buscar_agendamento(void){
     char cpf[15], data[15];
@@ -94,6 +95,7 @@ void buscar_agendamento(void){
     printf("///                         Profissional:                                   ///\n");
     printf("///                         Observações:                                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 }
 void alterar_agendamento(void){
     char data[15];
@@ -132,6 +134,7 @@ void alterar_agendamento(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Alterado com Sucesso !                     ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    pausar();
 }
 void excluir_agendamento(void){
     char data[15];

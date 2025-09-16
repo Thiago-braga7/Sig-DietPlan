@@ -5,7 +5,7 @@
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
-#define CYAN    "\033[36m"
+
 
 
 
@@ -15,9 +15,9 @@ char relatorios(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n"RESET);
-    printf(CYAN"///           = = = = =  🆁 🅴 🅻 🅰 🆃 🅾 🆁 🅸 🅾 🆂  = = = = =           ///\n"RESET);
-    printf(RED"///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                     = = = = =   Relatórios  = = = = =                   ///\n");
+    printf("///                                                                         ///\n");
     printf("///                    1. Alimentos mais Consumidos                         ///\n");
     printf("///                    2. Total de Calorias(Dia)                            ///\n");
     printf("///                    3. Meta Diária de Calorias                           ///\n");
