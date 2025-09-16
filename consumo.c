@@ -85,6 +85,7 @@ void cadastrar_consumo(void){
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
+        pausar();
         }
     else if(tipo == 2){
         int quantidade_agua;
@@ -106,10 +107,12 @@ void cadastrar_consumo(void){
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
+        pausar();
     }
     else {
         printf("Opção inválida!\n");
     }
+    pausar();
 }
 
 void buscar_consumo(void){
@@ -140,6 +143,7 @@ void buscar_consumo(void){
         printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
+        pausar();
         }
     else if(tipo == 2){
         char data[15];
@@ -159,10 +163,12 @@ void buscar_consumo(void){
         printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
+        pausar();
     }
     else {
         printf("Opção inválida!\n");
     }
+    pausar();
 }
 void alterar_consumo(void){
     int tipo;
@@ -209,6 +215,7 @@ void alterar_consumo(void){
         scanf("%s", nova_data);
         getchar();
         printf("\n");
+        pausar();
         }
     else if(tipo == 2){
         char data[15];
@@ -239,10 +246,12 @@ void alterar_consumo(void){
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("\n");
+        pausar();
     }
     else {
         printf("Opção inválida!\n");
     }
+    pausar();
 }
 void excluir_consumo(void){
     int tipo;

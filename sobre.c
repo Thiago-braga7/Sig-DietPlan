@@ -53,10 +53,9 @@ void bem_vindo(void) {
 
     
 
-
+// créditos:Text Art
 
 void sobre(void){
-    // peguei do textart a formatação diferente
     printf(CYAN"====================================================\n"RESET);
     printf(CYAN"                𝕾 𝖎 𝖌 - 𝕯 𝖎 𝖊 𝖙 𝕻 𝖑 𝖆 𝖓\n"RESET);
     printf(CYAN"====================================================\n\n"RESET);
