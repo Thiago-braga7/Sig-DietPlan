@@ -13,12 +13,8 @@
 void modulo_pacientes(void) {
     char opcao;
     do {
-        pacientes();
-        printf("Escolha uma opção: ");
-        scanf(" %c", &opcao);
-        getchar();
-
-
+        limpar_tela();
+        opcao = tela_pacientes();
         switch(opcao) {
             case '1': cadastrar_paciente(); break;
             case '2': buscar_paciente(); break;
@@ -29,29 +25,34 @@ void modulo_pacientes(void) {
             
         }
     } while (opcao != '0');  
-    
 }
 
 
-
-
-
-
-void pacientes(void){
+char tela_pacientes(void){
+    char opcao;
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                    = = = = =   Pacientes = = = = =                      ///\n");
     printf("///                                                                         ///\n");
-    printf("///                    1. Cadastrar Paciente                                 ///\n");
-    printf("///                    2. Buscar Paciente                                    ///\n");
-    printf("///                    3. Alterar Dados do Paciente                          ///\n");
-    printf("///                    4. Excluir Paciente                                   ///\n");
+    printf("///                    1. Cadastrar Paciente                                ///\n");
+    printf("///                    2. Buscar Paciente                                   ///\n");
+    printf("///                    3. Alterar Dados do Paciente                         ///\n");
+    printf("///                    4. Excluir Paciente                                  ///\n");
     printf("///                    5. Calcular IMC                                      ///\n");
     printf("///                    6. Calcular BF                                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///                      Escolha a opção desejada: ");
+    scanf("%c", &opcao);
+    getchar();
+    printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("\n");
+    pausar();
+    return opcao;
 }
 
 void cadastrar_paciente(void){
@@ -63,11 +64,11 @@ void cadastrar_paciente(void){
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Pacientes                                ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Cadastrar Paciente = = = = =                  ///\n");
+    printf("///                 = = = = =  Cadastrar Paciente = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n"RESET);
     
-    printf(RED"///                         Nome:                                           ///\n");
+    printf(RED"///                         Nome:                                        ///\n");
     scanf("%s", nome); 
     getchar();
 
@@ -108,12 +109,12 @@ void buscar_paciente(void){
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Buscar Paciente = = = = =                     ///\n");
+    printf("///                 = = = = =  Buscar Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     scanf("%s", cpf);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Informações do Paciente                           ///\n");
+    printf("///                        Informações do Paciente                          ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     printf("///                         CPF:                                            ///\n");
@@ -135,13 +136,13 @@ void alterar_paciente(void){
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = = Alterar Dados do Paciente = = = = =            ///\n");
+    printf("///                 = = = = = Alterar Dados do Paciente = = = = =           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     scanf("%s", cpf);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novos Dados do Paciente                           ///\n");
+    printf("///                        Novos Dados do Paciente                          ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     scanf("%[^\n]", novo_nome);
@@ -161,7 +162,7 @@ void alterar_paciente(void){
     printf("///                         Altura(m):                                      ///\n");
     scanf("%f", &nova_altura);
     getchar();
-    printf("///                         Percentual de gordura(Porcentagem):                                      ///\n");
+    printf("///                         Percentual de gordura(Porcentagem):             ///\n");
     scanf("%f", &novo_bf);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -179,17 +180,17 @@ void excluir_paciente(void){
     char cpf[15];
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Pacientes                                 ///\n");
+    printf("///                                Pacientes                                ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = = Excluir Paciente = = = = =                     ///\n");
+    printf("///                 = = = = = Excluir Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     scanf("%s", cpf); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Paciente                             ///\n");
+    printf("///                           Excluindo Paciente                            ///\n");
     printf("///                                                                         ///\n");
-    printf("///                            Dados do Paciente                             ///\n");
+    printf("///                            Dados do Paciente                            ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     printf("///                         CPF:                                            ///\n");
@@ -228,7 +229,7 @@ void calcular_imc(void) {
         limpar_tela();
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                Pacientes                                     ///\n");
+        printf("///                                Pacientes                                    ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Calcular IMC = = = = =                        ///\n");
         printf("///                                                                             ///\n");
@@ -298,7 +299,7 @@ void calcular_bf(void) {
         printf("\n");
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                Pacientes                                     ///\n");
+        printf("///                                Pacientes                                    ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Classificar Porcentagem de Gordura = = = = =  ///\n");
         printf("///                                                                             ///\n");

@@ -1,5 +1,5 @@
 void modulo_pacientes(void);
-void pacientes(void); 
+char tela_pacientes(void);
 void cadastrar_paciente(void);
 void buscar_paciente(void);
 void alterar_paciente(void);

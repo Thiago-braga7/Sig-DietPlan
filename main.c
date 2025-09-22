@@ -70,7 +70,7 @@ void menu_principal(void){
     printf("///                                                                         ///\n");
     printf("///            = = = = = Planejamento de Dietas = = = = =                   ///\n");
     printf("///                                                                         ///\n");
-    printf("///                      1. Usuários                                        ///\n");
+    printf("///                      1. Pacientes                                       ///\n");
     printf("///                      2. Dietas                                          ///\n");
     printf("///                      3. Consumo(Alimentos/Água)                         ///\n");
     printf("///                      4. Consultas                                       ///\n");
