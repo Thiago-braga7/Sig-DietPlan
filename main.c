@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> 
-#include "usuarios.h"
+#include "pacientes.h"
 #include "dietas.h"
 #include "consumo.h"
 #include "consultas.h"
@@ -33,7 +33,7 @@ int main(void){
         getchar();
 
         switch(opcao){
-            case '1': modulo_usuarios(); break;
+            case '1': modulo_pacientes(); break;
             case '2': modulo_dietas(); break;
             case '3': modulo_consumo(); break;
             case '4': modulo_consultas(); break;
