@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "usuarios.h"
+#include "pacientes.h"
 #include "util.h"
 #include <ctype.h>
 
@@ -10,20 +10,20 @@
 #define CYAN    "\033[36m"
 
 
-void modulo_usuarios(void) {
+void modulo_pacientes(void) {
     char opcao;
     do {
-        usuarios();
+        pacientes();
         printf("Escolha uma opção: ");
         scanf(" %c", &opcao);
         getchar();
 
 
         switch(opcao) {
-            case '1': cadastrar_usuario(); break;
-            case '2': buscar_usuario(); break;
-            case '3': alterar_usuario(); break;
-            case '4': excluir_usuario(); break;
+            case '1': cadastrar_paciente(); break;
+            case '2': buscar_paciente(); break;
+            case '3': alterar_paciente(); break;
+            case '4': excluir_paciente(); break;
             case '5': calcular_imc(); break;
             case '6': calcular_bf(); break;
             
@@ -37,33 +37,33 @@ void modulo_usuarios(void) {
 
 
 
-void usuarios(void){
+void pacientes(void){
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                    = = = = =   Usuários  = = = = =                      ///\n");
+    printf("///                    = = = = =   Pacientes = = = = =                      ///\n");
     printf("///                                                                         ///\n");
-    printf("///                    1. Cadastrar Usuário                                 ///\n");
-    printf("///                    2. Buscar Usuário                                    ///\n");
-    printf("///                    3. Alterar Dados do Usuário                          ///\n");
-    printf("///                    4. Excluir Usuário                                   ///\n");
+    printf("///                    1. Cadastrar Paciente                                 ///\n");
+    printf("///                    2. Buscar Paciente                                    ///\n");
+    printf("///                    3. Alterar Dados do Paciente                          ///\n");
+    printf("///                    4. Excluir Paciente                                   ///\n");
     printf("///                    5. Calcular IMC                                      ///\n");
     printf("///                    6. Calcular BF                                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 }
 
-void cadastrar_usuario(void){
+void cadastrar_paciente(void){
     char nome[100], cpf[12], telefone[10];
     int idade;
     float peso, altura, bf;   
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Usuários                                 ///\n");
+    printf("///                                Pacientes                                ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Cadastrar Usuário = = = = =                  ///\n");
+    printf("///                 = = = = =  Cadastrar Paciente = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n"RESET);
     
@@ -95,25 +95,25 @@ void cadastrar_usuario(void){
     scanf("%f", &bf); 
     getchar();
 
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("                    Usuário Cadastrado com Sucesso!                         \n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("                    Paciente Cadastrado com Sucesso!                         \n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
 }
 
-void buscar_usuario(void){
+void buscar_paciente(void){
     char cpf[15];
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Usuários                                  ///\n");
+    printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Buscar Usuário = = = = =                     ///\n");
+    printf("///                 = = = = =  Buscar Paciente = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     scanf("%s", cpf);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Informações do Usuário                           ///\n");
+    printf("///                        Informações do Paciente                           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     printf("///                         CPF:                                            ///\n");
@@ -126,22 +126,22 @@ void buscar_usuario(void){
 }
 
  
-void alterar_usuario(void){
+void alterar_paciente(void){
     char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
     int nova_idade;
     float novo_peso, nova_altura, novo_bf;
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Usuários                                  ///\n");
+    printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = = Alterar Dados do Usuário = = = = =            ///\n");
+    printf("///                 = = = = = Alterar Dados do Paciente = = = = =            ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     scanf("%s", cpf);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novos Dados do Usuário                           ///\n");
+    printf("///                        Novos Dados do Paciente                           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     scanf("%[^\n]", novo_nome);
@@ -165,7 +165,7 @@ void alterar_usuario(void){
     scanf("%f", &novo_bf);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Usuário alterado com sucesso!                        ///\n");
+    printf("///                    Paciente alterado com sucesso!                        ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     printf("\n");
     pausar();
@@ -174,22 +174,22 @@ void alterar_usuario(void){
 
         
    
-void excluir_usuario(void){
+void excluir_paciente(void){
     limpar_tela();
     char cpf[15];
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Usuários                                 ///\n");
+    printf("///                                Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                 = = = = = Excluir Usuário = = = = =                     ///\n");
+    printf("///                 = = = = = Excluir Paciente = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
     scanf("%s", cpf); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Usuário                             ///\n");
+    printf("///                           Excluindo Paciente                             ///\n");
     printf("///                                                                         ///\n");
-    printf("///                            Dados do Usuário                             ///\n");
+    printf("///                            Dados do Paciente                             ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
     printf("///                         CPF:                                            ///\n");
@@ -211,7 +211,7 @@ void excluir_usuario(void){
         }
     } while (resposta == 0); 
         if (resposta == 'S') {
-            printf(RED"Usuário Excluído com Sucesso!    \n"RESET);
+            printf(RED"Paciente Excluído com Sucesso!    \n"RESET);
     }   else {
             printf(RED"Operação de Exclusão Cancelada !  \n"RESET);
      }
@@ -228,7 +228,7 @@ void calcular_imc(void) {
         limpar_tela();
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                Usuários                                     ///\n");
+        printf("///                                Pacientes                                     ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Calcular IMC = = = = =                        ///\n");
         printf("///                                                                             ///\n");
@@ -298,7 +298,7 @@ void calcular_bf(void) {
         printf("\n");
         printf("\n");
         printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                                Usuários                                     ///\n");
+        printf("///                                Pacientes                                     ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Classificar Porcentagem de Gordura = = = = =  ///\n");
         printf("///                                                                             ///\n");

@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -g -I.
 
 EXECUTAVEL = programa
-FONTES = main.c usuarios.c dietas.c consumo.c consultas.c agendamentos.c relatorios.c util.c sobre.c
+FONTES = main.c pacientes.c dietas.c consumo.c consultas.c agendamentos.c relatorios.c util.c sobre.c
 OBJETOS = $(FONTES:.c=.o)
 
 .PHONY: all clean
