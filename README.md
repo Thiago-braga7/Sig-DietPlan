@@ -1,98 +1,89 @@
-Sig-DietPlan
+# SIG DietPlan - Sistema de Gestão de Planos Alimentares
 
-📝 Descrição do Projeto
+## Descrição do Projeto
 
-O Sig-DietPlan é um sistema de gestão voltado para o planejamento e acompanhamento de dietas. Desenvolvido como parte da avaliação da disciplina de Programação da UFRN (Universidade Federal do Rio Grande do Norte), o sistema oferece funcionalidades completas para facilitar o gerenciamento nutricional.
+Este projeto é um sistema de gestão desenvolvido para controle de planos alimentares, criado como parte da avaliação da disciplina de Programação na UFRN (Universidade Federal do Rio Grande do Norte).
 
-O sistema auxilia profissionais e usuários a monitorarem hábitos alimentares, simplificando o desenvolvimento de planos nutricionais e o acompanhamento da saúde.
+O sistema permite o gerenciamento de usuários, perfis alimentares, planos de dieta e refeições, facilitando o acompanhamento nutricional e o planejamento alimentar.
 
-✨ Funcionalidades
+---
 
-Com ele, é possível:
+## Estrutura, Modularização e Compilação
 
-    Cadastrar e gerenciar usuários;
+O projeto está organizado de forma modular, com cada funcionalidade principal separada em arquivos e pastas específicas, facilitando o desenvolvimento e a manutenção do código.
 
-    Controlar alimentos e seus valores nutricionais;
+### Compilação do Projeto no Linux
 
-    Registrar consumos diários;
+1. No VSCode, instale a extensão chamada **"Makefile Tools"**.
+2. Use o Makefile através do comando `make`.
+3. Em seguida, execute o comando `./main` para rodar o sistema.
 
-    Planejar e acompanhar refeições e dietas personalizadas.
+### Compilação do Projeto no Windows
 
-📂 Estrutura, Modularização e Compilação
+Este guia explica como configurar o ambiente e compilar o projeto no Windows utilizando o **MSYS2**.
 
-O projeto está organizado de forma modular, com cada funcionalidade principal separada em pastas específicas, facilitando o desenvolvimento e a manutenção do código.
+#### Pré-requisitos
 
-🚀 Como Compilar e Executar
+- Ter o MSYS2 e o GCC instalados.
 
-Compilação do Projeto no Linux
+#### Instalação do MSYS2 e do Make
 
-    No VSCode, instale a extensão Makefile Tools.
+1. Baixe e instale o MSYS2: https://www.msys2.org.
+   - O MSYS2 emula um terminal Linux (UNIX) no Windows, permitindo a utilização de ferramentas como make e gcc.
+2. Atualize os pacotes do MSYS2:
+   ```sh
+   pacman -Syu
+   ```
+3. Instale o make:
+   ```sh
+   pacman -S make
+   ```
 
-    Use o Makefile para compilar o projeto:
-    Bash
+#### Configuração do GCC
 
-make
+1. Verifique a instalação do GCC:
+   ```sh
+   gcc --version
+   ```
+2. Caso não esteja instalado:
+   ```sh
+   pacman -S mingw-w64-x86_64-gcc
+   ```
+3. Verifique o PATH:
+   ```sh
+   echo $PATH
+   ```
+4. Se necessário, adicione o caminho do GCC:
+   ```sh
+   export PATH=$PATH:/mingw64/bin
+   ```
+5. Reinicie o terminal para aplicar as alterações.
 
-Execute o programa com:
-Bash
+#### Compilação do Projeto
 
-    ./main
+- Navegue até o diretório do projeto e execute:
+  ```sh
+  make run
+  ```
 
-Compilação do Projeto no Windows (com MSYS2)
+Seguindo estas etapas, você conseguirá compilar e executar o projeto corretamente no Windows utilizando o MSYS2.
 
-Este guia mostra como configurar e compilar o projeto no Windows usando o MSYS2.
+---
 
-Pré-requisitos
+## Tecnologias Utilizadas
 
-    MSYS2 instalado.
+- **Linguagem:** C
+- **IDE:** Visual Studio Code (VSCode)
 
-    GCC configurado no ambiente MSYS2.
+---
 
-Passos
+## Funcionalidades Principais
 
-    Instale o MSYS2 a partir do site oficial: https://www.msys2.org
+- **Gestão de Clientes:** Cadastro e gerenciamento de perfis alimentares.
+- **Gestão de Planos de Dieta:** Criação, atualização e exclusão de planos alimentares personalizados.
+- **Gestão de Refeições:** Registro de refeições diárias e semanais.
+- **Relatórios:** Geração de relatórios nutricionais e acompanhamento do progresso dos usuários.
 
-    Abra o terminal do MSYS2 e atualize os pacotes:
-    Bash
+---
 
-pacman -Syu
-
-Instale o make:
-Bash
-
-pacman -S make
-
-Verifique se o compilador GCC está instalado:
-Bash
-
-gcc --version
-
-Se não estiver instalado, instale o conjunto de ferramentas MinGW-w64:
-Bash
-
-pacman -S mingw-w64-x86_64-gcc
-
-Confirme se o caminho /mingw64/bin está na variável de ambiente PATH. Você pode verificar com:
-Bash
-
-echo $PATH
-
-Se não estiver, adicione-o temporariamente à sessão atual:
-Bash
-
-    export PATH=$PATH:/mingw64/bin
-
-Compilação
-
-    Navegue até o diretório do projeto no terminal MSYS2.
-
-    Execute o comando para compilar e rodar o projeto:
-    Bash
-
-    make run
-
-💻 Tecnologias Utilizadas
-
-    Linguagem: C
-
-    IDE: Visual Studio Code (VSCode)
+> **Projeto desenvolvido para fins acadêmicos — todos os direitos reservados.**
