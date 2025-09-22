@@ -12,7 +12,7 @@
 void modulo_consumo(void) {
     char opcao;
     do {
-        opcao = menu_consumo();
+        opcao = tela_consumo();
         switch(opcao) {
             case '1': cadastrar_consumo(); break;
             case '2': buscar_consumo(); break;
@@ -25,7 +25,7 @@ void modulo_consumo(void) {
 
 
 
-char menu_consumo(void){
+char tela_consumo(void){
     char opcao;
     limpar_tela();
 

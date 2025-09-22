@@ -13,7 +13,7 @@ void modulo_consultas(void) {
     char opcao;
     do {
         limpar_tela();
-        opcao = consultas();
+        opcao = tela_consultas();
         switch(opcao) {
             case '1': cadastrar_consulta(); break;
             case '2': buscar_consulta(); break;
@@ -24,7 +24,7 @@ void modulo_consultas(void) {
 }
 
 
-char consultas(void){
+char tela_consultas(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");

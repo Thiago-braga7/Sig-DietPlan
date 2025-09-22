@@ -12,7 +12,7 @@ void modulo_agendamentos(void) {
     char opcao;
     do {
         limpar_tela();
-        opcao = agendamentos();
+        opcao = tela_agendamentos();
         switch(opcao) {
             case '1': cadastrar_agendamento(); break;
             case '2': buscar_agendamento(); break;
@@ -22,7 +22,7 @@ void modulo_agendamentos(void) {
     } while (opcao != '0');  
 }
 
-char agendamentos(void){
+char tela_agendamentos(void){
     char opcao;
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");

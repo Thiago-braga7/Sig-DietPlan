@@ -16,7 +16,7 @@ void modulo_dietas(void) {
     char opcao;
     do {
         limpar_tela();
-        opcao = dietas();
+        opcao = tela_dietas();
         switch(opcao) {
             case '1': cadastrar_dieta(); break;
             case '2': buscar_dieta(); break;
@@ -29,7 +29,7 @@ void modulo_dietas(void) {
 
 
 
-char dietas(void){
+char tela_dietas(void){
     char opcao;
     limpar_tela();
 
