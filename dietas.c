@@ -85,6 +85,20 @@ void cadastrar_dieta(void){
     printf("///                        Dieta Cadastrada com Sucesso!                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
+    
+    FILE *arq_dieta;
+    arq_dieta = fopen("dietas.txt","at");
+    if (arq_dieta == NULL){
+        printf("\t\t\t<<< ERRO: Não foi possível abrir o arquivo! >>>\n");
+        printf("\t\t\t<<< Pressione ENTER para continuar... >>>\n");
+        getchar();
+        return;
+    } 
+    fprintf(arq_dieta, "%s\n", cpf);
+    fprintf(arq_dieta, "%s\n", nome_dieta);
+    fprintf(arq_dieta, "%d\n", calorias);
+    fprintf(arq_dieta, "%s\n", refeicoes);
+    fclose(arq_dieta);
 }
 void buscar_dieta(void){
     char nome_dieta[50];
