@@ -108,17 +108,17 @@ void cadastrar_paciente(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
 
-    arq_paciente = fopen("arq_paciente.txt", "at");
+    arq_paciente = fopen("arq_paciente.csv", "at");
     if (arq_paciente == NULL) {
         printf("Erro na criacao do arquivo\n");
         return;
     }
 
-    fprintf(arq_paciente, "%s\n", nome);
-    fprintf(arq_paciente, "%s\n", cpf);
-    fprintf(arq_paciente, "%s\n", telefone);
-    fprintf(arq_paciente, "%d\n", idade);
-    fprintf(arq_paciente, "%f\n", peso);
+    fprintf(arq_paciente, "%s;", nome);
+    fprintf(arq_paciente, "%s;", cpf);
+    fprintf(arq_paciente, "%s;", telefone);
+    fprintf(arq_paciente, "%d;", idade);
+    fprintf(arq_paciente, "%f;", peso);
     fprintf(arq_paciente, "%f\n", altura);
 
     pausar();
