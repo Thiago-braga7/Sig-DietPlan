@@ -22,6 +22,7 @@ void modulo_pacientes(void) {
             case '4': excluir_paciente(); break;
             case '5': calcular_imc(); break;
             case '6': calcular_bf(); break;
+            // case '7': listar_pacientes(); break;
             
         }
     } while (opcao != '0');  
@@ -56,9 +57,15 @@ char tela_pacientes(void){
 }
 
 void cadastrar_paciente(void){
-    char nome[100], cpf[12], telefone[10];
+    FILE *arq_paciente;
+    char nome[100];
+    char cpf[13];
+    char telefone[11];
     int idade;
-    float peso, altura, bf;   
+    float peso;
+    float altura;
+    float bf;   
+
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -99,8 +106,46 @@ void cadastrar_paciente(void){
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Paciente Cadastrado com Sucesso!                         \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+
+    arq_paciente = fopen("arq_paciente.txt", "at");
+    if (arq_paciente == NULL) {
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    fprintf(arq_paciente, "%s\n", nome);
+    fprintf(arq_paciente, "%s\n", cpf);
+    fprintf(arq_paciente, "%s\n", telefone);
+    fprintf(arq_paciente, "%d\n", idade);
+    fprintf(arq_paciente, "%f\n", peso);
+    fprintf(arq_paciente, "%f\n", altura);
+
     pausar();
 }
+
+
+// void listar_pacientes(void) {
+//     FILE *arq_paciente;
+//     char linha[255];
+
+//     printf("Lista de pacientes\n");
+//     arq_paciente = fopen("arq_paciente.txt", "rt");
+//     if (arq_paciente == NULL){
+//         printf("Erro na criacao do arquivo\n");
+//         exit(1);
+//     }
+
+//     while (fscanf(arq_paciente, "%[^\n]",linha) == 1) {
+//         printf("%s\n", linha);
+//         fgetc(arq_paciente);
+//     }
+//     fclose(arq_paciente);
+//     return 0;
+
+//     pausar();
+// }
+
 
 void buscar_paciente(void){
     char cpf[15];
