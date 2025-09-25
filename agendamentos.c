@@ -42,6 +42,7 @@ char tela_agendamentos(void){
     return opcao;
 }
 void cadastrar_agendamento(void){
+    FILE *arq_agendamentos;
     char cpf[15], data[15], hora[10];
     char tipo[50], profissional[100], observacoes[200];
     limpar_tela();
@@ -72,6 +73,19 @@ void cadastrar_agendamento(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    arq_agendamentos = fopen("arq_agendamentos.csv", "at");
+    if (arq_agendamentos == NULL) {
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    fprintf(arq_agendamentos, "%s;", cpf);
+    fprintf(arq_agendamentos, "%s;", data);
+    fprintf(arq_agendamentos, "%s;", hora);
+    fprintf(arq_agendamentos, "%s;", tipo);
+    fprintf(arq_agendamentos, "%s;", profissional);
+    fprintf(arq_agendamentos, "%s\n", observacoes);
+
     pausar();
 }
 void buscar_agendamento(void){
