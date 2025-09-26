@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "pacientes.h"
 #include "util.h"
 #include <ctype.h>
@@ -60,11 +61,10 @@ void cadastrar_paciente(void){
     FILE *arq_paciente;
     char nome[100];
     char cpf[13];
-    char telefone[11];
+    char tel[11];
     int idade;
     float peso;
     float altura;
-    float bf;   
 
     limpar_tela();
     printf("\n");
@@ -84,7 +84,7 @@ void cadastrar_paciente(void){
     getchar();
 
     printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%s", telefone); 
+    scanf("%s", tel); 
     getchar();
 
     printf("///                         Idade:                                          ///\n");
@@ -97,10 +97,6 @@ void cadastrar_paciente(void){
 
     printf("///                         Altura (m):                                     ///\n");
     scanf("%f", &altura); 
-    getchar();
-
-    printf("///                         Percentual de Gordura (%%):                     ///\n"RESET);
-    scanf("%f", &bf); 
     getchar();
 
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -116,7 +112,7 @@ void cadastrar_paciente(void){
 
     fprintf(arq_paciente, "%s;", nome);
     fprintf(arq_paciente, "%s;", cpf);
-    fprintf(arq_paciente, "%s;", telefone);
+    fprintf(arq_paciente, "%s;", tel);
     fprintf(arq_paciente, "%d;", idade);
     fprintf(arq_paciente, "%f;", peso);
     fprintf(arq_paciente, "%f\n", altura);
@@ -148,7 +144,15 @@ void cadastrar_paciente(void){
 
 
 void buscar_paciente(void){
-    char cpf[15];
+    FILE *arq_paciente;
+    char nome[100];
+    char cpf[13];
+    char tel[11];
+    int idade;
+    float peso;
+    float altura;
+    char cpf_lido[13];
+
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -157,7 +161,8 @@ void buscar_paciente(void){
     printf("///                 = = = = =  Buscar Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf);
+    scanf("%s", cpf_lido);
+    getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações do Paciente                          ///\n");
     printf("///                                                                         ///\n");
@@ -169,6 +174,41 @@ void buscar_paciente(void){
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
+
+    arq_paciente = fopen("arq_paciente.csv", "rt");
+
+    if (arq_paciente == NULL){
+        printf("Erro na criacao do arquivo\n");
+        return;
+     }
+
+    while (!feof(arq_paciente)) {
+        fscanf(arq_paciente, "%[^;]", nome);
+        fgetc(arq_paciente);
+        fscanf(arq_paciente, "%[^;]", cpf);
+        fgetc(arq_paciente);
+        fscanf(arq_paciente, "%[^;]", tel);
+        fgetc(arq_paciente);
+        fscanf(arq_paciente, "%d", &idade);
+        fgetc(arq_paciente);
+        fscanf(arq_paciente, "%f", &peso);
+        fgetc(arq_paciente);
+        fscanf(arq_paciente, "%f", &altura);
+        fgetc(arq_paciente);
+    }
+
+    if (strcmp(cpf, cpf_lido) == 0) {
+        printf("Paciente encontrado");
+        printf("Nome: %s\n", nome);
+        printf("CPF: %s\n", cpf);
+        printf("Telefone: %s\n", tel);
+        printf("Idade: %d\n", idade);
+        printf("Peso: %f\n", peso);
+        printf("Altura: %f\n", altura);
+        getchar();
+        fclose(arq_paciente);
+        return;
+    }
 }
 
  
