@@ -56,13 +56,12 @@ char tela_dietas(void){
 }
 
 void cadastrar_dieta(void){
+    FILE *arq_dietas;
     char cpf[15]; 
     char nome_dieta[50];              
     char refeicoes[200];                    
     int calorias;   
-    
-    limpar_tela();
-    
+        
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Dietas                                    ///\n");
@@ -86,23 +85,29 @@ void cadastrar_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
     
-    FILE *arq_dieta;
-    arq_dieta = fopen("dietas.txt","at");
-    if (arq_dieta == NULL){
+    
+    arq_dietas = fopen("arq_dietas.csv","at");
+    if (arq_dietas == NULL){
         printf("\t\t\t<<< ERRO: Não foi possível abrir o arquivo! >>>\n");
         printf("\t\t\t<<< Pressione ENTER para continuar... >>>\n");
         getchar();
         return;
     } 
-    fprintf(arq_dieta, "%s\n", cpf);
-    fprintf(arq_dieta, "%s\n", nome_dieta);
-    fprintf(arq_dieta, "%d\n", calorias);
-    fprintf(arq_dieta, "%s\n", refeicoes);
-    fclose(arq_dieta);
+    fprintf(arq_dietas, "%s;", cpf);
+    fprintf(arq_dietas, "%s;", nome_dieta);
+    fprintf(arq_dietas, "%d;", calorias);
+    fprintf(arq_dietas, "%s\n", refeicoes);
+    fclose(arq_dietas);
+    pausar();
 }
 void buscar_dieta(void){
-    char nome_dieta[50];
-    limpar_tela();
+    FILE *arq_dietas;
+    
+    char cpf[13]; 
+    char nome_dieta[50];              
+    char refeicoes[200];                    
+    int calorias;   
+    char nome_dieta_lido[50];
 
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -111,7 +116,7 @@ void buscar_dieta(void){
     printf("///                  = = = = =  Buscar Dieta  = = = = =                     ///\n");
     printf("///                                                                         ///\n");
     printf("///                        Informe o nome da Dieta:                         ///\n");
-    scanf("%s", nome_dieta);
+    scanf("%s", nome_dieta_lido);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Informações da Dieta                             ///\n");
@@ -121,6 +126,35 @@ void buscar_dieta(void){
     printf("///                         Refeições:                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
+
+    arq_dietas = fopen("arq_dietas.csv", "rt");
+
+    if (arq_dietas == NULL){
+        printf("Erro na criacao do arquivo\n");
+        return;
+     }
+      while (!feof(arq_dietas)) {
+        fscanf(arq_dietas, "%[^;]", cpf);
+        fgetc(arq_dietas);
+        fscanf(arq_dietas, "%[^;]", nome_dieta);
+        fgetc(arq_dietas);
+        fscanf(arq_dietas, "%d", &calorias);
+        fgetc(arq_dietas);
+        fscanf(arq_dietas, "%[^;]", refeicoes);
+        fgetc(arq_dietas);
+        
+    }
+
+    if (strcmp(nome_dieta, nome_dieta_lido) == 0) {
+        printf("Dieta encontrada \n");
+        printf("CPF: %s\n", cpf);
+        printf("Nome da Dieta: %s\n", nome_dieta);
+        printf("Calorias: %d\n", calorias);
+        printf("Refeições: %s\n", refeicoes);
+        getchar();
+        fclose(arq_dietas);
+        return;
+    }
 
 }
 void alterar_dieta(void){
