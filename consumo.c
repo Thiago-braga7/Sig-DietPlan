@@ -203,11 +203,12 @@ void buscar_consumo(void)
             return;
         }
     }
-    else if (tipo == 2)
-    {
-        
-    
-        char data[15];    
+   else if (tipo == 2){
+        FILE *arq_consumo_agua;
+        int quantidade_agua;
+        char data[15];
+        char data_lida[15];
+
         limpar_tela();
 
         printf("\n");
@@ -218,13 +219,39 @@ void buscar_consumo(void)
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%s", data);
+        scanf("%s", data_lida);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                     Registro de Consumo (Água) no dia (DD/MM/AAAA)      ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
         printf("\n");
         pausar();
+
+        arq_consumo_agua = fopen("arq_consumo_agua.csv", "rt");
+
+        if (arq_consumo_agua == NULL)
+        {
+            printf("Erro ao abrir o arquivo de consumo de água\n");
+            return;
+        }
+
+        while (!feof(arq_consumo_agua))
+        {
+            fscanf(arq_consumo_agua, "%d", &quantidade_agua);
+            fgetc(arq_consumo_agua);
+            fscanf(arq_consumo_agua, "%[^;]", data);
+            fgetc(arq_consumo_agua);
+
+            if (strcmp(data, data_lida) == 0){
+                printf("Consumo de Água encontrado \n");
+                printf("Quantidade(ml): %d\n", quantidade_agua);
+                printf("Data: %s\n", data);
+                getchar();
+                fclose(arq_consumo_agua);
+                return;
+            }
+        }
+        fclose(arq_consumo_agua);
     }
     else
     {
