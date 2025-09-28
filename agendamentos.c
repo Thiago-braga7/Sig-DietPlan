@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "agendamentos.h"
 #include "util.h"
+#include <string.h>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -43,8 +44,12 @@ char tela_agendamentos(void){
 }
 void cadastrar_agendamento(void){
     FILE *arq_agendamentos;
-    char cpf[15], data[15], hora[10];
-    char tipo[50], profissional[100], observacoes[200];
+    char cpf[15];
+    char data[15]; 
+    char hora[10];
+    char tipo[50];
+    char profissional[100];
+    char observacoes[200];
     limpar_tela();
 
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -89,7 +94,14 @@ void cadastrar_agendamento(void){
     pausar();
 }
 void buscar_agendamento(void){
-    char cpf[15], data[15];
+    FILE *arq_agendamentos;
+    char cpf[15];
+    char data[15]; 
+    char hora[10];
+    char tipo[50];
+    char profissional[100];
+    char observacoes[200];
+    char cpf_lido[15];
     limpar_tela();
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                             Agendamentos                                ///\n");
@@ -97,9 +109,7 @@ void buscar_agendamento(void){
     printf("///                   = = = = = Buscar Agendamento = = = = =                ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
-    scanf("%s", cpf);
-    printf("///                         Data (DD/MM/AAAA):                              ///\n");
-    scanf("%s", data);
+    scanf("%s", cpf_lido);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                     Informações do Agendamento                          ///\n");
     printf("///                         CPF:                                            ///\n");
@@ -110,6 +120,41 @@ void buscar_agendamento(void){
     printf("///                         Observações:                                    ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
+
+    arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
+
+    if (arq_agendamentos == NULL){
+        printf("Erro na criacao do arquivo\n");
+        return;
+     }
+      while (!feof(arq_agendamentos)) {
+        fscanf(arq_agendamentos, "%[^;]", cpf);
+        fgetc(arq_agendamentos);
+        fscanf(arq_agendamentos, "%[^;]", data);
+        fgetc(arq_agendamentos);
+        fscanf(arq_agendamentos, "%[^;]", hora);
+        fgetc(arq_agendamentos);
+        fscanf(arq_agendamentos, "%[^;]", tipo);
+        fgetc(arq_agendamentos);
+        fscanf(arq_agendamentos, "%[^;]", profissional);
+        fgetc(arq_agendamentos);
+        fscanf(arq_agendamentos, "%[^;]", observacoes);
+        fgetc(arq_agendamentos);
+        
+    }
+
+    if (strcmp(cpf, cpf_lido) == 0) {
+        printf("Agendamento encontrado! \n");
+        printf("CPF: %s\n", cpf);
+        printf("Data: %s\n", data);
+        printf("Hora: %s\n", hora);
+        printf("Tipo: %s\n", tipo);
+        printf("Profissional: %s\n", profissional);
+        printf("Observações: %s\n", observacoes);
+        getchar();
+        fclose(arq_agendamentos);
+        return;
+    }
 }
 void alterar_agendamento(void){
     char data[15];
