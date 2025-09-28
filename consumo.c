@@ -8,32 +8,23 @@
 #define RESET "\x1b[0m"
 #define CYAN "\033[36m"
 
-void modulo_consumo(void)
-{
+
+void modulo_consumo(void) {
     char opcao;
-    do
-    {
+    do {
+        limpar_tela();
         opcao = tela_consumo();
-        switch (opcao)
-        {
-        case '1':
-            cadastrar_consumo();
-            break;
-        case '2':
-            buscar_consumo();
-            break;
-        case '3':
-            alterar_consumo();
-            break;
-        case '4':
-            excluir_consumo();
-            break;
-        case '5':
-            quantidade_agua();
-            break;
+        switch(opcao) {
+            case '1': cadastrar_consumo(); break;
+            case '2': buscar_consumo(); break;
+            case '3': alterar_consumo(); break;
+            case '4': excluir_consumo(); break;
+            case '5': quantidade_agua(); break;
+
         }
-    } while (opcao != '0');
+    } while (opcao != '0');  
 }
+
 
 char tela_consumo(void)
 {
@@ -125,13 +116,13 @@ void cadastrar_consumo(void)
         printf("///                                                                         ///\n");
         printf("///                 = = = = =  Cadastrar Consumo de Água = = = = =          ///\n");
         printf("///                                                                         ///\n");
-        scanf("%s", data);
-        getchar();
         printf("///                                                                         ///\n");
         printf("///                         Informe a quantidade (ml):                      ///\n");
         scanf("%d", &quantidade_agua);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
+        scanf("%s", data);
+        getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
         printf("\n");
         arq_consumo_agua = fopen("arq_consumo_agua .csv", "at");
@@ -202,8 +193,7 @@ void buscar_consumo(void)
             fgetc(arq_consumo_alimentos);
         }
 
-        if (strcmp(data, data_lida) == 0)
-        {
+        if (strcmp(data, data_lida) == 0){
             printf("Consumo de Alimentos encontrado \n");
             printf("Alimento: %s\n", alimento);
             printf("Quantidade(kcal): %f\n", quantidade_calorias);
@@ -216,7 +206,8 @@ void buscar_consumo(void)
     else if (tipo == 2)
     {
         
-        char data[15];
+    
+        char data[15];    
         limpar_tela();
 
         printf("\n");
