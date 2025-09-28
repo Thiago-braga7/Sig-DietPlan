@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "consumo.h"
 #include "util.h"
+#include <string.h>
 
 #define RED "\x1b[31m"
 #define RESET "\x1b[0m"
@@ -76,8 +77,9 @@ void cadastrar_consumo(void)
     if (tipo == 1)
     {
         FILE *arq_consumo_alimentos;
-        char alimento[100], data[15];
-        float quantidade;
+        char alimento[100];
+        char data[15];
+        float quantidade_calorias;
         limpar_tela();
 
         printf("\n");
@@ -91,7 +93,7 @@ void cadastrar_consumo(void)
         scanf("%s", alimento);
         getchar();
         printf("///                         Quantidade(kcal):                               ///\n");
-        scanf("%f", &quantidade);
+        scanf("%f", &quantidade_calorias);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
         scanf("%s", data);
@@ -106,7 +108,7 @@ void cadastrar_consumo(void)
         }
 
         fprintf(arq_consumo_alimentos, "%s;", alimento);
-        fprintf(arq_consumo_alimentos, "%f;", quantidade);
+        fprintf(arq_consumo_alimentos, "%f;", quantidade_calorias);
         fprintf(arq_consumo_alimentos, "%s;", data);
         pausar();
     }
@@ -123,24 +125,24 @@ void cadastrar_consumo(void)
         printf("///                                                                         ///\n");
         printf("///                 = = = = =  Cadastrar Consumo de Água = = = = =          ///\n");
         printf("///                                                                         ///\n");
+        scanf("%s", data);
+        getchar();
         printf("///                                                                         ///\n");
         printf("///                         Informe a quantidade (ml):                      ///\n");
         scanf("%d", &quantidade_agua);
         getchar();
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%s", data);
-        getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
         printf("\n");
         arq_consumo_agua = fopen("arq_consumo_agua .csv", "at");
-        if (arq_consumo_agua  == NULL)
+        if (arq_consumo_agua == NULL)
         {
             printf("Erro na criacao do arquivo\n");
             return;
         }
 
-        fprintf(arq_consumo_agua , "%d;", quantidade_agua);
-        fprintf(arq_consumo_agua , "%s;", data);
+        fprintf(arq_consumo_agua, "%d;", quantidade_agua);
+        fprintf(arq_consumo_agua, "%s;", data);
         pausar();
     }
     else
@@ -162,9 +164,11 @@ void buscar_consumo(void)
 
     if (tipo == 1)
     {
+        FILE *arq_consumo_alimentos;
+        char alimento[100];
         char data[15];
-        limpar_tela();
-
+        float quantidade_calorias;
+        char data_lida[15];
         printf("\n");
         printf(RED "///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                               Consumo Alimentos                         ///\n");
@@ -173,16 +177,45 @@ void buscar_consumo(void)
         printf("///                                                                         ///\n");
         printf("///                                                                         ///\n");
         printf("///                         Informe a data (DD/MM/AAAA):                    ///\n");
-        scanf("%s", data);
+        scanf("%s", data_lida);
         getchar();
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                     Registro de Consumo no dia (DD/MM/AAAA)             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
         printf("\n");
         pausar();
+
+        arq_consumo_alimentos = fopen("arq_consumo_alimentos.csv", "rt");
+
+        if (arq_consumo_alimentos == NULL)
+        {
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+        while (!feof(arq_consumo_alimentos))
+        {
+            fscanf(arq_consumo_alimentos, "%[^;]", alimento);
+            fgetc(arq_consumo_alimentos);
+            fscanf(arq_consumo_alimentos, "%f", &quantidade_calorias);
+            fgetc(arq_consumo_alimentos);
+            fscanf(arq_consumo_alimentos, "%[^;]", data);
+            fgetc(arq_consumo_alimentos);
+        }
+
+        if (strcmp(data, data_lida) == 0)
+        {
+            printf("Consumo de Alimentos encontrado \n");
+            printf("Alimento: %s\n", alimento);
+            printf("Quantidade(kcal): %f\n", quantidade_calorias);
+            printf("Data: %s\n", data);
+            getchar();
+            fclose(arq_consumo_alimentos);
+            return;
+        }
     }
     else if (tipo == 2)
     {
+        
         char data[15];
         limpar_tela();
 
@@ -206,7 +239,6 @@ void buscar_consumo(void)
     {
         printf("Opção inválida!\n");
     }
-    pausar();
 }
 void alterar_consumo(void)
 {
