@@ -23,7 +23,6 @@ void modulo_pacientes(void) {
             case '4': excluir_paciente(); break;
             case '5': calcular_imc(); break;
             case '6': calcular_bf(); break;
-            // case '7': listar_pacientes(); break;
             
         }
     } while (opcao != '0');  

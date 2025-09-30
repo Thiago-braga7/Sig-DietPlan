@@ -47,8 +47,13 @@ char tela_consultas(void){
 
 
 void cadastrar_consulta(void){
-    char nome[100], data[15], hora[10];
-    char medico[100], observacoes[200];
+    FILE *arq_consulta;
+
+    char nome[100];
+    char data[15];
+    char hora[10];
+    char medico[100];
+    char observacoes[200];
     limpar_tela();
 
     printf("\n");
@@ -77,8 +82,23 @@ void cadastrar_consulta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    
+    arq_consulta = fopen("arq_consulta.csv", "at");
+    if (arq_consulta == NULL) {
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    fprintf(arq_consulta, "%s;", nome);
+    fprintf(arq_consulta, "%s;", data);
+    fprintf(arq_consulta, "%s;", hora);
+    fprintf(arq_consulta, "%s;", medico);
+    fprintf(arq_consulta, "%s;", observacoes);
+
     pausar();
 }
+
+
 void buscar_consulta(void){
     char nome[100], data[15];
     limpar_tela();
