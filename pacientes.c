@@ -115,7 +115,7 @@ void cadastrar_paciente(void){
     fprintf(arq_paciente, "%d;", idade);
     fprintf(arq_paciente, "%f;", peso);
     fprintf(arq_paciente, "%f\n", altura);
-
+    fclose(arq_paciente);
     pausar();
 }
 
