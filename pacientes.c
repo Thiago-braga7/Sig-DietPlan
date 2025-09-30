@@ -115,31 +115,9 @@ void cadastrar_paciente(void){
     fprintf(arq_paciente, "%d;", idade);
     fprintf(arq_paciente, "%f;", peso);
     fprintf(arq_paciente, "%f\n", altura);
-
+    fclose(arq_paciente);
     pausar();
 }
-
-
-// void listar_pacientes(void) {
-//     FILE *arq_paciente;
-//     char linha[255];
-
-//     printf("Lista de pacientes\n");
-//     arq_paciente = fopen("arq_paciente.txt", "rt");
-//     if (arq_paciente == NULL){
-//         printf("Erro na criacao do arquivo\n");
-//         exit(1);
-//     }
-
-//     while (fscanf(arq_paciente, "%[^\n]",linha) == 1) {
-//         printf("%s\n", linha);
-//         fgetc(arq_paciente);
-//     }
-//     fclose(arq_paciente);
-//     return 0;
-
-//     pausar();
-// }
 
 
 void buscar_paciente(void){
