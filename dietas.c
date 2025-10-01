@@ -4,10 +4,6 @@
 #include "util.h"
 #include <string.h>
 
-#define RESET "\033[0m"
-#define RED "\033[31m"
-#define CYAN "\033[36m"
-
 
 void modulo_dietas(void) {
     char opcao;
@@ -28,7 +24,7 @@ char tela_dietas(void){
     limpar_tela();
 
     printf("\n");
-    printf(RED "///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                     = = = = = Dietas  = = = = =                         ///\n");
     printf("///                                                                         ///\n");
@@ -43,7 +39,7 @@ char tela_dietas(void){
     scanf("%c", &opcao);
     getchar();
     printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     pausar();
     return opcao;
@@ -69,7 +65,7 @@ void cadastrar_dieta(void){
     }
 
     printf("\n");
-    printf(RED "///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Dietas                                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
@@ -89,7 +85,7 @@ void cadastrar_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Dieta Cadastrada com Sucesso!                    ///\n");
     printf("///                        ID gerado: %02d                                    ///\n", id_dieta);
-    printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     pausar();
 
     arq_dietas = fopen("arq_dietas.csv", "at");
@@ -108,6 +104,7 @@ void cadastrar_dieta(void){
     fclose(arq_dietas);
     pausar();
 }
+
 void buscar_dieta(void){
     FILE *arq_dietas;
 
@@ -120,7 +117,7 @@ void buscar_dieta(void){
     int encontrado = 0;
 
     printf("\n");
-    printf(RED "///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Dietas                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Buscar Dieta  = = = = =                     ///\n");
@@ -128,26 +125,21 @@ void buscar_dieta(void){
     printf("///                        Informe o ID da Dieta:                           ///\n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
 
     arq_dietas = fopen("arq_dietas.csv", "rt");
 
-    if (arq_dietas == NULL){
+    if (arq_dietas == NULL)
+    {
         printf("Erro na criacao do arquivo\n");
         return;
     }
-    while (!feof(arq_dietas)){
-        fscanf(arq_dietas, "%d;", &id_dieta);
-        fscanf(arq_dietas, "%[^;]", cpf);
-        fgetc(arq_dietas);
-        fscanf(arq_dietas, "%[^;]", nome_dieta);
-        fgetc(arq_dietas);
-        fscanf(arq_dietas, "%d;", &calorias);
-        fscanf(arq_dietas, "%[^\n]", refeicoes);
-        fgetc(arq_dietas);
-
-        if (id_dieta == id_busca){
-            printf(RED "///                        Dieta Encontrada!                              ///\n" RESET);
+    while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",
+                  &id_dieta, cpf, nome_dieta, &calorias, refeicoes) == 5)
+    {
+        if (id_dieta == id_busca)
+        {
+            printf("///                        Dieta Encontrada!                              ///\n");
             printf("ID da Dieta:       %d\n", id_dieta);
             printf("CPF do Usuário:    %s\n", cpf);
             printf("Nome da Dieta:     %s\n", nome_dieta);
@@ -159,12 +151,14 @@ void buscar_dieta(void){
         }
     }
     fclose(arq_dietas);
-     if (encontrado == 0) {
-        printf(RED"\n///               Dieta com o ID %d nao foi encontrada.                 ///\n"RESET, id_busca);
+    
+    if (encontrado == 0){
+        printf("\n///               Dieta com o ID %d nao foi encontrada.                 ///\n", id_busca);
     }
 
     pausar();
 }
+
 void alterar_dieta(void){
     char nome_dieta[50];
     char novo_cpf[15];
@@ -173,7 +167,7 @@ void alterar_dieta(void){
     int novas_calorias;
     limpar_tela();
     printf("\n");
-    printf(RED "///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Dietas                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Dieta  = = = = =                    ///\n");
@@ -198,16 +192,17 @@ void alterar_dieta(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Dieta Alterada com sucesso!                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n" RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     pausar();
 }
 
-void excluir_dieta(void){
+void excluir_dieta(void)
+{
 
     char nome_dieta[50];
     limpar_tela();
     printf("\n");
-    printf(RED "///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Dietas                                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Excluir Dieta = = = = =                       ///\n");
@@ -230,24 +225,24 @@ void excluir_dieta(void){
 
     do
     {
-        printf(RED "Deseja confirmar a ação? (S/N): " RESET);
+        printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
 
         resposta = confirmar_acao(resposta);
 
         if (resposta == 0)
         {
-            printf(RED "Opção inválida! Digite apenas S ou N.\n" RESET);
+            printf("Opção inválida! Digite apenas S ou N.\n");
         }
     } while (resposta == 0);
 
     if (resposta == 'S')
     {
-        printf(RED "/// Dieta excluída com sucesso! ///\n");
+        printf("/// Dieta excluída com sucesso! ///\n");
     }
     else
     {
-        printf(RED "/// Operação de exclusão cancelada! ///\n");
+        printf("/// Operação de exclusão cancelada! ///\n");
     }
 
     pausar();
