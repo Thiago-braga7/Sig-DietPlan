@@ -14,44 +14,7 @@
 
 
 
-void bem_vindo(void) {
-    char nome[50];
-    char genero;
-    bool valido = false;
 
-    logo();
-   
-    do {
-        printf(CYAN"\nInforme seu nome: "RESET);
-        scanf(" %[^\n]", nome);  
-
-        if(validar_nome(nome)) {
-            valido = true;
-        } else {
-            printf(CYAN"Nome inválido! Use apenas letras e espaços, palavras com no mínimo 2 letras, sem repetições absurdas.\n"RESET);
-        }
-    } while(!valido);
-
-    
-    do {
-        printf(CYAN"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
-        scanf(" %c", &genero);
-
-        genero = ler_genero(genero); 
-
-        if (genero == 0) {
-            printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
-        }
-    } while (genero == 0);
-
-    
-    mensagem_boas_vindas(nome, genero);
-    pausar();
-    
-}
-
-
-    
 
 // créditos:Text Art
 

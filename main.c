@@ -23,7 +23,6 @@ void menu_principal(void);
 
 int main(void){
     char opcao;
-    bem_vindo();
     sobre();
 
     do {
