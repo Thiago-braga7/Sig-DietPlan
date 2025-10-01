@@ -103,8 +103,8 @@ void cadastrar_paciente(void){
     printf("                    Paciente Cadastrado com Sucesso!                         \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
 
-
     arq_paciente = fopen("arq_paciente.csv", "at");
+
     if (arq_paciente == NULL) {
         printf("Erro na criacao do arquivo\n");
         return;
@@ -182,33 +182,22 @@ void buscar_paciente(void){
         return;
      }
 
-    while (!feof(arq_paciente)) {
-        fscanf(arq_paciente, "%[^;]", nome);
-        fgetc(arq_paciente);
-        fscanf(arq_paciente, "%[^;]", cpf);
-        fgetc(arq_paciente);
-        fscanf(arq_paciente, "%[^;]", tel);
-        fgetc(arq_paciente);
-        fscanf(arq_paciente, "%d", &idade);
-        fgetc(arq_paciente);
-        fscanf(arq_paciente, "%f", &peso);
-        fgetc(arq_paciente);
-        fscanf(arq_paciente, "%f", &altura);
-        fgetc(arq_paciente);
+    while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", nome, cpf, tel, &idade, &peso, &altura) == 6) {
+        if (strcmp(cpf, cpf_lido) == 0) {
+            printf("Paciente encontrado\n");
+            printf("Nome: %s\n", nome);
+            printf("CPF: %s\n", cpf);
+            printf("Telefone: %s\n", tel);
+            printf("Idade: %d\n", idade);
+            printf("Peso: %f\n", peso);
+            printf("Altura: %f\n", altura);
+            getchar();
+            return;
+        }
     }
+    fclose(arq_paciente);
 
-    if (strcmp(cpf, cpf_lido) == 0) {
-        printf("Paciente encontrado");
-        printf("Nome: %s\n", nome);
-        printf("CPF: %s\n", cpf);
-        printf("Telefone: %s\n", tel);
-        printf("Idade: %d\n", idade);
-        printf("Peso: %f\n", peso);
-        printf("Altura: %f\n", altura);
-        getchar();
-        fclose(arq_paciente);
-        return;
-    }
+
 }
 
  
@@ -261,8 +250,19 @@ void alterar_paciente(void){
         
    
 void excluir_paciente(void){
+    FILE *arq_paciente;
+    FILE *arq_paciente_temp;
+    char nome[100];
+    char cpf[13];
+    char tel[11];
+    int idade;
+    float peso;
+    float altura;
+    char cpf_lido[13];
+    int encontrado = 0;
+
     limpar_tela();
-    char cpf[15];
+
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Pacientes                                ///\n");
@@ -284,24 +284,63 @@ void excluir_paciente(void){
     printf("///                         Peso(Kg):                                       ///\n");
     printf("///                         Altura(m):                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
-    char resposta;
-
-    do {
-        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
-        scanf(" %c", &resposta);
-
-        resposta = confirmar_acao(resposta); 
-
-        if (resposta == 0) {  
-            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
-        }
-    } while (resposta == 0); 
-        if (resposta == 'S') {
-            printf(RED"Paciente Excluído com Sucesso!    \n"RESET);
-    }   else {
-            printf(RED"Operação de Exclusão Cancelada !  \n"RESET);
-     }
     pausar();
+
+    arq_paciente = fopen("arq_paciente.csv", "rt");
+    arq_paciente_temp = fopen("arq_paciente_temp.csv", "at");
+
+    if (arq_paciente == NULL || arq_paciente_temp == NULL){
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", nome, cpf, tel, &idade, &peso, &altura) == 6) {
+        if (strcmp(cpf, cpf_lido) == 0) {
+            printf("Paciente encontrado");
+            printf("Nome: %s\n", nome);
+            printf("CPF: %s\n", cpf);
+            printf("Telefone: %s\n", tel);
+            printf("Idade: %d\n", idade);
+            printf("Peso: %f\n", peso);
+            printf("Altura: %f\n", altura);
+            getchar();
+            encontrado = 1;
+            return;
+        }
+    }
+
+    if (encontrado == 0) {
+        fprintf(arq_paciente_temp, "%s;", nome);
+        fprintf(arq_paciente_temp, "%s;", cpf);
+        fprintf(arq_paciente_temp, "%s;", tel);
+        fprintf(arq_paciente_temp, "%d;", idade);
+        fprintf(arq_paciente_temp, "%f;", peso);
+        fprintf(arq_paciente_temp, "%f\n", altura);
+    }
+
+    fclose(arq_paciente);
+    fclose(arq_paciente_temp);
+
+    rename("arq_paciente_temp.csv", "arq_paciente.csv");
+
+    // char resposta;
+
+    // do {
+    //     printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+    //     scanf(" %c", &resposta);
+
+    //     resposta = confirmar_acao(resposta); 
+
+    //     if (resposta == 0) {  
+    //         printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+    //     }
+    // } while (resposta == 0); 
+    //     if (resposta == 'S') {
+    //         printf(RED"Paciente Excluído com Sucesso!    \n"RESET);
+    // }   else {
+    //         printf(RED"Operação de Exclusão Cancelada !  \n"RESET);
+    // }
+    // pausar();
 
 }
 
