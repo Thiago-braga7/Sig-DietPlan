@@ -15,7 +15,7 @@ void modulo_profissionais(void) {
         switch(opcao) {
             case '1': cadastrar_profissional(); break;
             case '2': buscar_profissional(); break;
-            // case '3': alterar_profissional(); break;
+            case '3': alterar_profissional(); break;
             // case '4': excluir_profissional(); break;
         }
     } while (opcao != '0');  
@@ -73,23 +73,18 @@ void cadastrar_profissional(void){
     printf("///                         Nome:                                           ///\n");
     scanf("%s", nome); 
     getchar();
-
     printf("///                         CPF (Apenas números):                           ///\n");
     scanf("%s", cpf); 
     getchar();
-    
     printf("///                         E-mail:                                         ///\n");
     scanf("%s", email); 
-    getchar();
-    
+    getchar();    
     printf("///                         Telefone (Apenas números):                      ///\n");
     scanf("%s", tel); 
     getchar();
-    
     printf("///                         CRN:                                            ///\n");
     scanf("%s", crn); 
     getchar();
-    
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Profissional Cadastrado com Sucesso!                       \n");
     printf("///                        ID gerado: %02d                                    ///\n", id_profissional);
@@ -168,3 +163,46 @@ void buscar_profissional(void){
     fclose(arq_profissional);
     getchar();
 }
+ void alterar_profissional(void){
+    char novo_nome[100];
+    char novo_cpf[13];
+    char novo_email[30];
+    char novo_tel[11];
+    char novo_crn[12];
+    int id_busca;
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Profissionais                             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Alterar Dados do Profissional = = = = =       ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                          Informe o ID:                                  ///\n");
+    scanf("%d", &id_busca);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Novos Dados do Profissional                      ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Nome Completo:                                  ///\n");
+    scanf("%s", novo_nome);
+    getchar();
+    printf("///                         CPF:                                            ///\n");
+    scanf("%s", novo_cpf);
+    getchar();
+    printf("///                         E-mail:                                         ///\n");
+    scanf("%s", novo_email);
+    getchar();
+    printf("///                         Telefone:                                       ///\n");
+    scanf("%s", novo_tel);
+    getchar();
+    printf("///                         CRN:                                            ///\n");
+    scanf("%s", novo_crn);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                    Paciente alterado com sucesso!                       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    pausar();
+
+ }
