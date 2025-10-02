@@ -16,7 +16,7 @@ void modulo_profissionais(void) {
             case '1': cadastrar_profissional(); break;
             case '2': buscar_profissional(); break;
             case '3': alterar_profissional(); break;
-            // case '4': excluir_profissional(); break;
+            case '4': excluir_profissional(); break;
         }
     } while (opcao != '0');  
 }
@@ -206,3 +206,102 @@ void buscar_profissional(void){
     pausar();
 
  }
+
+ void excluir_profissional(void){
+
+    FILE *arq_profissional;
+    FILE *arq_profissional_temp;
+    char nome[100];
+    char cpf[13];
+    char email[30];
+    char tel[11];
+    char crn[12];
+    int id_profissional;
+    int id_busca;
+    int encontrado = 0;
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                             Profissionais                               ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = = Excluir Profissional = = = = =                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                         Informe o ID do Profissional:                   ///\n");
+    scanf("%d", &id_busca);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
+    pausar();
+    char resposta;
+
+    do{
+        arq_profissional = fopen("arq_profissional.csv", "rt");
+
+        if (arq_profissional == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&id_profissional, nome, cpf, email, tel, crn) == 6){
+            if (id_profissional == id_busca)
+            {
+                printf("///                        Profissional Encontrado!                       ///\n");
+                printf("ID:                 %d\n", id_profissional);
+                printf("Nome:               %s\n", nome);
+                printf("CPF:                %s\n", cpf);
+                printf("E-mail:             %s\n", email);
+                printf("Telefone:           %s\n", tel);
+                printf("CRN:                %s\n", crn);
+
+                encontrado = 1;
+                break;
+            }
+        }
+
+        if (!encontrado){
+            printf("\nProfissional não encontrado!\n");
+        }
+
+        fclose(arq_profissional);
+        getchar();
+        printf("Deseja confirmar a ação? (S/N): ");
+        scanf(" %c", &resposta);
+
+        resposta = confirmar_acao(resposta);
+
+        if (resposta == 0){
+            printf("Opção inválida! Digite apenas S ou N.\n");
+        }
+
+    } while (resposta == 0);
+
+    if (resposta == 'S'){
+        arq_profissional = fopen("arq_profissional.csv", "rt");
+        arq_profissional_temp = fopen("arq_profissional_temp.csv", "wt");
+
+        if (arq_profissional == NULL || arq_profissional_temp == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&id_profissional, nome, cpf, email, tel, crn) == 6){
+            if(id_profissional != id_busca){
+                fprintf(arq_profissional_temp, "%d;%s;%s;%s;%s;%s\n", id_profissional, nome, cpf, email, tel, crn);
+            }
+        }
+        fclose(arq_profissional);
+        fclose(arq_profissional_temp);
+
+        remove("arq_profissional.csv");
+        rename("arq_profissional_temp.csv", "arq_profissional.csv");
+
+        if (!encontrado){
+            printf("\nProfissional não encontrado!\n");
+        }
+
+        printf("Profissional Excluído com Sucesso! \n");
+    } else {
+            printf("Operação de Exclusão Cancelada !  \n");
+    }
+    pausar();
+}
