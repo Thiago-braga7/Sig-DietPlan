@@ -150,14 +150,14 @@ void buscar_dieta(void){
             break;
         }
     }
-    fclose(arq_dietas);
-    
-    if (encontrado == 0){
-        printf("\n///               Dieta com o ID %d nao foi encontrada.                 ///\n", id_busca);
+    if (!encontrado){
+        printf("\nDieta não encontrado!\n");
     }
 
-    pausar();
+    fclose(arq_dietas);
+    getchar();
 }
+
 
 void alterar_dieta(void){
     char nome_dieta[50];
@@ -196,10 +196,17 @@ void alterar_dieta(void){
     pausar();
 }
 
-void excluir_dieta(void)
-{
+void excluir_dieta(void){
 
+    FILE *arq_dietas;
+    FILE *arq_dietas_temp;
+    char cpf[13];
     char nome_dieta[50];
+    char refeicoes[200];
+    int calorias;
+    int id_dieta;
+    int id_busca;
+    int encontrado = 0;
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -207,43 +214,80 @@ void excluir_dieta(void)
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Excluir Dieta = = = = =                       ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o nome da Dieta:                        ///\n");
-    scanf("%s", nome_dieta);
+    printf("///                         Informe o ID da Dieta:                          ///\n");
+    scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Dieta                               ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                           Dados da Dieta                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome da Dieta:                                  ///\n");
-    printf("///                         Total de Calorias por dia:                      ///\n");
-    printf("///                         Refeições:                                      ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
     pausar();
     char resposta;
 
-    do
-    {
+    do{
+        arq_dietas = fopen("arq_dietas.csv", "rt");
+
+        if (arq_dietas == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&id_dieta, cpf, nome_dieta, &calorias, refeicoes) == 5){
+            if (id_dieta == id_busca)
+            {
+                printf("///                        Dieta Encontrada!                              ///\n");
+                printf("ID da Dieta:       %d\n", id_dieta);
+                printf("CPF do Usuário:    %s\n", cpf);
+                printf("Nome da Dieta:     %s\n", nome_dieta);
+                printf("Total de Calorias: %d kcal\n", calorias);
+                printf("Refeições:         %s\n", refeicoes);
+
+                encontrado = 1;
+                break;
+            }
+        }
+        if (!encontrado){
+            printf("\nDieta não encontrada!\n");
+        }
+
+        fclose(arq_dietas);
+        getchar();
         printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
 
         resposta = confirmar_acao(resposta);
 
-        if (resposta == 0)
-        {
+        if (resposta == 0){
             printf("Opção inválida! Digite apenas S ou N.\n");
         }
+
     } while (resposta == 0);
 
-    if (resposta == 'S')
-    {
-        printf("/// Dieta excluída com sucesso! ///\n");
-    }
-    else
-    {
-        printf("/// Operação de exclusão cancelada! ///\n");
-    }
+    if (resposta == 'S'){
+        arq_dietas = fopen("arq_dietas.csv", "rt");
+        arq_dietas_temp = fopen("arq_dietas_temp.csv", "wt");
 
+        if (arq_dietas == NULL || arq_dietas_temp == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&id_dieta, cpf, nome_dieta, &calorias, refeicoes) == 5){
+            if(id_dieta != id_busca){
+                fprintf(arq_dietas_temp, "%d;%s;%s;%d;%s\n", id_dieta, cpf, nome_dieta, calorias, refeicoes);
+            }
+        }
+        fclose(arq_dietas);
+        fclose(arq_dietas_temp);
+
+        remove("arq_dietas.csv");
+        rename("arq_dietas_temp.csv", "arq_dietas.csv");
+
+        if (!encontrado){
+            printf("\nDieta não encontrada!\n");
+        }
+
+        printf("Dieta Excluída com Sucesso! \n");
+    } else {
+            printf("Operação de Exclusão Cancelada !  \n");
+    }
     pausar();
 }
