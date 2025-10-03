@@ -4,7 +4,7 @@
 #include "util.h"
 #include <string.h>
 
-
+typedef struct profissional Profissional;
 
 
 void modulo_profissionais(void) {
@@ -43,12 +43,9 @@ char tela_profissionais(void){
 
 void cadastrar_profissional(void){
     FILE *arq_profissional;
-    char nome[100];
-    char cpf[13];
-    char email[30];
-    char tel[11];
-    char crn[12];
-    int id_profissional = 1;
+    Profissional pf;
+
+    pf.id_profissional = 1;
 
     arq_profissional = fopen("arq_profissional.csv", "rt");
     if (arq_profissional != NULL)
@@ -56,7 +53,7 @@ void cadastrar_profissional(void){
         char linha[512];
         while (fgets(linha, sizeof(linha), arq_profissional) != NULL)
         {
-            id_profissional++;
+            pf.id_profissional++;
         }
         fclose(arq_profissional);
     }
@@ -71,23 +68,23 @@ void cadastrar_profissional(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome:                                           ///\n");
-    scanf("%s", nome); 
+    scanf("%100[^\n]", pf.nome); 
     getchar();
     printf("///                         CPF (Apenas números):                           ///\n");
-    scanf("%s", cpf); 
+    scanf("%s", pf.cpf); 
     getchar();
     printf("///                         E-mail:                                         ///\n");
-    scanf("%s", email); 
+    scanf("%s", pf.email); 
     getchar();    
     printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%s", tel); 
+    scanf("%11[^\n]", pf.tel); 
     getchar();
     printf("///                         CRN:                                            ///\n");
-    scanf("%s", crn); 
+    scanf("%s", pf.crn); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Profissional Cadastrado com Sucesso!                       \n");
-    printf("///                        ID gerado: %02d                                    ///\n", id_profissional);
+    printf("///                        ID gerado: %02d                                    ///\n", pf.id_profissional);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
     arq_profissional = fopen("arq_profissional.csv", "at");
@@ -96,12 +93,12 @@ void cadastrar_profissional(void){
         printf("Erro na criacao do arquivo\n");
         return;
     }
-    fprintf(arq_profissional, "%d;", id_profissional);
-    fprintf(arq_profissional, "%s;", nome);
-    fprintf(arq_profissional, "%s;", cpf);
-    fprintf(arq_profissional, "%s;", email);
-    fprintf(arq_profissional, "%s;", tel);
-    fprintf(arq_profissional, "%s\n", crn);
+    fprintf(arq_profissional, "%d;", pf.id_profissional);
+    fprintf(arq_profissional, "%s;", pf.nome);
+    fprintf(arq_profissional, "%s;", pf.cpf);
+    fprintf(arq_profissional, "%s;", pf.email);
+    fprintf(arq_profissional, "%s;", pf.tel);
+    fprintf(arq_profissional, "%s\n", pf.crn);
     
     fclose(arq_profissional);
     pausar();
@@ -111,12 +108,7 @@ void cadastrar_profissional(void){
 void buscar_profissional(void){
     FILE *arq_profissional;
     
-    char nome[100];
-    char cpf[13];
-    char email[30];
-    char tel[11];
-    char crn[12];
-    int id_profissional;
+    Profissional pf;
     int id_busca;
     int encontrado = 0;
 
@@ -139,18 +131,16 @@ void buscar_profissional(void){
         printf("Erro na criacao do arquivo\n");
         return;
     }
-    while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",
-              &id_profissional, nome, cpf, email, tel, crn) == 6)
-    {
-        if (id_profissional == id_busca)
+    while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+        if (pf.id_profissional == id_busca)
         {
             printf("///                        Profissional Encontrado!                              ///\n");
-            printf("ID:         %d\n", id_profissional);
-            printf("Nome:       %s\n", nome);
-            printf("CPF:        %s\n", cpf);
-            printf("E-mail:     %s\n", email);
-            printf("Telefone:   %s\n", tel);
-            printf("CRN:        %s\n", crn);
+            printf("ID:         %d\n", pf.id_profissional);
+            printf("Nome:       %s\n", pf.nome);
+            printf("CPF:        %s\n", pf.cpf);
+            printf("E-mail:     %s\n", pf.email);
+            printf("Telefone:   %s\n", pf.tel);
+            printf("CRN:        %s\n", pf.crn);
 
             encontrado = 1;
             break;
@@ -164,13 +154,9 @@ void buscar_profissional(void){
     getchar();
 }
  void alterar_profissional(void){
-    char novo_nome[100];
-    char novo_cpf[13];
-    char novo_email[30];
-    char novo_tel[11];
-    char novo_crn[12];
+    // Profissional pf;
+    Profissional novo_pf;
     int id_busca;
-
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -185,38 +171,32 @@ void buscar_profissional(void){
     printf("///                        Novos Dados do Profissional                      ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
-    scanf("%s", novo_nome);
+    scanf("%s", novo_pf.nome);
     getchar();
     printf("///                         CPF:                                            ///\n");
-    scanf("%s", novo_cpf);
+    scanf("%s", novo_pf.cpf);
     getchar();
     printf("///                         E-mail:                                         ///\n");
-    scanf("%s", novo_email);
+    scanf("%s", novo_pf.email);
     getchar();
     printf("///                         Telefone:                                       ///\n");
-    scanf("%s", novo_tel);
+    scanf("%s", novo_pf.tel);
     getchar();
     printf("///                         CRN:                                            ///\n");
-    scanf("%s", novo_crn);
+    scanf("%s", novo_pf.crn);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Paciente alterado com sucesso!                       ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     pausar();
-
  }
 
  void excluir_profissional(void){
 
     FILE *arq_profissional;
     FILE *arq_profissional_temp;
-    char nome[100];
-    char cpf[13];
-    char email[30];
-    char tel[11];
-    char crn[12];
-    int id_profissional;
+    Profissional pf;
     int id_busca;
     int encontrado = 0;
     limpar_tela();
@@ -242,16 +222,16 @@ void buscar_profissional(void){
             return;
         }
 
-        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&id_profissional, nome, cpf, email, tel, crn) == 6){
-            if (id_profissional == id_busca)
+        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+            if (pf.id_profissional == id_busca)
             {
                 printf("///                        Profissional Encontrado!                       ///\n");
-                printf("ID:                 %d\n", id_profissional);
-                printf("Nome:               %s\n", nome);
-                printf("CPF:                %s\n", cpf);
-                printf("E-mail:             %s\n", email);
-                printf("Telefone:           %s\n", tel);
-                printf("CRN:                %s\n", crn);
+                printf("ID:                 %d\n", pf.id_profissional);
+                printf("Nome:               %s\n", pf.nome);
+                printf("CPF:                %s\n", pf.cpf);
+                printf("E-mail:             %s\n", pf.email);
+                printf("Telefone:           %s\n", pf.tel);
+                printf("CRN:                %s\n", pf.crn);
 
                 encontrado = 1;
                 break;
@@ -284,9 +264,9 @@ void buscar_profissional(void){
             return;
         }
 
-        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&id_profissional, nome, cpf, email, tel, crn) == 6){
-            if(id_profissional != id_busca){
-                fprintf(arq_profissional_temp, "%d;%s;%s;%s;%s;%s\n", id_profissional, nome, cpf, email, tel, crn);
+        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+            if(pf.id_profissional != id_busca){
+                fprintf(arq_profissional_temp, "%d;%s;%s;%s;%s;%s\n", pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
             }
         }
         fclose(arq_profissional);
