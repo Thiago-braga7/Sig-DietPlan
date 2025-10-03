@@ -5,6 +5,8 @@
 #include <string.h>
 
 
+typedef struct dieta Dieta;
+
 void modulo_dietas(void) {
     char opcao;
     do {
@@ -47,11 +49,9 @@ char tela_dietas(void){
 
 void cadastrar_dieta(void){
     FILE *arq_dietas;
-    char cpf[13];
-    char nome_dieta[50];
-    char refeicoes[200];
-    int calorias;
-    int id_dieta = 1;
+    Dieta dt;
+
+    dt.id_dieta = 1;
 
     arq_dietas = fopen("arq_dietas.csv", "rt");
     if (arq_dietas != NULL)
@@ -59,7 +59,7 @@ void cadastrar_dieta(void){
         char linha[512];
         while (fgets(linha, sizeof(linha), arq_dietas) != NULL)
         {
-            id_dieta++;
+            dt.id_dieta++;
         }
         fclose(arq_dietas);
     }
@@ -71,20 +71,20 @@ void cadastrar_dieta(void){
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Usuário:                                 ///\n");
-    scanf("%s", cpf);
+    scanf("%s", dt.cpf);
     getchar();
     printf("///                         Nome da Dieta:                                  ///\n");
-    scanf("%s", nome_dieta);
+    scanf("%50[^\n]", dt.nome_dieta);
     getchar();
     printf("///                         Total de Calorias por dia:                      ///\n");
-    scanf("%d", &calorias);
+    scanf("%d", &dt.calorias);
     getchar();
     printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%s", refeicoes);
+    scanf("%200[^\n]", dt.refeicoes);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Dieta Cadastrada com Sucesso!                    ///\n");
-    printf("///                        ID gerado: %02d                                    ///\n", id_dieta);
+    printf("///                        ID gerado: %02d                                    ///\n", dt.id_dieta);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     pausar();
 
@@ -96,11 +96,11 @@ void cadastrar_dieta(void){
         getchar();
         return;
     }
-    fprintf(arq_dietas, "%d;", id_dieta);
-    fprintf(arq_dietas, "%s;", cpf);
-    fprintf(arq_dietas, "%s;", nome_dieta);
-    fprintf(arq_dietas, "%d;", calorias);
-    fprintf(arq_dietas, "%s\n", refeicoes);
+    fprintf(arq_dietas, "%d;", dt.id_dieta);
+    fprintf(arq_dietas, "%s;", dt.cpf);
+    fprintf(arq_dietas, "%s;", dt.nome_dieta);
+    fprintf(arq_dietas, "%d;", dt.calorias);
+    fprintf(arq_dietas, "%s\n", dt.refeicoes);
     fclose(arq_dietas);
     pausar();
 }
@@ -108,11 +108,7 @@ void cadastrar_dieta(void){
 void buscar_dieta(void){
     FILE *arq_dietas;
 
-    char cpf[13];
-    char nome_dieta[50];
-    char refeicoes[200];
-    int calorias;
-    int id_dieta;
+    Dieta dt;
     int id_busca;
     int encontrado = 0;
 
@@ -135,16 +131,16 @@ void buscar_dieta(void){
         return;
     }
     while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",
-                  &id_dieta, cpf, nome_dieta, &calorias, refeicoes) == 5)
+                  &dt.id_dieta, dt.cpf, dt.nome_dieta, &dt.calorias, dt.refeicoes) == 5)
     {
-        if (id_dieta == id_busca)
+        if (dt.id_dieta == id_busca)
         {
             printf("///                        Dieta Encontrada!                              ///\n");
-            printf("ID da Dieta:       %d\n", id_dieta);
-            printf("CPF do Usuário:    %s\n", cpf);
-            printf("Nome da Dieta:     %s\n", nome_dieta);
-            printf("Total de Calorias: %d kcal\n", calorias);
-            printf("Refeições:         %s\n", refeicoes);
+            printf("ID da Dieta:       %d\n", dt.id_dieta);
+            printf("CPF do Usuário:    %s\n", dt.cpf);
+            printf("Nome da Dieta:     %s\n", dt.nome_dieta);
+            printf("Total de Calorias: %d kcal\n", dt.calorias);
+            printf("Refeições:         %s\n", dt.refeicoes);
 
             encontrado = 1;
             break;
@@ -160,11 +156,9 @@ void buscar_dieta(void){
 
 
 void alterar_dieta(void){
-    char nome_dieta[50];
-    char novo_cpf[15];
-    char novo_nome_dieta[50];
-    char novas_refeicoes[200];
-    int novas_calorias;
+    // Dieta dt;
+    Dieta nova_dt;
+    int id_busca;
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -172,24 +166,26 @@ void alterar_dieta(void){
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Dieta  = = = = =                    ///\n");
     printf("///                                                                         ///\n");
-    printf("///                        Informe o nome da Dieta:                         ///\n");
-    scanf("%s", nome_dieta);
+    printf("///                        Informe o ID da Dieta:                           ///\n");
+    scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novos Dados da Dieta                             ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Usuário:                                 ///\n");
-    scanf("%s", novo_cpf);
+    scanf("%s", nova_dt.cpf);
     getchar();
     printf("///                         Nome da Dieta:                                  ///\n");
-    scanf("%s", novo_nome_dieta);
+    scanf("%50[^\n]", nova_dt.nome_dieta);
     getchar();
     printf("///                         Total de Calorias por dia:                      ///\n");
-    scanf("%d", &novas_calorias);
+    scanf("%d", &nova_dt.calorias);
     getchar();
     printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%s", novas_refeicoes);
+    scanf("%200[^\n]", nova_dt.refeicoes);
     getchar();
+
+    nova_dt.id_dieta = id_busca;
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Dieta Alterada com sucesso!                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -200,11 +196,7 @@ void excluir_dieta(void){
 
     FILE *arq_dietas;
     FILE *arq_dietas_temp;
-    char cpf[13];
-    char nome_dieta[50];
-    char refeicoes[200];
-    int calorias;
-    int id_dieta;
+    Dieta dt;
     int id_busca;
     int encontrado = 0;
     limpar_tela();
@@ -230,15 +222,15 @@ void excluir_dieta(void){
             return;
         }
 
-        while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&id_dieta, cpf, nome_dieta, &calorias, refeicoes) == 5){
-            if (id_dieta == id_busca)
+        while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&dt.id_dieta, dt.cpf, dt.nome_dieta, &dt.calorias, dt.refeicoes) == 5){
+            if (dt.id_dieta == id_busca)
             {
                 printf("///                        Dieta Encontrada!                              ///\n");
-                printf("ID da Dieta:       %d\n", id_dieta);
-                printf("CPF do Usuário:    %s\n", cpf);
-                printf("Nome da Dieta:     %s\n", nome_dieta);
-                printf("Total de Calorias: %d kcal\n", calorias);
-                printf("Refeições:         %s\n", refeicoes);
+                printf("ID da Dieta:       %d\n", dt.id_dieta);
+                printf("CPF do Usuário:    %s\n", dt.cpf);
+                printf("Nome da Dieta:     %s\n", dt.nome_dieta);
+                printf("Total de Calorias: %d kcal\n", dt.calorias);
+                printf("Refeições:         %s\n", dt.refeicoes);
 
                 encontrado = 1;
                 break;
@@ -270,9 +262,9 @@ void excluir_dieta(void){
             return;
         }
 
-        while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&id_dieta, cpf, nome_dieta, &calorias, refeicoes) == 5){
-            if(id_dieta != id_busca){
-                fprintf(arq_dietas_temp, "%d;%s;%s;%d;%s\n", id_dieta, cpf, nome_dieta, calorias, refeicoes);
+        while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&dt.id_dieta, dt.cpf, dt.nome_dieta, &dt.calorias, dt.refeicoes) == 5){
+            if(dt.id_dieta != id_busca){
+                fprintf(arq_dietas_temp, "%d;%s;%s;%d;%s\n", dt.id_dieta, dt.cpf, dt.nome_dieta, dt.calorias, dt.refeicoes);
             }
         }
         fclose(arq_dietas);
