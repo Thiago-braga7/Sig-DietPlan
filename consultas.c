@@ -50,12 +50,8 @@ char tela_consultas(void){
 
 void cadastrar_consulta(void){
     FILE *arq_consulta;
+    Consulta con;
 
-    char nome[100];
-    char data[10];
-    char hora[6];
-    char medico[100];
-    char observacoes[200];
     limpar_tela();
 
     printf("\n");
@@ -67,19 +63,19 @@ void cadastrar_consulta(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome do Usuário:                                ///\n");
-    scanf("%s", nome);
+    scanf("%s", con.nome);
     getchar();
     printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    scanf("%s", data);
+    scanf("%s", con.data);
     getchar();
     printf("///                         Hora da Consulta (HH:MM):                       ///\n");
-    scanf("%s", hora);
+    scanf("%s", con.hora);
     getchar();
     printf("///                         Nome do Médico:                                  ///\n");
-    scanf("%s", medico);
+    scanf("%s", con.medico);
     getchar();
     printf("///                         Observações:                                    ///\n");
-    scanf("%s", observacoes);
+    scanf("%s", con.observacoes);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
@@ -91,11 +87,11 @@ void cadastrar_consulta(void){
         return;
     }
 
-    fprintf(arq_consulta, "%s;", nome);
-    fprintf(arq_consulta, "%s;", data);
-    fprintf(arq_consulta, "%s;", hora);
-    fprintf(arq_consulta, "%s;", medico);
-    fprintf(arq_consulta, "%s\n", observacoes);
+    fprintf(arq_consulta, "%s;", con.nome);
+    fprintf(arq_consulta, "%s;", con.data);
+    fprintf(arq_consulta, "%s;", con.hora);
+    fprintf(arq_consulta, "%s;", con.medico);
+    fprintf(arq_consulta, "%s\n", con.observacoes);
 
     fclose(arq_consulta);
 
@@ -105,13 +101,9 @@ void cadastrar_consulta(void){
 
 void buscar_consulta(void){
     FILE *arq_consulta;
-    char nome[100];
+    Consulta con;
     char nome_lido[100];
-    char data[10];
     char data_lida[10];
-    char hora[6];
-    char medico[100];
-    char observacoes[200];
     
 
     limpar_tela();
@@ -138,24 +130,24 @@ void buscar_consulta(void){
      }
 
     while (!feof(arq_consulta)) {
-        fscanf(arq_consulta, "%[^;]", nome);
+        fscanf(arq_consulta, "%[^;]", con.nome);
         fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^;]", data);
+        fscanf(arq_consulta, "%[^;]", con.data);
         fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^;]", hora);
+        fscanf(arq_consulta, "%[^;]", con.hora);
         fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^;]", medico);
+        fscanf(arq_consulta, "%[^;]", con.medico);
         fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^\n]", observacoes);
+        fscanf(arq_consulta, "%[^\n]", con.observacoes);
         fgetc(arq_consulta);
 
-        if ((strcmp(nome, nome_lido) == 0) && (strcmp(data, data_lida) == 0)) {
+        if ((strcmp(con.nome, nome_lido) == 0) && (strcmp(con.data, data_lida) == 0)) {
             printf("Consulta encontrada\n");
-            printf("Nome: %s\n", nome);
-            printf("Data: %s\n", data);
-            printf("Hora: %s\n", hora);
-            printf("Médico: %s\n", medico);
-            printf("Observações: %s\n", observacoes);
+            printf("Nome: %s\n", con.nome);
+            printf("Data: %s\n", con.data);
+            printf("Hora: %s\n", con.hora);
+            printf("Médico: %s\n", con.medico);
+            printf("Observações: %s\n", con.observacoes);
             getchar();
             fclose(arq_consulta);
             return;
@@ -165,8 +157,8 @@ void buscar_consulta(void){
 
 void alterar_consulta(void){
     char data[15];
-    char novo_nome[100], nova_data[15], nova_hora[10];
-    char novo_medico[100], novas_observacoes[200];
+    Consulta nova_con;
+
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);
     printf("///                               Consultas                                 ///\n");
@@ -180,19 +172,19 @@ void alterar_consulta(void){
     printf("///                        Novos Dados da Consulta                          ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome do Usuário:                                ///\n");
-    scanf("%s", novo_nome);
+    scanf("%s", nova_con.nome);
     getchar();
     printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    scanf("%s", nova_data);
+    scanf("%s", nova_con.data);
     getchar();
     printf("///                         Hora da Consulta (HH:MM):                        ///\n");
-    scanf("%s", nova_hora);
+    scanf("%s", nova_con.hora);
     getchar();
     printf("///                         Nome do Médico:                                 ///\n");
-    scanf("%s", novo_medico);
+    scanf("%s", nova_con.medico);
     getchar();
     printf("///                         Observações:                                    ///\n"RESET);
-    scanf("%s", novas_observacoes);
+    scanf("%s", nova_con.observacoes);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Alterada com Sucesso!                        \n");
