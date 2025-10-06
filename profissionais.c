@@ -152,7 +152,7 @@ void buscar_profissional(void){
     fclose(arq_profissional);
     getchar();
 }
- void alterar_profissional(void){
+void alterar_profissional(void){
     FILE *arq_profissional;
     FILE *arq_profissional_temp;
 
