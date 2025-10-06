@@ -100,6 +100,7 @@ void cadastrar_consulta(void){
         return;
     }
 
+    fprintf(arq_consulta, "%d;", con.id_consulta);
     fprintf(arq_consulta, "%s;", con.nome);
     fprintf(arq_consulta, "%s;", con.data);
     fprintf(arq_consulta, "%s;", con.hora);
@@ -116,6 +117,7 @@ void buscar_consulta(void){
     FILE *arq_consulta;
     Consulta con;
     int id_busca;
+    int encontrado = 0;
     
 
     limpar_tela();
@@ -126,7 +128,7 @@ void buscar_consulta(void){
     printf("///                  = = = = =  Buscar Consulta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                      Informe o ID da consulta:                          ///\n");
-    scanf("%s", id_busca);
+    scanf("%d", &id_busca);
     getchar();
     pausar();
 
@@ -138,30 +140,25 @@ void buscar_consulta(void){
         return;
      }
 
-    while (!feof(arq_consulta)) {
-        fscanf(arq_consulta, "%[^;]", con.nome);
-        fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^;]", con.data);
-        fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^;]", con.hora);
-        fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^;]", con.medico);
-        fgetc(arq_consulta);
-        fscanf(arq_consulta, "%[^\n]", con.observacoes);
-        fgetc(arq_consulta);
-
-        if ((strcmp(id_busca, con.id_consulta) == 0)) {
+    while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
+        if (id_busca == con.id_consulta) {
             printf("Consulta encontrada\n");
             printf("Nome: %s\n", con.nome);
             printf("Data: %s\n", con.data);
             printf("Hora: %s\n", con.hora);
             printf("Médico: %s\n", con.medico);
             printf("Observações: %s\n", con.observacoes);
-            getchar();
-            fclose(arq_consulta);
-            return;
+            encontrado = 1;
+            break;
         }
     }
+    
+    if (!encontrado) {
+        printf("\nPaciente não encontrado!\n");
+    }
+
+    fclose(arq_consulta);
+    getchar();
 }
 
 void alterar_consulta(void){
@@ -176,7 +173,7 @@ void alterar_consulta(void){
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                          Informe o ID da consulta:                      ///\n");
-    scanf("%s", id_busca);
+    scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novos Dados da Consulta                          ///\n");
@@ -214,7 +211,7 @@ void excluir_consulta(void){
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
-    scanf("%s", id_busca);
+    scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Excluindo Consulta                            ///\n");

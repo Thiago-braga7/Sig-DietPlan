@@ -3,8 +3,8 @@ typedef struct consulta Consulta;
 struct consulta {
     int id_consulta;
     char nome[50];
-    char data[10];
-    char hora[6];
+    char data[12];
+    char hora[7];
     char medico[50];
     char observacoes[200];
 };
