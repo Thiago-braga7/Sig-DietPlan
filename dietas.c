@@ -5,7 +5,6 @@
 #include <string.h>
 
 
-typedef struct dieta Dieta;
 
 void modulo_dietas(void) {
     char opcao;
@@ -156,9 +155,14 @@ void buscar_dieta(void){
 
 
 void alterar_dieta(void){
-    // Dieta dt;
-    Dieta nova_dt;
+    FILE *arq_dietas;
+    FILE *arq_dietas_temp;
+
+    Dieta dt;
     int id_busca;
+    int encontrado = 0;
+    char opcao;
+    char continuar = 'S';
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -170,26 +174,89 @@ void alterar_dieta(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novos Dados da Dieta                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         CPF do Usuário:                                 ///\n");
-    scanf("%s", nova_dt.cpf);
-    getchar();
-    printf("///                         Nome da Dieta:                                  ///\n");
-    scanf("%50[^\n]", nova_dt.nome_dieta);
-    getchar();
-    printf("///                         Total de Calorias por dia:                      ///\n");
-    scanf("%d", &nova_dt.calorias);
-    getchar();
-    printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%200[^\n]", nova_dt.refeicoes);
-    getchar();
+    
+    arq_dietas = fopen("arq_dietas.csv", "rt");
+    arq_dietas_temp = fopen("arq_dietas_temp.csv", "wt");
 
-    nova_dt.id_dieta = id_busca;
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                    Dieta Alterada com sucesso!                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    if (arq_dietas == NULL || arq_dietas_temp == NULL){
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",&dt.id_dieta, dt.cpf, dt.nome_dieta, &dt.calorias, dt.refeicoes) == 5){
+        if(dt.id_dieta == id_busca){
+            encontrado = 1;
+            do{
+                printf("\n    Dados atuais da dieta    \n");
+                printf("ID da Dieta:       %d\n", dt.id_dieta);
+                printf("CPF do Usuário:    %s\n", dt.cpf);
+                printf("Nome da Dieta:     %s\n", dt.nome_dieta);
+                printf("Total de Calorias: %d kcal\n", dt.calorias);
+                printf("Refeições:         %s\n", dt.refeicoes);
+
+                printf("\nQual campo deseja alterar?\n");
+                printf("1. CPF do Usuário\n");
+                printf("2. Nome da Dieta\n");
+                printf("3. Total de Calorias\n");
+                printf("4. Refeições\n");
+                printf("Escolha uma opção: ");
+                scanf(" %c", &opcao);
+                getchar();
+
+                 switch (opcao) {
+                    case '1':
+                        printf("Novo CPF: ");
+                        scanf("%12s", dt.cpf);
+                        getchar();
+                        break;
+                    case '2':
+                        printf("Novo Nome da Dieta: ");
+                        scanf("%50[^\n]", dt.nome_dieta);
+                        getchar();
+                        break;
+                    case '3':
+                        printf("Novo Total de Calorias: ");
+                        scanf("%d", &dt.calorias);
+                        getchar();
+                        break;
+                    case '4':
+                        printf("Nova descrição das Refeições: ");
+                        scanf("%200[^\n]", dt.refeicoes);
+                        getchar();
+                        break;
+                    default:
+                        printf("Opção inválida!\n");
+                        break;
+                }
+                printf("\n    Dados atualizados   \n");
+                printf("ID da Dieta:       %d\n", dt.id_dieta);
+                printf("CPF do Usuário:    %s\n", dt.cpf);
+                printf("Nome da Dieta:     %s\n", dt.nome_dieta);
+                printf("Total de Calorias: %d kcal\n", dt.calorias);
+                printf("Refeições:         %s\n", dt.refeicoes);
+
+                printf("\nDeseja alterar outro campo? (S/N): ");
+                scanf(" %c", &continuar);
+                continuar = confirmar_acao(continuar);
+            } while (continuar == 'S');
+        }
+        fprintf(arq_dietas_temp, "%d;%s;%s;%d;%s\n", dt.id_dieta, dt.cpf, dt.nome_dieta, dt.calorias, dt.refeicoes);
+    }
+    fclose(arq_dietas);
+    fclose(arq_dietas_temp);
+
+    if (encontrado){
+        remove("arq_dietas.csv");
+        rename("arq_dietas_temp.csv", "arq_dietas.csv");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Dieta Alterada com sucesso!                          ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+    } else {
+        remove("arq_dietas_temp.csv");
+        printf("\nDieta não encontrada!\n");
+    }
     pausar();
+
 }
 
 void excluir_dieta(void){

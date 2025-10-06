@@ -160,12 +160,12 @@ void buscar_paciente(void){
 
  
 void alterar_paciente(void){
-    FILE *arq_paciente;
-    FILE *arq_paciente_temp;
+    // FILE *arq_paciente;
+    // FILE *arq_paciente_temp;
 
     Paciente novo_pac;
     char cpf_busca[13];
-    int encontrado = 0;
+    // int encontrado = 0;
 
 
     limpar_tela();
