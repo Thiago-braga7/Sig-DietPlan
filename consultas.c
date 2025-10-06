@@ -52,6 +52,19 @@ void cadastrar_consulta(void){
     FILE *arq_consulta;
     Consulta con;
 
+    con.id_consulta = 1;
+
+    arq_consulta = fopen("arq_consulta.csv", "rt");
+    if (arq_consulta != NULL)
+    {
+        char linha[512];
+        while (fgets(linha, sizeof(linha), arq_consulta) != NULL)
+        {
+            con.id_consulta++;
+        }
+        fclose(arq_consulta);
+    }
+
     limpar_tela();
 
     printf("\n");
@@ -102,8 +115,7 @@ void cadastrar_consulta(void){
 void buscar_consulta(void){
     FILE *arq_consulta;
     Consulta con;
-    char nome_lido[100];
-    char data_lida[10];
+    int id_busca;
     
 
     limpar_tela();
@@ -113,11 +125,8 @@ void buscar_consulta(void){
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Buscar Consulta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
-    printf("///                     Informe o nome do Usuário:                          ///\n");
-    scanf("%s", nome_lido);
-    getchar();
-    printf("///                     Data da Consulta (DD/MM/AAAA):                      ///\n");
-    scanf("%s", data_lida);
+    printf("///                      Informe o ID da consulta:                          ///\n");
+    scanf("%s", id_busca);
     getchar();
     pausar();
 
@@ -141,7 +150,7 @@ void buscar_consulta(void){
         fscanf(arq_consulta, "%[^\n]", con.observacoes);
         fgetc(arq_consulta);
 
-        if ((strcmp(con.nome, nome_lido) == 0) && (strcmp(con.data, data_lida) == 0)) {
+        if ((strcmp(id_busca, con.id_consulta) == 0)) {
             printf("Consulta encontrada\n");
             printf("Nome: %s\n", con.nome);
             printf("Data: %s\n", con.data);
@@ -156,8 +165,9 @@ void buscar_consulta(void){
 }
 
 void alterar_consulta(void){
-    char data[15];
     Consulta nova_con;
+    int id_busca;
+
 
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n"RESET);
@@ -165,8 +175,8 @@ void alterar_consulta(void){
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
-    scanf("%s", data);
+    printf("///                          Informe o ID da consulta:                      ///\n");
+    scanf("%s", id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novos Dados da Consulta                          ///\n");
@@ -191,9 +201,11 @@ void alterar_consulta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
     pausar();
 }
+
+
 void excluir_consulta(void){
+    int id_busca;
     limpar_tela();
-    char data[15];
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -202,7 +214,7 @@ void excluir_consulta(void){
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
-    scanf("%s", data);
+    scanf("%s", id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                           Excluindo Consulta                            ///\n");
