@@ -6,10 +6,6 @@
 #include <ctype.h>
 
 
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define CYAN    "\033[36m"
-
 
 void modulo_pacientes(void) {
     char opcao;
@@ -32,7 +28,7 @@ char tela_pacientes(void){
     char opcao;
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                    = = = = =   Pacientes = = = = =                      ///\n");
     printf("///                                                                         ///\n");
@@ -49,7 +45,7 @@ char tela_pacientes(void){
     scanf("%c", &opcao);
     getchar();
     printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     pausar();
     return opcao;
@@ -61,14 +57,14 @@ void cadastrar_paciente(void){
 
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Pacientes                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Cadastrar Paciente = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n"RESET);
+    printf("///                                                                         ///\n");
     
-    printf(RED"///                         Nome:                                        ///\n");
+    printf("///                         Nome:                                        ///\n");
     scanf("%s", pac.nome); 
     getchar();
 
@@ -92,9 +88,9 @@ void cadastrar_paciente(void){
     scanf("%f", &pac.altura); 
     getchar();
 
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Paciente Cadastrado com Sucesso!                         \n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
 
     arq_paciente = fopen("arq_paciente.csv", "at");
 
@@ -123,7 +119,7 @@ void buscar_paciente(void){
 
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Buscar Paciente = = = = =                    ///\n");
@@ -164,13 +160,17 @@ void buscar_paciente(void){
 
  
 void alterar_paciente(void){
+    FILE *arq_paciente;
+    FILE *arq_paciente_temp;
+
     Paciente novo_pac;
     char cpf_busca[13];
+    int encontrado = 0;
 
 
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Alterar Dados do Paciente = = = = =           ///\n");
@@ -201,9 +201,9 @@ void alterar_paciente(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Paciente alterado com sucesso!                        ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    pausar();
+    pausar(); 
 
 }
 
@@ -220,7 +220,7 @@ void excluir_paciente(void){
     limpar_tela();
 
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Pacientes                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Excluir Paciente = = = = =                    ///\n");
@@ -233,6 +233,7 @@ void excluir_paciente(void){
 
     char resposta;
 
+    // Busca e exibe paciente
     do {
         arq_paciente = fopen("arq_paciente.csv", "rt");
 
@@ -261,18 +262,18 @@ void excluir_paciente(void){
 
         fclose(arq_paciente);
         getchar();
-        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+        printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
 
         resposta = confirmar_acao(resposta); 
 
         if (resposta == 0) {  
-            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+            printf("Opção inválida! Digite apenas S ou N.\n");
         }
 
     } while (resposta == 0); 
 
-
+    // Exclui caso a resposta seja "S"
     if (resposta == 'S') {
         arq_paciente = fopen("arq_paciente.csv", "rt");
         arq_paciente_temp = fopen("arq_paciente_temp.csv", "wt");
@@ -298,10 +299,10 @@ void excluir_paciente(void){
             printf("\nPaciente não encontrado!\n");
         }
 
-        printf(RED"Paciente Excluído com Sucesso!    \n"RESET);
+        printf("Paciente Excluído com Sucesso!    \n");
 
     } else {
-            printf(RED"Operação de Exclusão Cancelada !  \n"RESET);
+            printf("Operação de Exclusão Cancelada !  \n");
     }
     pausar();
 }
@@ -314,7 +315,7 @@ void calcular_imc(void) {
     do {
         limpar_tela();
         printf("\n");
-        printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
+        printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                                Pacientes                                    ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Calcular IMC = = = = =                        ///\n");
@@ -322,7 +323,7 @@ void calcular_imc(void) {
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                             1. Calcular IMC                                 ///\n");
         printf("///                             0. Voltar                                       ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////////\n"RESET);
+        printf("///////////////////////////////////////////////////////////////////////////////////\n");
         
         do {
             printf("Escolha a opção desejada (0 ou 1): ");
@@ -330,7 +331,7 @@ void calcular_imc(void) {
             getchar();
 
             if (opcao != '0' && opcao != '1') {
-                printf("Opção inválida! Digite apenas 0 ou 1.\n"RESET);
+                printf("Opção inválida! Digite apenas 0 ou 1.\n");
                 pausar();
                 limpar_tela();
             }
@@ -339,7 +340,7 @@ void calcular_imc(void) {
 
         switch (opcao) {
             case '1': {
-                printf(RED"Informe seu pac.peso (kg): ");
+                printf("Informe seu pac.peso (kg): ");
                 scanf("%f", &pac.peso);
                 printf("Informe sua pac.altura (m): ");
                 scanf("%f", &pac.altura );
@@ -347,18 +348,18 @@ void calcular_imc(void) {
                 pac.resultado = imc(pac.peso, pac.altura);
 
                 if (pac.resultado <= 0) {
-                    printf(RED"Resultado inválido!\n");
+                    printf("Resultado inválido!\n");
                 } else {
-                    printf(RED"\nSeu IMC é: %.2f\n"RESET, pac.resultado);
+                    printf("\nSeu IMC é: %.2f\n", pac.resultado);
                     classificação_imc(pac.resultado);
 
                     float min = peso_ideal_min(pac.altura);
                     float max = peso_ideal_max(pac.altura);
 
                     if (min > 0 && max > 0) {
-                        printf(RED"pac.peso ideal para sua pac.altura: entre %.1fkg e %.1fkg\n"RESET, min, max);
+                        printf("pac.peso ideal para sua pac.altura: entre %.1fkg e %.1fkg\n", min, max);
                     } else {
-                        printf(RED"Resultado inválido!\n"RESET);
+                        printf("Resultado inválido!\n");
                     }
                 }
 
@@ -367,7 +368,7 @@ void calcular_imc(void) {
             }
 
             case '0': {
-                printf(RED"Voltando ao menu...\n"RESET);
+                printf("Voltando ao menu...\n");
                 break;
             }
         }
@@ -383,7 +384,7 @@ void calcular_bf(void) {
         limpar_tela();
         printf("\n");
         printf("\n");
-        printf(RED"///////////////////////////////////////////////////////////////////////////////////\n");
+        printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                                Pacientes                                    ///\n");
         printf("///                                                                             ///\n");
         printf("///                     = = = = = Classificar Porcentagem de Gordura = = = = =  ///\n");
@@ -391,7 +392,7 @@ void calcular_bf(void) {
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("///                             1. Calcular por bf                              ///\n");
         printf("///                             0. Voltar                                       ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////////\n"RESET);
+        printf("///////////////////////////////////////////////////////////////////////////////////\n");
         printf("Escolha a opção desejada: ");
         scanf(" %c", &opcao);
         getchar();
@@ -400,17 +401,17 @@ void calcular_bf(void) {
             case '1':
 
                 do {
-                    printf(RED"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
+                    printf("Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): ");
                     scanf(" %c", &pac.genero);
 
                     pac.genero = ler_genero(pac.genero); 
 
                     if (pac.genero == 0) {
-                        printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
+                        printf("Opção inválida! Digite apenas M, F ou N.\n");
                     }
                 } while (pac.genero == 0);
 
-                printf(RED"Informe seu percentual de gordura corporal (pac.bf %%): "RESET);
+                printf("Informe seu percentual de gordura corporal (pac.bf %%): ");
                 scanf("%f", &pac.bf);
 
                 
@@ -420,19 +421,14 @@ void calcular_bf(void) {
                 break;
 
             case '0':
-                printf("Voltando ao menu...\n"RESET);
+                printf("Voltando ao menu...\n");
                 break;
 
             default:
-                printf("Opção inválida!\n"RESET);
+                printf("Opção inválida!\n");
                 pausar();
                 break;
         }
 
     } while(opcao != '0');
 }
-
-    
-
-    
-
