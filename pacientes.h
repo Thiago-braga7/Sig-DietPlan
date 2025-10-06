@@ -1,3 +1,17 @@
+typedef struct paciente Paciente;
+
+struct paciente {
+    char nome[100];
+    char cpf[13];
+    char tel[11];
+    int idade;
+    float peso;
+    float altura;
+    float resultado;
+    float bf;
+    char genero;
+};
+
 void modulo_pacientes(void);
 char tela_pacientes(void);
 void cadastrar_paciente(void);

@@ -23,8 +23,6 @@ void modulo_pacientes(void) {
             case '4': excluir_paciente(); break;
             case '5': calcular_imc(); break;
             case '6': calcular_bf(); break;
-            // case '7': listar_pacientes(); break;
-            
         }
     } while (opcao != '0');  
 }
@@ -43,7 +41,7 @@ char tela_pacientes(void){
     printf("///                    3. Alterar Dados do Paciente                         ///\n");
     printf("///                    4. Excluir Paciente                                  ///\n");
     printf("///                    5. Calcular IMC                                      ///\n");
-    printf("///                    6. Calcular BF                                       ///\n");
+    printf("///                    6. Calcular pac.bf                                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -59,12 +57,7 @@ char tela_pacientes(void){
 
 void cadastrar_paciente(void){
     FILE *arq_paciente;
-    char nome[100];
-    char cpf[13];
-    char tel[11];
-    int idade;
-    float peso;
-    float altura;
+    Paciente pac;
 
     limpar_tela();
     printf("\n");
@@ -76,27 +69,27 @@ void cadastrar_paciente(void){
     printf("///                                                                         ///\n"RESET);
     
     printf(RED"///                         Nome:                                        ///\n");
-    scanf("%s", nome); 
+    scanf("%s", pac.nome); 
     getchar();
 
     printf("///                         CPF (Apenas números):                           ///\n");
-    scanf("%s", cpf); 
+    scanf("%s", pac.cpf); 
     getchar();
 
     printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%s", tel); 
+    scanf("%s", pac.tel); 
     getchar();
 
-    printf("///                         Idade:                                          ///\n");
-    scanf("%d", &idade); 
+    printf("///                         pac.idade:                                          ///\n");
+    scanf("%d", &pac.idade); 
     getchar();
 
-    printf("///                         Peso (Kg):                                      ///\n");
-    scanf("%f", &peso); 
+    printf("///                         pac.peso (Kg):                                      ///\n");
+    scanf("%f", &pac.peso); 
     getchar();
 
-    printf("///                         Altura (m):                                     ///\n");
-    scanf("%f", &altura); 
+    printf("///                         pac.altura (m):                                     ///\n");
+    scanf("%f", &pac.altura); 
     getchar();
 
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -110,12 +103,12 @@ void cadastrar_paciente(void){
         return;
     }
 
-    fprintf(arq_paciente, "%s;", nome);
-    fprintf(arq_paciente, "%s;", cpf);
-    fprintf(arq_paciente, "%s;", tel);
-    fprintf(arq_paciente, "%d;", idade);
-    fprintf(arq_paciente, "%f;", peso);
-    fprintf(arq_paciente, "%f\n", altura);
+    fprintf(arq_paciente, "%s;", pac.nome);
+    fprintf(arq_paciente, "%s;", pac.cpf);
+    fprintf(arq_paciente, "%s;", pac.tel);
+    fprintf(arq_paciente, "%d;", pac.idade);
+    fprintf(arq_paciente, "%f;", pac.peso);
+    fprintf(arq_paciente, "%f\n", pac.altura);
 
     pausar();
 }
@@ -123,13 +116,9 @@ void cadastrar_paciente(void){
 
 void buscar_paciente(void){
     FILE *arq_paciente;
-    char nome[100];
-    char cpf[13];
-    char tel[11];
-    int idade;
-    float peso;
-    float altura;
-    char cpf_lido[13];
+    Paciente pac;
+
+    char cpf_busca[13];
     int encontrado = 0;
 
     limpar_tela();
@@ -140,7 +129,7 @@ void buscar_paciente(void){
     printf("///                 = = = = =  Buscar Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%12s", cpf_lido);
+    scanf("%12s", cpf_busca);
     getchar();
     pausar();
 
@@ -151,15 +140,15 @@ void buscar_paciente(void){
         return;
      }
 
-    while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", nome, cpf, tel, &idade, &peso, &altura) == 6) {
-        if (strcmp(cpf, cpf_lido) == 0) {
+    while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", pac.nome, pac.cpf, pac.tel, &pac.idade, &pac.peso, &pac.altura) == 6) {
+        if (strcmp(pac.cpf, cpf_busca) == 0) {
             printf("Paciente encontrado\n");
-            printf("Nome: %s\n", nome);
-            printf("CPF: %s\n", cpf);
-            printf("Telefone: %s\n", tel);
-            printf("Idade: %d\n", idade);
-            printf("Peso: %.2f kg\n", peso);
-            printf("Altura: %.2f m\n", altura);
+            printf("Nome: %s\n", pac.nome);
+            printf("CPF: %s\n", pac.cpf);
+            printf("Telefone: %s\n", pac.tel);
+            printf("Idade: %d\n", pac.idade);
+            printf("Peso: %.2f kg\n", pac.peso);
+            printf("Altura: %.2f m\n", pac.altura);
             encontrado = 1;
             break;
         }
@@ -175,9 +164,10 @@ void buscar_paciente(void){
 
  
 void alterar_paciente(void){
-    char cpf[15], novo_cpf[15], novo_nome[100], novo_telefone[15];
-    int nova_idade;
-    float novo_peso, nova_altura, novo_bf;
+    Paciente novo_pac;
+    char cpf_busca[13];
+
+
     limpar_tela();
     printf("\n");
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
@@ -186,31 +176,28 @@ void alterar_paciente(void){
     printf("///                 = = = = = Alterar Dados do Paciente = = = = =           ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf);
+    scanf("%s", cpf_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Novos Dados do Paciente                          ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome Completo:                                  ///\n");
-    scanf("%[^\n]", novo_nome);
+    scanf("%[^\n]", novo_pac.nome);
     getchar();
     printf("///                         CPF:                                            ///\n");
-    scanf("%s", novo_cpf);
+    scanf("%s", novo_pac.cpf);
     getchar();
     printf("///                         Telefone:                                       ///\n");
-    scanf("%s", novo_telefone);
+    scanf("%s", novo_pac.tel);
     getchar();
-    printf("///                         Idade:                                          ///\n");
-    scanf("%d", &nova_idade);
+    printf("///                         pac.idade:                                          ///\n");
+    scanf("%d", &novo_pac.idade);
     getchar();
-    printf("///                         Peso(Kg):                                       ///\n");
-    scanf("%f", &novo_peso);
+    printf("///                         pac.peso(Kg):                                       ///\n");
+    scanf("%f", &novo_pac.peso);
     getchar();
-    printf("///                         Altura(m):                                      ///\n");
-    scanf("%f", &nova_altura);
-    getchar();
-    printf("///                         Percentual de gordura(Porcentagem):             ///\n");
-    scanf("%f", &novo_bf);
+    printf("///                         pac.altura(m):                                      ///\n");
+    scanf("%f", &novo_pac.altura);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                    Paciente alterado com sucesso!                        ///\n");
@@ -225,13 +212,9 @@ void alterar_paciente(void){
 void excluir_paciente(void){
     FILE *arq_paciente;
     FILE *arq_paciente_temp;
-    char nome[100];
-    char cpf[13];
-    char tel[11];
-    int idade;
-    float peso;
-    float altura;
-    char cpf_lido[13];
+
+    Paciente pac;
+    char cpf_busca[13];
     int encontrado = 0;
 
     limpar_tela();
@@ -243,7 +226,7 @@ void excluir_paciente(void){
     printf("///                 = = = = = Excluir Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%12s", cpf_lido); 
+    scanf("%12s", cpf_busca); 
     getchar();
 
 
@@ -258,15 +241,15 @@ void excluir_paciente(void){
             return;
         }
 
-        while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", nome, cpf, tel, &idade, &peso, &altura) == 6) {
-            if (strcmp(cpf, cpf_lido) == 0) {
+        while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", pac.nome, pac.cpf, pac.tel, &pac.idade, &pac.peso, &pac.altura) == 6) {
+            if (strcmp(pac.cpf, cpf_busca) == 0) {
                 printf("Paciente encontrado\n");
-                printf("Nome: %s\n", nome);
-                printf("CPF: %s\n", cpf);
-                printf("Telefone: %s\n", tel);
-                printf("Idade: %d\n", idade);
-                printf("Peso: %.2f kg\n", peso);
-                printf("Altura: %.2f m\n", altura);
+                printf("Nome: %s\n", pac.nome);
+                printf("CPF: %s\n", pac.cpf);
+                printf("Telefone: %s\n", pac.tel);
+                printf("Idade: %d\n", pac.idade);
+                printf("Peso: %.2f kg\n", pac.peso);
+                printf("Altura: %.2f m\n", pac.altura);
                 encontrado = 1;
                 break;
             }
@@ -299,9 +282,9 @@ void excluir_paciente(void){
             return;
         }
 
-        while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", nome, cpf, tel, &idade, &peso, &altura) == 6) {
-            if(strcmp(cpf, cpf_lido) != 0) {
-                fprintf(arq_paciente_temp, "%s;%s;%s;%d;%.2f;%.2f\n", nome, cpf, tel, idade, peso, altura);
+        while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", pac.nome, pac.cpf, pac.tel, &pac.idade, &pac.peso, &pac.altura) == 6) {
+            if(strcmp(pac.cpf, cpf_busca) != 0) {
+                fprintf(arq_paciente_temp, "%s;%s;%s;%d;%.2f;%.2f\n", pac.nome, pac.cpf, pac.tel, pac.idade, pac.peso, pac.altura);
             }
         }
         
@@ -325,8 +308,8 @@ void excluir_paciente(void){
 
 
 void calcular_imc(void) {
+    Paciente pac;
     char opcao;
-    float peso, altura, resultado;
 
     do {
         limpar_tela();
@@ -356,24 +339,24 @@ void calcular_imc(void) {
 
         switch (opcao) {
             case '1': {
-                printf(RED"Informe seu peso (kg): ");
-                scanf("%f", &peso);
-                printf("Informe sua altura (m): ");
-                scanf("%f", &altura );
+                printf(RED"Informe seu pac.peso (kg): ");
+                scanf("%f", &pac.peso);
+                printf("Informe sua pac.altura (m): ");
+                scanf("%f", &pac.altura );
 
-                resultado = imc(peso, altura);
+                pac.resultado = imc(pac.peso, pac.altura);
 
-                if (resultado <= 0) {
+                if (pac.resultado <= 0) {
                     printf(RED"Resultado inválido!\n");
                 } else {
-                    printf(RED"\nSeu IMC é: %.2f\n"RESET, resultado);
-                    classificação_imc(resultado);
+                    printf(RED"\nSeu IMC é: %.2f\n"RESET, pac.resultado);
+                    classificação_imc(pac.resultado);
 
-                    float min = peso_ideal_min(altura);
-                    float max = peso_ideal_max(altura);
+                    float min = peso_ideal_min(pac.altura);
+                    float max = peso_ideal_max(pac.altura);
 
                     if (min > 0 && max > 0) {
-                        printf(RED"Peso ideal para sua altura: entre %.1fkg e %.1fkg\n"RESET, min, max);
+                        printf(RED"pac.peso ideal para sua pac.altura: entre %.1fkg e %.1fkg\n"RESET, min, max);
                     } else {
                         printf(RED"Resultado inválido!\n"RESET);
                     }
@@ -393,9 +376,8 @@ void calcular_imc(void) {
 }
     
 void calcular_bf(void) {
+    Paciente pac;
     char opcao;
-    float bf;
-    char genero;
 
     do {
         limpar_tela();
@@ -407,7 +389,7 @@ void calcular_bf(void) {
         printf("///                     = = = = = Classificar Porcentagem de Gordura = = = = =  ///\n");
         printf("///                                                                             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                             1. Calcular por BF                              ///\n");
+        printf("///                             1. Calcular por bf                              ///\n");
         printf("///                             0. Voltar                                       ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////////\n"RESET);
         printf("Escolha a opção desejada: ");
@@ -416,23 +398,23 @@ void calcular_bf(void) {
 
         switch(opcao) {
             case '1':
-                
+
                 do {
                     printf(RED"Informe seu gênero (M = Masculino, F = Feminino, N = Prefiro não informar): "RESET);
-                    scanf(" %c", &genero);
+                    scanf(" %c", &pac.genero);
 
-                    genero = ler_genero(genero); 
+                    pac.genero = ler_genero(pac.genero); 
 
-                    if (genero == 0) {
+                    if (pac.genero == 0) {
                         printf(CYAN"Opção inválida! Digite apenas M, F ou N.\n"RESET);
                     }
-                } while (genero == 0);
+                } while (pac.genero == 0);
 
-                printf(RED"Informe seu percentual de gordura corporal (BF %%): "RESET);
-                scanf("%f", &bf);
+                printf(RED"Informe seu percentual de gordura corporal (pac.bf %%): "RESET);
+                scanf("%f", &pac.bf);
 
                 
-                classificar_bf(genero, bf);
+                classificar_bf(pac.genero, pac.bf);
 
                 pausar();
                 break;
