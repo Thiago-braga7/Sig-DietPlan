@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "consultas.h"
 #include "util.h"
 
@@ -47,8 +49,13 @@ char tela_consultas(void){
 
 
 void cadastrar_consulta(void){
-    char nome[100], data[15], hora[10];
-    char medico[100], observacoes[200];
+    FILE *arq_consulta;
+
+    char nome[100];
+    char data[10];
+    char hora[6];
+    char medico[100];
+    char observacoes[200];
     limpar_tela();
 
     printf("\n");
@@ -77,10 +84,36 @@ void cadastrar_consulta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    
+    arq_consulta = fopen("arq_consulta.csv", "at");
+    if (arq_consulta == NULL) {
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    fprintf(arq_consulta, "%s;", nome);
+    fprintf(arq_consulta, "%s;", data);
+    fprintf(arq_consulta, "%s;", hora);
+    fprintf(arq_consulta, "%s;", medico);
+    fprintf(arq_consulta, "%s\n", observacoes);
+
+    fclose(arq_consulta);
+
     pausar();
 }
+
+
 void buscar_consulta(void){
-    char nome[100], data[15];
+    FILE *arq_consulta;
+    char nome[100];
+    char nome_lido[100];
+    char data[10];
+    char data_lida[10];
+    char hora[6];
+    char medico[100];
+    char observacoes[200];
+    
+
     limpar_tela();
     printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -89,19 +122,45 @@ void buscar_consulta(void){
     printf("///                  = = = = =  Buscar Consulta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                     Informe o nome do Usuário:                          ///\n");
-    scanf("%s", nome);
+    scanf("%s", nome_lido);
+    getchar();
     printf("///                     Data da Consulta (DD/MM/AAAA):                      ///\n");
-    scanf("%s", data);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Informações da Consulta                          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Usuário:                                ///\n");
-    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    printf("///                         Hora da Consulta (HH:MM):                       ///\n");
-    printf("///                         Nome do Médico:                                 ///\n");
-    printf("///                         Observações:                                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    scanf("%s", data_lida);
+    getchar();
     pausar();
+
+    arq_consulta = fopen("arq_consulta.csv", "rt");
+
+    if (arq_consulta == NULL){
+        printf("Erro na criacao do arquivo\n");
+        getchar();
+        return;
+     }
+
+    while (!feof(arq_consulta)) {
+        fscanf(arq_consulta, "%[^;]", nome);
+        fgetc(arq_consulta);
+        fscanf(arq_consulta, "%[^;]", data);
+        fgetc(arq_consulta);
+        fscanf(arq_consulta, "%[^;]", hora);
+        fgetc(arq_consulta);
+        fscanf(arq_consulta, "%[^;]", medico);
+        fgetc(arq_consulta);
+        fscanf(arq_consulta, "%[^\n]", observacoes);
+        fgetc(arq_consulta);
+
+        if ((strcmp(nome, nome_lido) == 0) && (strcmp(data, data_lida) == 0)) {
+            printf("Consulta encontrada\n");
+            printf("Nome: %s\n", nome);
+            printf("Data: %s\n", data);
+            printf("Hora: %s\n", hora);
+            printf("Médico: %s\n", medico);
+            printf("Observações: %s\n", observacoes);
+            getchar();
+            fclose(arq_consulta);
+            return;
+        }
+    }
 }
 
 void alterar_consulta(void){
