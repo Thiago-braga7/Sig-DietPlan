@@ -10,6 +10,7 @@ struct paciente {
     float resultado;
     float bf;
     char genero;
+    int status;
 };
 
 void modulo_pacientes(void);

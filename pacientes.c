@@ -4,7 +4,8 @@
 #include "pacientes.h"
 #include "util.h"
 #include <ctype.h>
-
+#define True 1;
+#define False 0;
 
 
 void modulo_pacientes(void) {
@@ -53,7 +54,8 @@ char tela_pacientes(void){
 
 void cadastrar_paciente(void){
     FILE *arq_paciente;
-    Paciente pac;
+    Paciente* pac;
+    pac = (Paciente*)malloc(sizeof(pac));
 
     limpar_tela();
     printf("\n");
@@ -65,46 +67,52 @@ void cadastrar_paciente(void){
     printf("///                                                                         ///\n");
     
     printf("///                         Nome:                                        ///\n");
-    scanf("%s", pac.nome); 
+    scanf("%s", pac->nome); 
     getchar();
 
     printf("///                         CPF (Apenas números):                           ///\n");
-    scanf("%s", pac.cpf); 
+    scanf("%s", pac->cpf); 
     getchar();
 
     printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%s", pac.tel); 
+    scanf("%s", pac->tel); 
     getchar();
 
-    printf("///                         pac.idade:                                          ///\n");
-    scanf("%d", &pac.idade); 
+    printf("///                         Idade:                                          ///\n");
+    scanf("%d", &pac->idade); 
     getchar();
 
-    printf("///                         pac.peso (Kg):                                      ///\n");
-    scanf("%f", &pac.peso); 
+    printf("///                         Peso (Kg):                                      ///\n");
+    scanf("%f", &pac->peso); 
     getchar();
 
-    printf("///                         pac.altura (m):                                     ///\n");
-    scanf("%f", &pac.altura); 
+    printf("///                         Altura (m):                                     ///\n");
+    scanf("%f", &pac->altura); 
     getchar();
 
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Paciente Cadastrado com Sucesso!                         \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    arq_paciente = fopen("arq_paciente.csv", "at");
+    pac->status = True;
+
+    arq_paciente = fopen("arq_paciente.dat", "a+b");    
 
     if (arq_paciente == NULL) {
         printf("Erro na criacao do arquivo\n");
         return;
     }
 
-    fprintf(arq_paciente, "%s;", pac.nome);
-    fprintf(arq_paciente, "%s;", pac.cpf);
-    fprintf(arq_paciente, "%s;", pac.tel);
-    fprintf(arq_paciente, "%d;", pac.idade);
-    fprintf(arq_paciente, "%f;", pac.peso);
-    fprintf(arq_paciente, "%f\n", pac.altura);
+    fprintf(arq_paciente, "%s;", pac->nome);
+    fprintf(arq_paciente, "%s;", pac->cpf);
+    fprintf(arq_paciente, "%s;", pac->tel);
+    fprintf(arq_paciente, "%d;", pac->idade);
+    fprintf(arq_paciente, "%f;", pac->peso);
+    fprintf(arq_paciente, "%f\n", pac->altura);
+
+    fwrite(pac, sizeof(pac), 1, arq_paciente);
+    fclose(arq_paciente);
+    free(pac);
 
     pausar();
 }
