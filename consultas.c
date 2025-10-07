@@ -272,32 +272,56 @@ void alterar_consulta(void){
 
 
 void excluir_consulta(void){
+    FILE *arq_consulta;
+    FILE *arq_consulta_temp;
+
+    Consulta con;
     int id_busca;
+    int encontrado = 0;
+
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
+    printf("///                  = = = = =  Excluir Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
+    printf("///                        Informe o ID da consulta:                        ///\n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Consulta                            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                            Dados da Consulta                            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Usuário:                                ///\n");
-    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    printf("///                         Hora da Consulta (HH:MM):                       ///\n");
-    printf("///                         Nome do Médico:                                 ///\n");
-    printf("///                         Observações:                                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
+
     char resposta;
 
+    // Busca e exibe consultas
     do {
+        arq_consulta = fopen("arq_consulta.csv", "rt");
+
+        if (arq_consulta == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
+            if (con.id_consulta == id_busca) {
+                printf("Consulta encontrada\n");
+                printf("Nome: %s\n", con.nome);
+                printf("Data: %s\n", con.data);
+                printf("Hora: %s\n", con.hora);
+                printf("Médico: %s\n", con.medico);
+                printf("Observações: %s\n", con.observacoes);
+                encontrado = 1;
+                break;
+            }
+        }
+        
+        if (!encontrado) {
+            printf("\nConsulta não encontrada!\n");
+        }
+
+        fclose(arq_consulta);
+        getchar();
         printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
 
@@ -306,13 +330,35 @@ void excluir_consulta(void){
         if (resposta == 0) {  
             printf("Opção inválida! Digite apenas S ou N.\n");
         }
+
     } while (resposta == 0); 
 
+    // Exclui caso a resposta seja "S"
     if (resposta == 'S') {
-        printf("/// Consulta excluída com sucesso! ///\n");
-    } else {
-        printf("/// Operação de exclusão cancelada! ///\n");
-}
-    pausar();
+        arq_consulta = fopen("arq_consulta.csv", "rt");
+        arq_consulta_temp = fopen("arq_consulta_temp.csv", "wt");
 
+        if (arq_consulta == NULL || arq_consulta_temp == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
+            if(con.id_consulta != id_busca){
+                fprintf(arq_consulta_temp, "%d;%s;%s;%s;%s;%s\n", con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes);
+            }
+        }
+        
+        fclose(arq_consulta);
+        fclose(arq_consulta_temp);
+
+        remove("arq_consulta.csv");
+        rename("arq_consulta_temp.csv", "arq_consulta.csv");
+
+        printf("Consulta Excluída com Sucesso!    \n");
+
+    } else {
+            printf("Operação de Exclusão Cancelada !  \n");
+    }
+    pausar();
 }
