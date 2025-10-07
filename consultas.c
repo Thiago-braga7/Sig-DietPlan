@@ -5,10 +5,6 @@
 #include "consultas.h"
 #include "util.h"
 
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define CYAN    "\033[36m"
-
 
 
 void modulo_consultas(void) {
@@ -29,7 +25,7 @@ void modulo_consultas(void) {
 char tela_consultas(void){
     char opcao;
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                     = = = = = Consultas  = = = = =                      ///\n");
     printf("///                                                                         ///\n");
@@ -40,7 +36,7 @@ char tela_consultas(void){
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada:                          ///\n"RESET);
+    printf("///                      Escolha a opção desejada:                          ///\n");
     scanf("%c", &opcao);
     getchar();
     return opcao;
@@ -68,7 +64,7 @@ void cadastrar_consulta(void){
     limpar_tela();
 
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
@@ -92,7 +88,7 @@ void cadastrar_consulta(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     
     arq_consulta = fopen("arq_consulta.csv", "at");
     if (arq_consulta == NULL) {
@@ -121,7 +117,7 @@ void buscar_consulta(void){
     
 
     limpar_tela();
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
@@ -162,12 +158,18 @@ void buscar_consulta(void){
 }
 
 void alterar_consulta(void){
-    Consulta nova_con;
+    FILE *arq_consulta;
+    FILE *arq_consulta_temp;
+
+    Consulta con;
     int id_busca;
+    int encontrado = 0;
+    char opcao;
+    char continuar = 'S';
 
 
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
@@ -175,73 +177,188 @@ void alterar_consulta(void){
     printf("///                          Informe o ID da consulta:                      ///\n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Novos Dados da Consulta                          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Usuário:                                ///\n");
-    scanf("%s", nova_con.nome);
-    getchar();
-    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    scanf("%s", nova_con.data);
-    getchar();
-    printf("///                         Hora da Consulta (HH:MM):                        ///\n");
-    scanf("%s", nova_con.hora);
-    getchar();
-    printf("///                         Nome do Médico:                                 ///\n");
-    scanf("%s", nova_con.medico);
-    getchar();
-    printf("///                         Observações:                                    ///\n"RESET);
-    scanf("%s", nova_con.observacoes);
-    getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("                        Consulta Alterada com Sucesso!                        \n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+    arq_consulta = fopen("arq_consulta.csv", "rt");
+    arq_consulta_temp = fopen("arq_consulta_temp.csv", "wt");
+
+    if (arq_consulta == NULL || arq_consulta_temp == NULL){
+        printf("Erro na criacao do arquivo\n");
+        return;
+    }
+
+    while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
+        if(con.id_consulta == id_busca){
+            encontrado = 1;
+            do{
+                printf("\n    Dados atuais da consulta    \n");
+                printf("Nome: %s\n", con.nome);
+                printf("Data: %s\n", con.data);
+                printf("Hora: %s\n", con.hora);
+                printf("Médico: %s\n", con.medico);
+                printf("Observações: %s\n", con.observacoes);
+
+                printf("\nQual campo deseja alterar?\n");
+                printf("1. Nome\n");
+                printf("2. Data\n");
+                printf("3. Hora\n");
+                printf("4. Médico\n");
+                printf("5. Observações\n");
+                printf("Escolha uma opção: ");
+                scanf(" %c", &opcao);
+                getchar();
+
+                 switch (opcao) {
+                    case '1':
+                        printf("Novo nome: ");
+                        scanf("%s", con.nome);
+                        getchar();
+                        break;
+                    case '2':
+                        printf("Novo data: ");
+                        scanf("%s", con.data);
+                        getchar();
+                        break;
+                    case '3':
+                        printf("Nova hora: ");
+                        scanf("%s", con.hora);
+                        getchar();
+                        break;
+                    case '4':
+                        printf("Novo médico: ");
+                        scanf("%s", con.medico);
+                        getchar();
+                        break;
+                    case '5':
+                        printf("Nova observação: ");
+                        scanf("%s", con.observacoes);
+                        getchar();
+                        break;
+                    default:
+                        printf("Opção inválida!\n");
+                        break;
+                }
+                printf("\n    Dados atualizados    \n");
+                printf("Nome: %s\n", con.nome);
+                printf("Data: %s\n", con.data);
+                printf("Hora: %s\n", con.hora);
+                printf("Médico: %s\n", con.medico);
+                printf("Observações: %s\n", con.observacoes);
+
+                printf("\nDeseja alterar outro campo? (S/N): ");
+                scanf(" %c", &continuar);
+                continuar = confirmar_acao(continuar);
+            } while (continuar == 'S');
+        }
+        fprintf(arq_consulta_temp, "%d;%s;%s;%s;%s;%s\n",
+                con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes);
+    }
+    
+    fclose(arq_consulta);
+    fclose(arq_consulta_temp);
+
+    if (encontrado){
+        remove("arq_consulta.csv");
+        rename("arq_consulta_temp.csv", "arq_consulta.csv");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                  Consulta Alterada com sucesso!                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+    } else {
+        remove("arq_consulta_temp.csv");
+        printf("\nConsulta não encontrada!\n");
+    }
     pausar();
+
 }
 
 
 void excluir_consulta(void){
+    FILE *arq_consulta;
+    FILE *arq_consulta_temp;
+
+    Consulta con;
     int id_busca;
+    int encontrado = 0;
+
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
+    printf("///                  = = = = =  Excluir Consulta  = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe a Data(DD/MM/AAAA):                     ///\n");
+    printf("///                        Informe o ID da consulta:                        ///\n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                           Excluindo Consulta                            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                            Dados da Consulta                            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Nome do Usuário:                                ///\n");
-    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    printf("///                         Hora da Consulta (HH:MM):                       ///\n");
-    printf("///                         Nome do Médico:                                 ///\n");
-    printf("///                         Observações:                                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+
+
     char resposta;
 
+    // Busca e exibe consultas
     do {
-        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+        arq_consulta = fopen("arq_consulta.csv", "rt");
+
+        if (arq_consulta == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
+            if (con.id_consulta == id_busca) {
+                printf("Consulta encontrada\n");
+                printf("Nome: %s\n", con.nome);
+                printf("Data: %s\n", con.data);
+                printf("Hora: %s\n", con.hora);
+                printf("Médico: %s\n", con.medico);
+                printf("Observações: %s\n", con.observacoes);
+                encontrado = 1;
+                break;
+            }
+        }
+        
+        if (!encontrado) {
+            printf("\nConsulta não encontrada!\n");
+        }
+
+        fclose(arq_consulta);
+        getchar();
+        printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
 
         resposta = confirmar_acao(resposta); 
 
         if (resposta == 0) {  
-            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+            printf("Opção inválida! Digite apenas S ou N.\n");
         }
+
     } while (resposta == 0); 
 
+    // Exclui caso a resposta seja "S"
     if (resposta == 'S') {
-        printf(RED"/// Consulta excluída com sucesso! ///\n");
-    } else {
-        printf(RED"/// Operação de exclusão cancelada! ///\n");
-}
-    pausar();
+        arq_consulta = fopen("arq_consulta.csv", "rt");
+        arq_consulta_temp = fopen("arq_consulta_temp.csv", "wt");
 
+        if (arq_consulta == NULL || arq_consulta_temp == NULL){
+            printf("Erro na criacao do arquivo\n");
+            return;
+        }
+
+        while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
+            if(con.id_consulta != id_busca){
+                fprintf(arq_consulta_temp, "%d;%s;%s;%s;%s;%s\n", con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes);
+            }
+        }
+        
+        fclose(arq_consulta);
+        fclose(arq_consulta_temp);
+
+        remove("arq_consulta.csv");
+        rename("arq_consulta_temp.csv", "arq_consulta.csv");
+
+        printf("Consulta Excluída com Sucesso!    \n");
+
+    } else {
+            printf("Operação de Exclusão Cancelada !  \n");
+    }
+    pausar();
 }
