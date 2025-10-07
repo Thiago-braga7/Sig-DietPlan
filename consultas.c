@@ -5,10 +5,6 @@
 #include "consultas.h"
 #include "util.h"
 
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define CYAN    "\033[36m"
-
 
 
 void modulo_consultas(void) {
@@ -29,7 +25,7 @@ void modulo_consultas(void) {
 char tela_consultas(void){
     char opcao;
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                     = = = = = Consultas  = = = = =                      ///\n");
     printf("///                                                                         ///\n");
@@ -40,7 +36,7 @@ char tela_consultas(void){
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada:                          ///\n"RESET);
+    printf("///                      Escolha a opção desejada:                          ///\n");
     scanf("%c", &opcao);
     getchar();
     return opcao;
@@ -68,7 +64,7 @@ void cadastrar_consulta(void){
     limpar_tela();
 
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
@@ -92,7 +88,7 @@ void cadastrar_consulta(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     
     arq_consulta = fopen("arq_consulta.csv", "at");
     if (arq_consulta == NULL) {
@@ -121,7 +117,7 @@ void buscar_consulta(void){
     
 
     limpar_tela();
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
@@ -166,8 +162,8 @@ void alterar_consulta(void){
     int id_busca;
 
 
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
@@ -190,12 +186,12 @@ void alterar_consulta(void){
     printf("///                         Nome do Médico:                                 ///\n");
     scanf("%s", nova_con.medico);
     getchar();
-    printf("///                         Observações:                                    ///\n"RESET);
+    printf("///                         Observações:                                    ///\n");
     scanf("%s", nova_con.observacoes);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Alterada com Sucesso!                        \n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     pausar();
 }
 
@@ -204,7 +200,7 @@ void excluir_consulta(void){
     int id_busca;
     limpar_tela();
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                               Consultas                                 ///\n");
     printf("///                                                                         ///\n");
@@ -223,24 +219,24 @@ void excluir_consulta(void){
     printf("///                         Hora da Consulta (HH:MM):                       ///\n");
     printf("///                         Nome do Médico:                                 ///\n");
     printf("///                         Observações:                                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     char resposta;
 
     do {
-        printf(RED"Deseja confirmar a ação? (S/N): "RESET);
+        printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
 
         resposta = confirmar_acao(resposta); 
 
         if (resposta == 0) {  
-            printf(RED"Opção inválida! Digite apenas S ou N.\n"RESET);
+            printf("Opção inválida! Digite apenas S ou N.\n");
         }
     } while (resposta == 0); 
 
     if (resposta == 'S') {
-        printf(RED"/// Consulta excluída com sucesso! ///\n");
+        printf("/// Consulta excluída com sucesso! ///\n");
     } else {
-        printf(RED"/// Operação de exclusão cancelada! ///\n");
+        printf("/// Operação de exclusão cancelada! ///\n");
 }
     pausar();
 
