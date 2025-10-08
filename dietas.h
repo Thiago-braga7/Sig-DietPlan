@@ -15,3 +15,4 @@ void cadastrar_dieta(void);
 void buscar_dieta(void);
 void alterar_dieta(void);
 void excluir_dieta(void);
+void listar_dietas(void);
