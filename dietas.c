@@ -3,7 +3,8 @@
 #include "dietas.h"
 #include "util.h"
 #include <string.h>
-
+#define True 1;
+#define False 0;
 
 
 void modulo_dietas(void) {
@@ -48,21 +49,25 @@ char tela_dietas(void){
 
 void cadastrar_dieta(void){
     FILE *arq_dietas;
-    Dieta dt;
-
-    dt.id_dieta = 1;
-
-    arq_dietas = fopen("arq_dietas.csv", "rt");
-    if (arq_dietas != NULL)
-    {
-        char linha[512];
-        while (fgets(linha, sizeof(linha), arq_dietas) != NULL)
-        {
-            dt.id_dieta++;
-        }
+    Dieta* dt;
+    dt = (Dieta*)malloc(sizeof(Dieta));
+    
+    dt->id_dieta = 1; 
+    arq_dietas = fopen("arq_dietas.dat", "rb"); 
+    
+    // Créditos: Função adaptada do gemini;
+    if (arq_dietas != NULL){
+        
+        fseek(arq_dietas, 0, SEEK_END);  
+        
+        long num_registros = ftell(arq_dietas) / sizeof(Dieta);
+        
+        dt->id_dieta = num_registros + 1;
+        
         fclose(arq_dietas);
     }
 
+    limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                               Dietas                                    ///\n");
@@ -70,24 +75,25 @@ void cadastrar_dieta(void){
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Usuário:                                 ///\n");
-    scanf("%s", dt.cpf);
+    scanf("%s", dt->cpf);
     getchar();
     printf("///                         Nome da Dieta:                                  ///\n");
-    scanf("%50[^\n]", dt.nome_dieta);
+    scanf("%50[^\n]", dt->nome_dieta);
     getchar();
     printf("///                         Total de Calorias por dia:                      ///\n");
-    scanf("%d", &dt.calorias);
+    scanf("%d", &dt->calorias);
     getchar();
     printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%200[^\n]", dt.refeicoes);
+    scanf("%200[^\n]", dt->refeicoes);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Dieta Cadastrada com Sucesso!                    ///\n");
-    printf("///                        ID gerado: %02d                                    ///\n", dt.id_dieta);
+    printf("///                        ID gerado: %02d                                    ///\n", dt->id_dieta);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    pausar();
 
-    arq_dietas = fopen("arq_dietas.csv", "at");
+    dt->status = True;
+
+    arq_dietas = fopen("arq_dietas.dat", "a+b");
     if (arq_dietas == NULL)
     {
         printf("\t\t\t<<< ERRO: Não foi possível abrir o arquivo! >>>\n");
@@ -95,12 +101,10 @@ void cadastrar_dieta(void){
         getchar();
         return;
     }
-    fprintf(arq_dietas, "%d;", dt.id_dieta);
-    fprintf(arq_dietas, "%s;", dt.cpf);
-    fprintf(arq_dietas, "%s;", dt.nome_dieta);
-    fprintf(arq_dietas, "%d;", dt.calorias);
-    fprintf(arq_dietas, "%s\n", dt.refeicoes);
+    
+    fwrite(dt, sizeof(Dieta), 1, arq_dietas);
     fclose(arq_dietas);
+    free(dt);
     pausar();
 }
 
