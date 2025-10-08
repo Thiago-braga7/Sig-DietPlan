@@ -6,6 +6,7 @@ struct dieta {
     char nome_dieta[50];
     int calorias;
     char refeicoes[200];
+    int status;
 };
 
 void modulo_dietas(void);
