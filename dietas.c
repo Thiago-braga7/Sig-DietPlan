@@ -111,12 +111,14 @@ void cadastrar_dieta(void){
 }
 
 void buscar_dieta(void){
-    FILE *arq_dietas;
-
-    Dieta dt;
+    FILE * arq_dietas;
+    Dieta * dt;
     int id_busca;
     int encontrado = 0;
 
+    dt = (Dieta*) malloc(sizeof(Dieta));
+    
+    limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                Dietas                                   ///\n");
@@ -128,35 +130,31 @@ void buscar_dieta(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    arq_dietas = fopen("arq_dietas.csv", "rt");
+    arq_dietas = fopen("arq_dietas.dat", "rb");
 
-    if (arq_dietas == NULL)
-    {
-        printf("Erro na criacao do arquivo\n");
+    if (arq_dietas == NULL){
+        printf("Erro na criação do arquivo\n");
         return;
     }
-    while (fscanf(arq_dietas, "%d;%12[^;];%49[^;];%d;%199[^\n]\n",
-                  &dt.id_dieta, dt.cpf, dt.nome_dieta, &dt.calorias, dt.refeicoes) == 5)
-    {
-        if (dt.id_dieta == id_busca)
-        {
-            printf("///                        Dieta Encontrada!                              ///\n");
-            printf("ID da Dieta:       %d\n", dt.id_dieta);
-            printf("CPF do Usuário:    %s\n", dt.cpf);
-            printf("Nome da Dieta:     %s\n", dt.nome_dieta);
-            printf("Total de Calorias: %d kcal\n", dt.calorias);
-            printf("Refeições:         %s\n", dt.refeicoes);
-
+    while (fread(dt, sizeof(Dieta), 1, arq_dietas)){
+        if ((dt->id_dieta == id_busca) && (dt->status == True)){
+            printf("///                        Dieta Encontrada!                                ///\n");
+            printf("ID da Dieta:       %d\n", dt->id_dieta);
+            printf("CPF do Usuário:    %s\n", dt->cpf);
+            printf("Nome da Dieta:     %s\n", dt->nome_dieta);
+            printf("Total de Calorias: %d kcal\n", dt->calorias);
+            printf("Refeições:         %s\n", dt->refeicoes);
             encontrado = 1;
             break;
         }
     }
     if (!encontrado){
-        printf("\nDieta não encontrado!\n");
+        printf("\nDieta não encontrada!\n");
     }
 
     fclose(arq_dietas);
-    getchar();
+    free(dt);
+    pausar();
 }
 
 
