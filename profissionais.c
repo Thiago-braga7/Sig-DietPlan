@@ -3,6 +3,8 @@
 #include "profissionais.h"
 #include "util.h"
 #include <string.h>
+#define True 1
+#define False 0
 
 
 
@@ -22,6 +24,7 @@ void modulo_profissionais(void) {
 
 char tela_profissionais(void){
     char opcao;
+    limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -41,20 +44,24 @@ char tela_profissionais(void){
 }
 
 void cadastrar_profissional(void){
-    FILE *arq_profissional;
-    Profissional pf;
+    FILE * arq_profissionais;
+    Profissional * pf;
+    
+    pf = (Profissional*)malloc(sizeof(Profissional));
 
-    pf.id_profissional = 1;
-
-    arq_profissional = fopen("arq_profissional.csv", "rt");
-    if (arq_profissional != NULL)
-    {
-        char linha[512];
-        while (fgets(linha, sizeof(linha), arq_profissional) != NULL)
-        {
-            pf.id_profissional++;
-        }
-        fclose(arq_profissional);
+    pf->id_profissional = 1;
+    arq_profissionais = fopen("arq_profissionais.dat", "rb");
+    
+     // Crédito: Função adaptada do gemini;
+    if (arq_profissionais != NULL){
+        
+        fseek(arq_profissionais, 0, SEEK_END);  
+        
+        long num_registros = ftell(arq_profissionais) / sizeof(Profissional);
+        
+        pf->id_profissional = num_registros + 1;
+        
+        fclose(arq_profissionais);
     }
     
 
@@ -67,45 +74,42 @@ void cadastrar_profissional(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome:                                           ///\n");
-    scanf("%100[^\n]", pf.nome); 
+    scanf("%100[^\n]", pf->nome); 
     getchar();
     printf("///                         CPF (Apenas números):                           ///\n");
-    scanf("%s", pf.cpf); 
+    scanf("%s", pf->cpf); 
     getchar();
     printf("///                         E-mail:                                         ///\n");
-    scanf("%s", pf.email); 
+    scanf("%s", pf->email); 
     getchar();    
     printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%11[^\n]", pf.tel); 
+    scanf("%11[^\n]", pf->tel); 
     getchar();
     printf("///                         CRN:                                            ///\n");
-    scanf("%s", pf.crn); 
+    scanf("%s", pf->crn); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Profissional Cadastrado com Sucesso!                       \n");
-    printf("///                        ID gerado: %02d                                    ///\n", pf.id_profissional);
+    printf("///                        ID gerado: %02d                                    ///\n", pf->id_profissional);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    arq_profissional = fopen("arq_profissional.csv", "at");
+    pf->status = True;
 
-    if (arq_profissional == NULL) {
+    arq_profissionais = fopen("arq_profissionais.dat", "a+b");
+    if (arq_profissionais == NULL) {
         printf("Erro na criacao do arquivo\n");
         return;
     }
-    fprintf(arq_profissional, "%d;", pf.id_profissional);
-    fprintf(arq_profissional, "%s;", pf.nome);
-    fprintf(arq_profissional, "%s;", pf.cpf);
-    fprintf(arq_profissional, "%s;", pf.email);
-    fprintf(arq_profissional, "%s;", pf.tel);
-    fprintf(arq_profissional, "%s\n", pf.crn);
     
-    fclose(arq_profissional);
+    fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
+    fclose(arq_profissionais);
+    free(pf);
     pausar();
 }
 
 
 void buscar_profissional(void){
-    FILE *arq_profissional;
+    FILE *arq_profissionais;
     
     Profissional pf;
     int id_busca;
@@ -123,14 +127,14 @@ void buscar_profissional(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    arq_profissional = fopen("arq_profissional.csv", "rt");
+    arq_profissionais = fopen("arq_profissionais.csv", "rt");
 
-    if (arq_profissional == NULL)
+    if (arq_profissionais == NULL)
     {
         printf("Erro na criacao do arquivo\n");
         return;
     }
-    while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+    while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
         if (pf.id_profissional == id_busca)
         {
             printf("///                        Profissional Encontrado!                              ///\n");
@@ -149,12 +153,12 @@ void buscar_profissional(void){
         printf("\nProfissional não encontrado!\n");
     }
 
-    fclose(arq_profissional);
+    fclose(arq_profissionais);
     getchar();
 }
 void alterar_profissional(void){
-    FILE *arq_profissional;
-    FILE *arq_profissional_temp;
+    FILE *arq_profissionais;
+    FILE *arq_profissionais_temp;
 
     Profissional pf;
     int id_busca;
@@ -173,15 +177,15 @@ void alterar_profissional(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    arq_profissional = fopen("arq_profissional.csv", "rt");
-    arq_profissional_temp = fopen("arq_profissional_temp.csv", "wt");
+    arq_profissionais = fopen("arq_profissionais.csv", "rt");
+    arq_profissionais_temp = fopen("arq_profissionais_temp.csv", "wt");
 
-    if (arq_profissional == NULL || arq_profissional_temp == NULL){
+    if (arq_profissionais == NULL || arq_profissionais_temp == NULL){
         printf("Erro na criacao do arquivo\n");
         return;
     }
 
-     while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+     while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
         if(pf.id_profissional == id_busca){
             encontrado = 1;
              do{
@@ -247,20 +251,20 @@ void alterar_profissional(void){
                 continuar = confirmar_acao(continuar);
             } while (continuar == 'S');
         }
-        fprintf(arq_profissional_temp, "%d;%s;%s;%s;%s;%s\n",pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
+        fprintf(arq_profissionais_temp, "%d;%s;%s;%s;%s;%s\n",pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
     }
 
-    fclose(arq_profissional);
-    fclose(arq_profissional_temp);
+    fclose(arq_profissionais);
+    fclose(arq_profissionais_temp);
 
     if (encontrado){
-        remove("arq_profissional.csv");
-        rename("arq_profissional_temp.csv", "arq_profissional.csv");
+        remove("arq_profissionais.csv");
+        rename("arq_profissionais_temp.csv", "arq_profissionais.csv");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                    Paciente alterado com sucesso!                       ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
     } else {
-        remove("arq_profissional_temp.csv");
+        remove("arq_profissionais_temp.csv");
         printf("\nProfissional não encontrado!\n");
     }
     pausar();
@@ -272,8 +276,8 @@ void alterar_profissional(void){
 
  void excluir_profissional(void){
 
-    FILE *arq_profissional;
-    FILE *arq_profissional_temp;
+    FILE *arq_profissionais;
+    FILE *arq_profissionais_temp;
     Profissional pf;
     int id_busca;
     int encontrado = 0;
@@ -293,14 +297,14 @@ void alterar_profissional(void){
     char resposta;
 
     do{
-        arq_profissional = fopen("arq_profissional.csv", "rt");
+        arq_profissionais = fopen("arq_profissionais.csv", "rt");
 
-        if (arq_profissional == NULL){
+        if (arq_profissionais == NULL){
             printf("Erro na criacao do arquivo\n");
             return;
         }
 
-        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+        while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
             if (pf.id_profissional == id_busca)
             {
                 printf("///                        Profissional Encontrado!                       ///\n");
@@ -320,7 +324,7 @@ void alterar_profissional(void){
             printf("\nProfissional não encontrado!\n");
         }
 
-        fclose(arq_profissional);
+        fclose(arq_profissionais);
         getchar();
         printf("Deseja confirmar a ação? (S/N): ");
         scanf(" %c", &resposta);
@@ -334,24 +338,24 @@ void alterar_profissional(void){
     } while (resposta == 0);
 
     if (resposta == 'S'){
-        arq_profissional = fopen("arq_profissional.csv", "rt");
-        arq_profissional_temp = fopen("arq_profissional_temp.csv", "wt");
+        arq_profissionais = fopen("arq_profissionais.csv", "rt");
+        arq_profissionais_temp = fopen("arq_profissionais_temp.csv", "wt");
 
-        if (arq_profissional == NULL || arq_profissional_temp == NULL){
+        if (arq_profissionais == NULL || arq_profissionais_temp == NULL){
             printf("Erro na criacao do arquivo\n");
             return;
         }
 
-        while (fscanf(arq_profissional, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
+        while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
             if(pf.id_profissional != id_busca){
-                fprintf(arq_profissional_temp, "%d;%s;%s;%s;%s;%s\n", pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
+                fprintf(arq_profissionais_temp, "%d;%s;%s;%s;%s;%s\n", pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
             }
         }
-        fclose(arq_profissional);
-        fclose(arq_profissional_temp);
+        fclose(arq_profissionais);
+        fclose(arq_profissionais_temp);
 
-        remove("arq_profissional.csv");
-        rename("arq_profissional_temp.csv", "arq_profissional.csv");
+        remove("arq_profissionais.csv");
+        rename("arq_profissionais_temp.csv", "arq_profissionais.csv");
 
         if (!encontrado){
             printf("\nProfissional não encontrado!\n");
