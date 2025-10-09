@@ -112,7 +112,7 @@ void buscar_profissional(void){
     FILE * arq_profissionais;
     Profissional * pf;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
 
     pf = (Profissional*) malloc(sizeof(Profissional));
 
@@ -156,14 +156,17 @@ void buscar_profissional(void){
     pausar();
 }
 void alterar_profissional(void){
-    FILE *arq_profissionais;
-    FILE *arq_profissionais_temp;
+    FILE * arq_profissionais;
+    FILE * arq_profissionais_temp;
 
-    Profissional pf;
+    Profissional * pf;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
     char opcao;
-    char continuar = 'S';
+    char continuar;
+
+    pf = (Profissional*) malloc(sizeof(Profissional));
+
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -175,26 +178,29 @@ void alterar_profissional(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
+    encontrado = False;
 
-    arq_profissionais = fopen("arq_profissionais.csv", "rt");
-    arq_profissionais_temp = fopen("arq_profissionais_temp.csv", "wt");
+    arq_profissionais = fopen("arq_profissionais.dat", "rb");
+    arq_profissionais_temp = fopen("arq_profissionais_temp.dat", "wb");
 
     if (arq_profissionais == NULL || arq_profissionais_temp == NULL){
-        printf("Erro na criacao do arquivo\n");
+        printf("Erro na criação do arquivo\n");
         return;
     }
 
-     while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
-        if(pf.id_profissional == id_busca){
-            encontrado = 1;
+     while (fread(pf, sizeof(Profissional), 1, arq_profissionais)){
+        if((pf->id_profissional == id_busca) && (pf->status == True)){
+            encontrado = True;
+
              do{
+                limpar_tela();
                 printf("\n    Dados atuais do profissional    \n");
-                printf("ID:              %d\n", pf.id_profissional);
-                printf("Nome:            %s\n", pf.nome);
-                printf("CPF:             %s\n", pf.cpf);
-                printf("Email:           %s\n", pf.email);
-                printf("Telefone:        %s\n", pf.tel);
-                printf("CRN:             %s\n", pf.crn);
+                printf("ID:              %d\n", pf->id_profissional);
+                printf("Nome:            %s\n", pf->nome);
+                printf("CPF:             %s\n", pf->cpf);
+                printf("Email:           %s\n", pf->email);
+                printf("Telefone:        %s\n", pf->tel);
+                printf("CRN:             %s\n", pf->crn);
 
                 printf("\nQual campo deseja alterar?\n");
                 printf("1. Nome\n");
@@ -209,27 +215,27 @@ void alterar_profissional(void){
                 switch (opcao) {
                     case '1':
                         printf("Novo Nome: ");
-                        scanf("%100[^\n]", pf.nome);
+                        scanf("%100[^\n]", pf->nome);
                         getchar();
                         break;
                     case '2':
                         printf("Novo CPF: ");
-                        scanf("%13s", pf.cpf);
+                        scanf("%13s", pf->cpf);
                         getchar();
                         break;
                     case '3':
                         printf("Novo Email: ");
-                        scanf("%30s", pf.email);
+                        scanf("%30s", pf->email);
                         getchar();
                         break;
                     case '4':
                         printf("Novo Telefone: ");
-                        scanf("%11[^\n]", pf.tel);
+                        scanf("%11[^\n]", pf->tel);
                         getchar();
                         break;
                     case '5':
                         printf("Novo CRN: ");
-                        scanf("%12s", pf.crn);
+                        scanf("%12s", pf->crn);
                         getchar();
                         break;
                     default:
@@ -238,40 +244,39 @@ void alterar_profissional(void){
                 }
 
                 printf("\n    Dados atualizados   \n");
-                printf("ID:              %d\n", pf.id_profissional);
-                printf("Nome:            %s\n", pf.nome);
-                printf("CPF:             %s\n", pf.cpf);
-                printf("Email:           %s\n", pf.email);
-                printf("Telefone:        %s\n", pf.tel);
-                printf("CRN:             %s\n", pf.crn);
+                printf("ID:              %d\n", pf->id_profissional);
+                printf("Nome:            %s\n", pf->nome);
+                printf("CPF:             %s\n", pf->cpf);
+                printf("Email:           %s\n", pf->email);
+                printf("Telefone:        %s\n", pf->tel);
+                printf("CRN:             %s\n", pf->crn);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
+                getchar();
                 continuar = confirmar_acao(continuar);
+                if(continuar == 0){
+                    printf("Opção inválida! Digite apenas S ou N.\n");
+                }
             } while (continuar == 'S');
         }
-        fprintf(arq_profissionais_temp, "%d;%s;%s;%s;%s;%s\n",pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
+        fwrite(pf, sizeof(Profissional), 1, arq_profissionais_temp);
     }
 
     fclose(arq_profissionais);
     fclose(arq_profissionais_temp);
 
-    if (encontrado){
-        remove("arq_profissionais.csv");
-        rename("arq_profissionais_temp.csv", "arq_profissionais.csv");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
+    if (encontrado == True){
+        remove("arq_profissionais.dat");
+        rename("arq_profissionais_temp.dat", "arq_profissionais.dat");
         printf("///                    Paciente alterado com sucesso!                       ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
     } else {
-        remove("arq_profissionais_temp.csv");
+        remove("arq_profissionais_temp.dat");
         printf("\nProfissional não encontrado!\n");
     }
+    free(pf);
     pausar();
 }
-
-    // // printf("///////////////////////////////////////////////////////////////////////////////\n");
-    // // printf("\n");
-    // // pausar();
 
  void excluir_profissional(void){
 
