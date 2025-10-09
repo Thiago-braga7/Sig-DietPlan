@@ -16,3 +16,4 @@ void cadastrar_profissional(void);
 void buscar_profissional(void);
 void alterar_profissional(void);
 void excluir_profissional(void);
+void listar_profissionais(void);
