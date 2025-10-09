@@ -279,12 +279,14 @@ void alterar_profissional(void){
 }
 
  void excluir_profissional(void){
-
     FILE *arq_profissionais;
-    FILE *arq_profissionais_temp;
-    Profissional pf;
+    Profissional * pf;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
+    char resposta;
+
+    pf = (Profissional*) malloc(sizeof(Profissional));
+
     limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -296,78 +298,53 @@ void alterar_profissional(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-
+    encontrado = False;
     pausar();
-    char resposta;
 
-    do{
-        arq_profissionais = fopen("arq_profissionais.csv", "rt");
-
-        if (arq_profissionais == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
-            if (pf.id_profissional == id_busca)
-            {
-                printf("///                        Profissional Encontrado!                       ///\n");
-                printf("ID:                 %d\n", pf.id_profissional);
-                printf("Nome:               %s\n", pf.nome);
-                printf("CPF:                %s\n", pf.cpf);
-                printf("E-mail:             %s\n", pf.email);
-                printf("Telefone:           %s\n", pf.tel);
-                printf("CRN:                %s\n", pf.crn);
-
-                encontrado = 1;
-                break;
-            }
-        }
-
-        if (!encontrado){
-            printf("\nProfissional não encontrado!\n");
-        }
-
-        fclose(arq_profissionais);
-        getchar();
-        printf("Deseja confirmar a ação? (S/N): ");
-        scanf(" %c", &resposta);
-
-        resposta = confirmar_acao(resposta);
-
-        if (resposta == 0){
-            printf("Opção inválida! Digite apenas S ou N.\n");
-        }
-
-    } while (resposta == 0);
-
-    if (resposta == 'S'){
-        arq_profissionais = fopen("arq_profissionais.csv", "rt");
-        arq_profissionais_temp = fopen("arq_profissionais_temp.csv", "wt");
-
-        if (arq_profissionais == NULL || arq_profissionais_temp == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        while (fscanf(arq_profissionais, "%d;%99[^;];%12[^;];%29[^;];%10[^;];%11[^\n]\n",&pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn) == 6){
-            if(pf.id_profissional != id_busca){
-                fprintf(arq_profissionais_temp, "%d;%s;%s;%s;%s;%s\n", pf.id_profissional, pf.nome, pf.cpf, pf.email, pf.tel, pf.crn);
-            }
-        }
-        fclose(arq_profissionais);
-        fclose(arq_profissionais_temp);
-
-        remove("arq_profissionais.csv");
-        rename("arq_profissionais_temp.csv", "arq_profissionais.csv");
-
-        if (!encontrado){
-            printf("\nProfissional não encontrado!\n");
-        }
-
-        printf("Profissional Excluído com Sucesso! \n");
-    } else {
-            printf("Operação de Exclusão Cancelada !  \n");
+    arq_profissionais = fopen("arq_profissionais.dat", "r+b");
+    
+    if (arq_profissionais == NULL){
+        printf("Erro na criação do arquivo\n");
+        return;
     }
+
+    while(fread(pf, sizeof(Profissional),1, arq_profissionais)){
+        if((pf->id_profissional == id_busca) && (pf->status == True)){
+                printf("///                        Profissional Encontrado!                       ///\n");
+                printf("ID:                 %d\n", pf->id_profissional);
+                printf("Nome:               %s\n", pf->nome);
+                printf("CPF:                %s\n", pf->cpf);
+                printf("E-mail:             %s\n", pf->email);
+                printf("Telefone:           %s\n", pf->tel);
+                printf("CRN:                %s\n", pf->crn);
+                encontrado = True;
+
+            do {
+                printf("\nDeseja realmente excluir este Profissional? (S/N): ");
+                scanf(" %c", &resposta);
+                resposta = confirmar_acao(resposta);
+                
+                if(resposta == 0){
+                    printf("Opção inválida! Digite apenas S ou N.\n");
+                }
+            } while(resposta == 0);
+            if (resposta == 'S'){
+                pf->status = False;
+                fseek(arq_profissionais, (-1)*sizeof(Profissional), SEEK_CUR);
+                fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
+                printf("\nProfissional excluído com sucesso!\n");
+            } else{
+                printf("\nOperação de exclusão cancelada.\n");
+            }
+            break;
+        }
+    }
+    if (encontrado == False){
+        printf("\nProfissional não encontrada!\n");
+    }
+    fclose(arq_profissionais);
+    free(pf);
     pausar();
 }
+
+
