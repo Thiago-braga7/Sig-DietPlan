@@ -312,35 +312,35 @@ void alterar_profissional(void){
 
     while(fread(pf, sizeof(Profissional),1, arq_profissionais)){
         if((pf->id_profissional == id_busca) && (pf->status == True)){
-                printf("///                        Profissional Encontrado!                       ///\n");
-                printf("ID:                 %d\n", pf->id_profissional);
-                printf("Nome:               %s\n", pf->nome);
-                printf("CPF:                %s\n", pf->cpf);
-                printf("E-mail:             %s\n", pf->email);
-                printf("Telefone:           %s\n", pf->tel);
-                printf("CRN:                %s\n", pf->crn);
-                encontrado = True;
+            printf("///                        Profissional Encontrado!                       ///\n");
+            printf("ID:                 %d\n", pf->id_profissional);
+            printf("Nome:               %s\n", pf->nome);
+            printf("CPF:                %s\n", pf->cpf);
+            printf("E-mail:             %s\n", pf->email);
+            printf("Telefone:           %s\n", pf->tel);
+            printf("CRN:                %s\n", pf->crn);
+            encontrado = True;
 
-            do {
-                printf("\nDeseja realmente excluir este Profissional? (S/N): ");
-                scanf(" %c", &resposta);
-                resposta = confirmar_acao(resposta);
-                
-                if(resposta == 0){
-                    printf("Opção inválida! Digite apenas S ou N.\n");
-                }
-            } while(resposta == 0);
-            if (resposta == 'S'){
-                pf->status = False;
-                fseek(arq_profissionais, (-1)*sizeof(Profissional), SEEK_CUR);
-                fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
-                printf("\nProfissional excluído com sucesso!\n");
-            } else{
-                printf("\nOperação de exclusão cancelada.\n");
+        do {
+            printf("\nDeseja realmente excluir este Profissional? (S/N): ");
+            scanf(" %c", &resposta);
+            resposta = confirmar_acao(resposta);
+            
+            if(resposta == 0){
+                printf("Opção inválida! Digite apenas S ou N.\n");
             }
-            break;
+        } while(resposta == 0);
+        if (resposta == 'S'){
+            pf->status = False;
+            fseek(arq_profissionais, (-1)*sizeof(Profissional), SEEK_CUR);
+            fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
+            printf("\nProfissional excluído com sucesso!\n");
+        } else{
+            printf("\nOperação de exclusão cancelada.\n");
         }
+        break;
     }
+}
     if (encontrado == False){
         printf("\nProfissional não encontrado!\n");
     }
