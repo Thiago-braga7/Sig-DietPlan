@@ -8,6 +8,7 @@ struct agendamento {
     char tipo[50];
     char profissional[100];
     char observacoes[200];
+    int status;
 };
 
 void modulo_agendamentos(void);

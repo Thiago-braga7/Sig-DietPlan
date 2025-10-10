@@ -3,6 +3,9 @@
 #include "agendamentos.h"
 #include "util.h"
 #include <string.h>
+#define True 1
+#define False 0
+
 
 
 
@@ -40,62 +43,66 @@ char tela_agendamentos(void){
     return opcao;
 }
 void cadastrar_agendamento(void){
-    FILE *arq_agendamentos;
-    Agendamento ag;
-    ag.id_agendamento = 1;
-    limpar_tela();
+    FILE * arq_agendamentos;
+    Agendamento * ag;
+    
+    ag = (Agendamento*)malloc(sizeof(Agendamento));
 
-    arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
-    if (arq_agendamentos != NULL)
-    {
-        char linha[512];
-        while (fgets(linha, sizeof(linha), arq_agendamentos) != NULL)
-        {
-            ag.id_agendamento++;
-        }
+    ag->id_agendamento = 1;
+     arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    
+     // Crédito: Função adaptada do gemini;
+    if (arq_agendamentos != NULL){
+        
+        fseek(arq_agendamentos, 0, SEEK_END);  
+        
+        long num_registros = ftell(arq_agendamentos) / sizeof(Agendamento);
+        
+        ag->id_agendamento = num_registros + 1;
+        
         fclose(arq_agendamentos);
     }
 
+    limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                             Agendamentos                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
-    scanf("%s", ag.cpf); 
+    scanf("%s", ag->cpf); 
     getchar();
     printf("///                         Data (DD/MM/AAAA):                              ///\n");
-    scanf("%s", ag.data); 
+    scanf("%s", ag->data); 
     getchar();
     printf("///                         Hora (HH:MM):                                   ///\n");
-    scanf("%s", ag.hora); 
+    scanf("%s", ag->hora); 
     getchar();
     printf("///                         Tipo de Agendamento:                            ///\n");
-    scanf("%50[^\n]", ag.tipo); 
+    scanf("%50[^\n]", ag->tipo); 
     getchar();
     printf("///                         Profissional Responsável:                       ///\n");
-    scanf("%100[^\n]", ag.profissional); 
+    scanf("%100[^\n]", ag->profissional); 
     getchar();
     printf("///                         Observações:                                    ///\n");
-    scanf("%200[^\n]", ag.observacoes); 
+    scanf("%200[^\n]", ag->observacoes); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
-    printf("///                        ID gerado: %02d                                    ///\n", ag.id_agendamento);
+    printf("///                        ID gerado: %02d                                    ///\n", ag->id_agendamento);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    arq_agendamentos = fopen("arq_agendamentos.csv", "at");
+    
+    ag->status = True;
+    
+    arq_agendamentos = fopen("arq_agendamentos.dat", "a+b");
     if (arq_agendamentos == NULL) {
-        printf("Erro na criacao do arquivo\n");
+        printf("Erro na criação do arquivo\n");
         return;
     }
-    fprintf(arq_agendamentos, "%d;", ag.id_agendamento);
-    fprintf(arq_agendamentos, "%s;", ag.cpf);
-    fprintf(arq_agendamentos, "%s;", ag.data);
-    fprintf(arq_agendamentos, "%s;", ag.hora);
-    fprintf(arq_agendamentos, "%s;", ag.tipo);
-    fprintf(arq_agendamentos, "%s;", ag.profissional);
-    fprintf(arq_agendamentos, "%s\n", ag.observacoes);
-
+    
+    fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos);
+    fclose(arq_agendamentos);
+    free(ag);
     pausar();
 }
 void buscar_agendamento(void){
