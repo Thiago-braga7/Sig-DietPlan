@@ -19,6 +19,7 @@ void modulo_agendamentos(void) {
             case '2': buscar_agendamento(); break;
             case '3': alterar_agendamento(); break;
             case '4': excluir_agendamento(); break;
+            case '5': listar_agendamentos(); break;
         }
     } while (opcao != '0');  
 }
@@ -34,6 +35,7 @@ char tela_agendamentos(void){
     printf("///                    2. Buscar Agendamento                                ///\n");
     printf("///                    3. Alterar Agendamento                               ///\n");
     printf("///                    4. Excluir Agendamento                               ///\n");
+    printf("///                    5. Listar Agendamentos                               ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
@@ -353,5 +355,44 @@ void excluir_agendamento(void){
     fclose(arq_agendamentos);
     free(ag);
     pausar();
+}
+void listar_agendamentos(void){
+    FILE * arq_agendamentos;
+    Agendamento * ag;
 
+    ag = (Agendamento*) malloc(sizeof(Agendamento));
+    
+    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    if (arq_agendamentos == NULL) {
+        printf("Nenhum Agendamento cadastrado ainda.\n");
+        free(ag);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Agendamentos                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Listar Agendamentos  = = = = =              ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if (ag->status == True){
+            printf("ID:                %d\n", ag->id_agendamento);
+            printf("CPF:               %s\n", ag->cpf);
+            printf("Data:              %s\n", ag->data);
+            printf("Hora:              %s\n", ag->hora);
+            printf("Tipo:              %s\n", ag->tipo);
+            printf("Profissional:      %s\n", ag->profissional);
+            printf("Observações:       %s\n", ag->observacoes);
+            printf("--------------------------------------------------\n");
+        }
+    }
+
+    fclose(arq_agendamentos);
+    free(ag);
+
+    pausar();
 }
