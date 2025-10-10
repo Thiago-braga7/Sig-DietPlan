@@ -290,7 +290,7 @@ void excluir_dieta(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
-    pausar();
+    
 
     arq_dietas = fopen("arq_dietas.dat", "r+b");
     
