@@ -112,11 +112,13 @@ void cadastrar_paciente(void){
 
 
 void buscar_paciente(void){
-    FILE* arq_paciente;
-    Paciente pac;
+    FILE * arq_paciente;
+    Paciente * pac;
 
     char cpf_busca[13];
-    int encontrado = 0;
+    int encontrado;
+
+    pac = (Paciente*) malloc(sizeof(Paciente));
 
     limpar_tela();
     printf("\n");
@@ -130,32 +132,35 @@ void buscar_paciente(void){
     getchar();
     pausar();
 
-    arq_paciente = fopen("arq_paciente.csv", "rt");
+    encontrado = False;
+
+    arq_paciente = fopen("arq_paciente.dat", "rb");
 
     if (arq_paciente == NULL){
         printf("Erro na criacao do arquivo\n");
         return;
      }
 
-    while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", pac.nome, pac.cpf, pac.tel, &pac.idade, &pac.peso, &pac.altura) == 6) {
-        if (strcmp(pac.cpf, cpf_busca) == 0) {
+    while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
+        if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == True) {
             printf("Paciente encontrado\n");
-            printf("Nome: %s\n", pac.nome);
-            printf("CPF: %s\n", pac.cpf);
-            printf("Telefone: %s\n", pac.tel);
-            printf("Idade: %d\n", pac.idade);
-            printf("Peso: %.2f kg\n", pac.peso);
-            printf("Altura: %.2f m\n", pac.altura);
-            encontrado = 1;
+            printf("Nome: %s\n", pac->nome);
+            printf("CPF: %s\n", pac->cpf);
+            printf("Telefone: %s\n", pac->tel);
+            printf("Idade: %d\n", pac->idade);
+            printf("Peso: %.2f kg\n", pac->peso);
+            printf("Altura: %.2f m\n", pac->altura);
+
+            encontrado = True;
             break;
         }
     }
-    
-    if (!encontrado) {
+    if (encontrado == False) {
         printf("\nPaciente não encontrado!\n");
     }
 
     fclose(arq_paciente);
+    free(pac);
     getchar();
 }
 
