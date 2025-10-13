@@ -11,12 +11,6 @@
 #include "util.h"
 
 
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define CYAN    "\033[36m"
-#define RESET   "\033[0m"
-
-
 
 
 
@@ -54,9 +48,9 @@ int main(void){
 void menu_principal(void){
     limpar_tela();
     printf("\n");
-    printf(CYAN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n"RESET);
-    printf(CYAN"///             Universidade Federal do Rio Grande do Norte                 ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
     printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
     printf("///               Departamento de Computação e Tecnologia                   ///\n");
     printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
@@ -64,9 +58,9 @@ void menu_principal(void){
     printf("///                           SIG-DietPlan                                  ///\n");
     printf("///         Criado por @thiagobraga9a e gabrieluchoa_1 -- desde Ago, 2025   ///\n");
     printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf(RED"///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = Planejamento de Dietas = = = = =                   ///\n");
     printf("///                                                                         ///\n");
@@ -77,7 +71,7 @@ void menu_principal(void){
     printf("///                      5. Agendamentos                                    ///\n");
     printf("///                      6. Relatórios                                      ///\n");
     printf("///                      0. Sair                                            ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n"RESET);
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
 }
 

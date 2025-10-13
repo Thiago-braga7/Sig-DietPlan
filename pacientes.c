@@ -161,8 +161,8 @@ void buscar_paciente(void){
 
  
 void alterar_paciente(void){
-    FILE *arq_paciente;
-    FILE *arq_paciente_temp;
+    // FILE *arq_paciente;
+    // FILE *arq_paciente_temp;
 
     Paciente pac;
     char cpf_busca[13];
