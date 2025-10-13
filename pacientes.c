@@ -161,8 +161,8 @@ void buscar_paciente(void){
 
  
 void alterar_paciente(void){
-    // FILE *arq_paciente;
-    // FILE *arq_paciente_temp;
+    FILE *arq_paciente;
+    FILE *arq_paciente_temp;
 
     Paciente pac;
     char cpf_busca[13];
@@ -270,11 +270,11 @@ void alterar_paciente(void){
         remove("arq_paciente.csv");
         rename("arq_paciente_temp.csv", "arq_paciente.csv");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                    Dieta Alterada com sucesso!                          ///\n");
+        printf("///                    Paciente Alterada com sucesso!                          ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
     } else {
         remove("arq_paciente_temp.csv");
-        printf("\nDieta não encontrada!\n");
+        printf("\nPaciente não encontrada!\n");
     }
     pausar();
 
@@ -284,11 +284,11 @@ void alterar_paciente(void){
    
 void excluir_paciente(void){
     FILE *arq_paciente;
-    FILE *arq_paciente_temp;
+    Paciente *pac;
 
-    Paciente pac;
     char cpf_busca[13];
-    int encontrado = 0;
+    int encontrado;
+    char resposta;
 
     limpar_tela();
 
@@ -302,81 +302,61 @@ void excluir_paciente(void){
     scanf("%12s", cpf_busca); 
     getchar();
 
+    encontrado = False;
 
-
-    char resposta;
-
-    // Busca e exibe paciente
-    do {
-        arq_paciente = fopen("arq_paciente.csv", "rt");
-
-        if (arq_paciente == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", pac.nome, pac.cpf, pac.tel, &pac.idade, &pac.peso, &pac.altura) == 6) {
-            if (strcmp(pac.cpf, cpf_busca) == 0) {
-                printf("Paciente encontrado\n");
-                printf("Nome: %s\n", pac.nome);
-                printf("CPF: %s\n", pac.cpf);
-                printf("Telefone: %s\n", pac.tel);
-                printf("Idade: %d\n", pac.idade);
-                printf("Peso: %.2f kg\n", pac.peso);
-                printf("Altura: %.2f m\n", pac.altura);
-                encontrado = 1;
-                break;
-            }
-        }
-        
-        if (!encontrado) {
-            printf("\nPaciente não encontrado!\n");
-        }
-
-        fclose(arq_paciente);
-        getchar();
-        printf("Deseja confirmar a ação? (S/N): ");
-        scanf(" %c", &resposta);
-
-        resposta = confirmar_acao(resposta); 
-
-        if (resposta == 0) {  
-            printf("Opção inválida! Digite apenas S ou N.\n");
-        }
-
-    } while (resposta == 0); 
-
-    // Exclui caso a resposta seja "S"
-    if (resposta == 'S') {
-        arq_paciente = fopen("arq_paciente.csv", "rt");
-        arq_paciente_temp = fopen("arq_paciente_temp.csv", "wt");
-
-        if (arq_paciente == NULL || arq_paciente_temp == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        while (fscanf(arq_paciente, "%[^;];%[^;];%[^;];%d;%f;%f\n", pac.nome, pac.cpf, pac.tel, &pac.idade, &pac.peso, &pac.altura) == 6) {
-            if(strcmp(pac.cpf, cpf_busca) != 0) {
-                fprintf(arq_paciente_temp, "%s;%s;%s;%d;%.2f;%.2f\n", pac.nome, pac.cpf, pac.tel, pac.idade, pac.peso, pac.altura);
-            }
-        }
-        
-        fclose(arq_paciente);
-        fclose(arq_paciente_temp);
-
-        remove("arq_paciente.csv");
-        rename("arq_paciente_temp.csv", "arq_paciente.csv");
-
-        if (!encontrado) {
-            printf("\nPaciente não encontrado!\n");
-        }
-
-        printf("Paciente Excluído com Sucesso!    \n");
-
-    } else {
-            printf("Operação de Exclusão Cancelada !  \n");
+    pac = malloc(sizeof(Paciente));
+    if (pac == NULL) {
+        printf("Erro de alocação de memória.\n");
+        return;
     }
+
+    arq_paciente = fopen("arq_paciente.dat", "r+b");
+
+    if (arq_paciente == NULL){
+        printf("Erro ao buscar do arquivo\n");
+        return;
+    }
+
+        while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
+            if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == True) {
+                printf("Paciente encontrado\n");
+                printf("Nome: %s\n", pac->nome);
+                printf("CPF: %s\n", pac->cpf);
+                printf("Telefone: %s\n", pac->tel);
+                printf("Idade: %d\n", pac->idade);
+                printf("Peso: %.2f kg\n", pac->peso);
+                printf("Altura: %.2f m\n", pac->altura);
+
+                encontrado = True;
+            }
+
+            do {
+                printf("\nDeseja realmente excluir esse paciente? (S/N): ");
+                scanf(" %c", &resposta);
+                resposta = confirmar_acao(resposta);
+                
+                if(resposta == 0){
+                    printf("Opção inválida! Digite apenas S ou N.\n");
+                }
+            } while(resposta == 0);
+
+            if (resposta == 'S'){
+                pac->status = False;
+                fseek(arq_paciente, (-1)*sizeof(Paciente), SEEK_CUR);
+                fwrite(pac, sizeof(Paciente), 1, arq_paciente);
+                printf("\nPaciente excluído com sucesso!\n");
+            } else{
+                printf("\nOperação de exclusão cancelada.\n");
+            }
+            break;
+        }
+    
+    if (encontrado == False){
+        printf("\nPaciente não encontrada!\n");
+    }
+    
+    fclose(arq_paciente);
+    free(pac);
     pausar();
 }
 
@@ -414,6 +394,6 @@ void listar_paciente(void) {
 
     fclose(arq_paciente);
     free(pac);
-    
+
     pausar();
 }
