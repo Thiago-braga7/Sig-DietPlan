@@ -3,6 +3,9 @@
 #include "agendamentos.h"
 #include "util.h"
 #include <string.h>
+#define True 1
+#define False 0
+
 
 
 
@@ -16,6 +19,7 @@ void modulo_agendamentos(void) {
             case '2': buscar_agendamento(); break;
             case '3': alterar_agendamento(); break;
             case '4': excluir_agendamento(); break;
+            case '5': listar_agendamentos(); break;
         }
     } while (opcao != '0');  
 }
@@ -31,6 +35,7 @@ char tela_agendamentos(void){
     printf("///                    2. Buscar Agendamento                                ///\n");
     printf("///                    3. Alterar Agendamento                               ///\n");
     printf("///                    4. Excluir Agendamento                               ///\n");
+    printf("///                    5. Listar Agendamentos                               ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
@@ -40,71 +45,77 @@ char tela_agendamentos(void){
     return opcao;
 }
 void cadastrar_agendamento(void){
-    FILE *arq_agendamentos;
-    Agendamento ag;
-    ag.id_agendamento = 1;
-    limpar_tela();
+    FILE * arq_agendamentos;
+    Agendamento * ag;
+    
+    ag = (Agendamento*)malloc(sizeof(Agendamento));
 
-    arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
-    if (arq_agendamentos != NULL)
-    {
-        char linha[512];
-        while (fgets(linha, sizeof(linha), arq_agendamentos) != NULL)
-        {
-            ag.id_agendamento++;
-        }
+    ag->id_agendamento = 1;
+     arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    
+     // Crédito: Função adaptada do gemini;
+    if (arq_agendamentos != NULL){
+        
+        fseek(arq_agendamentos, 0, SEEK_END);  
+        
+        long num_registros = ftell(arq_agendamentos) / sizeof(Agendamento);
+        
+        ag->id_agendamento = num_registros + 1;
+        
         fclose(arq_agendamentos);
     }
 
+    limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                             Agendamentos                                ///\n");
     printf("///                                                                         ///\n");
     printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
     printf("///                                                                         ///\n");
     printf("///                         CPF do Paciente:                                ///\n");
-    scanf("%s", ag.cpf); 
+    scanf("%s", ag->cpf); 
     getchar();
     printf("///                         Data (DD/MM/AAAA):                              ///\n");
-    scanf("%s", ag.data); 
+    scanf("%s", ag->data); 
     getchar();
     printf("///                         Hora (HH:MM):                                   ///\n");
-    scanf("%s", ag.hora); 
+    scanf("%s", ag->hora); 
     getchar();
     printf("///                         Tipo de Agendamento:                            ///\n");
-    scanf("%50[^\n]", ag.tipo); 
+    scanf("%50[^\n]", ag->tipo); 
     getchar();
     printf("///                         Profissional Responsável:                       ///\n");
-    scanf("%100[^\n]", ag.profissional); 
+    scanf("%100[^\n]", ag->profissional); 
     getchar();
     printf("///                         Observações:                                    ///\n");
-    scanf("%200[^\n]", ag.observacoes); 
+    scanf("%200[^\n]", ag->observacoes); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
-    printf("///                        ID gerado: %02d                                    ///\n", ag.id_agendamento);
+    printf("///                        ID gerado: %02d                                    ///\n", ag->id_agendamento);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    arq_agendamentos = fopen("arq_agendamentos.csv", "at");
+    
+    ag->status = True;
+    
+    arq_agendamentos = fopen("arq_agendamentos.dat", "a+b");
     if (arq_agendamentos == NULL) {
-        printf("Erro na criacao do arquivo\n");
+        printf("Erro na criação do arquivo\n");
         return;
     }
-    fprintf(arq_agendamentos, "%d;", ag.id_agendamento);
-    fprintf(arq_agendamentos, "%s;", ag.cpf);
-    fprintf(arq_agendamentos, "%s;", ag.data);
-    fprintf(arq_agendamentos, "%s;", ag.hora);
-    fprintf(arq_agendamentos, "%s;", ag.tipo);
-    fprintf(arq_agendamentos, "%s;", ag.profissional);
-    fprintf(arq_agendamentos, "%s\n", ag.observacoes);
-
+    
+    fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos);
+    fclose(arq_agendamentos);
+    free(ag);
     pausar();
 }
 void buscar_agendamento(void){
-    FILE *arq_agendamentos;
-    
-    Agendamento ag;
+    FILE * arq_agendamentos;
+    Agendamento * ag;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
 
+    ag = (Agendamento*)malloc(sizeof(Agendamento));
+
+    limpar_tela();
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                             Agendamentos                                ///\n");
@@ -115,48 +126,51 @@ void buscar_agendamento(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-
-    arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
+    encontrado = False;
+     encontrado = False;
+    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
 
     if (arq_agendamentos == NULL){
-        printf("Erro na criacao do arquivo\n");
+        printf("Erro na criação do arquivo\n");
         return;
     }
 
-    while (fscanf(arq_agendamentos, "%d;%12[^;];%14[^;];%9[^;];%49[^;];%99[^;];%199[^\n]\n",
-                  &ag.id_agendamento, ag.cpf, ag.data, ag.hora, ag.tipo, ag.profissional, ag.observacoes) == 7){
-        if (ag.id_agendamento == id_busca){
+    while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if ((ag->id_agendamento == id_busca) && (ag->status == True)){
             printf("///                        Agendamento Encontrado!                        ///\n");
-            printf("ID:                %d\n", ag.id_agendamento);
-            printf("CPF:               %s\n", ag.cpf);
-            printf("Data:              %s\n", ag.data);
-            printf("Hora:              %s\n", ag.hora);
-            printf("Tipo:              %s\n", ag.tipo);
-            printf("Profissional:      %s\n", ag.profissional);
-            printf("Observações:       %s\n", ag.observacoes);
+            printf("ID:                %d\n", ag->id_agendamento);
+            printf("CPF:               %s\n", ag->cpf);
+            printf("Data:              %s\n", ag->data);
+            printf("Hora:              %s\n", ag->hora);
+            printf("Tipo:              %s\n", ag->tipo);
+            printf("Profissional:      %s\n", ag->profissional);
+            printf("Observações:       %s\n", ag->observacoes);
 
-            encontrado = 1;
-            break;
+           encontrado = True;
+           break;
         }
     }
-    fclose(arq_agendamentos);
-
-    if (encontrado == 0){
-        printf("\n///               Agendamento com o ID %d não foi encontrado.            ///\n", id_busca);
+    if (encontrado == False){
+        printf("\nAgendamento não encontrado!\n");
     }
 
+    fclose(arq_agendamentos);
+    free(ag);
     pausar();
 }
 
 void alterar_agendamento(void){
-    FILE *arq_agendamentos;
-    FILE *arq_agendamentos_temp;
+    FILE * arq_agendamentos;
+    FILE * arq_agendamentos_temp;
 
-    Agendamento ag;
+    Agendamento * ag;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
     char opcao;
-    char continuar = 'S';
+    char continuar;
+
+    ag = (Agendamento*)malloc(sizeof(Agendamento));
+
     limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                             Agendamentos                                ///\n");
@@ -167,27 +181,31 @@ void alterar_agendamento(void){
     scanf("%d", &id_busca); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-   
-    arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
-    arq_agendamentos_temp = fopen("arq_agendamentos_temp.csv", "wt");
+    encontrado = False;
+
+    
+    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    arq_agendamentos_temp = fopen("arq_agendamentos_temp.dat", "wb");
 
     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL){
-        printf("Erro na criacao do arquivo\n");
+        printf("Erro na criação do arquivo\n");
         return;
     }
 
-    while (fscanf(arq_agendamentos, "%d;%12[^;];%14[^;];%9[^;];%49[^;];%99[^;];%199[^\n]\n", &ag.id_agendamento, ag.cpf, ag.data, ag.hora, ag.tipo, ag.profissional, ag.observacoes) == 7) {
-        if (ag.id_agendamento == id_busca){
-            encontrado = 1;
+
+     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if((ag->id_agendamento == id_busca) && (ag->status == True)){
+            encontrado = True;
             do{
+                limpar_tela();
                 printf("\n    Dados atuais do agendamento    \n");
-                printf("ID:              %d\n", ag.id_agendamento);
-                printf("CPF do Paciente: %s\n", ag.cpf);
-                printf("Data:            %s\n", ag.data);
-                printf("Hora:            %s\n", ag.hora);
-                printf("Tipo:            %s\n", ag.tipo);
-                printf("Profissional:    %s\n", ag.profissional);
-                printf("Observações:     %s\n", ag.observacoes);
+                printf("ID:              %d\n", ag->id_agendamento);
+                printf("CPF do Paciente: %s\n", ag->cpf);
+                printf("Data:            %s\n", ag->data);
+                printf("Hora:            %s\n", ag->hora);
+                printf("Tipo:            %s\n", ag->tipo);
+                printf("Profissional:    %s\n", ag->profissional);
+                printf("Observações:     %s\n", ag->observacoes);
 
                 printf("\nQual campo deseja alterar?\n");
                 printf("1. CPF do Paciente\n");
@@ -203,32 +221,32 @@ void alterar_agendamento(void){
                 switch (opcao){
                     case '1':
                         printf("Novo CPF: ");
-                        scanf("%13s", ag.cpf);
+                        scanf("%13s", ag->cpf);
                         getchar();
                         break;
                     case '2':
                         printf("Nova Data (DD/MM/AAAA): ");
-                        scanf("%15s", ag.data);
+                        scanf("%15s", ag->data);
                         getchar();
                         break;
                     case '3':
                         printf("Nova Hora (HH:MM): ");
-                        scanf("%10s", ag.hora);
+                        scanf("%10s", ag->hora);
                         getchar();
                         break;
                     case '4':
                         printf("Novo Tipo: ");
-                        scanf("%50[^\n]", ag.tipo);
+                        scanf("%50[^\n]", ag->tipo);
                         getchar();
                         break;
                     case '5':
                         printf("Novo Profissional: ");
-                        scanf("%100[^\n]", ag.profissional);
+                        scanf("%100[^\n]", ag->profissional);
                         getchar();
                         break;
                     case '6':
                         printf("Novas Observações: ");
-                        scanf("%200[^\n]", ag.observacoes);
+                        scanf("%200[^\n]", ag->observacoes);
                         getchar();
                         break;
                     default:
@@ -237,44 +255,48 @@ void alterar_agendamento(void){
                 }
 
                 printf("\n    Dados atualizados    \n");
-                printf("ID:              %d\n", ag.id_agendamento);
-                printf("CPF do Paciente: %s\n", ag.cpf);
-                printf("Data:            %s\n", ag.data);
-                printf("Hora:            %s\n", ag.hora);
-                printf("Tipo:            %s\n", ag.tipo);
-                printf("Profissional:    %s\n", ag.profissional);
-                printf("Observações:     %s\n", ag.observacoes);
+                printf("ID:              %d\n", ag->id_agendamento);
+                printf("CPF do Paciente: %s\n", ag->cpf);
+                printf("Data:            %s\n", ag->data);
+                printf("Hora:            %s\n", ag->hora);
+                printf("Tipo:            %s\n", ag->tipo);
+                printf("Profissional:    %s\n", ag->profissional);
+                printf("Observações:     %s\n", ag->observacoes);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
                 continuar = confirmar_acao(continuar); 
+                if(continuar == 0){
+                    printf("Opção inválida! Digite apenas S ou N.\n");
+                }
             } while (continuar == 'S');
         }
-
-        fprintf(arq_agendamentos_temp, "%d;%s;%s;%s;%s;%s;%s\n",ag.id_agendamento, ag.cpf, ag.data, ag.hora, ag.tipo, ag.profissional, ag.observacoes);
+        fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
     }
 
     fclose(arq_agendamentos);
     fclose(arq_agendamentos_temp);
 
-    if (encontrado){
-        remove("arq_agendamentos.csv");
-        rename("arq_agendamentos_temp.csv", "arq_agendamentos.csv");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                Agendamento alterado com sucesso!                        ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
+     if (encontrado == True){
+        remove("arq_agendamentos.dat");
+        rename("arq_agendamentos_temp.dat", "arq_agendamentos.dat");
+        printf("///                    Paciente alterado com sucesso!                       ///\n");
     } else {
-        remove("arq_agendamentos_temp.csv");
+        remove("arq_agendamentos_temp.dat");
         printf("\nAgendamento não encontrado!\n");
     }
+    free(ag);
     pausar();
 }
 void excluir_agendamento(void){
-    FILE *arq_agendamentos;
-    FILE *arq_agendamentos_temp;
-    Agendamento ag;
+    FILE * arq_agendamentos;
+    Agendamento * ag;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
+    char resposta;
+
+    ag = (Agendamento*)malloc(sizeof(Agendamento));
+
     limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                             Agendamentos                                ///\n");
@@ -285,81 +307,92 @@ void excluir_agendamento(void){
     scanf("%d", &id_busca); 
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
+    encontrado = False;
+    
+    arq_agendamentos = fopen("arq_agendamentos.dat", "r+b");
+    
+    if (arq_agendamentos == NULL){
+        printf("Erro na criação do arquivo\n");
+        return;
+        
+    }
 
-    pausar();
+    while(fread(ag, sizeof(Agendamento),1, arq_agendamentos)){
+        if((ag->id_agendamento == id_busca) && (ag->status == True)){
+            printf("///                        Agendamemto Encontrado!                       ///\n");
+            printf("ID:                %d\n", ag->id_agendamento);
+            printf("CPF:               %s\n", ag->cpf);
+            printf("Data:              %s\n", ag->data);
+            printf("Hora:              %s\n", ag->hora);
+            printf("Tipo:              %s\n", ag->tipo);
+            printf("Profissional:      %s\n", ag->profissional);
+            printf("Observações:       %s\n", ag->observacoes);
+            encontrado = True;
 
-    char resposta;
-
-     do{
-        arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
-
-        if (arq_agendamentos == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-          while (fscanf(arq_agendamentos, "%d;%12[^;];%14[^;];%9[^;];%49[^;];%99[^;];%199[^\n]\n",
-                  &ag.id_agendamento, ag.cpf, ag.data, ag.hora, ag.tipo, ag.profissional, ag.observacoes) == 7){
-        if (ag.id_agendamento == id_busca){
-            printf("///                        Agendamento Encontrado!                        ///\n");
-            printf("ID:                %d\n", ag.id_agendamento);
-            printf("CPF:               %s\n", ag.cpf);
-            printf("Data:              %s\n", ag.data);
-            printf("Hora:              %s\n", ag.hora);
-            printf("Tipo:              %s\n", ag.tipo);
-            printf("Profissional:      %s\n", ag.profissional);
-            printf("Observações:       %s\n", ag.observacoes);
-
-            encontrado = 1;
+        do {
+            printf("\nDeseja realmente excluir este Agendamento? (S/N): ");
+            scanf(" %c", &resposta);
+            resposta = confirmar_acao(resposta);
+            
+            if(resposta == 0){
+                printf("Opção inválida! Digite apenas S ou N.\n");
+            }
+        } while(resposta == 0);
+          if (resposta == 'S'){
+                ag->status = False;
+                fseek(arq_agendamentos, (-1)*sizeof(Agendamento), SEEK_CUR);
+                fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos);
+                printf("\nAgendamento excluído com sucesso!\n");
+            } else{
+                printf("\nOperação de exclusão cancelada.\n");
+            }
             break;
         }
     }
-        
-        if (!encontrado){
-            printf("\nAgendamento não encontrado!\n");
-        }
-
-        fclose(arq_agendamentos);
-        getchar();
-        printf("Deseja confirmar a ação? (S/N): ");
-        scanf(" %c", &resposta);
-
-        resposta = confirmar_acao(resposta);
-
-        if (resposta == 0){
-            printf("Opção inválida! Digite apenas S ou N.\n");
-        }
-
-    } while (resposta == 0);
-
-    if (resposta == 'S'){
-        arq_agendamentos = fopen("arq_agendamentos.csv", "rt");
-        arq_agendamentos_temp = fopen("arq_agendamentos_temp.csv", "wt");
-
-        if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        
-        while (fscanf(arq_agendamentos, "%d;%12[^;];%14[^;];%9[^;];%49[^;];%99[^;];%199[^\n]\n",&ag.id_agendamento, ag.cpf, ag.data, ag.hora, ag.tipo, ag.profissional, ag.observacoes) == 7) {
-            if (ag.id_agendamento != id_busca) {
-                fprintf(arq_agendamentos_temp, "%d;%s;%s;%s;%s;%s;%s\n",ag.id_agendamento, ag.cpf, ag.data, ag.hora, ag.tipo, ag.profissional, ag.observacoes);
-            }
-        }
-        fclose(arq_agendamentos);
-        fclose(arq_agendamentos_temp);
-
-        remove("arq_agendamentos.csv");
-        rename("arq_agendamentos_temp.csv", "arq_agendamentos.csv");
-
-        if (!encontrado){
-            printf("\nAgendamento não encontrada!\n");
-        }
-
-        printf("Agendamento Excluído com Sucesso! \n");
-    } else {
-            printf("Operação de Exclusão Cancelada !  \n");
+    if (encontrado == False){
+        printf("\nAgendamento não encontrado!\n");
     }
+    fclose(arq_agendamentos);
+    free(ag);
+    pausar();
+}
+void listar_agendamentos(void){
+    FILE * arq_agendamentos;
+    Agendamento * ag;
+
+    ag = (Agendamento*) malloc(sizeof(Agendamento));
+    
+    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    if (arq_agendamentos == NULL) {
+        printf("Nenhum Agendamento cadastrado ainda.\n");
+        free(ag);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Agendamentos                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Listar Agendamentos  = = = = =              ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if (ag->status == True){
+            printf("ID:                %d\n", ag->id_agendamento);
+            printf("CPF:               %s\n", ag->cpf);
+            printf("Data:              %s\n", ag->data);
+            printf("Hora:              %s\n", ag->hora);
+            printf("Tipo:              %s\n", ag->tipo);
+            printf("Profissional:      %s\n", ag->profissional);
+            printf("Observações:       %s\n", ag->observacoes);
+            printf("--------------------------------------------------\n");
+        }
+    }
+
+    fclose(arq_agendamentos);
+    free(ag);
+
     pausar();
 }

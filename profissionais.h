@@ -7,6 +7,7 @@ struct profissional {
     char email[30];
     char tel[11];
     char crn[12];
+    int status;
 };
 
 void modulo_profissionais(void);
@@ -15,3 +16,4 @@ void cadastrar_profissional(void);
 void buscar_profissional(void);
 void alterar_profissional(void);
 void excluir_profissional(void);
+void listar_profissionais(void);
