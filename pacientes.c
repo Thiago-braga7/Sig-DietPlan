@@ -380,31 +380,40 @@ void excluir_paciente(void){
     pausar();
 }
 
+
 void listar_paciente(void) {
     FILE *arq_paciente;
     Paciente* pac;
+
     pac = (Paciente*)malloc(sizeof(Paciente));
+    int encontrado = 0;
 
     arq_paciente = fopen("arq_paciente.dat", "rb");    
-
     if (arq_paciente == NULL) {
-        printf("Erro na criacao do arquivo\n");
+        printf("Nenhum paciente cadastrado ainda\n");
         free(pac);
         return;
     }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)){
         if (pac->status) {
+            encontrado = 1;
             printf("Nome: %s\n", pac->nome);
             printf("CPF: %s\n", pac->cpf);
             printf("Telefone: %s\n", pac->tel);
             printf("Idade: %d\n", pac->idade);
             printf("Peso: %.2f\n", pac->peso);
             printf("Altura: %.2f\n", pac->altura);
+            printf("--------------------------------------------------\n");
         }
+    }
+
+    if (!encontrado) {
+        printf("Nenhum paciente ativo encontrado.\n");
     }
 
     fclose(arq_paciente);
     free(pac);
+    
     pausar();
 }
