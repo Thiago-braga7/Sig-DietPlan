@@ -18,6 +18,7 @@ void modulo_consultas(void) {
             case '2': buscar_consulta(); break;
             case '3': alterar_consulta(); break;
             case '4': excluir_consulta(); break;
+            case '5': listar_consulta(); break;
         }
     } while (opcao != '0');  
 }
@@ -34,6 +35,7 @@ char tela_consultas(void){
     printf("///                    2. Buscar Consulta                                   ///\n");
     printf("///                    3. Alterar Consulta                                  ///\n");
     printf("///                    4. Excluir Consulta                                  ///\n");
+    printf("///                    5. Listar Consulta                                    ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -154,7 +156,7 @@ void buscar_consulta(void){
     }
     
     if (!encontrado) {
-        printf("\nPaciente não encontrado!\n");
+        printf("\nConsulta não encontrada!\n");
     }
 
     fclose(arq_consulta);
@@ -343,10 +345,51 @@ void excluir_consulta(void){
             break;
         }
     }
+
     if (encontrado == False){
         printf("\nconsulta não encontrada!\n");
     }
+
     fclose(arq_consulta);
     free(con);
+    pausar();
+}
+
+void listar_consulta(void){
+    FILE *arq_consulta;
+    Consulta* con;
+
+    con = (Consulta*) malloc(sizeof(Consulta));
+    
+    arq_consulta = fopen("arq_consulta.dat", "rb");
+    if (arq_consulta == NULL) {
+        printf("Nenhuma consulta cadastrada ainda.\n");
+        free(con);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                              Consultas                                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Listar Consultas  = = = = =                  ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
+        if (con->status == True) {  
+            printf("Nome: %s\n", con->nome);
+            printf("Data: %s\n", con->data);
+            printf("Hora: %s\n", con->hora);
+            printf("Médico: %s\n", con->medico);
+            printf("Observações: %s\n", con->observacoes);
+            printf("--------------------------------------------------\n");
+        }
+    }
+
+    fclose(arq_consulta);
+    free(con);
+
     pausar();
 }
