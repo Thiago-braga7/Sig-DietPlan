@@ -111,11 +111,12 @@ void cadastrar_consulta(void){
 
 
 void buscar_consulta(void){
-    FILE *arq_consulta;
-    Consulta con;
+    FILE * arq_consulta;
+    Consulta * con;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
     
+    con = (Consulta*)malloc(sizeof(Consulta));
 
     limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -129,7 +130,9 @@ void buscar_consulta(void){
     getchar();
     pausar();
 
-    arq_consulta = fopen("arq_consulta.csv", "rt");
+    encontrado = False;
+
+    arq_consulta = fopen("arq_consulta.dat", "rb");
 
     if (arq_consulta == NULL){
         printf("Erro na criacao do arquivo\n");
@@ -137,14 +140,14 @@ void buscar_consulta(void){
         return;
      }
 
-    while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
-        if (id_busca == con.id_consulta) {
+    while (fread(con, sizeof(Consulta), 1, arq_consulta)){
+        if ((id_busca == con->id_consulta) && (con->status == True)) {
             printf("Consulta encontrada\n");
-            printf("Nome: %s\n", con.nome);
-            printf("Data: %s\n", con.data);
-            printf("Hora: %s\n", con.hora);
-            printf("Médico: %s\n", con.medico);
-            printf("Observações: %s\n", con.observacoes);
+            printf("Nome: %s\n", con->nome);
+            printf("Data: %s\n", con->data);
+            printf("Hora: %s\n", con->hora);
+            printf("Médico: %s\n", con->medico);
+            printf("Observações: %s\n", con->observacoes);
             encontrado = 1;
             break;
         }
@@ -155,6 +158,7 @@ void buscar_consulta(void){
     }
 
     fclose(arq_consulta);
+    free(con);
     getchar();
 }
 
