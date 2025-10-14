@@ -4,7 +4,8 @@
 #include <ctype.h>
 #include "consultas.h"
 #include "util.h"
-
+#define True 1
+#define False 0
 
 
 void modulo_consultas(void) {
@@ -45,19 +46,23 @@ char tela_consultas(void){
 
 
 void cadastrar_consulta(void){
-    FILE *arq_consulta;
-    Consulta con;
+    FILE * arq_consulta;
+    Consulta * con;
+    con = (Consulta*)malloc(sizeof(Consulta));
 
-    con.id_consulta = 1;
+    con->id_consulta = 1;
 
-    arq_consulta = fopen("arq_consulta.csv", "rt");
-    if (arq_consulta != NULL)
-    {
-        char linha[512];
-        while (fgets(linha, sizeof(linha), arq_consulta) != NULL)
-        {
-            con.id_consulta++;
-        }
+    arq_consulta = fopen("arq_consulta.dat", "rb");
+
+    // Créditos: Função adaptada do gemini;
+    if (arq_consulta != NULL){
+        
+        fseek(arq_consulta, 0, SEEK_END);  
+        
+        long num_registros = ftell(arq_consulta) / sizeof(Consulta);
+        
+        con->id_consulta = num_registros + 1;
+        
         fclose(arq_consulta);
     }
 
@@ -72,39 +77,35 @@ void cadastrar_consulta(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///                         Nome do Usuário:                                ///\n");
-    scanf("%s", con.nome);
+    scanf("%s", con->nome);
     getchar();
     printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    scanf("%s", con.data);
+    scanf("%s", con->data);
     getchar();
     printf("///                         Hora da Consulta (HH:MM):                       ///\n");
-    scanf("%s", con.hora);
+    scanf("%s", con->hora);
     getchar();
     printf("///                         Nome do Médico:                                  ///\n");
-    scanf("%s", con.medico);
+    scanf("%s", con->medico);
     getchar();
     printf("///                         Observações:                                    ///\n");
-    scanf("%s", con.observacoes);
+    scanf("%s", con->observacoes);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     
-    arq_consulta = fopen("arq_consulta.csv", "at");
+    con->status = True;
+
+    arq_consulta = fopen("arq_consulta.dat", "a+b");
     if (arq_consulta == NULL) {
-        printf("Erro na criacao do arquivo\n");
+        printf("Erro na criação do arquivo\n");
         return;
     }
 
-    fprintf(arq_consulta, "%d;", con.id_consulta);
-    fprintf(arq_consulta, "%s;", con.nome);
-    fprintf(arq_consulta, "%s;", con.data);
-    fprintf(arq_consulta, "%s;", con.hora);
-    fprintf(arq_consulta, "%s;", con.medico);
-    fprintf(arq_consulta, "%s\n", con.observacoes);
-
+    fwrite(con, sizeof(Consulta), 1, arq_consulta);
     fclose(arq_consulta);
-
+    free(con);
     pausar();
 }
 

@@ -7,6 +7,7 @@ struct consulta {
     char hora[7];
     char medico[50];
     char observacoes[200];
+    int status;
 };
 
 void modulo_consultas(void);
