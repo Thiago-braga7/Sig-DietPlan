@@ -283,11 +283,13 @@ void alterar_consulta(void){
 
 void excluir_consulta(void){
     FILE *arq_consulta;
-    FILE *arq_consulta_temp;
+    Consulta * con;
 
-    Consulta con;
     int id_busca;
-    int encontrado = 0;
+    int encontrado;
+    char resposta;
+
+    con = (Consulta*) malloc(sizeof(Consulta));
 
     limpar_tela();
     printf("\n");
@@ -301,74 +303,50 @@ void excluir_consulta(void){
     scanf("%d", &id_busca);
     getchar();
 
+    encontrado = False;
 
-    char resposta;
+    arq_consulta = fopen("arq_consulta.dat", "r+b");
 
-    // Busca e exibe consultas
-    do {
-        arq_consulta = fopen("arq_consulta.csv", "rt");
-
-        if (arq_consulta == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
-            if (con.id_consulta == id_busca) {
-                printf("Consulta encontrada\n");
-                printf("Nome: %s\n", con.nome);
-                printf("Data: %s\n", con.data);
-                printf("Hora: %s\n", con.hora);
-                printf("Médico: %s\n", con.medico);
-                printf("Observações: %s\n", con.observacoes);
-                encontrado = 1;
-                break;
-            }
-        }
-        
-        if (!encontrado) {
-            printf("\nConsulta não encontrada!\n");
-        }
-
-        fclose(arq_consulta);
-        getchar();
-        printf("Deseja confirmar a ação? (S/N): ");
-        scanf(" %c", &resposta);
-
-        resposta = confirmar_acao(resposta); 
-
-        if (resposta == 0) {  
-            printf("Opção inválida! Digite apenas S ou N.\n");
-        }
-
-    } while (resposta == 0); 
-
-    // Exclui caso a resposta seja "S"
-    if (resposta == 'S') {
-        arq_consulta = fopen("arq_consulta.csv", "rt");
-        arq_consulta_temp = fopen("arq_consulta_temp.csv", "wt");
-
-        if (arq_consulta == NULL || arq_consulta_temp == NULL){
-            printf("Erro na criacao do arquivo\n");
-            return;
-        }
-
-        while (fscanf(arq_consulta, "%d;%[^;];%[^;];%[^;];%[^;];%[^\n]\n", &con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes) == 6) {
-            if(con.id_consulta != id_busca){
-                fprintf(arq_consulta_temp, "%d;%s;%s;%s;%s;%s\n", con.id_consulta, con.nome, con.data, con.hora, con.medico, con.observacoes);
-            }
-        }
-        
-        fclose(arq_consulta);
-        fclose(arq_consulta_temp);
-
-        remove("arq_consulta.csv");
-        rename("arq_consulta_temp.csv", "arq_consulta.csv");
-
-        printf("Consulta Excluída com Sucesso!    \n");
-
-    } else {
-            printf("Operação de Exclusão Cancelada !  \n");
+    if (arq_consulta == NULL){
+        printf("Erro na busca do arquivo\n");
+        return;
     }
+
+    while (fread(con, sizeof(Consulta), 1, arq_consulta)){
+        if ((id_busca == con->id_consulta) && (con->status == True)) {
+            printf("Consulta encontrada\n");
+            printf("Nome: %s\n", con->nome);
+            printf("Data: %s\n", con->data);
+            printf("Hora: %s\n", con->hora);
+            printf("Médico: %s\n", con->medico);
+            printf("Observações: %s\n", con->observacoes);
+            encontrado = True;
+
+            do {
+                printf("\nDeseja realmente excluir esta consulta? (S/N): ");
+                scanf(" %c", &resposta);
+                resposta = confirmar_acao(resposta);
+                
+                if(resposta == 0){
+                    printf("Opção inválida! Digite apenas S ou N.\n");
+                }
+            } while(resposta == 0);
+
+            if (resposta == 'S'){
+                con->status = False;
+                fseek(arq_consulta, (-1)*sizeof(Consulta), SEEK_CUR);
+                fwrite(con, sizeof(Consulta), 1, arq_consulta);
+                printf("\nConsulta excluída com sucesso!\n");
+            }else{
+                printf("\nOperação de exclusão cancelada.\n");
+            }
+            break;
+        }
+    }
+    if (encontrado == False){
+        printf("\nconsulta não encontrada!\n");
+    }
+    fclose(arq_consulta);
+    free(con);
     pausar();
 }
