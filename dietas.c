@@ -18,6 +18,7 @@ void modulo_dietas(void) {
             case '3': alterar_dieta(); break;
             case '4': excluir_dieta(); break;
             case '5': listar_dietas(); break;
+            // case '6': excluir_dieta_fisica(); break;
         }
     } while (opcao != '0');  
 }
@@ -36,6 +37,7 @@ char tela_dietas(void){
     printf("///                    3. Alterar Dieta                                     ///\n");
     printf("///                    4. Excluir Dieta                                     ///\n");
     printf("///                    5. Listar Dietas                                     ///\n");
+    // printf("///                    6. Excluir Dieta(Físico)                             ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -375,4 +377,96 @@ void listar_dietas(void) {
 
     pausar();
 }
+
+// void excluir_dieta_fisica(void) {
+//     FILE * arq_dietas;
+//     FILE * arq_dietas_temp;
+//     Dieta * dt;
+//     int id_busca;
+//     int encontrado;
+//     int excluida;
+//     char resposta;
+
+//     dt = (Dieta*) malloc(sizeof(Dieta));
+
+//     limpar_tela();
+//     printf("\n");
+//     printf("///////////////////////////////////////////////////////////////////////////////\n");
+//     printf("///                               Dietas                                    ///\n");
+//     printf("///                                                                         ///\n");
+//     printf("///              = = = = = Exclusão Física de Dieta = = = = =               ///\n");
+//     printf("///                                                                         ///\n");
+//     printf("///                    Informe o ID da Dieta: ");
+//     scanf("%d", &id_busca);
+//     getchar();
+//     printf("///////////////////////////////////////////////////////////////////////////////\n");
+//     encontrado = False;
+//     excluida = False;
+    
+//     arq_dietas = fopen("arq_dietas.dat", "rb");
+//     arq_dietas_temp = fopen("arq_dietas_temp.dat", "wb");
+
+//     if (arq_dietas == NULL || arq_dietas_temp == NULL) {
+//         printf("Erro ao abrir arquivos!\n");
+//         return;
+//     }
+
+//     while (fread(dt, sizeof(Dieta), 1, arq_dietas)) {
+//         if (dt->id_dieta == id_busca) {
+//             printf("///                        Dieta Encontrada!                                ///\n");
+//             printf("ID da Dieta:       %d\n", dt->id_dieta);
+//             printf("CPF do Usuário:    %s\n", dt->cpf);
+//             printf("Nome da Dieta:     %s\n", dt->nome_dieta);
+//             printf("Total de Calorias: %d kcal\n", dt->calorias);
+//             printf("Refeições:         %s\n", dt->refeicoes);
+//             encontrado = True;
+
+//             if (dt->status == True) {
+//                 printf("Status: Ativa \n");
+//             } else {
+//                 printf("Status: Inativa \n");
+//             }
+
+//             if (dt->status == False) {
+//                 do {
+//                     printf("\nDeseja realmente excluir esta dieta (fisicamente)? (S/N): ");
+//                     scanf(" %c", &resposta);
+//                     resposta = confirmar_acao(resposta);
+
+//                     if (resposta == 0) {
+//                         printf("Opção inválida! Digite apenas S ou N.\n");
+//                     }
+//                 } while (resposta == 0);
+
+//                 if (resposta == 'S') {
+//                     printf("\nDieta excluída com sucesso!\n");
+//                     excluida = True;
+//                 } else {
+//                     printf("\nOperação cancelada. A dieta foi mantida.\n");
+//                     fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
+//                 }
+//             } else {
+//                 printf("\nA dieta está ativa, portanto não pode ser excluída fisicamente.\n");
+//                 fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
+//             }
+//         } else {
+//             fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
+//         }
+//     }
+
+//     fclose(arq_dietas);
+//     fclose(arq_dietas_temp);
+//     free(dt);
+
+//     remove("arq_dietas.dat");
+//     rename("arq_dietas_temp.dat", "arq_dietas.dat");
+
+//     if (encontrado == False) {
+//         printf("\nDieta não encontrada!\n");
+//     } else if (excluida == True) {
+//         printf("\nExclusão física concluída!\n");
+//     }
+
+//     pausar();
+// }
 
