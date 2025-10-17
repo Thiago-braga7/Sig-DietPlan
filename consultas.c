@@ -19,6 +19,7 @@ void modulo_consultas(void) {
             case '3': alterar_consulta(); break;
             case '4': excluir_consulta(); break;
             case '5': listar_consulta(); break;
+            // case '6': excluir_consulta_fisica(); break;
         }
     } while (opcao != '0');  
 }
