@@ -20,6 +20,7 @@ void modulo_agendamentos(void) {
             case '3': alterar_agendamento(); break;
             case '4': excluir_agendamento(); break;
             case '5': listar_agendamentos(); break;
+            // case '6': excluir_agendamento_fisico(); break;
         }
     } while (opcao != '0');  
 }
@@ -36,6 +37,7 @@ char tela_agendamentos(void){
     printf("///                    3. Alterar Agendamento                               ///\n");
     printf("///                    4. Excluir Agendamento                               ///\n");
     printf("///                    5. Listar Agendamentos                               ///\n");
+    // printf("///                    6. Excluir Agendamento(Físico)                    ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
@@ -396,3 +398,92 @@ void listar_agendamentos(void){
 
     pausar();
 }
+// void excluir_agendamento_fisico(void) {
+//     FILE *arq_agendamentos;
+//     FILE *arq_agendamentos_temp;
+//     Agendamento *ag;
+//     int id_busca;
+//     int encontrado;
+//     int excluido;
+//     char resposta;
+
+//     ag = (Agendamento*) malloc(sizeof(Agendamento));
+
+//     limpar_tela();
+//     printf("\n");
+//     printf("///////////////////////////////////////////////////////////////////////////////\n");
+//     printf("///                             Agendamentos                                ///\n");
+//     printf("///                                                                         ///\n");
+//     printf("///              = = = = = Exclusão Física de Agendamento = = = = =         ///\n");
+//     printf("///                                                                         ///\n");
+//     printf("///                    Informe o ID do Agendamento: ");
+//     scanf("%d", &id_busca);
+//     getchar();
+//     printf("///////////////////////////////////////////////////////////////////////////////\n");
+
+//     encontrado = False;
+//     excluido = False;
+
+//     arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+//     arq_agendamentos_temp = fopen("arq_agendamentos_temp.dat", "wb");
+
+//     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL) {
+//         printf("Erro ao abrir arquivos!\n");
+//         free(ag);
+//         return;
+//     }
+
+//     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
+//         if (ag->id_agendamento == id_busca) {
+//             printf("///                        Agendamento Encontrado!                          ///\n");
+//             printf("ID:                %d\n", ag->id_agendamento);
+//             printf("CPF:               %s\n", ag->cpf);
+//             printf("Data:              %s\n", ag->data);
+//             printf("Hora:              %s\n", ag->hora);
+//             printf("Tipo:              %s\n", ag->tipo);
+//             printf("Profissional:      %s\n", ag->profissional);
+//             printf("Observações:       %s\n", ag->observacoes);
+//             encontrado = True;
+
+//             if (ag->status == False) {
+//                 do {
+//                     printf("\nDeseja realmente excluir este Agendamento (fisicamente)? (S/N): ");
+//                     scanf(" %c", &resposta);
+//                     resposta = confirmar_acao(resposta);
+
+//                     if (resposta == 0) {
+//                         printf("Opção inválida! Digite apenas S ou N.\n");
+//                     }
+//                 } while (resposta == 0);
+
+//                 if (resposta == 'S') {
+//                     printf("\nAgendamento excluído fisicamente com sucesso!\n");
+//                     excluido = True;
+//                 } else {
+//                     printf("\nOperação cancelada. O agendamento foi mantido.\n");
+//                     fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
+//                 }
+//             } else {
+//                 printf("\nO agendamento está ativo, portanto não pode ser excluído fisicamente.\n");
+//                 fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
+//             }
+//         } else {
+//             fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
+//         }
+//     }
+
+//     fclose(arq_agendamentos);
+//     fclose(arq_agendamentos_temp);
+//     free(ag);
+
+//     remove("arq_agendamentos.dat");
+//     rename("arq_agendamentos_temp.dat", "arq_agendamentos.dat");
+
+//     if (encontrado == False) {
+//         printf("\nAgendamento não encontrado!\n");
+//     } else if (excluido == True) {
+//         printf("\nExclusão física concluída!\n");
+//     }
+
+//     pausar();
+// }
