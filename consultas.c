@@ -19,7 +19,7 @@ void modulo_consultas(void) {
             case '3': alterar_consulta(); break;
             case '4': excluir_consulta(); break;
             case '5': listar_consulta(); break;
-            // case '6': excluir_consulta_fisica(); break;
+            case '6': excluir_consulta_fisica(); break;
         }
     } while (opcao != '0');  
 }
@@ -397,96 +397,96 @@ void listar_consulta(void){
     pausar();
 }
 
-// void excluir_consulta_fisica(void) {
-//     FILE * arq_consulta;
-//     FILE * arq_consulta_temp;
-//     consulta * con;
-//     int id_busca;
-//     int encontrado;
-//     int excluida;
-//     char resposta;
+void excluir_consulta_fisica(void) {
+    FILE * arq_consulta;
+    FILE * arq_consulta_temp;
+    Consulta * con;
+    int id_busca;
+    int encontrado;
+    int excluida;
+    char resposta;
 
-//     con = (Consulta*) malloc(sizeof(Consulta));
+    con = (Consulta*) malloc(sizeof(Consulta));
 
-//     limpar_tela();
-//     printf("\n");
-//     printf("///////////////////////////////////////////////////////////////////////////////\n");
-//     printf("///                             Consultas                                   ///\n");
-//     printf("///                                                                         ///\n");
-//     printf("///             = = = = = Exclusão Física de Consulta = = = = =             ///\n");
-//     printf("///                                                                         ///\n");
-//     printf("///                    Informe o ID da Consulta: ");
-//     scanf("%d", &id_busca);
-//     getchar();
-//     printf("///////////////////////////////////////////////////////////////////////////////\n");
-//     encontrado = False;
-//     excluida = False;
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                             Consultas                                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///             = = = = = Exclusão Física de Consulta = = = = =             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                    Informe o ID da Consulta: ");
+    scanf("%d", &id_busca);
+    getchar();
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    encontrado = False;
+    excluida = False;
     
-//     arq_consulta = fopen("arq_consulta.dat", "rb");
-//     arq_consulta_temp = fopen("arq_consulta_temp.dat", "wb");
+    arq_consulta = fopen("arq_consulta.dat", "rb");
+    arq_consulta_temp = fopen("arq_consulta_temp.dat", "wb");
 
-//     if (arq_consulta == NULL || arq_consulta_temp == NULL) {
-//         printf("Erro ao abrir arquivos!\n");
-//         return;
-//     }
+    if (arq_consulta == NULL || arq_consulta_temp == NULL) {
+        printf("Erro ao abrir arquivos!\n");
+        return;
+    }
 
-//     while (fread(con, sizeof(consulta), 1, arq_consulta)) {
-//         if (con->id_consulta == id_busca) {
-//             printf("///                        Consulta Encontrada!                                ///\n");
-//             printf("ID da consulta:       %d\n", con->id_consulta);
-//             printf("Nome:    %s\n", con->nome);
-//             printf("Data:     %s\n", con->data);
-//             printf("Hora:     %s\n", con->hora);
-//             printf("Médico:     %s\n", con->medico);
-//             printf("Observações:     %s\n", con->observacoes);
+    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
+        if (con->id_consulta == id_busca) {
+            printf("///                        Consulta Encontrada!                                ///\n");
+            printf("ID da consulta:       %d\n", con->id_consulta);
+            printf("Nome:    %s\n", con->nome);
+            printf("Data:     %s\n", con->data);
+            printf("Hora:     %s\n", con->hora);
+            printf("Médico:     %s\n", con->medico);
+            printf("Observações:     %s\n", con->observacoes);
 
-//             encontrado = True;
+            encontrado = True;
 
-//             if (con->status == True) {
-//                 printf("Status: Ativa \n");
-//             } else {
-//                 printf("Status: Inativa \n");
-//             }
+            if (con->status == True) {
+                printf("Status: Ativa \n");
+            } else {
+                printf("Status: Inativa \n");
+            }
 
-//             if (con->status == False) {
-//                 do {
-//                     printf("\nDeseja realmente excluir esta consulta (fisicamente)? (S/N): ");
-//                     scanf(" %c", &resposta);
-//                     resposta = confirmar_acao(resposta);
+            if (con->status == False) {
+                do {
+                    printf("\nDeseja realmente excluir esta consulta (fisicamente)? (S/N): ");
+                    scanf(" %c", &resposta);
+                    resposta = confirmar_acao(resposta);
 
-//                     if (resposta == 0) {
-//                         printf("Opção inválida! Digite apenas S ou N.\n");
-//                     }
-//                 } while (resposta == 0);
+                    if (resposta == 0) {
+                        printf("Opção inválida! Digite apenas S ou N.\n");
+                    }
+                } while (resposta == 0);
 
-//                 if (resposta == 'S') {
-//                     printf("\nConsulta excluída com sucesso!\n");
-//                     excluida = True;
-//                 } else {
-//                     printf("\nOperação cancelada. A consulta foi mantida.\n");
-//                     fwrite(con, sizeof(consulta), 1, arq_consulta_temp);
-//                 }
-//             } else {
-//                 printf("\nA consulta está ativa, portanto não pode ser excluída fisicamente.\n");
-//                 fwrite(con, sizeof(consulta), 1, arq_consulta_temp);
-//             }
-//         } else {
-//             fwrite(con, sizeof(consulta), 1, arq_consulta_temp);
-//         }
-//     }
+                if (resposta == 'S') {
+                    printf("\nConsulta excluída com sucesso!\n");
+                    excluida = True;
+                } else {
+                    printf("\nOperação cancelada. A consulta foi mantida.\n");
+                    fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
+                }
+            } else {
+                printf("\nA consulta está ativa, portanto não pode ser excluída fisicamente.\n");
+                fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
+            }
+        } else {
+            fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
+        }
+    }
 
-//     fclose(arq_consulta);
-//     fclose(arq_consulta_temp);
-//     free(con);
+    fclose(arq_consulta);
+    fclose(arq_consulta_temp);
+    free(con);
 
-//     remove("arq_consulta.dat");
-//     rename("arq_consulta_temp.dat", "arq_consulta.dat");
+    remove("arq_consulta.dat");
+    rename("arq_consulta_temp.dat", "arq_consulta.dat");
 
-//     if (encontrado == False) {
-//         printf("\nconsulta não encontrada!\n");
-//     } else if (excluida == True) {
-//         printf("\nExclusão física concluída!\n");
-//     }
+    if (encontrado == False) {
+        printf("\nConsulta não encontrada!\n");
+    } else if (excluida == True) {
+        printf("\nExclusão física concluída!\n");
+    }
 
-//     pausar();
-// }
+    pausar();
+}
