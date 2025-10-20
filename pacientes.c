@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pacientes.h"
 #include "util.h"
+#include "validacoes.h"
 #include <ctype.h>
 #define True 1
 #define False 0

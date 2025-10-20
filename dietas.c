@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "dietas.h"
 #include "util.h"
+#include "validacoes.h"
 #include <string.h>
 #define True 1
 #define False 0
