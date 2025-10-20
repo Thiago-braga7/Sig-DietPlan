@@ -37,6 +37,7 @@ char tela_consultas(void){
     printf("///                    3. Alterar Consulta                                  ///\n");
     printf("///                    4. Excluir Consulta                                  ///\n");
     printf("///                    5. Listar Consulta                                    ///\n");
+    printf("///                    5. Excluir Consulta (física)                         ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
