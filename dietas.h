@@ -16,4 +16,4 @@ void buscar_dieta(void);
 void alterar_dieta(void);
 void excluir_dieta(void);
 void listar_dietas(void);
-// void excluir_dieta_fisica(void);
+void excluir_dieta_fisica(void);
