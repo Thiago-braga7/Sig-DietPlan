@@ -7,7 +7,6 @@
 #include "agendamentos.h"
 #include "relatorios.h"
 #include "sobre.h"
-#include "util.h"
 #include "validacoes.h"
 
 

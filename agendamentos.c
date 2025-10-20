@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "agendamentos.h"
-#include "util.h"
 #include "validacoes.h"
 #include <string.h>
 #define True 1
