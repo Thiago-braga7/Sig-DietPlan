@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "consultas.h"
-#include "util.h"
+#include "validacoes.h"
 #define True 1
 #define False 0
 
