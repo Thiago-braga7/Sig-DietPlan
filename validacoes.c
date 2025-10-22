@@ -28,6 +28,22 @@ void pausar(void) {
     getchar();
 }
 
+// formato do crn CRN-X/XXXXX
+int valida_crn(char *crn) {
+
+  if (strlen(crn) != 11) {         
+    return 0;
+  }
+  
+  if (crn[0] != 'C' || crn[1] != 'R' || crn[2] != 'R' ||
+      crn[3] != '-' || !isdigit(crn[4]) ||  crn[5] != '/' ||
+      !isdigit(crn[6]) || !isdigit(crn[7]) || !isdigit(crn[8]) || 
+      !isdigit(crn[9]) || !isdigit(crn[10])
+  );
+  
+  return 1;
+}
+
 // créditos: Flavius Gorgônio
 
 // int validar_telefone(const char *telefone) {

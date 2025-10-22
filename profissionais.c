@@ -65,7 +65,7 @@ void cadastrar_profissional(void){
         
         fclose(arq_profissionais);
     }
-    
+    int valido;
 
     limpar_tela();
     printf("\n");
@@ -87,9 +87,19 @@ void cadastrar_profissional(void){
     printf("///                         Telefone (Apenas números):                      ///\n");
     scanf("%11[^\n]", pf->tel); 
     getchar();
-    printf("///                         CRN:                                            ///\n");
-    scanf("%s", pf->crn); 
-    getchar();
+
+    do{
+        printf("///                         CRN(Formato: CRN-X/XXXXX ):                     ///\n");
+        scanf("%s", pf->crn); 
+        getchar();
+        valido = valida_crn(pf->crn);
+
+        if (valido == 0){
+            printf("Formato inválido! Digite novamente! \n");
+
+        }
+
+    } while (valido == 0);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Profissional Cadastrado com Sucesso!                       \n");
     printf("///                        ID gerado: %02d                                    ///\n", pf->id_profissional);
@@ -166,6 +176,7 @@ void alterar_profissional(void){
     int encontrado;
     char opcao;
     char continuar;
+    int valido;
 
     pf = (Profissional*) malloc(sizeof(Profissional));
 
@@ -231,14 +242,23 @@ void alterar_profissional(void){
                         getchar();
                         break;
                     case '4':
-                        printf("Novo Telefone: ");
+                        printf("\nNovo Telefone: ");
                         scanf("%11[^\n]", pf->tel);
                         getchar();
                         break;
                     case '5':
-                        printf("Novo CRN: ");
-                        scanf("%12s", pf->crn);
-                        getchar();
+                        do{
+                            printf("\nNovo CRN(Formato: CRN-X/XXXXX ):                     \n");
+                            scanf("%s", pf->crn); 
+                            getchar();
+                            valido = valida_crn(pf->crn);
+
+                            if (valido == 0){
+                                printf("\nFormato inválido! Digite novamente! \n");
+
+                            }
+
+                        } while (valido == 0);
                         break;
                     default:
                         printf("Opção inválida!\n");
@@ -271,7 +291,7 @@ void alterar_profissional(void){
     if (encontrado == True){
         remove("arq_profissionais.dat");
         rename("arq_profissionais_temp.dat", "arq_profissionais.dat");
-        printf("///                    Paciente alterado com sucesso!                       ///\n");
+        printf("///                    Profissional alterado com sucesso!                      ///\n");
     } else {
         remove("arq_profissionais_temp.dat");
         printf("\nProfissional não encontrado!\n");
