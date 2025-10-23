@@ -83,20 +83,28 @@ void cadastrar_profissional(void){
     getchar();
     printf("///                         E-mail:                                         ///\n");
     scanf("%s", pf->email); 
-    getchar();    
-    printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%11[^\n]", pf->tel); 
-    getchar();
+    getchar();  
+    do{
+        printf("///                         Telefone (Apenas números):                      ///\n");
+        scanf(" %11s", pf->tel); 
+        getchar();
+
+        valido = valida_telefone(pf->tel);
+
+        if(valido == 0){
+            printf("Telefone inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+    
 
     do{
         printf("///                         CRN(Formato: CRN-X/XXXXX ):                     ///\n");
-        scanf("%s", pf->crn); 
+        scanf(" %11s", pf->crn);
         getchar();
         valido = valida_crn(pf->crn);
 
         if (valido == 0){
-            printf("Formato inválido! Digite novamente! \n");
-
+            printf("CRN inválido! Digite novamente! \n");
         }
 
     } while (valido == 0);
@@ -242,19 +250,27 @@ void alterar_profissional(void){
                         getchar();
                         break;
                     case '4':
-                        printf("\nNovo Telefone: ");
-                        scanf("%11[^\n]", pf->tel);
-                        getchar();
+                        do{
+                            printf("\nNovo Telefone (Apenas números):                      \n");
+                            scanf(" %11s", pf->tel); 
+                            getchar();
+
+                            valido = valida_telefone(pf->tel);
+
+                            if(valido == 0){
+                                printf("Telefone inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '5':
                         do{
                             printf("\nNovo CRN(Formato: CRN-X/XXXXX ):                     \n");
-                            scanf("%s", pf->crn); 
+                            scanf(" %11s", pf->crn);
                             getchar();
                             valido = valida_crn(pf->crn);
 
                             if (valido == 0){
-                                printf("\nFormato inválido! Digite novamente! \n");
+                                printf("\nCRN inválido! Digite novamente! \n");
 
                             }
 

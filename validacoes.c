@@ -44,22 +44,17 @@ int valida_crn(char *crn) {
   return 1;
 }
 
-// créditos: Flavius Gorgônio
+// função validar telefone
+// Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
+int valida_telefone(char *fone){
+  if(strlen(fone) != 11){
+    return 0;
+  }
+  for (int i = 0; i < strlen(fone); i++){
+    if(!isdigit(fone[i])){
+      return 0;
+    };
+  }
+  return 1;
+};
 
-// int validar_telefone(const char *telefone) {
-//     int len = strlen(telefone);
-
-    
-//     if (len != 10) {
-//         return 0;
-//     }
-
-    
-//     for (int i = 0; i < len; i++) {
-//         if (!isdigit(telefone[i])) {
-//             return 0;
-//         }
-//     }
-
-//     return 1; 
-// }

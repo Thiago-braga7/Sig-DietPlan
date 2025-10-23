@@ -5,7 +5,7 @@ struct profissional {
     char nome[100];
     char cpf[13];
     char email[30];
-    char tel[11];
+    char tel[12];
     char crn[12];
     int status;
 };
