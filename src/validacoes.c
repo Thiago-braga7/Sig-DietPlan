@@ -82,3 +82,33 @@ int valida_idade(char *digito){
   }
 
 }
+
+int valida_mes(char * mes){
+  int len = strlen(mes);
+  if(strlen(mes) == 0){
+    return 0;
+  }
+
+  for(int i = 0; i < len; i++){
+     if(!isdigit(mes[i])){ 
+      return 0; 
+    } 
+  }
+  int mes_digitado = atoi(mes);
+  
+  if((mes_digitado) >= 1 && (mes_digitado <= 12)){
+    return 1;
+  } else{
+    return 0;
+  }
+}
+
+int ano_bissexto(int ano){
+  if(ano % 400 == 0){
+    return 1;
+  } else if((ano % 4 == 0) && (ano % 100 != 0)){
+    return 1;
+  } else{
+    return 0;
+  }
+}
