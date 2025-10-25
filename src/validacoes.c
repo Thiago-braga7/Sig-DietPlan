@@ -38,9 +38,9 @@ int valida_crn(char *crn) {
   if (crn[0] != 'C' || crn[1] != 'R' || crn[2] != 'R' ||
       crn[3] != '-' || !isdigit(crn[4]) ||  crn[5] != '/' ||
       !isdigit(crn[6]) || !isdigit(crn[7]) || !isdigit(crn[8]) || 
-      !isdigit(crn[9]) || !isdigit(crn[10])
-  );
-  
+      !isdigit(crn[9]) || !isdigit(crn[10])) {
+        return 0;
+      }      
   return 1;
 }
 
@@ -50,7 +50,10 @@ int valida_telefone(char *fone){
   if(strlen(fone) != 11){
     return 0;
   }
-  for (int i = 0; i < strlen(fone); i++){
+
+  int len = strlen(fone);
+  
+  for (int i = 0; i < len; i++){
     if(!isdigit(fone[i])){
       return 0;
     };
