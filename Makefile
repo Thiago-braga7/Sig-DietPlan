@@ -1,19 +1,52 @@
+# Compilador e opções
 CC = gcc
-CFLAGS = -Wall -g -I.
+CFLAGS = -Wall -Wextra -Iinclude
 
-EXECUTAVEL = programa
-FONTES = main.c pacientes.c dietas.c profissionais.c  consultas.c agendamentos.c relatorios.c sobre.c validacoes.c
-OBJETOS = $(FONTES:.c=.o)
+# Pastas
+SRCDIR = src
+INCDIR = include
+BUILDDIR = build
+DATADIR = data
 
-.PHONY: all clean
+# Nome do executável final
+TARGET = $(BUILDDIR)/sig-dietplan
 
-all: $(EXECUTAVEL)
+# Lista automática de todos os .c dentro de src/
+SRC = $(wildcard $(SRCDIR)/*.c)
+OBJ = $(SRC:$(SRCDIR)/%.c=$(BUILDDIR)/%.o)
 
-$(EXECUTAVEL): $(OBJETOS)
-	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
+# REGRAS
+
+# Gera o executável
+all: $(TARGET)
+
+# Linkagem final
+$(TARGET): $(OBJ)
+	@$(CC) $(CFLAGS) -o $@ $^
+
+# Compilação dos .c para .o
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+# Cria a pasta build automaticamente se não existir
+$(BUILDDIR):
+	@mkdir -p $(BUILDDIR)
+
+
+# Remove objetos e binário
 clean:
-	rm -f $(OBJETOS) $(EXECUTAVEL)
+	@rm -rf $(BUILDDIR)
+
+# Recompila e executa
+rebuild: clean run
+
+# Executa o programa
+run: all
+	@$(TARGET)
+
+# Evita conflitos com nomes de arquivos
+.PHONY: all clean rebuild run
+
+# Feito com auxílio do ChatGPT
