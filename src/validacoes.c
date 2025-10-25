@@ -61,3 +61,24 @@ int valida_telefone(char *fone){
   return 1;
 };
 
+int valida_idade(char *digito){ 
+  int len = strlen(digito);
+  
+  if(strlen(digito) == 0){ 
+    return 0; 
+  } 
+  for(int i = 0; i < len; i++){
+     if(!isdigit(digito[i])){ 
+      return 0; 
+    } 
+  }
+  // Créditos: Peguei essa parte do Gemini, o atoi converte string em um número inteiro. Da biblioteca stdlib
+  int idade = atoi(digito);
+
+  if((idade) > 0 && (idade <= 130)){
+    return 1;
+  } else{
+    return 0;
+  }
+
+}
