@@ -3,3 +3,4 @@ void limpar_tela(void);
 void pausar(void);
 int valida_crn(char *);
 int valida_telefone(char *);
+int valida_idade(char *);
