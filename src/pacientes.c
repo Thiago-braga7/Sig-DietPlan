@@ -91,7 +91,7 @@ void cadastrar_paciente(void){
 
     pac->status = True;
 
-    arq_paciente = fopen("arq_paciente.dat", "ab");    
+    arq_paciente = fopen("data/arq_pacientes.dat", "ab");    
 
     if (arq_paciente == NULL) {
         printf("Erro na criacao do arquivo\n");
@@ -134,7 +134,7 @@ void buscar_paciente(void){
 
     encontrado = False;
 
-    arq_paciente = fopen("arq_paciente.dat", "rb");
+    arq_paciente = fopen("data/arq_pacientes.dat", "rb");
 
     if (arq_paciente == NULL){
         printf("Erro na criacao do arquivo\n");
@@ -192,8 +192,8 @@ void alterar_paciente(void){
 
     encontrado = False;
 
-    arq_paciente = fopen("arq_paciente.dat", "rb");
-    arq_paciente_temp = fopen("arq_paciente_temp.dat", "wb");
+    arq_paciente = fopen("data/arq_pacientes.dat", "rb");
+    arq_paciente_temp = fopen("data/arq_pacientes.dat", "wb");
 
 
     if (arq_paciente == NULL || arq_paciente_temp == NULL){
@@ -285,13 +285,13 @@ void alterar_paciente(void){
     fclose(arq_paciente_temp);
 
     if (encontrado){
-        remove("arq_paciente.dat");
-        rename("arq_paciente_temp.dat", "arq_paciente.dat");
+        remove("data/arq_pacientes.dat");
+        rename("data/arq_pacientes.dat", "data/arq_pacientes.dat");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                    Paciente Alterado com sucesso!                          ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
     } else {
-        remove("arq_paciente_temp.dat");
+        remove("data/arq_pacientes.dat");
         printf("\nPaciente não encontrada!\n");
     }
     free(pac);
@@ -328,7 +328,7 @@ void excluir_paciente(void){
         return;
     }
 
-    arq_paciente = fopen("arq_paciente.dat", "r+b");
+    arq_paciente = fopen("data/arq_pacientes.dat", "r+b");
 
     if (arq_paciente == NULL){
         printf("Erro ao buscar do arquivo\n");
@@ -387,7 +387,7 @@ void listar_paciente(void) {
     pac = (Paciente*)malloc(sizeof(Paciente));
     int encontrado = 0;
 
-    arq_paciente = fopen("arq_paciente.dat", "rb");    
+    arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
     if (arq_paciente == NULL) {
         printf("Nenhum paciente cadastrado ainda\n");
         free(pac);
