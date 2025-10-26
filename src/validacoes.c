@@ -114,7 +114,7 @@ int ano_bissexto(int ano){
 }
 
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
-int valida_dia(int mes, int dia, int ano){
+int valida_dia(int dia, int mes, int ano){
   if((dia < 1) || (mes < 1) || (mes > 12)){
     return 0;
   }
@@ -148,13 +148,56 @@ int ano_atual() {
 
 // Essa função foi criada para validar apenas o ano atual e (ano atual + 1)
 int valida_ano(int ano){
-  int atual = ano_atual;
+  int atual = ano_atual();
 
   if((ano == atual) || (ano == atual + 1)){
     return 1;
   } else{
     return 0;
   }
+}
+
+// Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
+int valida_data(char *data){
+   int len, dia, mes, ano;
+  len = strlen(data);
+  if(len != 8){
+    return 0;
+  }
+  for (int i = 0; i < len; i++){
+    if (!isdigit(data[i])) {
+      return 0;
+    }
+  }
+  dia = (data[0] - '0') * 10 + (data[1] - '0');
+  mes = (data[2] - '0') * 10 + (data[3] - '0');
+  ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
+        (data[6] - '0') * 10 + (data[7] - '0');
+
+  if (!valida_dia(dia, mes, ano)){
+    return 0;
+  }
+  if(!valida_ano(ano)){
+    return 0;
+  }
+
+  // Créditos: Função Adaptada do Gemini
+  // Verifica se a data já passou;
+  time_t segundos_atuais = time(NULL);
+  struct tm *data_atual = localtime(&segundos_atuais); 
+  int dia_atual = data_atual->tm_mday;
+  int mes_atual = data_atual->tm_mon + 1; // pega os meses de 0 a 11;
+  int ano_atual_val = data_atual->tm_year + 1900; 
+
+  if(ano == ano_atual_val){
+    if(mes < mes_atual){
+      return 0;
+    } else if((mes == mes_atual) && (dia < dia_atual)){
+      return 0;
+    }
+  }
+
+  return 1; 
 }
 
 
