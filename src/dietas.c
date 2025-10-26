@@ -56,7 +56,7 @@ void cadastrar_dieta(void){
     dt = (Dieta*)malloc(sizeof(Dieta));
     
     dt->id_dieta = 1; 
-    arq_dietas = fopen("arq_dietas.dat", "rb"); 
+    arq_dietas = fopen("data/arq_dietas.dat", "rb"); 
     
     if (arq_dietas != NULL){
         fseek(arq_dietas, 0, SEEK_END);  
@@ -88,7 +88,7 @@ void cadastrar_dieta(void){
 
     dt->status = True;
 
-    arq_dietas = fopen("arq_dietas.dat", "a+b");
+    arq_dietas = fopen("data/arq_dietas.dat", "a+b");
     if (arq_dietas == NULL){
         printf("Erro na criação do arquivo\n");
         return;
@@ -120,7 +120,7 @@ void buscar_dieta(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
-    arq_dietas = fopen("arq_dietas.dat", "rb");
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");
 
     if (arq_dietas == NULL){
         printf("Erro na criação do arquivo\n");
@@ -170,8 +170,8 @@ void alterar_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
 
-    arq_dietas = fopen("arq_dietas.dat", "rb");
-    arq_dietas_temp = fopen("arq_dietas_temp.dat", "wb");
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");
+    arq_dietas_temp = fopen("data/arq_dietas_temp.dat", "wb");
 
     if (arq_dietas == NULL || arq_dietas_temp == NULL){
         printf("Erro na criaçao do arquivo\n");
@@ -239,11 +239,11 @@ void alterar_dieta(void){
     fclose(arq_dietas_temp);  
 
     if(encontrado == True){
-        remove("arq_dietas.dat");
-        rename("arq_dietas_temp.dat", "arq_dietas.dat");
+        remove("data/arq_dietas.dat");
+        rename("data/arq_dietas_temp.dat", "data/arq_dietas.dat");
         printf("\nDieta alterada com sucesso!\n");
     } else{
-        remove("arq_dietas_temp.dat");
+        remove("data/arq_dietas_temp.dat");
         printf("\nDieta não encontrada!\n");
     }
     free(dt);
@@ -272,7 +272,7 @@ void excluir_dieta(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
     
-    arq_dietas = fopen("arq_dietas.dat", "r+b");
+    arq_dietas = fopen("data/arq_dietas.dat", "r+b");
     
     if (arq_dietas == NULL){
         printf("Erro na criação do arquivo\n");
@@ -322,7 +322,7 @@ void listar_dietas(void) {
 
     dt = (Dieta*) malloc(sizeof(Dieta));
     
-    arq_dietas = fopen("arq_dietas.dat", "rb");
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");
     if (arq_dietas == NULL) {
         printf("Nenhuma dieta cadastrada ainda.\n");
         free(dt);
@@ -378,8 +378,8 @@ void excluir_dieta_fisica(void) {
     encontrado = False;
     excluida = False;
     
-    arq_dietas = fopen("arq_dietas.dat", "rb");
-    arq_dietas_temp = fopen("arq_dietas_temp.dat", "wb");
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");
+    arq_dietas_temp = fopen("data/arq_dietas_temp.dat", "wb");
 
     if (arq_dietas == NULL || arq_dietas_temp == NULL) {
         printf("Erro ao abrir arquivos!\n");
@@ -432,8 +432,8 @@ void excluir_dieta_fisica(void) {
     fclose(arq_dietas_temp);
     free(dt);
 
-    remove("arq_dietas.dat");
-    rename("arq_dietas_temp.dat", "arq_dietas.dat");
+    remove("data/arq_dietas.dat");
+    rename("data/arq_dietas_temp.dat", "data/arq_dietas.dat");
 
     if (encontrado == False) {
         printf("\nDieta não encontrada!\n");
