@@ -52,7 +52,7 @@ void cadastrar_profissional(void){
     pf = (Profissional*)malloc(sizeof(Profissional));
 
     pf->id_profissional = 1;
-    arq_profissionais = fopen("arq_profissionais.dat", "rb");
+    arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
     
      // Crédito: Função adaptada do gemini;
     if (arq_profissionais != NULL){
@@ -115,7 +115,7 @@ void cadastrar_profissional(void){
 
     pf->status = True;
 
-    arq_profissionais = fopen("arq_profissionais.dat", "a+b");
+    arq_profissionais = fopen("data/arq_profissionais.dat", "a+b");
     if (arq_profissionais == NULL) {
         printf("Erro na criação do arquivo\n");
         return;
@@ -148,7 +148,7 @@ void buscar_profissional(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
-    arq_profissionais = fopen("arq_profissionais.dat", "rb");
+    arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
 
     if (arq_profissionais == NULL){
         printf("Erro na criação do arquivo\n");
@@ -201,8 +201,8 @@ void alterar_profissional(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
 
-    arq_profissionais = fopen("arq_profissionais.dat", "rb");
-    arq_profissionais_temp = fopen("arq_profissionais_temp.dat", "wb");
+    arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
+    arq_profissionais_temp = fopen("data/arq_profissionais_temp.dat", "wb");
 
     if (arq_profissionais == NULL || arq_profissionais_temp == NULL){
         printf("Erro na criação do arquivo\n");
@@ -305,11 +305,11 @@ void alterar_profissional(void){
     fclose(arq_profissionais_temp);
 
     if (encontrado == True){
-        remove("arq_profissionais.dat");
-        rename("arq_profissionais_temp.dat", "arq_profissionais.dat");
+        remove("data/arq_profissionais.dat");
+        rename("data/arq_profissionais_temp.dat", "data/arq_profissionais.dat");
         printf("///                    Profissional alterado com sucesso!                      ///\n");
     } else {
-        remove("arq_profissionais_temp.dat");
+        remove("data/arq_profissionais_temp.dat");
         printf("\nProfissional não encontrado!\n");
     }
     free(pf);
@@ -339,7 +339,7 @@ void alterar_profissional(void){
     encontrado = False;
     pausar();
 
-    arq_profissionais = fopen("arq_profissionais.dat", "r+b");
+    arq_profissionais = fopen("data/arq_profissionais.dat", "r+b");
     
     if (arq_profissionais == NULL){
         printf("Erro na criação do arquivo\n");
@@ -391,7 +391,7 @@ void listar_profissionais(void) {
 
     pf = (Profissional*) malloc(sizeof(Profissional));
     
-    arq_profissionais = fopen("arq_profissionais.dat", "rb");
+    arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
     if (arq_profissionais == NULL) {
         printf("Nenhum Profissional cadastrado ainda.\n");
         free(pf);
