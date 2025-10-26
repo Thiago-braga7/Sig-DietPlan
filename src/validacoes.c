@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdbool.h>
-
+#include <time.h>
 
 
 // Funcões Criadas por Thiago
@@ -83,7 +83,7 @@ int valida_idade(char *digito){
 
 }
 
-int valida_mes(char * mes){
+int valida_mes(char *mes){
   int len = strlen(mes);
   if(strlen(mes) == 0){
     return 0;
@@ -112,3 +112,50 @@ int ano_bissexto(int ano){
     return 0;
   }
 }
+
+// Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
+int valida_dia(int mes, int dia, int ano){
+  if((dia < 1) || (mes < 1) || (mes > 12)){
+    return 0;
+  }
+  int max_dias;
+  if ((mes == 4) || (mes == 6) || (mes == 9) || (mes == 11)){
+    max_dias = 30;
+  } else if (mes == 2){
+      if(ano_bissexto(ano)){
+        max_dias = 29;
+      } else{
+        max_dias = 28;
+      }
+  } else{
+    max_dias = 31;
+  }
+  if(dia > max_dias){
+    return 0;
+  }
+  return 1;
+}
+
+// Créditos: Gemini. Peguei essa função para saber o ano atual;
+/* Explicação: Conta os segundos desde 1970 até a data atual, converte para a data atual, subtrai com 1900(por
+causa do tm_year), aí depois somamos novamente com 1900 para termos o ano atual.
+*/
+int ano_atual() {
+    time_t segundos_atuais = time(NULL);           // Pega o tempo atual em segundos desde 01/01/1970
+    struct tm *data_atual = localtime(&segundos_atuais); // Converte para a data_atual/hora local (estrutura tm)
+    return data_atual->tm_year + 1900;         // tm_year é anos desde 1900, então somamos 1900 para obter o ano real
+}
+
+// Essa função foi criada para validar apenas o ano atual e (ano atual + 1)
+int valida_ano(int ano){
+  int atual = ano_atual;
+
+  if((ano == atual) || (ano == atual + 1)){
+    return 1;
+  } else{
+    return 0;
+  }
+}
+
+
+
