@@ -56,7 +56,7 @@ void cadastrar_consulta(void){
 
     con->id_consulta = 1;
 
-    arq_consulta = fopen("arq_consulta.dat", "rb");
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
 
     // Créditos: Função adaptada do gemini;
     if (arq_consulta != NULL){
@@ -69,6 +69,7 @@ void cadastrar_consulta(void){
         
         fclose(arq_consulta);
     }
+    int valido;
 
     limpar_tela();
 
@@ -83,9 +84,17 @@ void cadastrar_consulta(void){
     printf("///                         Nome do Usuário:                                ///\n");
     scanf("%s", con->nome);
     getchar();
-    printf("///                         Data da Consulta (DD/MM/AAAA):                  ///\n");
-    scanf("%s", con->data);
-    getchar();
+    do{
+        printf("///                         Data da Consulta (DDMMAAAA):                    ///\n");
+        scanf("%s", con->data);
+        getchar();
+
+        valido = valida_data(con->data);
+
+        if(valido == 0){
+            printf("Data inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
     printf("///                         Hora da Consulta (HH:MM):                       ///\n");
     scanf("%s", con->hora);
     getchar();
@@ -101,7 +110,7 @@ void cadastrar_consulta(void){
     
     con->status = True;
 
-    arq_consulta = fopen("arq_consulta.dat", "a+b");
+    arq_consulta = fopen("data/arq_consulta.dat", "a+b");
     if (arq_consulta == NULL) {
         printf("Erro na criação do arquivo\n");
         return;
@@ -136,7 +145,7 @@ void buscar_consulta(void){
 
     encontrado = False;
 
-    arq_consulta = fopen("arq_consulta.dat", "rb");
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
 
     if (arq_consulta == NULL){
         printf("Erro na criacao do arquivo\n");
@@ -176,6 +185,7 @@ void alterar_consulta(void){
     int encontrado;
     char opcao;
     char continuar;
+    int valido;
 
     con = (Consulta*)malloc(sizeof(Consulta));
 
@@ -191,8 +201,8 @@ void alterar_consulta(void){
 
     encontrado = False;
 
-    arq_consulta = fopen("arq_consulta.dat", "rb");
-    arq_consulta_temp = fopen("arq_consulta_temp.dat", "wb");
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
+    arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
 
     if (arq_consulta == NULL || arq_consulta_temp == NULL){
         printf("Erro na busca do arquivo\n");
@@ -228,9 +238,17 @@ void alterar_consulta(void){
                         getchar();
                         break;
                     case '2':
-                        printf("Novo data: ");
-                        scanf("%s", con->data);
-                        getchar();
+                        do{
+                            printf("Nova Data da Consulta(DDMMAAAA): ");
+                            scanf("%s", con->data);
+                            getchar();
+
+                            valido = valida_data(con->data);
+
+                            if(valido == 0){
+                                printf("Data inválida! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '3':
                         printf("Nova hora: ");
@@ -274,11 +292,11 @@ void alterar_consulta(void){
     fclose(arq_consulta_temp);  
 
     if(encontrado == True){
-        remove("arq_consulta.dat");
-        rename("arq_consulta_temp.dat", "arq_consulta.dat");
+        remove("data/arq_consulta.dat");
+        rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
         printf("\nConsulta alterada com sucesso!\n");
     } else{
-        remove("arq_consulta_temp.dat");
+        remove("data/arq_consulta_temp.dat");
         printf("\nConsulta não encontrada!\n");
     }
     free(con);
@@ -310,7 +328,7 @@ void excluir_consulta(void){
 
     encontrado = False;
 
-    arq_consulta = fopen("arq_consulta.dat", "r+b");
+    arq_consulta = fopen("data/arq_consulta.dat", "r+b");
 
     if (arq_consulta == NULL){
         printf("Erro na busca do arquivo\n");
@@ -365,7 +383,7 @@ void listar_consulta(void){
 
     con = (Consulta*) malloc(sizeof(Consulta));
     
-    arq_consulta = fopen("arq_consulta.dat", "rb");
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
     if (arq_consulta == NULL) {
         printf("Nenhuma consulta cadastrada ainda.\n");
         free(con);
@@ -423,8 +441,8 @@ void excluir_consulta_fisica(void) {
     encontrado = False;
     excluida = False;
     
-    arq_consulta = fopen("arq_consulta.dat", "rb");
-    arq_consulta_temp = fopen("arq_consulta_temp.dat", "wb");
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
+    arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
 
     if (arq_consulta == NULL || arq_consulta_temp == NULL) {
         printf("Erro ao abrir arquivos!\n");
@@ -480,8 +498,8 @@ void excluir_consulta_fisica(void) {
     fclose(arq_consulta_temp);
     free(con);
 
-    remove("arq_consulta.dat");
-    rename("arq_consulta_temp.dat", "arq_consulta.dat");
+    remove("data/arq_consulta.dat");
+    rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
 
     if (encontrado == False) {
         printf("\nConsulta não encontrada!\n");

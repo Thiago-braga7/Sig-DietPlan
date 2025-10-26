@@ -37,7 +37,7 @@ char tela_agendamentos(void){
     printf("///                    3. Alterar Agendamento                               ///\n");
     printf("///                    4. Excluir Agendamento                               ///\n");
     printf("///                    5. Listar Agendamentos                               ///\n");
-    printf("///                    6. Excluir Agendamento(Físico)                    ///\n");
+    printf("///                    6. Excluir Agendamento(Físico)                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
@@ -53,7 +53,7 @@ void cadastrar_agendamento(void){
     ag = (Agendamento*)malloc(sizeof(Agendamento));
 
     ag->id_agendamento = 1;
-     arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     
      // Crédito: Função adaptada do gemini;
     if (arq_agendamentos != NULL){
@@ -66,6 +66,7 @@ void cadastrar_agendamento(void){
         
         fclose(arq_agendamentos);
     }
+    int valido;
 
     limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -76,9 +77,17 @@ void cadastrar_agendamento(void){
     printf("///                         CPF do Paciente:                                ///\n");
     scanf("%s", ag->cpf); 
     getchar();
-    printf("///                         Data (DD/MM/AAAA):                              ///\n");
-    scanf("%s", ag->data); 
-    getchar();
+    do{
+        printf("///                         Data (DDMMAAAA):                                ///\n");
+        scanf("%s", ag->data); 
+        getchar();
+
+        valido = valida_data(ag->data);
+
+        if(valido == 0){
+            printf("Data inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
     printf("///                         Hora (HH:MM):                                   ///\n");
     scanf("%s", ag->hora); 
     getchar();
@@ -98,7 +107,7 @@ void cadastrar_agendamento(void){
     
     ag->status = True;
     
-    arq_agendamentos = fopen("arq_agendamentos.dat", "a+b");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "a+b");
     if (arq_agendamentos == NULL) {
         printf("Erro na criação do arquivo\n");
         return;
@@ -129,8 +138,7 @@ void buscar_agendamento(void){
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
-     encontrado = False;
-    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
 
     if (arq_agendamentos == NULL){
         printf("Erro na criação do arquivo\n");
@@ -170,6 +178,7 @@ void alterar_agendamento(void){
     int encontrado;
     char opcao;
     char continuar;
+    int valido;
 
     ag = (Agendamento*)malloc(sizeof(Agendamento));
 
@@ -186,8 +195,8 @@ void alterar_agendamento(void){
     encontrado = False;
 
     
-    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
-    arq_agendamentos_temp = fopen("arq_agendamentos_temp.dat", "wb");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
+    arq_agendamentos_temp = fopen("data/arq_agendamentos_temp.dat", "wb");
 
     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL){
         printf("Erro na criação do arquivo\n");
@@ -227,9 +236,17 @@ void alterar_agendamento(void){
                         getchar();
                         break;
                     case '2':
-                        printf("Nova Data (DD/MM/AAAA): ");
-                        scanf("%15s", ag->data);
-                        getchar();
+                        do{
+                            printf("Nova Data (DDMMAAAA): ");
+                            scanf("%s", ag->data);
+                            getchar();
+
+                            valido = valida_data(ag->data);
+
+                            if(valido == 0){
+                                printf("Data inválida! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '3':
                         printf("Nova Hora (HH:MM): ");
@@ -255,7 +272,6 @@ void alterar_agendamento(void){
                         printf("Opção inválida!\n");
                         break;
                 }
-
                 printf("\n    Dados atualizados    \n");
                 printf("ID:              %d\n", ag->id_agendamento);
                 printf("CPF do Paciente: %s\n", ag->cpf);
@@ -280,11 +296,11 @@ void alterar_agendamento(void){
     fclose(arq_agendamentos_temp);
 
      if (encontrado == True){
-        remove("arq_agendamentos.dat");
-        rename("arq_agendamentos_temp.dat", "arq_agendamentos.dat");
+        remove("data/arq_agendamentos.dat");
+        rename("data/arq_agendamentos_temp.dat", "data/arq_agendamentos.dat");
         printf("///                    Paciente alterado com sucesso!                       ///\n");
     } else {
-        remove("arq_agendamentos_temp.dat");
+        remove("data/arq_agendamentos_temp.dat");
         printf("\nAgendamento não encontrado!\n");
     }
     free(ag);
@@ -311,7 +327,7 @@ void excluir_agendamento(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
     
-    arq_agendamentos = fopen("arq_agendamentos.dat", "r+b");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "r+b");
     
     if (arq_agendamentos == NULL){
         printf("Erro na criação do arquivo\n");
@@ -364,7 +380,7 @@ void listar_agendamentos(void){
 
     ag = (Agendamento*) malloc(sizeof(Agendamento));
     
-    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     if (arq_agendamentos == NULL) {
         printf("Nenhum Agendamento cadastrado ainda.\n");
         free(ag);
@@ -424,8 +440,8 @@ void excluir_agendamento_fisico(void) {
     encontrado = False;
     excluido = False;
 
-    arq_agendamentos = fopen("arq_agendamentos.dat", "rb");
-    arq_agendamentos_temp = fopen("arq_agendamentos_temp.dat", "wb");
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
+    arq_agendamentos_temp = fopen("data/arq_agendamentos_temp.dat", "wb");
 
     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL) {
         printf("Erro ao abrir arquivos!\n");
@@ -476,8 +492,8 @@ void excluir_agendamento_fisico(void) {
     fclose(arq_agendamentos_temp);
     free(ag);
 
-    remove("arq_agendamentos.dat");
-    rename("arq_agendamentos_temp.dat", "arq_agendamentos.dat");
+    remove("data/arq_agendamentos.dat");
+    rename("data/arq_agendamentos_temp.dat", "data/arq_agendamentos.dat");
 
     if (encontrado == False) {
         printf("\nAgendamento não encontrado!\n");
