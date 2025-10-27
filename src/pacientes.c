@@ -125,9 +125,17 @@ void cadastrar_paciente(void){
         }
     } while (valido == 0);
 
-    printf("///                         Altura (m):                                     ///\n");
-    scanf("%f", &pac->altura); 
-    getchar();
+    do{
+        printf("///                      Altura (m):                                     ///\n");
+        scanf("%f", &pac->altura); 
+        getchar();
+
+        valido = validar_altura(pac->altura);
+
+        if(valido == 0){
+            printf("Altura inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
 
     pac->status = True;

@@ -289,5 +289,24 @@ int validar_peso(float peso) {
         return 0;
     }
 
+    // Permite até 600 kg
+    else if(peso > 600){
+        return 0;
+    }
+
+    return 1;
+}
+
+int validar_altura(float altura) {
+    // Permite apenas valores positivos
+    if(altura <= 0) {
+        return 0;
+    }
+
+    // Permite até 3 m
+    else if(altura > 3){
+        return 0;
+    }
+
     return 1;
 }
