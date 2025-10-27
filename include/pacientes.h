@@ -1,7 +1,7 @@
 typedef struct paciente Paciente;
 
 struct paciente {
-    char nome[100];
+    char nome[50];
     char cpf[13];
     char tel[12];
     char idade[4];

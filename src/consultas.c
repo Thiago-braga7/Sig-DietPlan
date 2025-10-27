@@ -81,9 +81,18 @@ void cadastrar_consulta(void){
     printf("///                  = = = = =  Cadastrar Consulta  = = = = =               ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome do Usuário:                                ///\n");
-    scanf("%s", con->nome);
-    getchar();
+    do{
+        printf("///                         Nome do Usuário:                                ///\n");
+        scanf(" %50s", con->nome); 
+        getchar();
+
+        valido = validar_nome(con->nome);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
     do{
         printf("///                         Data da Consulta (DDMMAAAA):                    ///\n");
         scanf("%s", con->data);
@@ -106,10 +115,18 @@ void cadastrar_consulta(void){
             printf("Hora inválida! Digite novamente! \n");
         }
     } while (valido == 0);
-    printf("///                         Nome do Médico:                                  ///\n");
-    scanf("%s", con->medico);
-    getchar();
+    
+    do{
+        printf("///                         Nome do Médico:                                  ///\n");
+        scanf(" %50s", con->medico); 
+        getchar();
 
+        valido = validar_nome(con->medico);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
     do{
         printf("///                         Observações:                                      ///\n");
         scanf("%200[^\n]", con->observacoes); 
@@ -250,9 +267,17 @@ void alterar_consulta(void){
 
                  switch (opcao) {
                     case '1':
-                        printf("Novo nome: ");
-                        scanf("%s", con->nome);
-                        getchar();
+                        do{
+                            printf("Novo Nome do Usuário: \n");
+                            scanf(" %50s", con->nome); 
+                            getchar();
+
+                            valido = validar_nome(con->nome);
+
+                            if(valido == 0){
+                                printf("Nome inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '2':
                         do{
@@ -282,9 +307,17 @@ void alterar_consulta(void){
                         } while (valido == 0);
                         break;
                     case '4':
-                        printf("Novo médico: ");
-                        scanf("%s", con->medico);
-                        getchar();
+                        do{
+                            printf("Novo Nome do Médico: \n");
+                            scanf(" %50s", con->medico); 
+                            getchar();
+
+                            valido = validar_nome(con->medico);
+
+                            if(valido == 0){
+                                printf("Nome inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '5':
                         do{

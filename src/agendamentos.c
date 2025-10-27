@@ -110,12 +110,30 @@ void cadastrar_agendamento(void){
         }
     } while (valido == 0);
 
-    printf("///                         Tipo de Agendamento:                              ///\n");
-    scanf("%50[^\n]", ag->tipo); 
-    getchar();
-    printf("///                         Profissional Responsável:                         ///\n");
-    scanf("%100[^\n]", ag->profissional); 
-    getchar();
+    do{
+        printf("///                         Tipo de Agendamento:                            ///\n");
+        scanf(" %50[^\n]", ag->tipo); 
+        getchar();
+
+        valido = validar_nome(ag->tipo);
+
+        if(valido == 0){
+            printf("Texto inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
+
+    do{
+        printf("///                         Profissional Responsável:                       ///\n");
+        scanf(" %50[^\n]", ag->profissional); 
+        getchar();
+
+        valido = validar_nome(ag->profissional);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
     
     do{
         printf("///                         Observações:                                      ///\n");
@@ -299,14 +317,30 @@ void alterar_agendamento(void){
                         } while (valido == 0);
                         break;
                     case '4':
-                        printf("Novo Tipo: ");
-                        scanf("%50[^\n]", ag->tipo);
-                        getchar();
+                         do{
+                            printf("Novo Tipo de Agendamento:                            \n");
+                            scanf(" %50[^\n]", ag->tipo); 
+                            getchar();
+
+                            valido = validar_nome(ag->tipo);
+
+                            if(valido == 0){
+                                printf("Texto inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '5':
-                        printf("Novo Profissional: ");
-                        scanf("%100[^\n]", ag->profissional);
-                        getchar();
+                        do{
+                            printf("Novo Profissional: \n");
+                            scanf(" %50[^\n]", ag->profissional); 
+                            getchar();
+
+                            valido = validar_nome(ag->profissional);
+
+                            if(valido == 0){
+                                printf("Nome inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '6':
                         do{
