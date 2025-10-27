@@ -65,13 +65,29 @@ void cadastrar_paciente(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     
-    printf("///                         Nome:                                           ///\n");
-    scanf(" %[^\n]", pac->nome); 
-    getchar();
+    do{
+        printf("///                                 Nome:                               ///\n");
+        scanf(" %50s", pac->nome); 
+        getchar();
 
-    printf("///                         CPF (Apenas números):                           ///\n");
-    scanf("%s", pac->cpf); 
-    getchar();
+        valido = validar_nome(pac->nome);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
+    do{
+        printf("///                        CPF (Apenas números):                       ///\n");
+        scanf(" %s", pac->cpf); 
+        getchar();
+
+        valido = validar_cpf(pac->cpf);
+
+        if(valido == 0){
+            printf("CPF inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     do{
         printf("///                         Telefone (Apenas números):                      ///\n");
@@ -97,13 +113,29 @@ void cadastrar_paciente(void){
         }
     } while (valido == 0);
 
-    printf("///                         Peso (Kg):                                      ///\n");
-    scanf("%f", &pac->peso); 
-    getchar();
+    do{
+        printf("///                       Peso (kg):                                      ///\n");
+        scanf("%f", &pac->peso); 
+        getchar();
 
-    printf("///                         Altura (m):                                     ///\n");
-    scanf("%f", &pac->altura); 
-    getchar();
+        valido = validar_peso(pac->peso);
+
+        if(valido == 0){
+            printf("Peso inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
+    do{
+        printf("///                      Altura (m):                                     ///\n");
+        scanf("%f", &pac->altura); 
+        getchar();
+
+        valido = validar_altura(pac->altura);
+
+        if(valido == 0){
+            printf("Altura inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
 
     pac->status = True;

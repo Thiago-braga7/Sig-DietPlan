@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <locale.h>
 
 
 // Funcões Criadas por Thiago
@@ -237,3 +238,75 @@ int validar_calorias(float calorias){
 }
 
 
+// Funções criadas por Wallison
+// Com auxílio do ChatGPT
+
+int validar_nome(const char *nome) {
+    setlocale(LC_CTYPE, "");
+
+    int tamanho = strlen(nome);
+
+    // Permite nomes a partir de 2 letras
+    if (tamanho < 2) {
+        return 0;
+    }
+
+    for (int i = 0; i < tamanho; i++) {
+        unsigned char c = nome[i];
+
+        // Permite apenas letras, espaços e acentos
+        if (!(isalpha(c) || c == ' ' || strchr("áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ", c))) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+
+int validar_cpf(char *cpf){
+    int i;
+    int tamanho = strlen(cpf);
+
+    // Só pode ter 11 caracteres
+    if(tamanho != 11){
+        return 0;
+    }
+
+    for(i = 0; i < tamanho; i++){
+      // Só pode ter número
+      if(!isdigit(cpf[i])){
+          return 0;
+      }
+    }
+
+    return 1;
+}
+
+int validar_peso(float peso) {
+    // Permite apenas valores positivos
+    if(peso <= 0) {
+        return 0;
+    }
+
+    // Permite até 600 kg
+    else if(peso > 600){
+        return 0;
+    }
+
+    return 1;
+}
+
+int validar_altura(float altura) {
+    // Permite apenas valores positivos
+    if(altura <= 0) {
+        return 0;
+    }
+
+    // Permite até 3 m
+    else if(altura > 3){
+        return 0;
+    }
+
+    return 1;
+}
