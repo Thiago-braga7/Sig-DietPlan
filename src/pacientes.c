@@ -69,18 +69,9 @@ void cadastrar_paciente(void){
     ler_cpf(pac->cpf);
     ler_tel(pac->tel);
     ler_idade(pac->idade);
+    ler_peso(pac->peso);
 
-    do{
-        printf("///                       Peso (kg):                                      ///\n");
-        scanf("%f", &pac->peso); 
-        getchar();
-
-        valido = validar_peso(pac->peso);
-
-        if(valido == 0){
-            printf("Peso inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
+    
 
     do{
         printf("///                      Altura (m):                                     ///\n");

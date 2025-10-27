@@ -70,3 +70,20 @@ void ler_idade(char *idade) {
         }
     } while (valido == 0);
 }
+
+
+void ler_peso(float peso) {
+    int valido = 0;
+
+    do{
+        printf("///                       Peso (kg):                                      ///\n");
+        scanf("%f", &peso); 
+        getchar();
+
+        valido = validar_peso(peso);
+
+        if(valido == 0){
+            printf("Peso inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+}
