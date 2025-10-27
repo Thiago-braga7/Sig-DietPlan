@@ -53,3 +53,20 @@ void ler_tel(char *tel) {
         }
     } while (valido == 0);
 }
+
+
+void ler_tel(char *idade) {
+    int valido = 0;
+
+    do{
+        printf("///                         Idade:                                          ///\n");
+        scanf("%s", idade); 
+        getchar();
+
+        valido = valida_idade(idade);
+
+        if(valido == 0){
+            printf("Idade inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
+}
