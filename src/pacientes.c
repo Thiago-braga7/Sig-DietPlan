@@ -85,9 +85,17 @@ void cadastrar_paciente(void){
         }
     } while (valido == 0);
 
-    printf("///                         Idade:                                          ///\n");
-    scanf("%d", &pac->idade); 
-    getchar();
+    do{
+        printf("///                         Idade:                                          ///\n");
+        scanf("%s", pac->idade); 
+        getchar();
+
+        valido = valida_idade(pac->idade);
+
+        if(valido == 0){
+            printf("Idade inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     printf("///                         Peso (Kg):                                      ///\n");
     scanf("%f", &pac->peso); 
@@ -156,7 +164,7 @@ void buscar_paciente(void){
             printf("Nome: %s\n", pac->nome);
             printf("CPF: %s\n", pac->cpf);
             printf("Telefone: %s\n", pac->tel);
-            printf("Idade: %d\n", pac->idade);
+            printf("Idade: %s\n", pac->idade);
             printf("Peso: %.2f kg\n", pac->peso);
             printf("Altura: %.2f m\n", pac->altura);
 
@@ -221,7 +229,7 @@ void alterar_paciente(void){
                 printf("Nome: %s\n", pac->nome);
                 printf("CPF: %s\n", pac->cpf);
                 printf("Telefone: %s\n", pac->tel);
-                printf("Idade: %d\n", pac->idade);
+                printf("Idade: %s\n", pac->idade);
                 printf("Peso: %.2f kg\n", pac->peso);
                 printf("Altura: %.2f m\n", pac->altura);
 
@@ -262,8 +270,19 @@ void alterar_paciente(void){
                         break;
                     case '4':
                         printf("Nova idade: ");
-                        scanf("%d", &pac->idade);
+                        scanf("%s", pac->idade);
                         getchar();
+                         do{
+                            printf("Nova idade: ");
+                            scanf("%s", pac->idade); 
+                            getchar();
+
+                            valido = valida_idade(pac->idade);
+
+                            if(valido == 0){
+                                printf("Idade inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '5':
                         printf("Novo peso: ");
@@ -283,7 +302,7 @@ void alterar_paciente(void){
                 printf("Nome: %s\n", pac->nome);
                 printf("CPF: %s\n", pac->cpf);
                 printf("Telefone: %s\n", pac->tel);
-                printf("Idade: %d\n", pac->idade);
+                printf("Idade: %s\n", pac->idade);
                 printf("Peso: %.2f kg\n", pac->peso);
                 printf("Altura: %.2f m\n", pac->altura);
 
@@ -359,7 +378,7 @@ void excluir_paciente(void){
                 printf("Nome: %s\n", pac->nome);
                 printf("CPF: %s\n", pac->cpf);
                 printf("Telefone: %s\n", pac->tel);
-                printf("Idade: %d\n", pac->idade);
+                printf("Idade: %s\n", pac->idade);
                 printf("Peso: %.2f kg\n", pac->peso);
                 printf("Altura: %.2f m\n", pac->altura);
 
@@ -418,7 +437,7 @@ void listar_paciente(void) {
             printf("Nome: %s\n", pac->nome);
             printf("CPF: %s\n", pac->cpf);
             printf("Telefone: %s\n", pac->tel);
-            printf("Idade: %d\n", pac->idade);
+            printf("Idade: %s\n", pac->idade);
             printf("Peso: %.2f\n", pac->peso);
             printf("Altura: %.2f\n", pac->altura);
             printf("--------------------------------------------------\n");
