@@ -67,18 +67,9 @@ void cadastrar_paciente(void){
     printf("///                                                                         ///\n");
     ler_nome(pac->nome);
     ler_cpf(pac->cpf);
+    ler_tel(pac->tel);
 
-    do{
-        printf("///                         Telefone (Apenas números):                      ///\n");
-        scanf(" %11s", pac->tel); 
-        getchar();
-
-        valido = valida_telefone(pac->tel);
-
-        if(valido == 0){
-            printf("Telefone inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
+    
 
     do{
         printf("///                         Idade:                                          ///\n");
