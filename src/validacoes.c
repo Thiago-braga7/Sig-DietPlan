@@ -237,3 +237,25 @@ int validar_calorias(float calorias){
 }
 
 
+// Funções criadas por Wallison
+
+int validar_nome(char *nome){
+    int i;
+    int tamanho = strlen(nome);
+
+    // Tem que ter mais de 2 caracteres
+    if(tamanho < 2){
+        return 0;
+    }
+
+    for(i = 0; i < tamanho; i++){
+        char c = nome[i];
+
+        // Só pode ter letra, espaço e fim de linha
+        if(!isalpha(c) && c != ' ' && c != '\n'){
+            return 0;
+        }
+    }
+
+    return 1;
+}

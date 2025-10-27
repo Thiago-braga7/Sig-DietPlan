@@ -65,9 +65,17 @@ void cadastrar_paciente(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     
-    printf("///                         Nome:                                           ///\n");
-    scanf(" %[^\n]", pac->nome); 
-    getchar();
+    do{
+        printf("///                                 Nome:                               ///\n");
+        scanf(" %50s", pac->nome); 
+        getchar();
+
+        valido = validar_nome(pac->nome);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     printf("///                         CPF (Apenas números):                           ///\n");
     scanf("%s", pac->cpf); 

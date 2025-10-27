@@ -10,3 +10,4 @@ int ano_atual(int );
 int valida_data(char *);
 int validar_hora(const char *);
 int validar_calorias(float );
+int validar_nome(char *);
