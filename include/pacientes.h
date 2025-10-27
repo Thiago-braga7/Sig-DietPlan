@@ -4,7 +4,7 @@ struct paciente {
     char nome[100];
     char cpf[13];
     char tel[12];
-    int idade;
+    char idade[4];
     float peso;
     float altura;
     float resultado;
