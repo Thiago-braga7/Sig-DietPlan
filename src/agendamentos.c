@@ -88,9 +88,19 @@ void cadastrar_agendamento(void){
             printf("Data inválida! Digite novamente! \n");
         }
     } while (valido == 0);
-    printf("///                         Hora (HH:MM):                                   ///\n");
-    scanf("%s", ag->hora); 
-    getchar();
+    
+    do{
+        printf("///                         Hora de Atendimento(08:00 - 18:00):              ///\n");
+        scanf("%s", ag->hora); 
+        getchar();
+
+        valido = validar_hora(ag->hora);
+
+        if(valido == 0){
+            printf("Hora inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
     printf("///                         Tipo de Agendamento:                            ///\n");
     scanf("%50[^\n]", ag->tipo); 
     getchar();
@@ -250,8 +260,17 @@ void alterar_agendamento(void){
                         break;
                     case '3':
                         printf("Nova Hora (HH:MM): ");
-                        scanf("%10s", ag->hora);
-                        getchar();
+                        do{
+                            printf("Nova Hora (08:00 - 18:00): ");
+                            scanf("%s", ag->hora); 
+                            getchar();
+
+                            valido = validar_hora(ag->hora);
+
+                            if(valido == 0){
+                                printf("Hora inválida! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '4':
                         printf("Novo Tipo: ");
