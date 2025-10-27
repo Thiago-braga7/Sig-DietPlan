@@ -3,6 +3,7 @@
 #include "profissionais.h"
 #include "validacoes.h"
 #include <string.h>
+#include "leituras.h"
 #define True 1
 #define False 0
 
@@ -58,7 +59,6 @@ void cadastrar_profissional(void){
         pf->id_profissional = num_registros + 1;
         fclose(arq_profissionais);
     }
-    int valido;
 
     limpar_tela();
     printf("\n");
@@ -67,54 +67,10 @@ void cadastrar_profissional(void){
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Cadastrar Profissional = = = = =             ///\n");
     printf("///                                                                         ///\n");
-    do{
-        printf("///                                 Nome:                                     ///\n");
-        scanf(" %50s", pf->nome); 
-        getchar();
-
-        valido = validar_nome(pf->nome);
-
-        if(valido == 0){
-            printf("Nome inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-    do{
-        printf("///                         CPF(Apenas Números):                             ///\n");
-         scanf("%s", pf->cpf); 
-        getchar();
-
-        valido = validar_cpf(pf->cpf);
-
-        if(valido == 0){
-            printf("CPF inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-    do{
-        printf("///                         Telefone (Apenas números):                      ///\n");
-        scanf(" %11s", pf->tel); 
-        getchar();
-
-        valido = valida_telefone(pf->tel);
-
-        if(valido == 0){
-            printf("Telefone inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    
-    do{
-        printf("///                         CRN(Formato: CRN-X/XXXXX ):                     ///\n");
-        scanf(" %11s", pf->crn);
-        getchar();
-        valido = valida_crn(pf->crn);
-
-        if (valido == 0){
-            printf("CRN inválido! Digite novamente! \n");
-        }
-
-    } while (valido == 0);
-
+    ler_nome(pf->nome);
+    ler_cpf(pf->cpf);
+    ler_tel(pf->tel);
+    ler_crn(pf->crn);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Profissional Cadastrado com Sucesso!                       \n");
     printf("///                        ID gerado: %02d                                    ///\n", pf->id_profissional);

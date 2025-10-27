@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "consultas.h"
 #include "validacoes.h"
+#include "leituras.h"
 #define True 1
 #define False 0
 
@@ -69,7 +70,6 @@ void cadastrar_consulta(void){
         
         fclose(arq_consulta);
     }
-    int valido;
 
     limpar_tela();
 
@@ -81,63 +81,11 @@ void cadastrar_consulta(void){
     printf("///                  = = = = =  Cadastrar Consulta  = = = = =               ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    do{
-        printf("///                         Nome do Usuário:                                ///\n");
-        scanf(" %50s", con->nome); 
-        getchar();
-
-        valido = validar_nome(con->nome);
-
-        if(valido == 0){
-            printf("Nome inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-    do{
-        printf("///                         Data da Consulta (DDMMAAAA):                    ///\n");
-        scanf("%s", con->data);
-        getchar();
-
-        valido = valida_data(con->data);
-
-        if(valido == 0){
-            printf("Data inválida! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    do{
-        printf("///                         Hora de Atendimento(08:00 - 18:00):              ///\n");
-        scanf("%s", con->hora); 
-        getchar();
-
-        valido = validar_hora(con->hora);
-
-        if(valido == 0){
-            printf("Hora inválida! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    
-    do{
-        printf("///                         Nome do Médico:                                  ///\n");
-        scanf(" %50s", con->medico); 
-        getchar();
-
-        valido = validar_nome(con->medico);
-
-        if(valido == 0){
-            printf("Nome inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    do{
-        printf("///                         Observações:                                      ///\n");
-        scanf("%200[^\n]", con->observacoes); 
-        getchar();
-
-        valido = validar_observacao(con->observacoes);
-
-        if(valido == 0){
-            printf("Texto Digitado inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
+    ler_nome(con->nome);
+    ler_data(con->data);
+    ler_hora(con->hora);
+    ler_medico(con->medico);
+    ler_observacoes(con->observacoes);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
