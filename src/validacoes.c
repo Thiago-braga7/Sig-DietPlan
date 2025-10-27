@@ -200,5 +200,33 @@ int valida_data(char *data){
   return 1; 
 }
 
+int validar_hora(const char *hora){
+  if(strlen(hora) != 5){
+    return 0;
+  }
+  int i;
+  for(i = 0; i < 5; i++){
+    if(i == 2){
+      if(hora[i] != ':'){
+        return 0;
+      }
+    } else {
+        if(!isdigit(hora[i])){
+          return 0;
+      }
+    }
+  }
+  int horas = (hora[0] - '0') * 10 + (hora[1] - '0');
+  int minutos = (hora[3] - '0') * 10 + (hora[4] - '0');
+
+  if(horas < 0 || horas > 23 || minutos < 0 || minutos > 59){
+    return 0;
+  }
+  // Horário de Atendimento 08:00 - 18:00)
+  if(horas < 8 || horas > 18 || (horas == 18 && minutos > 0)){
+    return 0;
+  }
+  return 1;
+}
 
 

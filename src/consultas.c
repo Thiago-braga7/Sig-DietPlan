@@ -36,8 +36,8 @@ char tela_consultas(void){
     printf("///                    2. Buscar Consulta                                   ///\n");
     printf("///                    3. Alterar Consulta                                  ///\n");
     printf("///                    4. Excluir Consulta                                  ///\n");
-    printf("///                    5. Listar Consulta                                    ///\n");
-    printf("///                    5. Excluir Consulta (física)                         ///\n");
+    printf("///                    5. Listar Consulta                                   ///\n");
+    printf("///                    6. Excluir Consulta (física)                         ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -95,9 +95,17 @@ void cadastrar_consulta(void){
             printf("Data inválida! Digite novamente! \n");
         }
     } while (valido == 0);
-    printf("///                         Hora da Consulta (HH:MM):                       ///\n");
-    scanf("%s", con->hora);
-    getchar();
+    do{
+        printf("///                         Hora de Atendimento(08:00 - 18:00):              ///\n");
+        scanf("%s", con->hora); 
+        getchar();
+
+        valido = validar_hora(con->hora);
+
+        if(valido == 0){
+            printf("Hora inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
     printf("///                         Nome do Médico:                                  ///\n");
     scanf("%s", con->medico);
     getchar();
@@ -251,9 +259,18 @@ void alterar_consulta(void){
                         } while (valido == 0);
                         break;
                     case '3':
-                        printf("Nova hora: ");
-                        scanf("%s", con->hora);
-                        getchar();
+                        printf("Nova Hora (HH:MM): ");
+                        do{
+                            printf("Nova Hora (08:00 - 18:00): ");
+                            scanf("%s", con->hora); 
+                            getchar();
+
+                            valido = validar_hora(con->hora);
+
+                            if(valido == 0){
+                                printf("Hora inválida! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '4':
                         printf("Novo médico: ");
