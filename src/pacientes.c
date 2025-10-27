@@ -54,6 +54,7 @@ void cadastrar_paciente(void){
     FILE *arq_paciente;
     Paciente* pac;
     pac = (Paciente*)malloc(sizeof(Paciente));
+    int valido;
 
     limpar_tela();
     printf("\n");
@@ -64,7 +65,7 @@ void cadastrar_paciente(void){
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     
-    printf("///                         Nome:                                        ///\n");
+    printf("///                         Nome:                                           ///\n");
     scanf(" %[^\n]", pac->nome); 
     getchar();
 
@@ -72,9 +73,17 @@ void cadastrar_paciente(void){
     scanf("%s", pac->cpf); 
     getchar();
 
-    printf("///                         Telefone (Apenas números):                      ///\n");
-    scanf("%s", pac->tel); 
-    getchar();
+    do{
+        printf("///                         Telefone (Apenas números):                      ///\n");
+        scanf(" %11s", pac->tel); 
+        getchar();
+
+        valido = valida_telefone(pac->tel);
+
+        if(valido == 0){
+            printf("Telefone inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     printf("///                         Idade:                                          ///\n");
     scanf("%d", &pac->idade); 
@@ -175,6 +184,7 @@ void alterar_paciente(void){
     int encontrado;
     char opcao;
     char continuar;
+    int valido;
 
     pac = (Paciente*) malloc(sizeof(Paciente));
 
@@ -238,9 +248,17 @@ void alterar_paciente(void){
                         getchar();
                         break;
                     case '3':
-                        printf("Novo telefone: ");
-                        scanf(" %s", pac->tel);
-                        getchar();
+                         do{
+                            printf("\nNovo Telefone (Apenas números):                      \n");
+                            scanf(" %11s", pac->tel); 
+                            getchar();
+
+                            valido = valida_telefone(pac->tel);
+
+                            if(valido == 0){
+                                printf("Telefone inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '4':
                         printf("Nova idade: ");
