@@ -67,9 +67,17 @@ void cadastrar_profissional(void){
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Cadastrar Profissional = = = = =             ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome:                                           ///\n");
-    scanf("%100[^\n]", pf->nome); 
-    getchar();
+    do{
+        printf("///                                 Nome:                                     ///\n");
+        scanf(" %50s", pf->nome); 
+        getchar();
+
+        valido = validar_nome(pf->nome);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     do{
         printf("///                         CPF(Apenas Números):                             ///\n");
@@ -232,9 +240,17 @@ void alterar_profissional(void){
 
                 switch (opcao) {
                     case '1':
-                        printf("Novo Nome: ");
-                        scanf("%100[^\n]", pf->nome);
-                        getchar();
+                        do{
+                            printf("Novo nome: ");
+                            scanf(" %50s", pf->nome); 
+                            getchar();
+
+                            valido = validar_nome(pf->nome);
+
+                            if(valido == 0){
+                                printf("Nome inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '2':
                         do{

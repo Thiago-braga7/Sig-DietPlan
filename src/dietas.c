@@ -73,9 +73,18 @@ void cadastrar_dieta(void){
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Nome da Dieta:                                  ///\n");
-    scanf("%50[^\n]", dt->nome_dieta);
-    getchar();
+    do{
+        printf("///                         Nome da Dieta:                                  ///\n");
+        scanf(" %50s", dt->nome_dieta); 
+        getchar();
+
+        valido = validar_nome(dt->nome_dieta);
+
+        if(valido == 0){
+            printf("Nome inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+    
     do{
         printf("///                         Total de Calorias:                               ///\n");
         scanf("%f", &dt->calorias);
@@ -221,9 +230,17 @@ void alterar_dieta(void){
 
                 switch (opcao) {
                     case '1':
-                        printf("Novo Nome da Dieta: ");
-                        scanf("%50[^\n]", dt->nome_dieta);
-                        getchar();
+                        do{
+                            printf("Novo Nome da Dieta: ");
+                            scanf(" %50s", dt->nome_dieta); 
+                            getchar();
+
+                            valido = validar_nome(dt->nome_dieta);
+
+                            if(valido == 0){
+                                printf("Nome inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '2':
                         do{

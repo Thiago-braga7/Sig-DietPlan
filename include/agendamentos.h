@@ -6,7 +6,7 @@ struct agendamento {
     char data[15];
     char hora[10];
     char tipo[50];
-    char profissional[100];
+    char profissional[50];
     char observacoes[200];
     int status;
 };

@@ -211,9 +211,17 @@ void alterar_paciente(void){
 
                 switch (opcao) {
                     case '1':
-                        printf("Novo nome: ");
-                        scanf(" %s", pac->nome);
-                        getchar();
+                        do{
+                            printf("Novo nome: ");
+                            scanf(" %50s", pac->nome); 
+                            getchar();
+
+                            valido = validar_nome(pac->nome);
+
+                            if(valido == 0){
+                                printf("Nome inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '2':
                         do{
