@@ -55,7 +55,6 @@ void cadastrar_paciente(void){
     FILE *arq_paciente;
     Paciente* pac;
     pac = (Paciente*)malloc(sizeof(Paciente));
-    int valido;
 
     limpar_tela();
     printf("\n");
@@ -70,21 +69,7 @@ void cadastrar_paciente(void){
     ler_tel(pac->tel);
     ler_idade(pac->idade);
     ler_peso(pac->peso);
-
-    
-
-    do{
-        printf("///                      Altura (m):                                     ///\n");
-        scanf("%f", &pac->altura); 
-        getchar();
-
-        valido = validar_altura(pac->altura);
-
-        if(valido == 0){
-            printf("Altura inválida! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
+    ler_altura(pac->altura);
 
     pac->status = True;
 

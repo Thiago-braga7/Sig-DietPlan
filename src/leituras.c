@@ -87,3 +87,20 @@ void ler_peso(float peso) {
         }
     } while (valido == 0);
 }
+
+
+void ler_altura(float altura) {
+    int valido = 0;
+    
+    do{
+        printf("///                      Altura (m):                                     ///\n");
+        scanf("%f", &altura); 
+        getchar();
+
+        valido = validar_altura(altura);
+
+        if(valido == 0){
+            printf("Altura inválida! Digite novamente! \n");
+        }
+    } while (valido == 0);
+}

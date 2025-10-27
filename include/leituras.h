@@ -6,5 +6,6 @@ void ler_cpf(char *cpf);
 void ler_tel(char *tel);
 void ler_idade(char *idade);
 void ler_peso(float);
+void ler_altura(float);
 
 #endif
