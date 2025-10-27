@@ -3,6 +3,7 @@
 #include "dietas.h"
 #include "validacoes.h"
 #include <string.h>
+#include "leituras.h"
 #define True 1
 #define False 0
 
@@ -64,7 +65,6 @@ void cadastrar_dieta(void){
         dt->id_dieta = num_registros + 1;
         fclose(arq_dietas);
     }
-    int valido;
 
     limpar_tela();
     printf("\n");
@@ -73,43 +73,9 @@ void cadastrar_dieta(void){
     printf("///                                                                         ///\n");
     printf("///                  = = = = =  Cadastrar Dieta  = = = = =                  ///\n");
     printf("///                                                                         ///\n");
-    do{
-        printf("///                         Nome da Dieta:                                  ///\n");
-        scanf(" %50s", dt->nome_dieta); 
-        getchar();
-
-        valido = validar_nome(dt->nome_dieta);
-
-        if(valido == 0){
-            printf("Nome inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    
-    do{
-        printf("///                         Total de Calorias:                               ///\n");
-        scanf("%f", &dt->calorias);
-        getchar();
-
-        valido = validar_calorias(dt->calorias);
-
-        if(valido == 0){
-            printf("Calorias inválidas! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-    
-    do{
-        printf("///                         Refeições (breve descrição):                    ///\n");
-        scanf("%200[^\n]", dt->refeicoes);
-        getchar();
-
-        valido = validar_observacao(dt->refeicoes);
-
-        if(valido == 0){
-            printf("Texto Digitado inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
+    ler_dieta(dt->nome_dieta);
+    ler_calorias(dt->calorias);
+    ler_refeicoes(dt->refeicoes);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Dieta Cadastrada com Sucesso!                    ///\n");
     printf("///                        ID gerado: %02d                                    ///\n", dt->id_dieta);

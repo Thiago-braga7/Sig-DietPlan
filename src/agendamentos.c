@@ -3,6 +3,7 @@
 #include "agendamentos.h"
 #include "validacoes.h"
 #include <string.h>
+#include "leituras.h"
 #define True 1
 #define False 0
 
@@ -66,7 +67,6 @@ void cadastrar_agendamento(void){
         
         fclose(arq_agendamentos);
     }
-    int valido;
 
     limpar_tela();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -74,78 +74,12 @@ void cadastrar_agendamento(void){
     printf("///                                                                         ///\n");
     printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
     printf("///                                                                         ///\n");
-    do{
-        printf("///                         CPF do Paciente(Apenas Números):              ///\n");
-        scanf("%s", ag->cpf); 
-        getchar();
-
-        valido = validar_cpf(ag->cpf);
-
-        if(valido == 0){
-            printf("CPF inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-    do{
-        printf("///                         Data (DDMMAAAA):                                ///\n");
-        scanf("%s", ag->data); 
-        getchar();
-
-        valido = valida_data(ag->data);
-
-        if(valido == 0){
-            printf("Data inválida! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    
-    do{
-        printf("///                         Hora de Atendimento(08:00 - 18:00):            ///\n");
-        scanf("%s", ag->hora); 
-        getchar();
-
-        valido = validar_hora(ag->hora);
-
-        if(valido == 0){
-            printf("Hora inválida! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-    do{
-        printf("///                         Tipo de Agendamento:                            ///\n");
-        scanf(" %50[^\n]", ag->tipo); 
-        getchar();
-
-        valido = validar_nome(ag->tipo);
-
-        if(valido == 0){
-            printf("Texto inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
-
-    do{
-        printf("///                         Profissional Responsável:                       ///\n");
-        scanf(" %50[^\n]", ag->profissional); 
-        getchar();
-
-        valido = validar_nome(ag->profissional);
-
-        if(valido == 0){
-            printf("Nome inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-    
-    do{
-        printf("///                         Observações:                                      ///\n");
-        scanf("%200[^\n]", ag->observacoes); 
-        getchar();
-
-        valido = validar_observacao(ag->observacoes);
-
-        if(valido == 0){
-            printf("Texto Digitado inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
+    ler_cpf(ag->cpf);
+    ler_data(ag->data);
+    ler_hora(ag->hora);
+    ler_tipo(ag->tipo);
+    ler_profissional(ag->profissional);
+    ler_observacoes(ag->observacoes);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
     printf("///                        ID gerado: %02d                                    ///\n", ag->id_agendamento);
