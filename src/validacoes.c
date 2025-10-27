@@ -35,7 +35,7 @@ int valida_crn(char *crn) {
     return 0;
   }
   
-  if (crn[0] != 'C' || crn[1] != 'R' || crn[2] != 'R' ||
+  if (crn[0] != 'C' || crn[1] != 'R' || crn[2] != 'N' ||
       crn[3] != '-' || !isdigit(crn[4]) ||  crn[5] != '/' ||
       !isdigit(crn[6]) || !isdigit(crn[7]) || !isdigit(crn[8]) || 
       !isdigit(crn[9]) || !isdigit(crn[10])) {
