@@ -77,9 +77,17 @@ void cadastrar_paciente(void){
         }
     } while (valido == 0);
 
-    printf("///                         CPF (Apenas números):                           ///\n");
-    scanf("%s", pac->cpf); 
-    getchar();
+    do{
+        printf("///                        CPF (Apenas números):                       ///\n");
+        scanf(" %s", pac->cpf); 
+        getchar();
+
+        valido = validar_cpf(pac->cpf);
+
+        if(valido == 0){
+            printf("CPF inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     do{
         printf("///                         Telefone (Apenas números):                      ///\n");
