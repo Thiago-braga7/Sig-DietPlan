@@ -113,9 +113,17 @@ void cadastrar_paciente(void){
         }
     } while (valido == 0);
 
-    printf("///                         Peso (Kg):                                      ///\n");
-    scanf("%f", &pac->peso); 
-    getchar();
+    do{
+        printf("///                       Peso (kg):                                      ///\n");
+        scanf("%f", &pac->peso); 
+        getchar();
+
+        valido = validar_peso(pac->peso);
+
+        if(valido == 0){
+            printf("Peso inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
 
     printf("///                         Altura (m):                                     ///\n");
     scanf("%f", &pac->altura); 
