@@ -216,9 +216,17 @@ void alterar_paciente(void){
                         getchar();
                         break;
                     case '2':
-                        printf("Novo CPF: ");
-                        scanf(" %s", pac->cpf);
-                        getchar();
+                        do{
+                            printf("Novo CPF do Paciente(Apenas Números):                 \n");
+                            scanf("%s", pac->cpf); 
+                            getchar();
+
+                            valido = validar_cpf(pac->cpf);
+
+                            if(valido == 0){
+                                printf("CPF inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '3':
                          do{
