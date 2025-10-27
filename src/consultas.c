@@ -109,9 +109,18 @@ void cadastrar_consulta(void){
     printf("///                         Nome do Médico:                                  ///\n");
     scanf("%s", con->medico);
     getchar();
-    printf("///                         Observações:                                    ///\n");
-    scanf("%s", con->observacoes);
-    getchar();
+
+    do{
+        printf("///                         Observações:                                      ///\n");
+        scanf("%200[^\n]", con->observacoes); 
+        getchar();
+
+        valido = validar_observacao(con->observacoes);
+
+        if(valido == 0){
+            printf("Texto Digitado inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -278,9 +287,17 @@ void alterar_consulta(void){
                         getchar();
                         break;
                     case '5':
-                        printf("Nova observação: ");
-                        scanf("%s", con->observacoes);
-                        getchar();
+                        do{
+                            printf("Novas Observações: ");
+                            scanf("%200[^\n]", con->observacoes); 
+                            getchar();
+
+                            valido = validar_observacao(con->observacoes);
+
+                            if(valido == 0){
+                                printf("Texto Digitado inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     default:
                         printf("Opção inválida!\n");

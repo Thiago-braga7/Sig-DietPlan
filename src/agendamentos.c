@@ -75,7 +75,7 @@ void cadastrar_agendamento(void){
     printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
     printf("///                                                                         ///\n");
     do{
-        printf("///                         CPF do Paciente(Apenas Números):                 ///\n");
+        printf("///                         CPF do Paciente(Apenas Números):              ///\n");
         scanf("%s", ag->cpf); 
         getchar();
 
@@ -99,7 +99,7 @@ void cadastrar_agendamento(void){
     } while (valido == 0);
     
     do{
-        printf("///                         Hora de Atendimento(08:00 - 18:00):              ///\n");
+        printf("///                         Hora de Atendimento(08:00 - 18:00):            ///\n");
         scanf("%s", ag->hora); 
         getchar();
 
@@ -110,15 +110,24 @@ void cadastrar_agendamento(void){
         }
     } while (valido == 0);
 
-    printf("///                         Tipo de Agendamento:                            ///\n");
+    printf("///                         Tipo de Agendamento:                              ///\n");
     scanf("%50[^\n]", ag->tipo); 
     getchar();
-    printf("///                         Profissional Responsável:                       ///\n");
+    printf("///                         Profissional Responsável:                         ///\n");
     scanf("%100[^\n]", ag->profissional); 
     getchar();
-    printf("///                         Observações:                                    ///\n");
-    scanf("%200[^\n]", ag->observacoes); 
-    getchar();
+    
+    do{
+        printf("///                         Observações:                                      ///\n");
+        scanf("%200[^\n]", ag->observacoes); 
+        getchar();
+
+        valido = validar_observacao(ag->observacoes);
+
+        if(valido == 0){
+            printf("Texto Digitado inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
     printf("///                        ID gerado: %02d                                    ///\n", ag->id_agendamento);
@@ -300,9 +309,17 @@ void alterar_agendamento(void){
                         getchar();
                         break;
                     case '6':
-                        printf("Novas Observações: ");
-                        scanf("%200[^\n]", ag->observacoes);
-                        getchar();
+                        do{
+                            printf("Novas Observações: ");
+                            scanf("%200[^\n]", ag->observacoes); 
+                            getchar();
+
+                            valido = validar_observacao(ag->observacoes);
+
+                            if(valido == 0){
+                                printf("Texto Digitado inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     default:
                         printf("Opção inválida!\n");

@@ -310,3 +310,22 @@ int validar_altura(float altura) {
 
     return 1;
 }
+// Créditos: Essa função eu tomei como base a Função ler_nome criada por Walisson;
+int validar_observacao(const char *obs) {
+    setlocale(LC_CTYPE, "");
+
+    int tamanho = strlen(obs);
+    if (tamanho < 2) {
+        return 0;
+    }
+
+    for (int i = 0; i < tamanho; i++) {
+        unsigned char c = obs[i];
+        if (isalpha(c) || isdigit(c) || c == ' ' || c == '%' ||
+            strchr(".,!?;:-_()[]{}\"'@#$/\\+=*&°ºª|~^´`áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ", c)) {
+            continue;
+        }
+        return 0;
+    }
+    return 1;
+}

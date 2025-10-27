@@ -14,3 +14,4 @@ int validar_nome(char *);
 int validar_cpf(char *);
 int validar_peso(float);
 int validar_altura(float);
+int validar_observacao(const char *);
