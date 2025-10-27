@@ -3,7 +3,7 @@ typedef struct paciente Paciente;
 struct paciente {
     char nome[100];
     char cpf[13];
-    char tel[11];
+    char tel[12];
     int idade;
     float peso;
     float altura;
