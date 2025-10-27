@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pacientes.h"
 #include "validacoes.h"
+#include "leituras.h"
 #include <ctype.h>
 #define True 1
 #define False 0
@@ -64,19 +65,7 @@ void cadastrar_paciente(void){
     printf("///                 = = = = =  Cadastrar Paciente = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
-    
-    do{
-        printf("///                                 Nome:                               ///\n");
-        scanf(" %50s", pac->nome); 
-        getchar();
-
-        valido = validar_nome(pac->nome);
-
-        if(valido == 0){
-            printf("Nome inválido! Digite novamente! \n");
-        }
-    } while (valido == 0);
-
+    ler_nome(pac->nome);
     do{
         printf("///                        CPF (Apenas números):                       ///\n");
         scanf(" %s", pac->cpf); 
