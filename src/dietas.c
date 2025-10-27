@@ -88,9 +88,19 @@ void cadastrar_dieta(void){
         }
     } while (valido == 0);
 
-    printf("///                         Refeições (breve descrição):                    ///\n");
-    scanf("%200[^\n]", dt->refeicoes);
-    getchar();
+    
+    do{
+        printf("///                         Refeições (breve descrição):                    ///\n");
+        scanf("%200[^\n]", dt->refeicoes);
+        getchar();
+
+        valido = validar_observacao(dt->refeicoes);
+
+        if(valido == 0){
+            printf("Texto Digitado inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                        Dieta Cadastrada com Sucesso!                    ///\n");
     printf("///                        ID gerado: %02d                                    ///\n", dt->id_dieta);
@@ -229,9 +239,17 @@ void alterar_dieta(void){
                         } while (valido == 0);
                         break;
                     case '3':
-                        printf("Nova descrição das Refeições: ");
-                        scanf("%200[^\n]", dt->refeicoes);
-                        getchar();
+                        do{
+                            printf("Nova descrição das Refeições: ");
+                            scanf("%200[^\n]", dt->refeicoes);
+                            getchar();
+
+                            valido = validar_observacao(dt->refeicoes);
+
+                            if(valido == 0){
+                                printf("Texto Digitado inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     default:
                         printf("Opção inválida!\n");

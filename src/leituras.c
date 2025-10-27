@@ -8,7 +8,7 @@ void ler_nome(char *nome) {
     int valido = 0;
 
     do{
-        printf("///                                 Nome:                               ///\n");
+        printf("///                                 Nome:                                   ///\n");
         scanf(" %50s", nome); 
         getchar();
 
