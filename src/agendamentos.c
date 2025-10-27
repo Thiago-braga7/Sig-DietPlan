@@ -74,9 +74,18 @@ void cadastrar_agendamento(void){
     printf("///                                                                         ///\n");
     printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         CPF do Paciente:                                ///\n");
-    scanf("%s", ag->cpf); 
-    getchar();
+    do{
+        printf("///                         CPF do Paciente(Apenas Números):                 ///\n");
+        scanf("%s", ag->cpf); 
+        getchar();
+
+        valido = validar_cpf(ag->cpf);
+
+        if(valido == 0){
+            printf("CPF inválido! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
     do{
         printf("///                         Data (DDMMAAAA):                                ///\n");
         scanf("%s", ag->data); 
@@ -241,9 +250,17 @@ void alterar_agendamento(void){
 
                 switch (opcao){
                     case '1':
-                        printf("Novo CPF: ");
-                        scanf("%13s", ag->cpf);
-                        getchar();
+                        do{
+                            printf("Novo CPF do Paciente(Apenas Números):                 \n");
+                            scanf("%s", ag->cpf); 
+                            getchar();
+
+                            valido = validar_cpf(ag->cpf);
+
+                            if(valido == 0){
+                                printf("CPF inválido! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '2':
                         do{
