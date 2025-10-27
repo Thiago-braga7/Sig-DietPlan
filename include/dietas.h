@@ -3,7 +3,7 @@ typedef struct dieta Dieta;
 struct dieta {
     int id_dieta;
     char nome_dieta[50];
-    int calorias;
+    float calorias;
     char refeicoes[200];
     int status;
 };

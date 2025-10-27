@@ -64,6 +64,7 @@ void cadastrar_dieta(void){
         dt->id_dieta = num_registros + 1;
         fclose(arq_dietas);
     }
+    int valido;
 
     limpar_tela();
     printf("\n");
@@ -75,9 +76,18 @@ void cadastrar_dieta(void){
     printf("///                         Nome da Dieta:                                  ///\n");
     scanf("%50[^\n]", dt->nome_dieta);
     getchar();
-    printf("///                         Total de Calorias por dia:                      ///\n");
-    scanf("%d", &dt->calorias);
-    getchar();
+    do{
+        printf("///                         Total de Calorias:                               ///\n");
+        scanf("%f", &dt->calorias);
+        getchar();
+
+        valido = validar_calorias(dt->calorias);
+
+        if(valido == 0){
+            printf("Calorias inválidas! Digite novamente! \n");
+        }
+    } while (valido == 0);
+
     printf("///                         Refeições (breve descrição):                    ///\n");
     scanf("%200[^\n]", dt->refeicoes);
     getchar();
@@ -131,7 +141,7 @@ void buscar_dieta(void){
             printf("///                        Dieta Encontrada!                                ///\n");
             printf("ID da Dieta:       %d\n", dt->id_dieta);
             printf("Nome da Dieta:     %s\n", dt->nome_dieta);
-            printf("Total de Calorias: %d kcal\n", dt->calorias);
+            printf("Total de Calorias: %.2f kcal\n", dt->calorias);
             printf("Refeições:         %s\n", dt->refeicoes);
             encontrado = True;
             break;
@@ -154,6 +164,7 @@ void alterar_dieta(void){
     int encontrado;
     char opcao;
     char continuar;
+    int valido;
 
     dt = (Dieta*) malloc(sizeof(Dieta));
     
@@ -187,7 +198,7 @@ void alterar_dieta(void){
                 printf("\n    Dados atuais da dieta    \n");
                 printf("ID da Dieta:       %d\n", dt->id_dieta);
                 printf("Nome da Dieta:     %s\n", dt->nome_dieta);
-                printf("Total de Calorias: %d kcal\n", dt->calorias);
+                printf("Total de Calorias: %.2f kcal\n", dt->calorias);
                 printf("Refeições:         %s\n", dt->refeicoes);
 
                 printf("\nQual campo deseja alterar?\n");
@@ -205,9 +216,17 @@ void alterar_dieta(void){
                         getchar();
                         break;
                     case '2':
-                        printf("Novo Total de Calorias: ");
-                        scanf("%d", &dt->calorias);
-                        getchar();
+                        do{
+                            printf("Novo Total de Calorias: ");
+                            scanf("%f", &dt->calorias);
+                            getchar();
+
+                            valido = validar_calorias(dt->calorias);
+
+                            if(valido == 0){
+                                printf("Calorias inválidas! Digite novamente! \n");
+                            }
+                        } while (valido == 0);
                         break;
                     case '3':
                         printf("Nova descrição das Refeições: ");
@@ -221,7 +240,7 @@ void alterar_dieta(void){
                 printf("\n    Dados atualizados   \n");
                 printf("ID da Dieta:       %d\n", dt->id_dieta);
                 printf("Nome da Dieta:     %s\n", dt->nome_dieta);
-                printf("Total de Calorias: %d kcal\n", dt->calorias);
+                printf("Total de Calorias: %.2f kcal\n", dt->calorias);
                 printf("Refeições:         %s\n", dt->refeicoes);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
@@ -284,7 +303,7 @@ void excluir_dieta(void){
             printf("///                        Dieta Encontrada!                                ///\n");
             printf("ID da Dieta:       %d\n", dt->id_dieta);
             printf("Nome da Dieta:     %s\n", dt->nome_dieta);
-            printf("Total de Calorias: %d kcal\n", dt->calorias);
+            printf("Total de Calorias: %.2f kcal\n", dt->calorias);
             printf("Refeições:         %s\n", dt->refeicoes);
             encontrado = True;
 
@@ -342,7 +361,7 @@ void listar_dietas(void) {
         if (dt->status == True) {  
             printf("ID: %d\n", dt->id_dieta);
             printf("Nome da Dieta: %s\n", dt->nome_dieta);
-            printf("Calorias/dia: %d\n", dt->calorias);
+            printf("Calorias/dia: %.2f\n", dt->calorias);
             printf("Refeições: %s\n", dt->refeicoes);
             printf("--------------------------------------------------\n");
         }
@@ -391,7 +410,7 @@ void excluir_dieta_fisica(void) {
             printf("///                        Dieta Encontrada!                                ///\n");
             printf("ID da Dieta:       %d\n", dt->id_dieta);
             printf("Nome da Dieta:     %s\n", dt->nome_dieta);
-            printf("Total de Calorias: %d kcal\n", dt->calorias);
+            printf("Total de Calorias: %.2f kcal\n", dt->calorias);
             printf("Refeições:         %s\n", dt->refeicoes);
             encontrado = True;
 

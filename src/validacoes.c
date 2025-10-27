@@ -72,7 +72,7 @@ int valida_idade(char *digito){
       return 0; 
     } 
   }
-  // Créditos: Peguei essa parte do Gemini, o atoi converte string em um número inteiro. Da biblioteca stdlib
+  
   int idade = atoi(digito);
 
   if((idade) > 0 && (idade <= 130)){
@@ -227,6 +227,13 @@ int validar_hora(const char *hora){
     return 0;
   }
   return 1;
+}
+
+int validar_calorias(float calorias){
+  if(calorias > 0.0 && calorias < 10000.0){
+        return 1; 
+    }
+    return 0; 
 }
 
 
