@@ -55,7 +55,7 @@ void ler_tel(char *tel) {
 }
 
 
-void ler_tel(char *idade) {
+void ler_idade(char *idade) {
     int valido = 0;
 
     do{
