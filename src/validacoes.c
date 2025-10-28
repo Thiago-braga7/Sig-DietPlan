@@ -29,6 +29,7 @@ void pausar(void) {
     getchar();
 }
 
+
 // formato do crn CRN-X/XXXXX
 int valida_crn(char *crn) {
 
@@ -44,6 +45,7 @@ int valida_crn(char *crn) {
       }      
   return 1;
 }
+
 
 // função validar telefone
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
@@ -81,8 +83,8 @@ int valida_idade(char *digito){
   } else{
     return 0;
   }
-
 }
+
 
 int valida_mes(char *mes){
   int len = strlen(mes);
@@ -114,6 +116,7 @@ int ano_bissexto(int ano){
   }
 }
 
+
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
 int valida_dia(int dia, int mes, int ano){
   if((dia < 1) || (mes < 1) || (mes > 12)){
@@ -137,6 +140,7 @@ int valida_dia(int dia, int mes, int ano){
   return 1;
 }
 
+
 // Créditos: Gemini. Peguei essa função para saber o ano atual;
 /* Explicação: Conta os segundos desde 1970 até a data atual, converte para a data atual, subtrai com 1900(por
 causa do tm_year), aí depois somamos novamente com 1900 para termos o ano atual.
@@ -146,6 +150,7 @@ int ano_atual() {
     struct tm *data_atual = localtime(&segundos_atuais); // Converte para a data_atual/hora local (estrutura tm)
     return data_atual->tm_year + 1900;         // tm_year é anos desde 1900, então somamos 1900 para obter o ano real
 }
+
 
 // Essa função foi criada para validar apenas o ano atual e (ano atual + 1)
 int valida_ano(int ano){
@@ -157,6 +162,7 @@ int valida_ano(int ano){
     return 0;
   }
 }
+
 
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
 int valida_data(char *data){
@@ -200,6 +206,7 @@ int valida_data(char *data){
 
   return 1; 
 }
+
 
 int validar_hora(const char *hora){
   if(strlen(hora) != 5){
@@ -283,6 +290,7 @@ int validar_cpf(char *cpf){
     return 1;
 }
 
+
 int validar_peso(float peso) {
     // Permite apenas valores positivos
     if(peso <= 0) {
@@ -297,6 +305,7 @@ int validar_peso(float peso) {
     return 1;
 }
 
+
 int validar_altura(float altura) {
     // Permite apenas valores positivos
     if(altura <= 0) {
@@ -310,6 +319,8 @@ int validar_altura(float altura) {
 
     return 1;
 }
+
+
 // Créditos: Essa função eu tomei como base a Função ler_nome criada por Walisson;
 int validar_observacao(const char *obs) {
     setlocale(LC_CTYPE, "");

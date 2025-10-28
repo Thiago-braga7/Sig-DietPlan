@@ -105,6 +105,7 @@ void ler_altura(float altura) {
     } while (valido == 0);
 }
 
+
 void ler_data(char *data){
     int valido = 0;
     do{
@@ -120,6 +121,7 @@ void ler_data(char *data){
     } while (valido == 0);
 }
 
+
 void ler_hora(char *hora){
     int valido = 0;
     do{
@@ -134,6 +136,7 @@ void ler_hora(char *hora){
         }
     } while (valido == 0);
 }
+
 
 void ler_tipo(char *tipo){
     int valido = 0;
@@ -166,6 +169,7 @@ void ler_profissional(char *profissional){
     } while (valido == 0);
 }
 
+
 void ler_observacoes(char *observacoes){
     int valido = 0;
     do{
@@ -180,6 +184,7 @@ void ler_observacoes(char *observacoes){
         }
     } while (valido == 0);
 }
+
 
 void ler_medico(char *medico){
     int valido = 0;
@@ -196,6 +201,7 @@ void ler_medico(char *medico){
     } while (valido == 0);
 }
 
+
 void ler_dieta(char *nome_dieta){
     int valido = 0;
     do{
@@ -210,6 +216,7 @@ void ler_dieta(char *nome_dieta){
         }
     } while (valido == 0);
 }
+
 
 void ler_calorias(float calorias){
     int valido = 0;
@@ -226,6 +233,7 @@ void ler_calorias(float calorias){
     } while (valido == 0);
 }
 
+
 void ler_refeicoes(char *refeicoes){
     int valido = 0;
     do{
@@ -240,6 +248,7 @@ void ler_refeicoes(char *refeicoes){
         }
     } while (valido == 0);
 }
+
 
 void ler_crn(char *crn){
     int valido = 0;
