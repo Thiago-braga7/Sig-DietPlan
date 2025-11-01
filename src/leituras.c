@@ -25,7 +25,7 @@ void ler_cpf(char *cpf) {
     int valido = 0;
 
     do{
-        printf("///                        CPF (Apenas números):                       ///\n");
+        printf("///                        CPF (Apenas números):                            ///\n");
         scanf(" %s", cpf); 
         getchar();
 
@@ -173,7 +173,7 @@ void ler_profissional(char *profissional){
 void ler_observacoes(char *observacoes){
     int valido = 0;
     do{
-        printf("///                         Observações:                                      ///\n");
+        printf("///                         Observações:                                   ///\n");
         scanf("%200[^\n]", observacoes); 
         getchar();
 

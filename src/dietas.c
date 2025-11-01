@@ -446,7 +446,7 @@ void excluir_dieta_fisica(void) {
     pausar(); 
 }
 
-void exibir_dieta(const Dieta * dt) {
+void exibir_dieta(const Dieta * dt){
     if (dt == NULL) {
         printf("Erro: dieta inexistente!\n");
         return;
