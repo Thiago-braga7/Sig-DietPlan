@@ -19,3 +19,4 @@ void alterar_agendamento(void);
 void excluir_agendamento(void);
 void listar_agendamentos(void);
 void excluir_agendamento_fisico(void);
+void exibir_agendamento(const Agendamento * ag);

@@ -128,16 +128,9 @@ void buscar_agendamento(void){
     while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
         if ((ag->id_agendamento == id_busca) && (ag->status == True)){
             printf("///                        Agendamento Encontrado!                        ///\n");
-            printf("ID:                %d\n", ag->id_agendamento);
-            printf("CPF:               %s\n", ag->cpf);
-            printf("Data:              %s\n", ag->data);
-            printf("Hora:              %s\n", ag->hora);
-            printf("Tipo:              %s\n", ag->tipo);
-            printf("Profissional:      %s\n", ag->profissional);
-            printf("Observações:       %s\n", ag->observacoes);
-
-           encontrado = True;
-           break;
+            exibir_agendamento(ag);
+            encontrado = True;
+            break;
         }
     }
     if (encontrado == False){
@@ -190,13 +183,7 @@ void alterar_agendamento(void){
             do{
                 limpar_tela();
                 printf("\n    Dados atuais do agendamento    \n");
-                printf("ID:              %d\n", ag->id_agendamento);
-                printf("CPF do Paciente: %s\n", ag->cpf);
-                printf("Data:            %s\n", ag->data);
-                printf("Hora:            %s\n", ag->hora);
-                printf("Tipo:            %s\n", ag->tipo);
-                printf("Profissional:    %s\n", ag->profissional);
-                printf("Observações:     %s\n", ag->observacoes);
+                exibir_agendamento(ag);
 
                 printf("\nQual campo deseja alterar?\n");
                 printf("1. CPF do Paciente\n");
@@ -294,13 +281,7 @@ void alterar_agendamento(void){
                         break;
                 }
                 printf("\n    Dados atualizados    \n");
-                printf("ID:              %d\n", ag->id_agendamento);
-                printf("CPF do Paciente: %s\n", ag->cpf);
-                printf("Data:            %s\n", ag->data);
-                printf("Hora:            %s\n", ag->hora);
-                printf("Tipo:            %s\n", ag->tipo);
-                printf("Profissional:    %s\n", ag->profissional);
-                printf("Observações:     %s\n", ag->observacoes);
+                exibir_agendamento(ag);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
@@ -359,13 +340,7 @@ void excluir_agendamento(void){
     while(fread(ag, sizeof(Agendamento),1, arq_agendamentos)){
         if((ag->id_agendamento == id_busca) && (ag->status == True)){
             printf("///                        Agendamemto Encontrado!                       ///\n");
-            printf("ID:                %d\n", ag->id_agendamento);
-            printf("CPF:               %s\n", ag->cpf);
-            printf("Data:              %s\n", ag->data);
-            printf("Hora:              %s\n", ag->hora);
-            printf("Tipo:              %s\n", ag->tipo);
-            printf("Profissional:      %s\n", ag->profissional);
-            printf("Observações:       %s\n", ag->observacoes);
+            exibir_agendamento(ag);
             encontrado = True;
 
         do {
@@ -419,13 +394,7 @@ void listar_agendamentos(void){
 
     while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
         if (ag->status == True){
-            printf("ID:                %d\n", ag->id_agendamento);
-            printf("CPF:               %s\n", ag->cpf);
-            printf("Data:              %s\n", ag->data);
-            printf("Hora:              %s\n", ag->hora);
-            printf("Tipo:              %s\n", ag->tipo);
-            printf("Profissional:      %s\n", ag->profissional);
-            printf("Observações:       %s\n", ag->observacoes);
+            exibir_agendamento(ag);
             printf("--------------------------------------------------\n");
         }
     }
@@ -473,13 +442,7 @@ void excluir_agendamento_fisico(void) {
     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
         if (ag->id_agendamento == id_busca) {
             printf("///                        Agendamento Encontrado!                          ///\n");
-            printf("ID:                %d\n", ag->id_agendamento);
-            printf("CPF:               %s\n", ag->cpf);
-            printf("Data:              %s\n", ag->data);
-            printf("Hora:              %s\n", ag->hora);
-            printf("Tipo:              %s\n", ag->tipo);
-            printf("Profissional:      %s\n", ag->profissional);
-            printf("Observações:       %s\n", ag->observacoes);
+            exibir_agendamento(ag);
             encontrado = True;
 
             if (ag->status == False) {
@@ -523,4 +486,19 @@ void excluir_agendamento_fisico(void) {
     }
 
     pausar();
+}
+
+void exibir_agendamento(const Agendamento * ag){
+    if (ag == NULL) {
+        printf("Erro: agendamento inexistente!\n");
+        return;
+    }
+
+    printf("ID:                %d\n", ag->id_agendamento);
+    printf("CPF:               %s\n", ag->cpf);
+    printf("Data:              %s\n", ag->data);
+    printf("Hora:              %s\n", ag->hora);
+    printf("Tipo:              %s\n", ag->tipo);
+    printf("Profissional:      %s\n", ag->profissional);
+    printf("Observações:       %s\n", ag->observacoes);
 }
