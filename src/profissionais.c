@@ -120,11 +120,7 @@ void buscar_profissional(void){
     while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
         if ((pf->id_profissional == id_busca) && (pf->status == True)){
             printf("///                        Profissional Encontrado!                         ///\n");
-            printf("ID:         %d\n", pf->id_profissional);
-            printf("Nome:       %s\n", pf->nome);
-            printf("CPF:        %s\n", pf->cpf);
-            printf("Telefone:   %s\n", pf->tel);
-            printf("CRN:        %s\n", pf->crn);
+            exibir_profissional(pf);
             encontrado = True;
             break;
         }
@@ -179,11 +175,7 @@ void alterar_profissional(void){
             do{
                 limpar_tela();
                 printf("\n    Dados atuais do profissional    \n");
-                printf("ID:              %d\n", pf->id_profissional);
-                printf("Nome:            %s\n", pf->nome);
-                printf("CPF:             %s\n", pf->cpf);
-                printf("Telefone:        %s\n", pf->tel);
-                printf("CRN:             %s\n", pf->crn);
+                exibir_profissional(pf);
 
                 printf("\nQual campo deseja alterar?\n");
                 printf("1. Nome\n");
@@ -253,11 +245,7 @@ void alterar_profissional(void){
                 }
 
                 printf("\n    Dados atualizados   \n");
-                printf("ID:              %d\n", pf->id_profissional);
-                printf("Nome:            %s\n", pf->nome);
-                printf("CPF:             %s\n", pf->cpf);
-                printf("Telefone:        %s\n", pf->tel);
-                printf("CRN:             %s\n", pf->crn);
+                exibir_profissional(pf);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
@@ -319,11 +307,7 @@ void excluir_profissional(void){
     while(fread(pf, sizeof(Profissional),1, arq_profissionais)){
         if((pf->id_profissional == id_busca) && (pf->status == True)){
             printf("///                        Profissional Encontrado!                       ///\n");
-            printf("ID:                 %d\n", pf->id_profissional);
-            printf("Nome:               %s\n", pf->nome);
-            printf("CPF:                %s\n", pf->cpf);
-            printf("Telefone:           %s\n", pf->tel);
-            printf("CRN:                %s\n", pf->crn);
+            exibir_profissional(pf);
             encontrado = True;
 
             do {
@@ -380,11 +364,7 @@ void listar_profissionais(void) {
 
     while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
         if (pf->status == True){
-            printf("ID:         %d\n", pf->id_profissional);
-            printf("Nome:       %s\n", pf->nome);
-            printf("CPF:        %s\n", pf->cpf);
-            printf("Telefone:   %s\n", pf->tel);
-            printf("CRN:        %s\n", pf->crn);
+            exibir_profissional(pf);
             printf("--------------------------------------------------\n");
         }
     }
@@ -393,4 +373,17 @@ void listar_profissionais(void) {
     free(pf);
 
     pausar();
+}
+
+void exibir_profissional(const Profissional * pf){
+    if(pf == NULL){
+        printf("Erro: profisional inexistente!\n");
+        return;
+    }
+    printf("ID:         %d\n", pf->id_profissional);
+    printf("Nome:       %s\n", pf->nome);
+    printf("CPF:        %s\n", pf->cpf);
+    printf("Telefone:   %s\n", pf->tel);
+    printf("CRN:        %s\n", pf->crn);
+
 }

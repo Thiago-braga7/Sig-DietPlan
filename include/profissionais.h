@@ -16,3 +16,4 @@ void buscar_profissional(void);
 void alterar_profissional(void);
 void excluir_profissional(void);
 void listar_profissionais(void);
+void exibir_profissional(const Profissional * pf);
