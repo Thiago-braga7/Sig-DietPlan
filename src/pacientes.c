@@ -1,19 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
 #include "pacientes.h"
 #include "validacoes.h"
 #include "leituras.h"
-#include <ctype.h>
+
 #define True 1
 #define False 0
 
 
 void modulo_pacientes(void) {
     char opcao;
+
     do {
         limpar_tela();
         opcao = tela_pacientes();
+
         switch(opcao) {
             case '1': cadastrar_paciente(); break;
             case '2': buscar_paciente(); break;
@@ -23,6 +27,7 @@ void modulo_pacientes(void) {
         }
     } while (opcao != '0');  
 }
+
 
 
 char tela_pacientes(void){
@@ -51,6 +56,8 @@ char tela_pacientes(void){
     return opcao;
 }
 
+
+
 void cadastrar_paciente(void){
     FILE *arq_paciente;
     Paciente* pac;
@@ -64,6 +71,7 @@ void cadastrar_paciente(void){
     printf("///                 = = = = =  Cadastrar Paciente = = = = =                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
+    
     ler_nome(pac->nome);
     ler_cpf(pac->cpf);
     ler_tel(pac->tel);
@@ -79,6 +87,7 @@ void cadastrar_paciente(void){
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                    Erro na criação do arquivo!                          ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
+
         free(pac);
         return;
     }
@@ -93,6 +102,7 @@ void cadastrar_paciente(void){
 
     pausar();
 }
+
 
 
 void buscar_paciente(void){
@@ -111,9 +121,8 @@ void buscar_paciente(void){
     printf("///                                                                         ///\n");
     printf("///                 = = = = =  Buscar Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%12s", cpf_busca);
-    getchar();
+    
+    ler_cpf(cpf_busca);
     pausar();
 
     encontrado = False;
@@ -121,19 +130,24 @@ void buscar_paciente(void){
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");
 
     if (arq_paciente == NULL){
-        printf("Erro na criacao do arquivo\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Erro na abertura do arquivo!                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
         return;
-     }
+    }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == True) {
-            printf("Paciente encontrado\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            printf("///                         Paciente Encontrado!                           ///\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
             exibir_paciente(pac);
 
             encontrado = True;
             break;
         }
     }
+
     if (encontrado == False) {
         printf("\nPaciente não encontrado!\n");
     }
@@ -154,10 +168,8 @@ void alterar_paciente(void){
     int encontrado;
     char opcao;
     char continuar;
-    int valido;
 
     pac = (Paciente*) malloc(sizeof(Paciente));
-
 
     limpar_tela();
     printf("\n");
@@ -166,9 +178,7 @@ void alterar_paciente(void){
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Alterar Dados do Paciente = = = = =           ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%s", cpf_busca);
-    getchar();
+    ler_cpf(cpf_busca);
 
     encontrado = False;
 
@@ -177,7 +187,9 @@ void alterar_paciente(void){
 
 
     if (arq_paciente == NULL || arq_paciente_temp == NULL){
-        printf("Erro ao buscar o arquivo\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Erro na abertura do arquivo!                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
         return;
     }
 
@@ -190,99 +202,47 @@ void alterar_paciente(void){
                 printf("Paciente encontrado\n");
                 exibir_paciente(pac);
 
-                printf("\nQual campo deseja alterar?\n");
-                printf("1. Nome\n");
-                printf("2. CPF\n");
-                printf("3. Telefone\n");
-                printf("4. Idade\n");
-                printf("5. Peso\n");
-                printf("6. Altura\n");
-                printf("Escolha uma opção: ");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                printf("///                         Qual campo deseja alterar?                     ///\n");
+                printf("///                                                                         ///\n");
+                printf("///                         1. Nome                                         ///\n");
+                printf("///                         2. CPF                                          ///\n");
+                printf("///                         3. Telefone                                     ///\n");
+                printf("///                         4. Idade                                        ///\n");
+                printf("///                         5. Peso                                         ///\n");
+                printf("///                         6. Altura                                       ///\n");
+                printf("///                                                                         ///\n");
+                printf("///                         Escolha uma opção: ");
                 scanf(" %c", &opcao);
                 getchar();
 
                 switch (opcao) {
                     case '1':
-                        do{
-                            printf("Novo nome: ");
-                            scanf(" %50s", pac->nome); 
-                            getchar();
-
-                            valido = validar_nome(pac->nome);
-
-                            if(valido == 0){
-                                printf("Nome inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_nome(pac->nome);
                         break;
                     case '2':
-                        do{
-                            printf("Novo CPF do Paciente(Apenas Números):                 \n");
-                            scanf("%s", pac->cpf); 
-                            getchar();
-
-                            valido = validar_cpf(pac->cpf);
-
-                            if(valido == 0){
-                                printf("CPF inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_cpf(pac->cpf);
                         break;
                     case '3':
-                         do{
-                            printf("\nNovo Telefone (Apenas números):                      \n");
-                            scanf(" %11s", pac->tel); 
-                            getchar();
-
-                            valido = valida_telefone(pac->tel);
-
-                            if(valido == 0){
-                                printf("Telefone inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_tel(pac->tel);                        
                         break;
                     case '4':
-                        do {
-                            printf("Nova idade: ");
-                            scanf("%s", pac->idade); 
-                            getchar();
-
-                            valido = valida_idade(pac->idade);
-
-                            if(valido == 0){
-                                printf("Idade inválida! Digite novamente!\n");
-                            }
-                        } while (valido == 0);
+                        ler_idade(pac->idade);
                         break;
                     case '5':
-                        do {
-                            printf("Novo peso (kg): ");
-                            scanf("%f", &pac->peso);
-                            getchar();
-                            
-                            valido = validar_peso(pac->peso);
-                            if(valido == 0){
-                                printf("Peso inválido! Digite novamente!\n");
-                            }
-                        } while (valido == 0);
+                        ler_peso(&pac->peso);
                         break;
                     case '6':
-                        do {
-                            printf("Nova altura (m): ");
-                            scanf("%f", &pac->altura);
-                            getchar();
-                            
-                            valido = validar_altura(pac->altura);
-                            if(valido == 0){
-                                printf("Altura inválida! Digite novamente!\n");
-                            }
-                        } while (valido == 0);
+                        ler_altura(&pac->altura);
                         break;
                     default:
                         printf("Opção inválida!\n");
                         break;
                 }
-                printf("\n    Dados atualizados    \n");
+                
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                printf("///                         Dados Atualizados:                            ///\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
                 exibir_paciente(pac);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
@@ -334,22 +294,24 @@ void excluir_paciente(void){
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Excluir Paciente = = = = =                    ///\n");
     printf("///                                                                         ///\n");
-    printf("///                         Informe o CPF(Apenas números):                  ///\n");
-    scanf("%12s", cpf_busca); 
-    getchar();
+    ler_cpf(cpf_busca);
 
     encontrado = False;
 
     pac = malloc(sizeof(Paciente));
     if (pac == NULL) {
-        printf("Erro de alocação de memória.\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Erro de alocação de memória!                        ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
         return;
     }
 
     arq_paciente = fopen("data/arq_pacientes.dat", "r+b");
 
     if (arq_paciente == NULL){
-        printf("Erro ao buscar do arquivo\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Erro na abertura do arquivo!                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
         return;
     }
 
@@ -375,15 +337,21 @@ void excluir_paciente(void){
                 pac->status = False;
                 fseek(arq_paciente, (-1)*sizeof(Paciente), SEEK_CUR);
                 fwrite(pac, sizeof(Paciente), 1, arq_paciente);
-                printf("\nPaciente excluído com sucesso!\n");
-            } else{
-                printf("\nOperação de exclusão cancelada.\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                printf("///                    Paciente excluído com sucesso!                     ///\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+            } else {
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                printf("///                    Operação de exclusão cancelada!                     ///\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
             }
             break;
         }
     
     if (encontrado == False){
-        printf("\nPaciente não encontrada!\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Paciente não encontrado!                             ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
     }
     
     fclose(arq_paciente);
@@ -421,7 +389,7 @@ void listar_paciente(void) {
         if (pac->status) {
             encontrado = 1;
             exibir_paciente(pac);
-            printf("--------------------------------------------------\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
         }
     }
 
@@ -436,6 +404,7 @@ void listar_paciente(void) {
 
     pausar();
 }
+
 
 
 void exibir_paciente(const Paciente * pac){
