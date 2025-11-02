@@ -72,15 +72,15 @@ void ler_idade(char *idade) {
 }
 
 
-void ler_peso(float peso) {
+void ler_peso(float* peso) {
     int valido = 0;
 
     do{
         printf("///                       Peso (kg):                                      ///\n");
-        scanf("%f", &peso); 
+        scanf("%f", peso); 
         getchar();
 
-        valido = validar_peso(peso);
+        valido = validar_peso(*peso);
 
         if(valido == 0){
             printf("Peso inválido! Digite novamente! \n");
@@ -89,15 +89,15 @@ void ler_peso(float peso) {
 }
 
 
-void ler_altura(float altura) {
+void ler_altura(float* altura) {
     int valido = 0;
     
     do{
         printf("///                      Altura (m):                                     ///\n");
-        scanf("%f", &altura); 
+        scanf("%f", altura); 
         getchar();
 
-        valido = validar_altura(altura);
+        valido = validar_altura(*altura);
 
         if(valido == 0){
             printf("Altura inválida! Digite novamente! \n");

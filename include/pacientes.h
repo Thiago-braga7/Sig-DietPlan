@@ -8,8 +8,6 @@ struct paciente {
     float peso;
     float altura;
     float resultado;
-    float bf;
-    char genero;
     int status;
 };
 
