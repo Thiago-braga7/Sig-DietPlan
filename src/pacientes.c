@@ -434,3 +434,18 @@ void listar_paciente(void) {
 
     pausar();
 }
+
+
+void exibir_paciente(const Paciente * pac){
+    if (pac == NULL) {
+        printf("Erro: paciente inexistente!\n");
+        return;
+    }
+
+    printf("Nome: %s\n", pac->nome);
+    printf("CPF: %s\n", pac->cpf);
+    printf("Telefone: %s\n", pac->tel);
+    printf("Idade: %s\n", pac->idade);
+    printf("Peso: %.2f\n", pac->peso);
+    printf("Altura: %.2f\n", pac->altura);
+}

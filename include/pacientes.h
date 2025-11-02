@@ -20,3 +20,4 @@ void buscar_paciente(void);
 void alterar_paciente(void);
 void excluir_paciente(void);
 void listar_paciente(void);
+void exibir_paciente(const Paciente * pac);
