@@ -77,7 +77,7 @@ void cadastrar_paciente(void){
     ler_peso(&pac->peso);
     ler_altura(&pac->altura);
 
-    pac->status = True;
+    pac->status = true;
 
     arq_paciente = fopen("data/arq_pacientes.dat", "ab");    
 
@@ -123,7 +123,7 @@ void buscar_paciente(void){
     ler_cpf(cpf_busca);
     pausar();
 
-    encontrado = False;
+    encontrado = false;
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");
 
@@ -135,18 +135,18 @@ void buscar_paciente(void){
     }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
-        if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == True) {
+        if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == true) {
             printf("///////////////////////////////////////////////////////////////////////////////\n");
             printf("///                         Paciente Encontrado!                           ///\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
             exibir_paciente(pac);
 
-            encontrado = True;
+            encontrado = true;
             break;
         }
     }
 
-    if (encontrado == False) {
+    if (encontrado == false) {
         printf("\nPaciente não encontrado!\n");
     }
 
@@ -178,7 +178,7 @@ void alterar_paciente(void){
     printf("///                                                                         ///\n");
     ler_cpf(cpf_busca);
 
-    encontrado = False;
+    encontrado = false;
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");
     arq_paciente_temp = fopen("data/arq_pacientes_temp.dat", "wb");
@@ -192,8 +192,8 @@ void alterar_paciente(void){
     }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
-        if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == True) {
-            encontrado = True;
+        if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == true) {
+            encontrado = true;
 
             do{
                 limpar_tela();
@@ -294,7 +294,7 @@ void excluir_paciente(void){
     printf("///                                                                         ///\n");
     ler_cpf(cpf_busca);
 
-    encontrado = False;
+    encontrado = false;
 
     pac = malloc(sizeof(Paciente));
     if (pac == NULL) {
@@ -314,11 +314,11 @@ void excluir_paciente(void){
     }
 
         while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
-            if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == True) {
+            if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == true) {
                 printf("Paciente encontrado\n");
                 exibir_paciente(pac);
 
-                encontrado = True;
+                encontrado = true;
             }
 
             do {
@@ -332,7 +332,7 @@ void excluir_paciente(void){
             } while(resposta == 0);
 
             if (resposta == 'S'){
-                pac->status = False;
+                pac->status = false;
                 fseek(arq_paciente, (-1)*sizeof(Paciente), SEEK_CUR);
                 fwrite(pac, sizeof(Paciente), 1, arq_paciente);
                 printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -346,7 +346,7 @@ void excluir_paciente(void){
             break;
         }
     
-    if (encontrado == False){
+    if (encontrado == false){
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                    Paciente não encontrado!                             ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
