@@ -2,13 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #include "pacientes.h"
 #include "validacoes.h"
 #include "leituras.h"
-
-#define True 1
-#define False 0
 
 
 void modulo_pacientes(void) {
