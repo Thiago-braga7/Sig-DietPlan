@@ -1,3 +1,6 @@
+#ifndef PROFISSIONAIS_H
+#define PROFISSIONAIS_H
+
 typedef struct profissional Profissional;
 
 struct profissional {
@@ -17,3 +20,5 @@ void alterar_profissional(void);
 void excluir_profissional(void);
 void listar_profissionais(void);
 void exibir_profissional(const Profissional * pf);
+
+#endif

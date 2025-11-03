@@ -1,3 +1,6 @@
+#ifndef AGENDAMENTOS_H
+#define AGENDAMENTOS_H
+
 typedef struct agendamento Agendamento;
 
 struct agendamento {
@@ -20,3 +23,5 @@ void excluir_agendamento(void);
 void listar_agendamentos(void);
 void excluir_agendamento_fisico(void);
 void exibir_agendamento(const Agendamento * ag);
+
+#endif

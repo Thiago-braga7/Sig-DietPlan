@@ -1,3 +1,6 @@
+#ifndef DIETAS_H
+#define DIETAS_H
+
 typedef struct dieta Dieta;
 
 struct dieta {
@@ -17,3 +20,5 @@ void excluir_dieta(void);
 void listar_dietas(void);
 void excluir_dieta_fisica(void);
 void exibir_dieta(const Dieta * dt);
+
+#endif
