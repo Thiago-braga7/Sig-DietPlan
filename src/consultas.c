@@ -138,11 +138,7 @@ void buscar_consulta(void){
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
         if ((id_busca == con->id_consulta) && (con->status == True)) {
             printf("Consulta encontrada\n");
-            printf("Nome: %s\n", con->nome);
-            printf("Data: %s\n", con->data);
-            printf("Hora: %s\n", con->hora);
-            printf("Médico: %s\n", con->medico);
-            printf("Observações: %s\n", con->observacoes);
+            exibir_consulta(con);
             encontrado = 1;
             break;
         }
@@ -197,11 +193,7 @@ void alterar_consulta(void){
             do{
                 limpar_tela();
                 printf("\n    Dados atuais da consulta    \n");
-                printf("Nome: %s\n", con->nome);
-                printf("Data: %s\n", con->data);
-                printf("Hora: %s\n", con->hora);
-                printf("Médico: %s\n", con->medico);
-                printf("Observações: %s\n", con->observacoes);
+                exibir_consulta(con);
 
                 printf("\nQual campo deseja alterar?\n");
                 printf("1. Nome\n");
@@ -285,11 +277,7 @@ void alterar_consulta(void){
                         break;
                 }
                 printf("\n    Dados atualizados    \n");
-                printf("Nome: %s\n", con->nome);
-                printf("Data: %s\n", con->data);
-                printf("Hora: %s\n", con->hora);
-                printf("Médico: %s\n", con->medico);
-                printf("Observações: %s\n", con->observacoes);
+                exibir_consulta(con);                
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
@@ -353,11 +341,7 @@ void excluir_consulta(void){
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
         if ((id_busca == con->id_consulta) && (con->status == True)) {
             printf("Consulta encontrada\n");
-            printf("Nome: %s\n", con->nome);
-            printf("Data: %s\n", con->data);
-            printf("Hora: %s\n", con->hora);
-            printf("Médico: %s\n", con->medico);
-            printf("Observações: %s\n", con->observacoes);
+            exibir_consulta(con);            
             encontrado = True;
 
             do {
@@ -416,12 +400,8 @@ void listar_consulta(void){
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->status == True) {  
-            printf("Nome: %s\n", con->nome);
-            printf("Data: %s\n", con->data);
-            printf("Hora: %s\n", con->hora);
-            printf("Médico: %s\n", con->medico);
-            printf("Observações: %s\n", con->observacoes);
-            printf("--------------------------------------------------\n");
+            exibir_consulta(con);
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
         }
     }
 
@@ -467,13 +447,8 @@ void excluir_consulta_fisica(void) {
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->id_consulta == id_busca) {
             printf("///                        Consulta Encontrada!                                ///\n");
-            printf("ID da consulta:       %d\n", con->id_consulta);
-            printf("Nome:    %s\n", con->nome);
-            printf("Data:     %s\n", con->data);
-            printf("Hora:     %s\n", con->hora);
-            printf("Médico:     %s\n", con->medico);
-            printf("Observações:     %s\n", con->observacoes);
-
+            exibir_consulta(con);
+            
             encontrado = True;
 
             if (con->status == True) {
@@ -535,10 +510,10 @@ void exibir_consulta(const Consulta * con){
         return;
     }
 
-    printf("ID da consulta:       %d\n", con->id_consulta);
-    printf("Nome:    %s\n", con->nome);
-    printf("Data:     %s\n", con->data);
-    printf("Hora:     %s\n", con->hora);
-    printf("Médico:     %s\n", con->medico);
-    printf("Observações:     %s\n", con->observacoes);
+    printf("ID da consulta: %d\n", con->id_consulta);
+    printf("Nome: %s\n", con->nome);
+    printf("Data: %s\n", con->data);
+    printf("Hora: %s\n", con->hora);
+    printf("Médico: %s\n", con->medico);
+    printf("Observações: %s\n", con->observacoes);
 }
