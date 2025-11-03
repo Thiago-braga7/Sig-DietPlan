@@ -524,3 +524,21 @@ void excluir_consulta_fisica(void) {
 
     pausar();
 }
+
+
+
+void exibir_consulta(const Consulta * con){
+    if (con == NULL) {
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                    Erro: consulta inexistente!                          ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        return;
+    }
+
+    printf("ID da consulta:       %d\n", con->id_consulta);
+    printf("Nome:    %s\n", con->nome);
+    printf("Data:     %s\n", con->data);
+    printf("Hora:     %s\n", con->hora);
+    printf("Médico:     %s\n", con->medico);
+    printf("Observações:     %s\n", con->observacoes);
+}
