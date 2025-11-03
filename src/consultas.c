@@ -55,10 +55,15 @@ char tela_consultas(void){
 
 
 void cadastrar_consulta(void){
-    FILE * arq_consulta;
-    Consulta * con;
+    FILE *arq_consulta;
+    Consulta *con;
+    
     con = (Consulta*)malloc(sizeof(Consulta));
 
+    if (!con) {
+        printf("Erro: Falha ao alocar memória para consulta.\n");
+        return;
+    }
     con->id_consulta = 1;
 
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
@@ -103,7 +108,10 @@ void cadastrar_consulta(void){
         return;
     }
 
-    fwrite(con, sizeof(Consulta), 1, arq_consulta);
+    if (fwrite(con, sizeof(Consulta), 1, arq_consulta) != 1) {
+        printf("Erro ao salvar consulta.\n");
+    }
+
     fclose(arq_consulta);
     free(con);
     pausar();
@@ -114,6 +122,7 @@ void cadastrar_consulta(void){
 void buscar_consulta(void){
     FILE * arq_consulta;
     Consulta * con;
+    
     int id_busca;
     bool encontrado;
     
@@ -139,13 +148,13 @@ void buscar_consulta(void){
         printf("Erro na criacao do arquivo\n");
         getchar();
         return;
-     }
+    }
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
         if ((id_busca == con->id_consulta) && (con->status == true)) {
             printf("Consulta encontrada\n");
             exibir_consulta(con);
-            encontrado = 1;
+            encontrado = true;
             break;
         }
     }
@@ -162,10 +171,11 @@ void buscar_consulta(void){
 
 
 void alterar_consulta(void){
-    FILE * arq_consulta;
-    FILE * arq_consulta_temp;
+    FILE *arq_consulta;
+    FILE *arq_consulta_temp;
 
-    Consulta * con;
+    Consulta *con;
+
     int id_busca;
     bool encontrado;
     char opcao;
@@ -198,7 +208,7 @@ void alterar_consulta(void){
             encontrado = true;
             do{
                 limpar_tela();
-                printf("\n    Dados atuais da consulta    \n");
+                printf("\nDados atuais da consulta\n");
                 exibir_consulta(con);
 
                 printf("\nQual campo deseja alterar?\n");
@@ -247,6 +257,7 @@ void alterar_consulta(void){
         }
         fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
     }
+
     fclose(arq_consulta);
     fclose(arq_consulta_temp);  
 
@@ -254,7 +265,7 @@ void alterar_consulta(void){
         remove("data/arq_consulta.dat");
         rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
         printf("\nConsulta alterada com sucesso!\n");
-    } else{
+    } else {
         remove("data/arq_consulta_temp.dat");
         printf("\nConsulta não encontrada!\n");
     }
@@ -297,8 +308,11 @@ void excluir_consulta(void){
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
         if ((id_busca == con->id_consulta) && (con->status == true)) {
-            printf("Consulta encontrada\n");
-            exibir_consulta(con);            
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            printf("///                         Consulta encontrada                             ///\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            exibir_consulta(con);
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
             encontrado = true;
 
             do {
@@ -315,16 +329,22 @@ void excluir_consulta(void){
                 con->status = false;
                 fseek(arq_consulta, (-1)*sizeof(Consulta), SEEK_CUR);
                 fwrite(con, sizeof(Consulta), 1, arq_consulta);
-                printf("\nConsulta excluída com sucesso!\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                printf("Consulta excluída com sucesso!\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
             }else{
-                printf("\nOperação de exclusão cancelada.\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                printf("Operação de exclusão cancelada.\n");
+                printf("///////////////////////////////////////////////////////////////////////////////\n");
             }
             break;
         }
     }
 
     if (encontrado == false){
-        printf("\nconsulta não encontrada!\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("Consulta não encontrada!\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     }
 
     fclose(arq_consulta);
@@ -341,6 +361,7 @@ void listar_consulta(void){
     con = (Consulta*) malloc(sizeof(Consulta));
     
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
+
     if (arq_consulta == NULL) {
         printf("Nenhuma consulta cadastrada ainda.\n");
         free(con);
@@ -374,7 +395,9 @@ void listar_consulta(void){
 void excluir_consulta_fisica(void) {
     FILE * arq_consulta;
     FILE * arq_consulta_temp;
+
     Consulta * con;
+
     int id_busca;
     bool encontrado;
     int excluida;
@@ -393,6 +416,7 @@ void excluir_consulta_fisica(void) {
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
+    
     encontrado = false;
     excluida = false;
     
@@ -406,7 +430,9 @@ void excluir_consulta_fisica(void) {
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->id_consulta == id_busca) {
-            printf("///                        Consulta Encontrada!                                ///\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            printf("///                      Consulta Encontrada!                               ///\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
             exibir_consulta(con);
             
             encontrado = true;
@@ -429,7 +455,9 @@ void excluir_consulta_fisica(void) {
                 } while (resposta == 0);
 
                 if (resposta == 'S') {
-                    printf("\nConsulta excluída com sucesso!\n");
+                    printf("///////////////////////////////////////////////////////////////////////////////\n");
+                    printf("///                     Consulta excluída com sucesso!                      ///\n");
+                    printf("///////////////////////////////////////////////////////////////////////////////\n");
                     excluida = true;
                 } else {
                     printf("\nOperação cancelada. A consulta foi mantida.\n");
@@ -452,9 +480,13 @@ void excluir_consulta_fisica(void) {
     rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
 
     if (encontrado == false) {
-        printf("\nConsulta não encontrada!\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                         Consulta não encontrada!                        ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     } else if (excluida == true) {
-        printf("\nExclusão física concluída!\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                        Exclusão física concluída!                       ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     }
 
     pausar();
