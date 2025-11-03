@@ -2,18 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
+
 #include "consultas.h"
 #include "validacoes.h"
 #include "leituras.h"
-#define True 1
-#define False 0
 
 
 void modulo_consultas(void) {
     char opcao;
+
     do {
         limpar_tela();
         opcao = tela_consultas();
+        
         switch(opcao) {
             case '1': cadastrar_consulta(); break;
             case '2': buscar_consulta(); break;
@@ -22,8 +24,10 @@ void modulo_consultas(void) {
             case '5': listar_consulta(); break;
             case '6': excluir_consulta_fisica(); break;
         }
+
     } while (opcao != '0');  
 }
+
 
 
 char tela_consultas(void){
@@ -43,7 +47,7 @@ char tela_consultas(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
-    scanf("%c", &opcao);
+    scanf(" %c", &opcao);
     getchar();
     return opcao;
 }
@@ -61,11 +65,9 @@ void cadastrar_consulta(void){
 
     // Créditos: função adaptada do Gemini
     if (arq_consulta != NULL){
-        
         fseek(arq_consulta, 0, SEEK_END);  
-        
+
         long num_registros = ftell(arq_consulta) / sizeof(Consulta);
-        
         con->id_consulta = num_registros + 1;
         
         fclose(arq_consulta);
@@ -81,18 +83,21 @@ void cadastrar_consulta(void){
     printf("///                  = = = = =  Cadastrar Consulta  = = = = =               ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
+
     ler_nome(con->nome);
     ler_data(con->data);
     ler_hora(con->hora);
     ler_medico(con->medico);
     ler_observacoes(con->observacoes);
+
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                        Consulta Cadastrada com Sucesso!                        \n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     
-    con->status = True;
+    con->status = true;
 
     arq_consulta = fopen("data/arq_consulta.dat", "a+b");
+
     if (arq_consulta == NULL) {
         printf("Erro na criação do arquivo\n");
         return;
@@ -103,6 +108,7 @@ void cadastrar_consulta(void){
     free(con);
     pausar();
 }
+
 
 
 void buscar_consulta(void){
@@ -125,7 +131,7 @@ void buscar_consulta(void){
     getchar();
     pausar();
 
-    encontrado = False;
+    encontrado = false;
 
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
 
@@ -136,7 +142,7 @@ void buscar_consulta(void){
      }
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
-        if ((id_busca == con->id_consulta) && (con->status == True)) {
+        if ((id_busca == con->id_consulta) && (con->status == true)) {
             printf("Consulta encontrada\n");
             exibir_consulta(con);
             encontrado = 1;
@@ -152,6 +158,7 @@ void buscar_consulta(void){
     free(con);
     getchar();
 }
+
 
 
 void alterar_consulta(void){
@@ -176,7 +183,7 @@ void alterar_consulta(void){
     scanf("%d", &id_busca);
     getchar();
 
-    encontrado = False;
+    encontrado = false;
 
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
     arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
@@ -187,8 +194,8 @@ void alterar_consulta(void){
     }
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
-        if ((id_busca == con->id_consulta) && (con->status == True)) {
-            encontrado = True;
+        if ((id_busca == con->id_consulta) && (con->status == true)) {
+            encontrado = true;
             do{
                 limpar_tela();
                 printf("\n    Dados atuais da consulta    \n");
@@ -224,7 +231,8 @@ void alterar_consulta(void){
                         printf("Opção inválida!\n");
                         break;
                 }
-                printf("\n    Dados atualizados    \n");
+                
+                printf("\nDados atualizados\n");
                 exibir_consulta(con);                
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
@@ -242,7 +250,7 @@ void alterar_consulta(void){
     fclose(arq_consulta);
     fclose(arq_consulta_temp);  
 
-    if(encontrado == True){
+    if(encontrado == true){
         remove("data/arq_consulta.dat");
         rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
         printf("\nConsulta alterada com sucesso!\n");
@@ -253,6 +261,7 @@ void alterar_consulta(void){
     free(con);
     pausar();
 }
+
 
 
 void excluir_consulta(void){
@@ -277,7 +286,7 @@ void excluir_consulta(void){
     scanf("%d", &id_busca);
     getchar();
 
-    encontrado = False;
+    encontrado = false;
 
     arq_consulta = fopen("data/arq_consulta.dat", "r+b");
 
@@ -287,10 +296,10 @@ void excluir_consulta(void){
     }
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
-        if ((id_busca == con->id_consulta) && (con->status == True)) {
+        if ((id_busca == con->id_consulta) && (con->status == true)) {
             printf("Consulta encontrada\n");
             exibir_consulta(con);            
-            encontrado = True;
+            encontrado = true;
 
             do {
                 printf("\nDeseja realmente excluir esta consulta? (S/N): ");
@@ -303,7 +312,7 @@ void excluir_consulta(void){
             } while(resposta == 0);
 
             if (resposta == 'S'){
-                con->status = False;
+                con->status = false;
                 fseek(arq_consulta, (-1)*sizeof(Consulta), SEEK_CUR);
                 fwrite(con, sizeof(Consulta), 1, arq_consulta);
                 printf("\nConsulta excluída com sucesso!\n");
@@ -314,7 +323,7 @@ void excluir_consulta(void){
         }
     }
 
-    if (encontrado == False){
+    if (encontrado == false){
         printf("\nconsulta não encontrada!\n");
     }
 
@@ -322,6 +331,7 @@ void excluir_consulta(void){
     free(con);
     pausar();
 }
+
 
 
 void listar_consulta(void){
@@ -347,7 +357,7 @@ void listar_consulta(void){
     printf("\n");
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
-        if (con->status == True) {  
+        if (con->status == true) {  
             exibir_consulta(con);
             printf("///////////////////////////////////////////////////////////////////////////////\n");
         }
@@ -358,6 +368,8 @@ void listar_consulta(void){
 
     pausar();
 }
+
+
 
 void excluir_consulta_fisica(void) {
     FILE * arq_consulta;
@@ -381,8 +393,8 @@ void excluir_consulta_fisica(void) {
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    encontrado = False;
-    excluida = False;
+    encontrado = false;
+    excluida = false;
     
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
     arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
@@ -397,15 +409,15 @@ void excluir_consulta_fisica(void) {
             printf("///                        Consulta Encontrada!                                ///\n");
             exibir_consulta(con);
             
-            encontrado = True;
+            encontrado = true;
 
-            if (con->status == True) {
+            if (con->status == true) {
                 printf("Status: Ativa \n");
             } else {
                 printf("Status: Inativa \n");
             }
 
-            if (con->status == False) {
+            if (con->status == false) {
                 do {
                     printf("\nDeseja realmente excluir esta consulta (fisicamente)? (S/N): ");
                     scanf(" %c", &resposta);
@@ -418,7 +430,7 @@ void excluir_consulta_fisica(void) {
 
                 if (resposta == 'S') {
                     printf("\nConsulta excluída com sucesso!\n");
-                    excluida = True;
+                    excluida = true;
                 } else {
                     printf("\nOperação cancelada. A consulta foi mantida.\n");
                     fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
@@ -439,9 +451,9 @@ void excluir_consulta_fisica(void) {
     remove("data/arq_consulta.dat");
     rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
 
-    if (encontrado == False) {
+    if (encontrado == false) {
         printf("\nConsulta não encontrada!\n");
-    } else if (excluida == True) {
+    } else if (excluida == true) {
         printf("\nExclusão física concluída!\n");
     }
 
