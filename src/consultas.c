@@ -59,7 +59,7 @@ void cadastrar_consulta(void){
 
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
 
-    // Créditos: Função adaptada do gemini;
+    // Créditos: função adaptada do Gemini
     if (arq_consulta != NULL){
         
         fseek(arq_consulta, 0, SEEK_END);  
@@ -163,7 +163,6 @@ void alterar_consulta(void){
     int encontrado;
     char opcao;
     char continuar;
-    int valido;
 
     con = (Consulta*)malloc(sizeof(Consulta));
 
@@ -207,70 +206,19 @@ void alterar_consulta(void){
 
                  switch (opcao) {
                     case '1':
-                        do{
-                            printf("Novo Nome do Usuário: \n");
-                            scanf(" %50s", con->nome); 
-                            getchar();
-
-                            valido = validar_nome(con->nome);
-
-                            if(valido == 0){
-                                printf("Nome inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_nome(con->nome);
                         break;
                     case '2':
-                        do{
-                            printf("Nova Data da Consulta(DDMMAAAA): ");
-                            scanf("%s", con->data);
-                            getchar();
-
-                            valido = valida_data(con->data);
-
-                            if(valido == 0){
-                                printf("Data inválida! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_data(con->data);
                         break;
                     case '3':
-                        printf("Nova Hora (HH:MM): ");
-                        do{
-                            printf("Nova Hora (08:00 - 18:00): ");
-                            scanf("%s", con->hora); 
-                            getchar();
-
-                            valido = validar_hora(con->hora);
-
-                            if(valido == 0){
-                                printf("Hora inválida! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_hora(con->hora);
                         break;
                     case '4':
-                        do{
-                            printf("Novo Nome do Médico: \n");
-                            scanf(" %50s", con->medico); 
-                            getchar();
-
-                            valido = validar_nome(con->medico);
-
-                            if(valido == 0){
-                                printf("Nome inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_medico(con->medico);
                         break;
                     case '5':
-                        do{
-                            printf("Novas Observações: ");
-                            scanf("%200[^\n]", con->observacoes); 
-                            getchar();
-
-                            valido = validar_observacao(con->observacoes);
-
-                            if(valido == 0){
-                                printf("Texto Digitado inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_observacoes(con->observacoes);
                         break;
                     default:
                         printf("Opção inválida!\n");
