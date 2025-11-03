@@ -115,7 +115,7 @@ void buscar_consulta(void){
     FILE * arq_consulta;
     Consulta * con;
     int id_busca;
-    int encontrado;
+    bool encontrado;
     
     con = (Consulta*)malloc(sizeof(Consulta));
 
@@ -167,7 +167,7 @@ void alterar_consulta(void){
 
     Consulta * con;
     int id_busca;
-    int encontrado;
+    bool encontrado;
     char opcao;
     char continuar;
 
@@ -269,7 +269,7 @@ void excluir_consulta(void){
     Consulta * con;
 
     int id_busca;
-    int encontrado;
+    bool encontrado;
     char resposta;
 
     con = (Consulta*) malloc(sizeof(Consulta));
@@ -376,7 +376,7 @@ void excluir_consulta_fisica(void) {
     FILE * arq_consulta_temp;
     Consulta * con;
     int id_busca;
-    int encontrado;
+    bool encontrado;
     int excluida;
     char resposta;
 
