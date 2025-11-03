@@ -108,7 +108,7 @@ void buscar_paciente(void){
     Paciente * pac;
 
     char cpf_busca[13];
-    int encontrado;
+    bool encontrado;
 
     pac = (Paciente*) malloc(sizeof(Paciente));
 
@@ -163,7 +163,7 @@ void alterar_paciente(void){
 
     Paciente * pac;
     char cpf_busca[13];
-    int encontrado;
+    bool encontrado;
     char opcao;
     char continuar;
 
@@ -281,7 +281,7 @@ void excluir_paciente(void){
     Paciente *pac;
 
     char cpf_busca[13];
-    int encontrado;
+    bool encontrado;
     char resposta;
 
     limpar_tela();
@@ -364,7 +364,7 @@ void listar_paciente(void) {
     Paciente* pac;
 
     pac = (Paciente*)malloc(sizeof(Paciente));
-    int encontrado = 0;
+    bool encontrado = 0;
 
     limpar_tela();
     printf("\n");
