@@ -18,3 +18,4 @@ void alterar_consulta(void);
 void excluir_consulta(void);
 void listar_consulta(void);
 void excluir_consulta_fisica(void);
+void exibir_consulta(const Consulta * con);
