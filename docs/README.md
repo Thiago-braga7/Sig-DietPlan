@@ -15,8 +15,8 @@ O projeto está organizado de forma modular, com cada funcionalidade principal s
 ### Compilação do Projeto no Linux
 
 1. No VSCode, instale a extensão chamada **"Makefile Tools"**.
-2. Use o Makefile através do comando `make`.
-3. Em seguida, execute o comando `./main` para rodar o sistema.
+2. Use o Makefile através do comando `make rebuild`.
+3. Após finalizar o programa, utilize o comando `make clean` para limpar os arquivos.
 
 ### Compilação do Projeto no Windows
 

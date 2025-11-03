@@ -55,7 +55,8 @@ void menu_principal(void){
     printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
     printf("///               Projeto Sistema de Planejamento de Dietas                 ///\n");
     printf("///                           SIG-DietPlan                                  ///\n");
-    printf("///         Criado por @thiagobraga9a e gabrieluchoa_1 -- desde Ago, 2025   ///\n");
+    printf("///                 Criado por @thiagobraga9a, @gabrieluchoa_1              ///\n");
+    printf("///                    e @wallisonvsdias -- desde Ago, 2025                 ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
