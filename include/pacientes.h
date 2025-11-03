@@ -1,3 +1,6 @@
+#ifndef PACIENTES_H
+#define PACIENTES_H
+
 typedef struct paciente Paciente;
 
 struct paciente {
@@ -18,4 +21,6 @@ void buscar_paciente(void);
 void alterar_paciente(void);
 void excluir_paciente(void);
 void listar_paciente(void);
-void exibir_paciente(const Paciente * pac);
+void exibir_paciente(const Paciente *pac);
+
+#endif
