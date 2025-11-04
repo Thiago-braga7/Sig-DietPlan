@@ -200,6 +200,7 @@ void alterar_paciente(void){
                 printf("Paciente encontrado\n");
                 exibir_paciente(pac);
 
+                printf("\n");
                 printf("///////////////////////////////////////////////////////////////////////////////\n");
                 printf("///                         Qual campo deseja alterar?                     ///\n");
                 printf("///                                                                         ///\n");
@@ -387,6 +388,7 @@ void listar_paciente(void) {
         if (pac->status) {
             encontrado = 1;
             exibir_paciente(pac);
+            printf("\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
         }
     }
