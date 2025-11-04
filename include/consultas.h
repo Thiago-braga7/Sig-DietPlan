@@ -6,7 +6,7 @@ typedef struct consulta Consulta;
 struct consulta {
     int id_consulta;
     char nome[50];
-    char data[12];
+    char data[11];
     char hora[7];
     char medico[50];
     char observacoes[200];

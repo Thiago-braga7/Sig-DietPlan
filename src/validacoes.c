@@ -166,20 +166,23 @@ int valida_ano(int ano){
 
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
 int valida_data(char *data){
-   int len, dia, mes, ano;
-  len = strlen(data);
-  if(len != 8){
-    return 0;
-  }
-  for (int i = 0; i < len; i++){
-    if (!isdigit(data[i])) {
-      return 0;
+    int len, dia, mes, ano;
+    len = strlen(data);
+    if (len != 10) {
+        return 0;
     }
-  }
-  dia = (data[0] - '0') * 10 + (data[1] - '0');
-  mes = (data[2] - '0') * 10 + (data[3] - '0');
-  ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
-        (data[6] - '0') * 10 + (data[7] - '0');
+    // Espera-se o formato DD/MM/AAAA
+    if (!isdigit(data[0]) || !isdigit(data[1]) ||
+        data[2] != '/' ||
+        !isdigit(data[3]) || !isdigit(data[4]) ||
+        data[5] != '/' ||
+        !isdigit(data[6]) || !isdigit(data[7]) || !isdigit(data[8]) || !isdigit(data[9])) {
+        return 0;
+    }
+    dia = (data[0] - '0') * 10 + (data[1] - '0');
+    mes = (data[3] - '0') * 10 + (data[4] - '0');
+    ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 +
+          (data[8] - '0') * 10 + (data[9] - '0');
 
   if (!valida_dia(dia, mes, ano)){
     return 0;

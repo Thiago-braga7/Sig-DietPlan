@@ -108,14 +108,14 @@ void ler_altura(float* altura) {
 
 void ler_data(char *data){
     int valido = 0;
-    do{
-        printf("///                         Data (DDMMAAAA):                                ///\n");
-        scanf("%s", data); 
+    do {
+        printf("///                         Data (DD/MM/AAAA):                              ///\n");
+        scanf("%10s", data);
         getchar();
 
         valido = valida_data(data);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Data inválida! Digite novamente! \n");
         }
     } while (valido == 0);

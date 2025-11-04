@@ -380,6 +380,7 @@ void listar_consulta(void){
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->status == true) {  
             exibir_consulta(con);
+            printf("\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
         }
     }
