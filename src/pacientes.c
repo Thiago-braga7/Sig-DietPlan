@@ -1,3 +1,13 @@
+/*
+ * Módulo de Pacientes
+ * Responsável pelo cadastro, busca, alteração, exclusão e listagem de pacientes.
+ * Cada função implementa uma operação do CRUD sobre o registro de pacientes.
+ *
+ * Autor: Wallison Dias
+ * Créditos: auxílio do ChatGPT
+ * Data: 2025
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +19,7 @@
 #include "leituras.h"
 
 
+// Menu principal do módulo de pacientes
 void modulo_pacientes(void) {
     char opcao;
 
@@ -28,6 +39,7 @@ void modulo_pacientes(void) {
 
 
 
+// Exibe o menu de opções do módulo de pacientes e retorna a opção escolhida
 char tela_pacientes(void){
     char opcao;
     limpar_tela();
@@ -56,6 +68,7 @@ char tela_pacientes(void){
 
 
 
+// Realiza o cadastro de um novo paciente
 void cadastrar_paciente(void){
     FILE *arq_paciente;
     Paciente* pac;
@@ -103,6 +116,7 @@ void cadastrar_paciente(void){
 
 
 
+// Busca e exibe um paciente pelo CPF
 void buscar_paciente(void){
     FILE * arq_paciente;
     Paciente * pac;
@@ -157,6 +171,7 @@ void buscar_paciente(void){
 
  
 
+// Permite alterar os dados de um paciente existente
 void alterar_paciente(void){
     FILE * arq_paciente;
     FILE *arq_paciente_temp;
@@ -277,6 +292,7 @@ void alterar_paciente(void){
 
         
    
+// Marca um paciente como excluído logicamente (status = false)
 void excluir_paciente(void){
     FILE *arq_paciente;
     Paciente *pac;
@@ -360,6 +376,7 @@ void excluir_paciente(void){
 
 
 
+// Lista todos os pacientes ativos
 void listar_paciente(void) {
     FILE *arq_paciente;
     Paciente* pac;
@@ -407,6 +424,7 @@ void listar_paciente(void) {
 
 
 
+// Exibe os dados de um paciente formatados
 void exibir_paciente(const Paciente * pac){
     if (pac == NULL) {
         printf("///////////////////////////////////////////////////////////////////////////////\n");

@@ -1,3 +1,13 @@
+/*
+ * Módulo de Consultas
+ * Responsável pelo cadastro, busca, alteração, exclusão e listagem de consultas médicas.
+ * Cada função implementa uma operação do CRUD sobre o registro de consultas.
+ *
+ * Autor: Wallison Dias
+ * Créditos: auxílio do ChatGPT
+ * Data: 2025
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +19,7 @@
 #include "leituras.h"
 
 
+// Menu principal do módulo de consultas
 void modulo_consultas(void) {
     char opcao;
 
@@ -30,6 +41,7 @@ void modulo_consultas(void) {
 
 
 
+// Exibe o menu de opções do módulo de consultas e retorna a opção escolhida
 char tela_consultas(void){
     char opcao;
     printf("\n");
@@ -54,6 +66,7 @@ char tela_consultas(void){
 
 
 
+// Realiza o cadastro de uma nova consulta
 void cadastrar_consulta(void){
     FILE *arq_consulta;
     Consulta *con;
@@ -119,6 +132,7 @@ void cadastrar_consulta(void){
 
 
 
+// Busca e exibe uma consulta pelo ID
 void buscar_consulta(void){
     FILE * arq_consulta;
     Consulta * con;
@@ -170,6 +184,7 @@ void buscar_consulta(void){
 
 
 
+// Permite alterar os dados de uma consulta existente
 void alterar_consulta(void){
     FILE *arq_consulta;
     FILE *arq_consulta_temp;
@@ -275,6 +290,7 @@ void alterar_consulta(void){
 
 
 
+// Marca uma consulta como excluída logicamente (status = false)
 void excluir_consulta(void){
     FILE *arq_consulta;
     Consulta * con;
@@ -354,6 +370,7 @@ void excluir_consulta(void){
 
 
 
+// Lista todas as consultas ativas
 void listar_consulta(void){
     FILE *arq_consulta;
     Consulta* con;
@@ -393,6 +410,7 @@ void listar_consulta(void){
 
 
 
+// Exclui fisicamente uma consulta inativa do arquivo
 void excluir_consulta_fisica(void) {
     FILE * arq_consulta;
     FILE * arq_consulta_temp;
@@ -495,6 +513,7 @@ void excluir_consulta_fisica(void) {
 
 
 
+// Exibe os dados de uma consulta formatados
 void exibir_consulta(const Consulta * con){
     if (con == NULL) {
         printf("///////////////////////////////////////////////////////////////////////////////\n");
