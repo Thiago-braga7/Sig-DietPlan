@@ -373,7 +373,6 @@ void listar_paciente(void) {
     printf("///                               Pacientes                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                 = = = = = Lista de Pacientes = = = = =                  ///\n");
-    printf("///                                                                         ///\n");
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
     if (arq_paciente == NULL) {
@@ -387,6 +386,7 @@ void listar_paciente(void) {
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)){
         if (pac->status) {
             encontrado = 1;
+            printf("\n");
             exibir_paciente(pac);
             printf("\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
