@@ -17,7 +17,6 @@ void modulo_dietas(void) {
             case '2': buscar_dieta(); break;
             case '3': alterar_dieta(); break;
             case '4': excluir_dieta(); break;
-            case '5': listar_dietas(); break;
             case '6': excluir_dieta_fisica(); break;
         }
     } while (opcao != '0');  
@@ -324,39 +323,7 @@ void excluir_dieta(void){
     pausar();
 }
 
-void listar_dietas(void) {
-    FILE *arq_dietas;
-    Dieta* dt;
 
-    dt = (Dieta*) malloc(sizeof(Dieta));
-    
-    arq_dietas = fopen("data/arq_dietas.dat", "rb");
-    if (arq_dietas == NULL) {
-        printf("Nenhuma dieta cadastrada ainda.\n");
-        free(dt);
-        return;
-    }
-
-    limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Dietas                                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Listar Dietas  = = = = =                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-
-    while (fread(dt, sizeof(Dieta), 1, arq_dietas)) {
-        if (dt->status == True) {  
-            exibir_dieta(dt);
-            printf("--------------------------------------------------\n");
-        }
-    }
-
-    fclose(arq_dietas);
-    free(dt);
-    pausar();
-}
 
 void excluir_dieta_fisica(void) {
     FILE * arq_dietas;

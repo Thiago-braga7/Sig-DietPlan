@@ -4,6 +4,7 @@
 
 #include "relatorios.h"
 #include "pacientes.h"
+#include "dietas.h"
 #include "validacoes.h"
 #include "leituras.h"
 
@@ -21,6 +22,7 @@ void modulo_relatorios(void) {
 
         switch(opcao) {
             case '1': listar_pacientes(); break;
+            case '2': listar_dietas(); break;
         }
     } while (opcao != '0');  
 }
@@ -93,5 +95,41 @@ void listar_pacientes(void) {
     fclose(arq_paciente);
     free(pac);
 
+    pausar();
+}
+
+
+
+void listar_dietas(void) {
+    FILE *arq_dietas;
+    Dieta* dt;
+
+    dt = (Dieta*) malloc(sizeof(Dieta));
+    
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");
+    if (arq_dietas == NULL) {
+        printf("Nenhuma dieta cadastrada ainda.\n");
+        free(dt);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Dietas                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Listar Dietas  = = = = =                    ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while (fread(dt, sizeof(Dieta), 1, arq_dietas)) {
+        if (dt->status == true) {  
+            exibir_dieta(dt);
+            printf("--------------------------------------------------\n");
+        }
+    }
+
+    fclose(arq_dietas);
+    free(dt);
     pausar();
 }
