@@ -35,10 +35,10 @@ char tela_relatorios(void){
     printf("///                     = = = = =   Relatórios  = = = = =                   ///\n");
     printf("///                                                                         ///\n");
     printf("///                    1. Lista geral de Pacientes                          ///\n");
-    printf("///                    2. Total de Calorias(Dia)                            ///\n");
-    printf("///                    3. Meta Diária de Calorias                           ///\n");
-    printf("///                    4. Meta Diária de Água                               ///\n");
-    printf("///                    5. Excluir Registro de Consumo                       ///\n");
+    printf("///                    2. Lista geral de Dietas                             ///\n");
+    printf("///                    3. Lista geral de Profissionais                      ///\n");
+    printf("///                    4. Lista geral de Consultas                          ///\n");
+    printf("///                    5. Lista geral de Agendamentos                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
