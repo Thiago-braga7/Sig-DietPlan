@@ -32,7 +32,6 @@ void modulo_consultas(void) {
             case '2': buscar_consulta(); break;
             case '3': alterar_consulta(); break;
             case '4': excluir_consulta(); break;
-            case '5': listar_consulta(); break;
             case '6': excluir_consulta_fisica(); break;
         }
 
@@ -365,46 +364,6 @@ void excluir_consulta(void){
 
     fclose(arq_consulta);
     free(con);
-    pausar();
-}
-
-
-
-// Lista todas as consultas ativas
-void listar_consulta(void){
-    FILE *arq_consulta;
-    Consulta* con;
-
-    con = (Consulta*) malloc(sizeof(Consulta));
-    
-    arq_consulta = fopen("data/arq_consulta.dat", "rb");
-
-    if (arq_consulta == NULL) {
-        printf("Nenhuma consulta cadastrada ainda.\n");
-        free(con);
-        return;
-    }
-
-    limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                              Consultas                                  ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Listar Consultas  = = = = =                  ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-
-    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
-        if (con->status == true) {  
-            exibir_consulta(con);
-            printf("\n");
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
-        }
-    }
-
-    fclose(arq_consulta);
-    free(con);
-
     pausar();
 }
 

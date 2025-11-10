@@ -6,5 +6,6 @@ char tela_relatorios(void);
 void listar_pacientes(void);
 void listar_dietas(void);
 void listar_profissionais(void);
+void listar_consultas(void);
 
 #endif

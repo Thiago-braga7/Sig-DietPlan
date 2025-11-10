@@ -6,6 +6,7 @@
 #include "pacientes.h"
 #include "dietas.h"
 #include "profissionais.h"
+#include "consultas.h"
 #include "validacoes.h"
 #include "leituras.h"
 
@@ -25,6 +26,7 @@ void modulo_relatorios(void) {
             case '1': listar_pacientes(); break;
             case '2': listar_dietas(); break;
             case '3': listar_profissionais(); break;
+            case '4': listar_consultas(); break;
         }
     } while (opcao != '0');  
 }
@@ -184,4 +186,44 @@ void exibir_profissional(const Profissional * pf){
     printf("Telefone:   %s\n", pf->tel);
     printf("CRN:        %s\n", pf->crn);
 
+}
+
+
+
+// Lista todas as consultas ativas
+void listar_consultas(void){
+    FILE *arq_consulta;
+    Consulta* con;
+
+    con = (Consulta*) malloc(sizeof(Consulta));
+    
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
+
+    if (arq_consulta == NULL) {
+        printf("Nenhuma consulta cadastrada ainda.\n");
+        free(con);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                              Consultas                                  ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                 = = = = =  Listar Consultas  = = = = =                  ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
+        if (con->status == true) {  
+            exibir_consulta(con);
+            printf("\n");
+            printf("///////////////////////////////////////////////////////////////////////////////\n");
+        }
+    }
+
+    fclose(arq_consulta);
+    free(con);
+
+    pausar();
 }
