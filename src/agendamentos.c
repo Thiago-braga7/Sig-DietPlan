@@ -20,7 +20,7 @@ void modulo_agendamentos(void) {
             case '2': buscar_agendamento(); break;
             case '3': alterar_agendamento(); break;
             case '4': excluir_agendamento(); break;
-            case '6': excluir_agendamento_fisico(); break;
+            case '5': excluir_agendamento_fisico(); break;
         }
     } while (opcao != '0');  
 }
@@ -36,8 +36,7 @@ char tela_agendamentos(void){
     printf("///                    2. Buscar Agendamento                                ///\n");
     printf("///                    3. Alterar Agendamento                               ///\n");
     printf("///                    4. Excluir Agendamento                               ///\n");
-    printf("///                    5. Listar Agendamentos                               ///\n");
-    printf("///                    6. Excluir Agendamento(Físico)                       ///\n");
+    printf("///                    5. Excluir Agendamento(Físico)                       ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");

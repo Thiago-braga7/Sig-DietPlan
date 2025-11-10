@@ -17,7 +17,7 @@ void modulo_dietas(void) {
             case '2': buscar_dieta(); break;
             case '3': alterar_dieta(); break;
             case '4': excluir_dieta(); break;
-            case '6': excluir_dieta_fisica(); break;
+            case '5': excluir_dieta_fisica(); break;
         }
     } while (opcao != '0');  
 }
@@ -36,7 +36,6 @@ char tela_dietas(void){
     printf("///                    3. Alterar Dieta                                     ///\n");
     printf("///                    4. Excluir Dieta                                     ///\n");
     printf("///                    5. Listar Dietas                                     ///\n");
-    printf("///                    6. Excluir Dieta(Físico)                             ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");

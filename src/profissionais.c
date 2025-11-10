@@ -33,7 +33,6 @@ char tela_profissionais(void){
     printf("///                    2. Buscar Profissional                               ///\n");
     printf("///                    3. Alterar Profissional                              ///\n");
     printf("///                    4. Excluir Profissional                              ///\n");
-    printf("///                    5. Listar Profissionais                              ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
