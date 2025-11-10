@@ -17,7 +17,6 @@ void modulo_profissionais(void) {
             case '2': buscar_profissional(); break;
             case '3': alterar_profissional(); break;
             case '4': excluir_profissional(); break;    
-            case '5': listar_profissionais(); break;
         }
     } while (opcao != '0');  
 }
@@ -34,7 +33,6 @@ char tela_profissionais(void){
     printf("///                    2. Buscar Profissional                               ///\n");
     printf("///                    3. Alterar Profissional                              ///\n");
     printf("///                    4. Excluir Profissional                              ///\n");
-    printf("///                    5. Listar Profissionais                              ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                      Escolha a opção desejada:                          ///\n");
@@ -338,52 +336,4 @@ void excluir_profissional(void){
     fclose(arq_profissionais);
     free(pf);
     pausar();
-}
-
-void listar_profissionais(void) {
-    FILE * arq_profissionais;
-    Profissional * pf;
-
-    pf = (Profissional*) malloc(sizeof(Profissional));
-    
-    arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
-    if (arq_profissionais == NULL) {
-        printf("Nenhum Profissional cadastrado ainda.\n");
-        free(pf);
-        return;
-    }
-
-    limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Profissionais                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Listar Profissionais  = = = = =             ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-
-    while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
-        if (pf->status == True){
-            exibir_profissional(pf);
-            printf("--------------------------------------------------\n");
-        }
-    }
-
-    fclose(arq_profissionais);
-    free(pf);
-
-    pausar();
-}
-
-void exibir_profissional(const Profissional * pf){
-    if(pf == NULL){
-        printf("Erro: profisional inexistente!\n");
-        return;
-    }
-    printf("ID:         %d\n", pf->id_profissional);
-    printf("Nome:       %s\n", pf->nome);
-    printf("CPF:        %s\n", pf->cpf);
-    printf("Telefone:   %s\n", pf->tel);
-    printf("CRN:        %s\n", pf->crn);
-
 }

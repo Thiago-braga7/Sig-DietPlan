@@ -51,7 +51,6 @@ char tela_pacientes(void){
     printf("///                    2. Buscar Paciente                                   ///\n");
     printf("///                    3. Alterar Dados do Paciente                         ///\n");
     printf("///                    4. Excluir Paciente                                  ///\n");
-    printf("///                    5. Listar Paciente                                   ///\n");
     printf("///                    0. Voltar ao Menu Principal                          ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
