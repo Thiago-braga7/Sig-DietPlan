@@ -31,7 +31,7 @@ int main(void){
             case '3': modulo_profissionais(); break;
             case '4': modulo_consultas(); break;
             case '5': modulo_agendamentos(); break;
-            case '6': relatorios(); break;
+            case '6': modulo_relatorios(); break;
             case '0': sair(); break;
             
         }

@@ -32,7 +32,6 @@ void modulo_pacientes(void) {
             case '2': buscar_paciente(); break;
             case '3': alterar_paciente(); break;
             case '4': excluir_paciente(); break;
-            case '5': listar_paciente(); break;
         }
     } while (opcao != '0');  
 }
@@ -371,54 +370,6 @@ void excluir_paciente(void){
     
     fclose(arq_paciente);
     free(pac);
-    pausar();
-}
-
-
-
-// Lista todos os pacientes ativos
-void listar_paciente(void) {
-    FILE *arq_paciente;
-    Paciente* pac;
-
-    pac = (Paciente*)malloc(sizeof(Paciente));
-    bool encontrado = 0;
-
-    limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Pacientes                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Lista de Pacientes = = = = =                  ///\n");
-
-    arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
-    if (arq_paciente == NULL) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                    Nenhum paciente cadastrado ainda!                    ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        free(pac);
-        return;
-    }
-
-    while (fread(pac, sizeof(Paciente), 1, arq_paciente)){
-        if (pac->status) {
-            encontrado = 1;
-            printf("\n");
-            exibir_paciente(pac);
-            printf("\n");
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
-        }
-    }
-
-    if (!encontrado) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                    Nenhum paciente ativo encontrado!                    ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-    }
-
-    fclose(arq_paciente);
-    free(pac);
-
     pausar();
 }
 
