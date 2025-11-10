@@ -7,6 +7,7 @@
 #include "dietas.h"
 #include "profissionais.h"
 #include "consultas.h"
+#include "agendamentos.h"
 #include "validacoes.h"
 #include "leituras.h"
 
@@ -27,6 +28,7 @@ void modulo_relatorios(void) {
             case '2': listar_dietas(); break;
             case '3': listar_profissionais(); break;
             case '4': listar_consultas(); break;
+            case '5': listar_agendamentos(); break;
         }
     } while (opcao != '0');  
 }
@@ -224,6 +226,43 @@ void listar_consultas(void){
 
     fclose(arq_consulta);
     free(con);
+
+    pausar();
+}
+
+
+
+void listar_agendamentos(void){
+    FILE * arq_agendamentos;
+    Agendamento * ag;
+
+    ag = (Agendamento*) malloc(sizeof(Agendamento));
+    
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
+    if (arq_agendamentos == NULL) {
+        printf("Nenhum Agendamento cadastrado ainda.\n");
+        free(ag);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Agendamentos                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Listar Agendamentos  = = = = =              ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if (ag->status == true){
+            exibir_agendamento(ag);
+            printf("--------------------------------------------------\n");
+        }
+    }
+
+    fclose(arq_agendamentos);
+    free(ag);
 
     pausar();
 }

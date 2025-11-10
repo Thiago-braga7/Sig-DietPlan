@@ -20,7 +20,6 @@ void modulo_agendamentos(void) {
             case '2': buscar_agendamento(); break;
             case '3': alterar_agendamento(); break;
             case '4': excluir_agendamento(); break;
-            case '5': listar_agendamentos(); break;
             case '6': excluir_agendamento_fisico(); break;
         }
     } while (opcao != '0');  
@@ -370,40 +369,7 @@ void excluir_agendamento(void){
     free(ag);
     pausar();
 }
-void listar_agendamentos(void){
-    FILE * arq_agendamentos;
-    Agendamento * ag;
 
-    ag = (Agendamento*) malloc(sizeof(Agendamento));
-    
-    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
-    if (arq_agendamentos == NULL) {
-        printf("Nenhum Agendamento cadastrado ainda.\n");
-        free(ag);
-        return;
-    }
-
-    limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Agendamentos                              ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Listar Agendamentos  = = = = =              ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-
-    while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
-        if (ag->status == True){
-            exibir_agendamento(ag);
-            printf("--------------------------------------------------\n");
-        }
-    }
-
-    fclose(arq_agendamentos);
-    free(ag);
-
-    pausar();
-}
 void excluir_agendamento_fisico(void) {
     FILE *arq_agendamentos;
     FILE *arq_agendamentos_temp;
