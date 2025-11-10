@@ -5,6 +5,7 @@
 #include "relatorios.h"
 #include "pacientes.h"
 #include "dietas.h"
+#include "profissionais.h"
 #include "validacoes.h"
 #include "leituras.h"
 
@@ -23,6 +24,7 @@ void modulo_relatorios(void) {
         switch(opcao) {
             case '1': listar_pacientes(); break;
             case '2': listar_dietas(); break;
+            case '3': listar_profissionais(); break;
         }
     } while (opcao != '0');  
 }
@@ -132,4 +134,54 @@ void listar_dietas(void) {
     fclose(arq_dietas);
     free(dt);
     pausar();
+}
+
+
+
+void listar_profissionais(void) {
+    FILE * arq_profissionais;
+    Profissional * pf;
+
+    pf = (Profissional*) malloc(sizeof(Profissional));
+    
+    arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
+    if (arq_profissionais == NULL) {
+        printf("Nenhum Profissional cadastrado ainda.\n");
+        free(pf);
+        return;
+    }
+
+    limpar_tela();
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                               Profissionais                             ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                  = = = = =  Listar Profissionais  = = = = =             ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
+        if (pf->status == true){
+            exibir_profissional(pf);
+            printf("--------------------------------------------------\n");
+        }
+    }
+
+    fclose(arq_profissionais);
+    free(pf);
+
+    pausar();
+}
+
+void exibir_profissional(const Profissional * pf){
+    if(pf == NULL){
+        printf("Erro: profisional inexistente!\n");
+        return;
+    }
+    printf("ID:         %d\n", pf->id_profissional);
+    printf("Nome:       %s\n", pf->nome);
+    printf("CPF:        %s\n", pf->cpf);
+    printf("Telefone:   %s\n", pf->tel);
+    printf("CRN:        %s\n", pf->crn);
+
 }
