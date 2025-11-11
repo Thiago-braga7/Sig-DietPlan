@@ -47,7 +47,8 @@ char tela_relatorios(void) {
         "5. Lista geral de Agendamentos\n"
         "0. Voltar ao Menu Principal";
 
-    exibir_moldura("Relatórios", menu);
+    exibir_moldura_titulo("Relatórios");
+    exibir_moldura_conteudo(menu);
 
     printf("║ Escolha a opção desejada: ");
     scanf(" %c", &opcao);  // espaço antes de %c ignora enter anterior
