@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+
+
+// largura total útil (entre as bordas)
+#define LARGURA 75
+
+// Conta a "largura visual" real da string UTF-8 (acentos contam como 1)
+int largura_visual(const char *texto) {
+    int largura = 0;
+    unsigned char c;
+    while ((c = *texto++)) {
+        // Se for byte de continuação UTF-8 (10xxxxxx), ignora
+        if ((c & 0xC0) != 0x80)
+            largura++;
+    }
+    return largura;
+}
+
+void exibir_moldura(const char *titulo, const char *conteudo) {
+    int i;
+
+    printf("╔");
+    for (i = 0; i < LARGURA; i++) printf("═");
+    printf("╗\n");
+
+    printf("║%*s║\n", LARGURA, " ");
+
+    // Centralizar corretamente o título mesmo com acentos
+    int titulo_len = largura_visual(titulo);
+    int espacos = (LARGURA - titulo_len) / 2;
+    printf("║%*s%s%*s║\n",
+           espacos, "", titulo, LARGURA - espacos - titulo_len, "");
+
+    printf("║%*s║\n", LARGURA, " ");
+
+    // Imprime o conteúdo linha por linha
+    const char *p = conteudo;
+    while (*p) {
+        const char *inicio = p;
+        int len = 0;
+        while (p[len] != '\n' && p[len] != '\0') len++;
+
+        char linha[256];
+        strncpy(linha, inicio, len);
+        linha[len] = '\0';
+
+        int vis = largura_visual(linha);
+        int espacos_finais = LARGURA - 1 - vis; // margem direita ajustada
+
+        printf("║ %s%*s║\n", linha, espacos_finais, "");
+
+        p += len;
+        if (*p == '\n') p++;
+    }
+
+    printf("╚");
+    for (i = 0; i < LARGURA; i++) printf("═");
+    printf("╝\n");
+}

@@ -8,6 +8,7 @@
 #include "profissionais.h"
 #include "consultas.h"
 #include "agendamentos.h"
+#include "uteis.h"
 #include "validacoes.h"
 #include "leituras.h"
 
@@ -35,24 +36,23 @@ void modulo_relatorios(void) {
 
 
 
-char tela_relatorios(void){
+char tela_relatorios(void) {
     char opcao;
-    printf("\n");
-    printf(GREEN"///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                     = = = = =   Relatórios  = = = = =                   ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    1. Lista geral de Pacientes                          ///\n");
-    printf("///                    2. Lista geral de Dietas                             ///\n");
-    printf("///                    3. Lista geral de Profissionais                      ///\n");
-    printf("///                    4. Lista geral de Consultas                          ///\n");
-    printf("///                    5. Lista geral de Agendamentos                       ///\n");
-    printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada: "RESET);
-    scanf("%c", &opcao);
+
+    const char *menu =
+        "1. Lista geral de Pacientes\n"
+        "2. Lista geral de Dietas\n"
+        "3. Lista geral de Profissionais\n"
+        "4. Lista geral de Consultas\n"
+        "5. Lista geral de Agendamentos\n"
+        "0. Voltar ao Menu Principal";
+
+    exibir_moldura("Relatórios", menu);
+
+    printf("║ Escolha a opção desejada: ");
+    scanf(" %c", &opcao);  // espaço antes de %c ignora enter anterior
     getchar();
+
     return opcao;
 }
 
