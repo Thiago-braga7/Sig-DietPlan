@@ -4,6 +4,7 @@
 #include "validacoes.h"
 #include <string.h>
 #include "leituras.h"
+#include "uteis.h"
 #define True 1
 #define False 0
 
@@ -27,10 +28,7 @@ void modulo_agendamentos(void) {
 
 char tela_agendamentos(void){
     char opcao;
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Agendamentos  = = = = =                     ///\n");
+    exibir_moldura_titulo("Agendamentos");
     printf("///                                                                         ///\n");
     printf("///                    1. Cadastrar Agendamento                             ///\n");
     printf("///                    2. Buscar Agendamento                                ///\n");
@@ -67,11 +65,7 @@ void cadastrar_agendamento(void){
     }
 
     limpar_tela();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Agendamentos                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                   = = = = = Cadastrar Agendamento = = = = =             ///\n");
-    printf("///                                                                         ///\n");
+    exibir_moldura_titulo("Agendamentos - Cadastro");
     ler_cpf(ag->cpf);
     ler_data(ag->data);
     ler_hora(ag->hora);
@@ -105,11 +99,7 @@ void buscar_agendamento(void){
     ag = (Agendamento*)malloc(sizeof(Agendamento));
 
     limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Agendamentos                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                   = = = = = Buscar Agendamento = = = = =                ///\n");
+    exibir_moldura_titulo("Agendamentos - Busca");
     printf("///                                                                         ///\n");
     printf("///                        Informe o ID do Agendamento                      ///\n");
     scanf("%d", &id_busca);
@@ -125,7 +115,7 @@ void buscar_agendamento(void){
 
     while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
         if ((ag->id_agendamento == id_busca) && (ag->status == True)){
-            printf("///                        Agendamento Encontrado!                        ///\n");
+            exibir_moldura_titulo("Agendamento encontrado");
             exibir_agendamento(ag);
             encontrado = True;
             break;
@@ -154,10 +144,7 @@ void alterar_agendamento(void){
     ag = (Agendamento*)malloc(sizeof(Agendamento));
 
     limpar_tela();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Agendamentos                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                   = = = = = Alterar Agendamento = = = = =               ///\n");
+    exibir_moldura_titulo("Agendamentos - Alteração");
     printf("///                                                                         ///\n");
     printf("///                         Informe o ID do Agendamento:                    ///\n");
     scanf("%d", &id_busca); 
@@ -316,10 +303,7 @@ void excluir_agendamento(void){
     ag = (Agendamento*)malloc(sizeof(Agendamento));
 
     limpar_tela();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Agendamentos                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                   = = = = = Excluir Agendamento = = = = =               ///\n");
+    exibir_moldura_titulo("Agendamentos - Exclusão");
     printf("///                                                                         ///\n");
     printf("///                         Informe o ID do Agendamento:                    ///\n");
     scanf("%d", &id_busca); 
@@ -337,7 +321,7 @@ void excluir_agendamento(void){
 
     while(fread(ag, sizeof(Agendamento),1, arq_agendamentos)){
         if((ag->id_agendamento == id_busca) && (ag->status == True)){
-            printf("///                        Agendamemto Encontrado!                       ///\n");
+            exibir_moldura_titulo("Agendamento encontrado!");
             exibir_agendamento(ag);
             encontrado = True;
 
