@@ -108,24 +108,20 @@ void listar_dietas(void) {
     
     arq_dietas = fopen("data/arq_dietas.dat", "rb");
     if (arq_dietas == NULL) {
-        printf("Nenhuma dieta cadastrada ainda.\n");
+        exibir_moldura_titulo("Nenhuma dieta cadastrada ainda");
         free(dt);
         return;
     }
 
     limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Dietas                                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Listar Dietas  = = = = =                    ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
+    exibir_moldura_titulo("Dietas - Lista Geral");
 
     while (fread(dt, sizeof(Dieta), 1, arq_dietas)) {
-        if (dt->status == true) {  
+        if (dt->status == true) {
+            printf("\n");
             exibir_dieta(dt);
-            printf("--------------------------------------------------\n");
+            printf("\n");
+            printf("═══════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
