@@ -208,24 +208,20 @@ void listar_agendamentos(void){
     
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     if (arq_agendamentos == NULL) {
-        printf("Nenhum Agendamento cadastrado ainda.\n");
+        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
         free(ag);
         return;
     }
 
     limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Agendamentos                              ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Listar Agendamentos  = = = = =              ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
+    exibir_moldura_titulo("Agendamentos - Lista Geral");
 
     while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
         if (ag->status == true){
+            printf("\n");
             exibir_agendamento(ag);
-            printf("--------------------------------------------------\n");
+            printf("\n");
+            printf("════════════════════════════════════════════════════════════════════════════\n");   
         }
     }
 
