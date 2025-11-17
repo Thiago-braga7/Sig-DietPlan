@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "relatorios.h"
 #include "pacientes.h"
@@ -31,6 +32,7 @@ void modulo_relatorios(void) {
             case '4': listar_consultas(); break;
             case '5': listar_agendamentos(); break;
             case '6': listar_pacientes_idade(); break;
+            case '7': listar_consultas_medico(); break;
         }
     } while (opcao != '0');  
 }
@@ -46,7 +48,8 @@ char tela_relatorios(void) {
         "3. Lista geral de Profissionais\n"
         "4. Lista geral de Consultas\n"
         "5. Lista geral de Agendamentos\n"
-        "6. Lista geral de Pacientes - Idade\n"
+        "6. Lista de Pacientes por Idade\n"
+        "7. Lista de Consultas por Médico\n"
         "0. Voltar ao Menu Principal";
 
     exibir_moldura_titulo("Relatórios");
@@ -72,6 +75,8 @@ void listar_pacientes(void) {
     limpar_tela();
     exibir_moldura_titulo("Pacientes - Lista Geral");
     
+    printf("║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
+    printf("═════════════════════════════════════════════════════════════════════════════\n");
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
     if (arq_paciente == NULL) {
@@ -83,10 +88,8 @@ void listar_pacientes(void) {
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)){
         if (pac->status) {
             encontrado = 1;
-            printf("\n");
-            exibir_paciente(pac);
-            printf("\n");
-            printf("════════════════════════════════════════════════════════════════════════════\n");
+            printf("║ %-30s ║ %-12s ║ %7d ║ %6.2f ║ %6.2f ║\n",
+                pac->nome, pac->cpf, pac->idade, pac->peso, pac->altura);
         }
     }
 
@@ -241,6 +244,47 @@ void listar_consultas(void){
             exibir_consulta(con);
             printf("\n");
             printf("════════════════════════════════════════════════════════════════════════════\n");   
+        }
+    }
+
+    fclose(arq_consulta);
+    free(con);
+
+    pausar();
+}
+
+
+
+void listar_consultas_medico(void) {
+    FILE *arq_consulta;
+    Consulta* con;
+
+    con = (Consulta*) malloc(sizeof(Consulta));
+
+    char med_busca[50];
+    
+    arq_consulta = fopen("data/arq_consulta.dat", "rb");
+
+    printf("Digite o nome do médico: \n");
+    scanf("%s", med_busca);
+
+    if (arq_consulta == NULL) {
+        exibir_moldura_titulo("Nenhuma consulta cadastrada ainda");
+        free(con);
+        return;
+    }
+
+    limpar_tela();
+    exibir_moldura_titulo("Consultas - Lista Médico");
+
+    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
+        if (con->status == true) {  
+            if (strcmp(med_busca, con->medico) == 0) {
+                printf("\n");
+                exibir_consulta(con);
+                printf("\n");
+                printf("════════════════════════════════════════════════════════════════════════════\n");  
+            }             
         }
     }
 

@@ -9,5 +9,6 @@ void listar_profissionais(void);
 void listar_consultas(void);
 void listar_agendamentos(void);
 void listar_pacientes_idade(void);
+void listar_consultas_medico(void);
 
 #endif
