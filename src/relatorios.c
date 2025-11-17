@@ -51,7 +51,7 @@ char tela_relatorios(void) {
     exibir_moldura_conteudo(menu);
 
     printf("║ Escolha a opção desejada: ");
-    scanf(" %c", &opcao);  // espaço antes de %c ignora enter anterior
+    scanf(" %c", &opcao);
     getchar();
 
     return opcao;
@@ -68,17 +68,12 @@ void listar_pacientes(void) {
     bool encontrado = 0;
 
     limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Pacientes                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Lista de Pacientes = = = = =                  ///\n");
+    exibir_moldura_titulo("Pacientes - Lista Geral");
+    
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
     if (arq_paciente == NULL) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                    Nenhum paciente cadastrado ainda!                    ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        exibir_moldura_titulo("Nenhum paciente cadastrado ainda");
         free(pac);
         return;
     }
@@ -89,14 +84,12 @@ void listar_pacientes(void) {
             printf("\n");
             exibir_paciente(pac);
             printf("\n");
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            printf("═══════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
     if (!encontrado) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                    Nenhum paciente ativo encontrado!                    ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        exibir_moldura_titulo("Nenhum paciente ativo encontrado");
     }
 
     fclose(arq_paciente);
