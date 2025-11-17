@@ -163,19 +163,6 @@ void listar_profissionais(void) {
     pausar();
 }
 
-void exibir_profissional(const Profissional * pf){
-    if(pf == NULL){
-        printf("Erro: profisional inexistente!\n");
-        return;
-    }
-    printf("ID:         %d\n", pf->id_profissional);
-    printf("Nome:       %s\n", pf->nome);
-    printf("CPF:        %s\n", pf->cpf);
-    printf("Telefone:   %s\n", pf->tel);
-    printf("CRN:        %s\n", pf->crn);
-
-}
-
 
 
 // Lista todas as consultas ativas
