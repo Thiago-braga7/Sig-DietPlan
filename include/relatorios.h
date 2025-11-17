@@ -8,5 +8,6 @@ void listar_dietas(void);
 void listar_profissionais(void);
 void listar_consultas(void);
 void listar_agendamentos(void);
+void listar_pacientes_idade(void);
 
 #endif

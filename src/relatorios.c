@@ -30,6 +30,7 @@ void modulo_relatorios(void) {
             case '3': listar_profissionais(); break;
             case '4': listar_consultas(); break;
             case '5': listar_agendamentos(); break;
+            case '6': listar_pacientes_idade(); break;
         }
     } while (opcao != '0');  
 }
@@ -45,6 +46,7 @@ char tela_relatorios(void) {
         "3. Lista geral de Profissionais\n"
         "4. Lista geral de Consultas\n"
         "5. Lista geral de Agendamentos\n"
+        "6. Lista geral de Pacientes - Idade\n"
         "0. Voltar ao Menu Principal";
 
     exibir_moldura_titulo("Relatórios");
@@ -85,6 +87,56 @@ void listar_pacientes(void) {
             exibir_paciente(pac);
             printf("\n");
             printf("════════════════════════════════════════════════════════════════════════════\n");
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhum paciente ativo encontrado");
+    }
+
+    fclose(arq_paciente);
+    free(pac);
+
+    pausar();
+}
+
+
+
+void listar_pacientes_idade(void) {
+    FILE *arq_paciente;
+    Paciente* pac;
+
+    pac = (Paciente*)malloc(sizeof(Paciente));
+    bool encontrado = 0;
+
+    int idade_min;
+    int idade_max;
+
+    limpar_tela();
+    exibir_moldura_titulo("Pacientes - Lista por idade");
+    
+    printf("Digite a idade mínima:");
+    scanf("%d", &idade_min);
+
+    printf("Digite a idade máxima:");
+    scanf("%d", &idade_max);
+
+    arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
+    if (arq_paciente == NULL) {
+        exibir_moldura_titulo("Nenhum paciente cadastrado ainda");
+        free(pac);
+        return;
+    }
+
+    while (fread(pac, sizeof(Paciente), 1, arq_paciente)){
+        if (pac->status) {
+            if (pac->idade >= idade_min && pac->idade <= idade_max) {
+                encontrado = 1;
+                printf("\n");
+                exibir_paciente(pac);
+                printf("\n");
+                printf("════════════════════════════════════════════════════════════════════════════\n");
+            }
         }
     }
 
