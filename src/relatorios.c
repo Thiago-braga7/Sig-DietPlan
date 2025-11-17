@@ -84,7 +84,7 @@ void listar_pacientes(void) {
             printf("\n");
             exibir_paciente(pac);
             printf("\n");
-            printf("═══════════════════════════════════════════════════════════════════════════\n");
+            printf("════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
@@ -121,7 +121,7 @@ void listar_dietas(void) {
             printf("\n");
             exibir_dieta(dt);
             printf("\n");
-            printf("═══════════════════════════════════════════════════════════════════════════\n");
+            printf("════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
@@ -140,24 +140,20 @@ void listar_profissionais(void) {
     
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
     if (arq_profissionais == NULL) {
-        printf("Nenhum Profissional cadastrado ainda.\n");
+        exibir_moldura_titulo("Nenhum profissional cadastrado ainda");
         free(pf);
         return;
     }
 
     limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Profissionais                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Listar Profissionais  = = = = =             ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
+    exibir_moldura_titulo("Profissionais - Lista Geral");
 
     while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
         if (pf->status == true){
+            printf("\n");
             exibir_profissional(pf);
-            printf("--------------------------------------------------\n");
+            printf("\n");
+            printf("════════════════════════════════════════════════════════════════════════════\n");            
         }
     }
 
