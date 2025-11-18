@@ -43,6 +43,7 @@ char tela_agendamentos(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     return opcao;
 }
+
 void cadastrar_agendamento(void){
     FILE * arq_agendamentos;
     Agendamento * ag;
@@ -90,6 +91,7 @@ void cadastrar_agendamento(void){
     free(ag);
     pausar();
 }
+
 void buscar_agendamento(void){
     FILE * arq_agendamentos;
     Agendamento * ag;
@@ -293,6 +295,7 @@ void alterar_agendamento(void){
     free(ag);
     pausar();
 }
+
 void excluir_agendamento(void){
     FILE * arq_agendamentos;
     Agendamento * ag;

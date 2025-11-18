@@ -34,6 +34,7 @@ void modulo_relatorios(void) {
             case '6': listar_pacientes_idade(); break;
             case '7': listar_consultas_medico(); break;
             case '8': listar_dietas_calorias(); break;
+            case '9': listar_agendamentos_cpf(); break;
         }
     } while (opcao != '0');  
 }
@@ -329,8 +330,6 @@ void listar_agendamentos(void){
 
 
 
-// ...existing code...
-
 void listar_dietas_calorias(void) {
     FILE *arq_dietas;
     Dieta* dt;
@@ -376,5 +375,51 @@ void listar_dietas_calorias(void) {
     fclose(arq_dietas);
     free(dt);
 
+    pausar();
+}
+
+
+void listar_agendamentos_cpf(void) {
+    FILE *arq_agendamentos;
+    Agendamento* ag;
+
+    ag = (Agendamento*) malloc(sizeof(Agendamento));
+
+    char cpf_busca[13];
+
+    limpar_tela();
+    exibir_moldura_titulo("Agendamentos - Lista por CPF");
+
+    printf("Digite o CPF do paciente (Apenas Números): ");
+    scanf("%s", cpf_busca);
+    getchar();
+
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");    
+    if (arq_agendamentos == NULL) {
+        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
+        free(ag);
+        return;
+    }
+
+    bool encontrado = 0;
+
+    while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if (ag->status) {
+            if (strcmp(ag->cpf, cpf_busca) == 0) {
+                encontrado = 1;
+                printf("\n");
+                exibir_agendamento(ag);
+                printf("\n");
+                printf("════════════════════════════════════════════════════════════════════════════\n");
+            }
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhum agendamento encontrado para esse CPF");
+    }
+
+    fclose(arq_agendamentos);
+    free(ag);
     pausar();
 }
