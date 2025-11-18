@@ -8,8 +8,7 @@
 #include "relatorios.h"
 #include "sobre.h"
 #include "validacoes.h"
-
-
+#include "uteis.h"
 
 
 
@@ -42,37 +41,31 @@ int main(void){
 
 
 
-
-
 void menu_principal(void){
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
-    printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
-    printf("///               Departamento de Computação e Tecnologia                   ///\n");
-    printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
-    printf("///               Projeto Sistema de Planejamento de Dietas                 ///\n");
-    printf("///                           SIG-DietPlan                                  ///\n");
-    printf("///                 Criado por @thiagobraga9a, @gabrieluchoa_1              ///\n");
-    printf("///                    e @wallisonvsdias -- desde Ago, 2025                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            = = = = = Planejamento de Dietas = = = = =                   ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                      1. Pacientes                                       ///\n");
-    printf("///                      2. Dietas                                          ///\n");
-    printf("///                      3. Profissionais                                   ///\n");
-    printf("///                      4. Consultas                                       ///\n");
-    printf("///                      5. Agendamentos                                    ///\n");
-    printf("///                      6. Relatórios                                      ///\n");
-    printf("///                      0. Sair                                            ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
+
+    const char *cabecalho =
+        "Universidade Federal do Rio Grande do Norte\n"
+        "Centro de Ensino Superior do Seridó\n"
+        "Departamento de Computação e Tecnologia\n"
+        "Disciplina DCT1106 -- Programação\n"
+        "Projeto Sistema de Planejamento de Dietas (SIG-DietPlan)\n"
+        "Criado por @thiagobraga9a, @gabrieluchoa_1 e @wallisonvsdias\n"
+        "Desde Agosto de 2025\n";
+
+    const char *menu =
+        "1. Pacientes\n"
+        "2. Dietas\n"
+        "3. Profissionais\n"
+        "4. Consultas\n"
+        "5. Agendamentos\n"
+        "6. Relatórios\n"
+        "0. Sair\n";
+
+    exibir_moldura_conteudo(cabecalho);
+    exibir_moldura_titulo("Planejamento de Dietas");
+    exibir_moldura_conteudo(menu);
 }
 
 
