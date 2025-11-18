@@ -69,6 +69,15 @@ void cadastrar_profissional(void){
     ler_cpf(pf->cpf);
     ler_tel(pf->tel);
     ler_crn(pf->crn);
+    do {
+        printf("///                         Sexo (M/F/O):                                 ///\n");
+        scanf(" %c", &pf->sexo);
+        getchar();
+        pf->sexo = toupper(pf->sexo);
+        if (pf->sexo != 'M' && pf->sexo != 'F' && pf->sexo != 'O') {
+            printf("Sexo inválido! Digite novamente! \n");
+        }
+    } while (pf->sexo != 'M' && pf->sexo != 'F' && pf->sexo != 'O');
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("                    Profissional Cadastrado com Sucesso!                       \n");
     printf("///                        ID gerado: %02d                                    ///\n", pf->id_profissional);
@@ -87,7 +96,6 @@ void cadastrar_profissional(void){
     free(pf);
     pausar();
 }
-
 
 void buscar_profissional(void){
     FILE * arq_profissionais;
@@ -338,8 +346,6 @@ void excluir_profissional(void){
     pausar();
 }
 
-
-
 void exibir_profissional(const Profissional * pf){
     if(pf == NULL){
         printf("Erro: profisional inexistente!\n");
@@ -350,5 +356,6 @@ void exibir_profissional(const Profissional * pf){
     printf("CPF:        %s\n", pf->cpf);
     printf("Telefone:   %s\n", pf->tel);
     printf("CRN:        %s\n", pf->crn);
+    printf("Sexo:       %c\n", pf->sexo);
 
 }
