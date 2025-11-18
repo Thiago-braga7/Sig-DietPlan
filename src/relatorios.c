@@ -33,10 +33,10 @@ void modulo_relatorios(void) {
             case '5': listar_agendamentos(); break;
             case '6': listar_pacientes_idade(); break;
             case '7': listar_consultas_medico(); break;
+            case '8': listar_dietas_calorias(); break;
         }
     } while (opcao != '0');  
 }
-
 
 
 char tela_relatorios(void) {
@@ -323,6 +323,58 @@ void listar_agendamentos(void){
 
     fclose(arq_agendamentos);
     free(ag);
+
+    pausar();
+}
+
+
+
+// ...existing code...
+
+void listar_dietas_calorias(void) {
+    FILE *arq_dietas;
+    Dieta* dt;
+
+    dt = (Dieta*) malloc(sizeof(Dieta));
+    bool encontrado = 0;
+
+    int calorias_min;
+    int calorias_max;
+
+    limpar_tela();
+    exibir_moldura_titulo("Dietas - Lista por Calorias");
+    
+    printf("Digite a quantidade mínima de calorias: ");
+    scanf("%d", &calorias_min);
+
+    printf("Digite a quantidade máxima de calorias: ");
+    scanf("%d", &calorias_max);
+
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");    
+    if (arq_dietas == NULL) {
+        exibir_moldura_titulo("Nenhuma dieta cadastrada ainda");
+        free(dt);
+        return;
+    }
+
+    while (fread(dt, sizeof(Dieta), 1, arq_dietas)){
+        if (dt->status) {
+            if (dt->calorias >= calorias_min && dt->calorias <= calorias_max) {
+                encontrado = 1;
+                printf("\n");
+                exibir_dieta(dt);
+                printf("\n");
+                printf("════════════════════════════════════════════════════════════════════════════\n");
+            }
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhuma dieta encontrada nesse intervalo de calorias");
+    }
+
+    fclose(arq_dietas);
+    free(dt);
 
     pausar();
 }
