@@ -55,12 +55,12 @@ void ler_tel(char *tel) {
 }
 
 
-void ler_idade(char *idade) {
+void ler_idade(int *idade) {
     int valido = 0;
 
     do{
         printf("///                         Idade:                                          ///\n");
-        scanf("%s", idade); 
+        scanf("%d", idade); 
         getchar();
 
         valido = valida_idade(idade);
