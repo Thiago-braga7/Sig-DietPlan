@@ -4,6 +4,7 @@
 #include "validacoes.h"
 #include <string.h>
 #include "leituras.h"
+#include <ctype.h>
 #define True 1
 #define False 0
 
