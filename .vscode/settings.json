@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "agendamentos.h": "c",
+        "profissionais.h": "c"
+    }
+}

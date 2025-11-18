@@ -26,23 +26,28 @@ void modulo_agendamentos(void) {
     } while (opcao != '0');  
 }
 
+
+
 char tela_agendamentos(void){
     char opcao;
+    const char *menu =
+        "1. Cadastrar agendamento\n"
+        "2. Buscar agendamento\n"
+        "3. Alterar agendamento\n"
+        "4. Excluir agendamento\n"
+        "5. Excluir agendamento (físico)\n"
+        "0. Voltar ao Menu Principal";
+
     exibir_moldura_titulo("Agendamentos");
-    printf("///                                                                         ///\n");
-    printf("///                    1. Cadastrar Agendamento                             ///\n");
-    printf("///                    2. Buscar Agendamento                                ///\n");
-    printf("///                    3. Alterar Agendamento                               ///\n");
-    printf("///                    4. Excluir Agendamento                               ///\n");
-    printf("///                    5. Excluir Agendamento(Físico)                       ///\n");
-    printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Escolha a opção desejada:                          ///\n");
+    exibir_moldura_conteudo(menu);
+    printf("Escolha a opção desejada: ");
     scanf("%c", &opcao);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     return opcao;
 }
+
+
+
 void cadastrar_agendamento(void){
     FILE * arq_agendamentos;
     Agendamento * ag;
@@ -72,10 +77,8 @@ void cadastrar_agendamento(void){
     ler_tipo(ag->tipo);
     ler_profissional(ag->profissional);
     ler_observacoes(ag->observacoes);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                  Agendamento Cadastrado com Sucesso !                   ///\n");
-    printf("///                        ID gerado: %02d                                    ///\n", ag->id_agendamento);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    exibir_moldura_titulo("Agendamento cadastrado com sucesso");
+    printf("ID gerado: %02d\n", ag->id_agendamento);
     
     ag->status = True;
     
@@ -100,11 +103,9 @@ void buscar_agendamento(void){
 
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Busca");
-    printf("///                                                                         ///\n");
-    printf("///                        Informe o ID do Agendamento                      ///\n");
+    printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
 
@@ -145,11 +146,9 @@ void alterar_agendamento(void){
 
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Alteração");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o ID do Agendamento:                    ///\n");
+    printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca); 
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
 
     
@@ -167,17 +166,20 @@ void alterar_agendamento(void){
             encontrado = True;
             do{
                 limpar_tela();
-                printf("\n    Dados atuais do agendamento    \n");
+                exibir_moldura_titulo("Agendamento - Dados Atuais");
                 exibir_agendamento(ag);
 
-                printf("\nQual campo deseja alterar?\n");
-                printf("1. CPF do Paciente\n");
-                printf("2. Data\n");
-                printf("3. Hora\n");
-                printf("4. Tipo\n");
-                printf("5. Profissional\n");
-                printf("6. Observações\n");
-                printf("Escolha uma opção: ");
+                const char *menu_alt =
+                    "\nQual campo deseja alterar?\n"
+                    "1. CPF do Paciente\n"
+                    "2. Data\n"
+                    "3. Hora\n"
+                    "4. Tipo\n"
+                    "5. Profissional\n"
+                    "6. Observações\n"
+                    "Escolha uma opção: ";
+
+                exibir_moldura_conteudo(menu_alt);
                 scanf(" %c", &opcao);
                 getchar();
 
@@ -285,7 +287,7 @@ void alterar_agendamento(void){
      if (encontrado == True){
         remove("data/arq_agendamentos.dat");
         rename("data/arq_agendamentos_temp.dat", "data/arq_agendamentos.dat");
-        printf("///                    Paciente alterado com sucesso!                       ///\n");
+        printf("Agendamento alterado com sucesso!\n");
     } else {
         remove("data/arq_agendamentos_temp.dat");
         printf("\nAgendamento não encontrado!\n");
@@ -304,11 +306,9 @@ void excluir_agendamento(void){
 
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Exclusão");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o ID do Agendamento:                    ///\n");
+    printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca); 
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
     
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "r+b");
@@ -366,15 +366,10 @@ void excluir_agendamento_fisico(void) {
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Agendamentos                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              = = = = = Exclusão Física de Agendamento = = = = =         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    Informe o ID do Agendamento: ");
+    exibir_moldura_titulo("Agendamentos - Exclusão Física");
+    printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
 
     encontrado = False;
     excluido = False;
@@ -390,7 +385,7 @@ void excluir_agendamento_fisico(void) {
 
     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
         if (ag->id_agendamento == id_busca) {
-            printf("///                        Agendamento Encontrado!                          ///\n");
+            printf("Agendamento encontrado!\n");
             exibir_agendamento(ag);
             encontrado = True;
 
