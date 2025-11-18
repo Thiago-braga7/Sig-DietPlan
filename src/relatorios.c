@@ -423,3 +423,46 @@ void listar_agendamentos_cpf(void) {
     free(ag);
     pausar();
 }
+
+
+void listar_profissionais_sexo(void) {
+    FILE *arq;
+    Profissional *pf;
+    char sexo_busca;
+    bool encontrado = false;
+
+    pf = (Profissional*) malloc(sizeof(Profissional));
+    if (!pf) return;
+
+    limpar_tela();
+    exibir_moldura_titulo("Profissionais - Lista por Sexo");
+
+    printf("Digite o sexo para buscar (M/F/O): ");
+    scanf(" %c", &sexo_busca);
+    sexo_busca = toupper((unsigned char)sexo_busca);
+    while (getchar() != '\n');
+
+    arq = fopen("data/arq_profissionais.dat", "rb");
+    if (arq == NULL) {
+        exibir_moldura_titulo("Nenhum profissional cadastrado ainda");
+        free(pf);
+        return;
+    }
+
+    while (fread(pf, sizeof(Profissional), 1, arq)) {
+        if (pf->status && pf->sexo == sexo_busca) {
+            encontrado = true;
+            printf("\n");
+            exibir_profissional(pf);
+            printf("\n════════════════════════════════════════════════════════════════════════════\n");
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhum profissional encontrado para esse sexo");
+    }
+
+    fclose(arq);
+    free(pf);
+    pausar();
+}
