@@ -17,6 +17,7 @@
 #include "consultas.h"
 #include "validacoes.h"
 #include "leituras.h"
+#include "uteis.h"
 
 
 // Menu principal do módulo de consultas
@@ -43,20 +44,18 @@ void modulo_consultas(void) {
 // Exibe o menu de opções do módulo de consultas e retorna a opção escolhida
 char tela_consultas(void){
     char opcao;
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                     = = = = = Consultas  = = = = =                      ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    1. Cadastrar Consulta                                ///\n");
-    printf("///                    2. Buscar Consulta                                   ///\n");
-    printf("///                    3. Alterar Consulta                                  ///\n");
-    printf("///                    4. Excluir Consulta                                  ///\n");
-    printf("///                    5. Excluir Consulta (física)                         ///\n");
-    printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                      Escolha a opção desejada:                          ///\n");
+    const char *menu =
+        "1. Cadastrar consulta\n"
+        "2. Buscar consulta\n"
+        "3. Alterar Consulta\n"
+        "4. Excluir Consulta\n"
+        "5. Excluir Consulta (física)\n"
+        "0. Voltar ao Menu Principal\n";
+
+    exibir_moldura_titulo("Consultas");
+    exibir_moldura_conteudo(menu);
+
+    printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
     getchar();
     return opcao;
@@ -92,13 +91,7 @@ void cadastrar_consulta(void){
     limpar_tela();
 
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                               Consultas                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Cadastrar Consulta  = = = = =               ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
+    exibir_moldura_titulo("Consultas - Cadastro");
 
     ler_nome(con->nome);
     ler_data(con->data);
@@ -106,9 +99,7 @@ void cadastrar_consulta(void){
     ler_medico(con->medico);
     ler_observacoes(con->observacoes);
 
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("                        Consulta Cadastrada com Sucesso!                        \n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    exibir_moldura_titulo("Consulta cadastrada com sucesso");
     
     con->status = true;
 
@@ -141,13 +132,7 @@ void buscar_consulta(void){
     con = (Consulta*)malloc(sizeof(Consulta));
 
     limpar_tela();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                               Consultas                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Buscar Consulta  = = = = =                  ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                      Informe o ID da consulta:                          ///\n");
+    exibir_moldura_titulo("Consultas - Busca");
     scanf("%d", &id_busca);
     getchar();
     pausar();
@@ -196,13 +181,7 @@ void alterar_consulta(void){
 
     con = (Consulta*)malloc(sizeof(Consulta));
 
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                               Consultas                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Alterar Consulta  = = = = =                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                          Informe o ID da consulta:                      ///\n");
+    exibir_moldura_titulo("Consultas - Alteração");
     scanf("%d", &id_busca);
     getchar();
 
@@ -301,13 +280,8 @@ void excluir_consulta(void){
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                               Consultas                                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Excluir Consulta  = = = = =                 ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                        Informe o ID da consulta:                        ///\n");
+    exibir_moldura_titulo("Consultas - Exclusão");
+    printf("Informe o ID da consulta: ");
     scanf("%d", &id_busca);
     getchar();
 
@@ -322,11 +296,9 @@ void excluir_consulta(void){
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)){
         if ((id_busca == con->id_consulta) && (con->status == true)) {
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
-            printf("///                         Consulta encontrada                             ///\n");
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            exibir_moldura_titulo("Consulta encontrada!\n");
             exibir_consulta(con);
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            printf("════════════════════════════════════════════════════════════════════════════\n");   
             encontrado = true;
 
             do {
@@ -343,22 +315,16 @@ void excluir_consulta(void){
                 con->status = false;
                 fseek(arq_consulta, (-1)*sizeof(Consulta), SEEK_CUR);
                 fwrite(con, sizeof(Consulta), 1, arq_consulta);
-                printf("///////////////////////////////////////////////////////////////////////////////\n");
-                printf("Consulta excluída com sucesso!\n");
-                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                    exibir_moldura_titulo("Consulta excluída com sucesso!\n");
             }else{
-                printf("///////////////////////////////////////////////////////////////////////////////\n");
-                printf("Operação de exclusão cancelada.\n");
-                printf("///////////////////////////////////////////////////////////////////////////////\n");
+                    exibir_moldura_titulo("Operação de exclusão cancelada!\n");
             }
             break;
         }
     }
 
     if (encontrado == false){
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("Consulta não encontrada!\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+        exibir_moldura_titulo("Consulta não encontrada!\n");
     }
 
     fclose(arq_consulta);
@@ -384,15 +350,10 @@ void excluir_consulta_fisica(void) {
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Consultas                                   ///\n");
-    printf("///                                                                         ///\n");
-    printf("///             = = = = = Exclusão Física de Consulta = = = = =             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    Informe o ID da Consulta: ");
+    exibir_moldura_titulo("Consultas - Exclusão Física");
+    printf("Informe o ID da Consulta: ");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     
     encontrado = false;
     excluida = false;
@@ -407,9 +368,7 @@ void excluir_consulta_fisica(void) {
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->id_consulta == id_busca) {
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
-            printf("///                      Consulta Encontrada!                               ///\n");
-            printf("///////////////////////////////////////////////////////////////////////////////\n");
+            exibir_moldura_titulo("Consulta encontrada!\n");
             exibir_consulta(con);
             
             encontrado = true;
@@ -432,9 +391,7 @@ void excluir_consulta_fisica(void) {
                 } while (resposta == 0);
 
                 if (resposta == 'S') {
-                    printf("///////////////////////////////////////////////////////////////////////////////\n");
-                    printf("///                     Consulta excluída com sucesso!                      ///\n");
-                    printf("///////////////////////////////////////////////////////////////////////////////\n");
+                    exibir_moldura_titulo("Consulta excluída com sucesso!\n");
                     excluida = true;
                 } else {
                     printf("\nOperação cancelada. A consulta foi mantida.\n");
@@ -457,13 +414,9 @@ void excluir_consulta_fisica(void) {
     rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
 
     if (encontrado == false) {
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                         Consulta não encontrada!                        ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+        exibir_moldura_titulo("Consulta não encontrada!\n");
     } else if (excluida == true) {
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                        Exclusão física concluída!                       ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+        exibir_moldura_titulo("Consulta excluída com sucesso!\n");
     }
 
     pausar();
@@ -474,9 +427,7 @@ void excluir_consulta_fisica(void) {
 // Exibe os dados de uma consulta formatados
 void exibir_consulta(const Consulta * con){
     if (con == NULL) {
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
-        printf("///                    Erro: consulta inexistente!                          ///\n");
-        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        exibir_moldura_titulo("Erro: consulta inexistente!\n");
         return;
     }
 
