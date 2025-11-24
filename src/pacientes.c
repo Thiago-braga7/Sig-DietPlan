@@ -17,6 +17,7 @@
 #include "pacientes.h"
 #include "validacoes.h"
 #include "leituras.h"
+#include "uteis.h"
 
 
 // Menu principal do módulo de pacientes
