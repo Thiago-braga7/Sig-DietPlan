@@ -15,8 +15,6 @@
 #include "leituras.h"
 
 
-#define RESET   "\033[0m"
-#define GREEN   "\033[32m"
 
 
 void modulo_relatorios(void) {
@@ -27,15 +25,33 @@ void modulo_relatorios(void) {
         opcao = tela_relatorios();
 
         switch(opcao) {
-            case '1': listar_pacientes(); break;
-            case '2': listar_dietas(); break;
-            case '3': listar_profissionais(); break;
-            case '4': listar_consultas(); break;
-            case '5': listar_agendamentos(); break;
-            case '6': listar_pacientes_idade(); break;
-            case '7': listar_consultas_medico(); break;
-            case '8': listar_dietas_calorias(); break;
-            case '9': listar_agendamentos_cpf(); break;
+            case '1':
+                listar_pacientes();
+                break;
+            case '2':
+                listar_dietas();
+                break;
+            case '3':
+                listar_profissionais();
+                break;
+            case '4':
+                listar_consultas();
+                break;
+            case '5':
+                listar_agendamentos();
+                break;
+            case '6':
+                listar_pacientes_idade();
+                break;
+            case '7':
+                listar_consultas_medico();
+                break;
+            case '8':
+                listar_dietas_calorias();
+                break;
+            case '9':
+                listar_agendamentos_paciente();
+                break;
         }
     } while (opcao != '0');  
 }
@@ -53,13 +69,13 @@ char tela_relatorios(void) {
         "6. Lista de Pacientes por Idade\n"
         "7. Lista de Consultas por Médico\n"
         "8. Lista de Dietas por Calorias\n"
-        "9. Lista de Agendamentos por CPF\n"
+        "9. Lista de Agendamentos por Paciente\n"
         "0. Voltar ao Menu Principal";
 
     exibir_moldura_titulo("Relatórios");
     exibir_moldura_conteudo(menu);
 
-    printf("║ Escolha a opção desejada: ");
+    printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
     getchar();
 
@@ -382,11 +398,14 @@ void listar_dietas_calorias(void) {
 }
 
 
-void listar_agendamentos_cpf(void) {
+void listar_agendamentos_paciente(void) {
     FILE *arq_agendamentos;
-    Agendamento* ag;
+    FILE *arq_pacientes;
+    Agendamento *ag;
+    Paciente *pac;
 
     ag = (Agendamento*) malloc(sizeof(Agendamento));
+    pac = (Paciente*) malloc(sizeof(Paciente));
 
     char cpf_busca[13];
 
@@ -396,6 +415,9 @@ void listar_agendamentos_cpf(void) {
     printf("Digite o CPF do paciente (Apenas Números): ");
     scanf("%s", cpf_busca);
     getchar();
+
+    printf("║ %-30s ║ %15s ║ %11s ║ %7s ║ %10s ║ %12s ║ %14s ║\n", "Nome", "ID Agendamento", "Data", "Hora", "Tipo", "Profissional", "Observações");
+    printf("═════════════════════════════════════════════════════════════════════════════\n");
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");    
     if (arq_agendamentos == NULL) {
@@ -410,9 +432,20 @@ void listar_agendamentos_cpf(void) {
         if (ag->status) {
             if (strcmp(ag->cpf, cpf_busca) == 0) {
                 encontrado = 1;
-                printf("\n");
-                exibir_agendamento(ag);
-                printf("\n");
+
+                arq_pacientes = fopen("data/arq_pacientes.dat", "rb");
+                
+                if (arq_pacientes != NULL) {
+                    while (fread(pac, sizeof(Paciente), 1, arq_pacientes)) {
+                        if (pac->status && strcmp(pac->cpf, cpf_busca) == 0) {
+                            break;
+                        }
+                    }
+                    fclose(arq_pacientes);
+                }
+
+                printf("║ %-30s ║ %15d ║ %11s ║ %7s ║ %10s ║ %12s ║ %12s ║\n",
+                pac->nome, ag->id_agendamento, ag->data, ag->hora, ag->tipo, ag->profissional, ag->observacoes);
                 printf("════════════════════════════════════════════════════════════════════════════\n");
             }
         }
@@ -426,6 +459,7 @@ void listar_agendamentos_cpf(void) {
     free(ag);
     pausar();
 }
+
 
 
 void listar_profissionais_sexo(void) {
