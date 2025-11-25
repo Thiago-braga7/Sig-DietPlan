@@ -15,8 +15,6 @@
 #include "leituras.h"
 
 
-#define RESET   "\033[0m"
-#define GREEN   "\033[32m"
 
 
 void modulo_relatorios(void) {
