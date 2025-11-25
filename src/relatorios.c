@@ -400,6 +400,9 @@ void listar_agendamentos_paciente(void) {
     scanf("%s", cpf_busca);
     getchar();
 
+    printf("║ %-30s ║ %15s ║ %11s ║ %7s ║ %10s ║ %12s ║ %14s ║\n", "Nome", "ID Agendamento", "Data", "Hora", "Tipo", "Profissional", "Observações");
+    printf("═════════════════════════════════════════════════════════════════════════════\n");
+
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");    
     if (arq_agendamentos == NULL) {
         exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
@@ -425,15 +428,8 @@ void listar_agendamentos_paciente(void) {
                     fclose(arq_pacientes);
                 }
 
-                printf("\n");
-                printf("Paciente:               %s\n", pac->nome);
-                printf("ID do Agendamento:                %d\n", ag->id_agendamento);
-                printf("Data:              %s\n", ag->data);
-                printf("Hora:              %s\n", ag->hora);
-                printf("Tipo:              %s\n", ag->tipo);
-                printf("Profissional:      %s\n", ag->profissional);
-                printf("Observações:       %s\n", ag->observacoes);
-                printf("\n");
+                printf("║ %-30s ║ %15d ║ %11s ║ %7s ║ %10s ║ %12s ║ %12s ║\n",
+                pac->nome, ag->id_agendamento, ag->data, ag->hora, ag->tipo, ag->profissional, ag->observacoes);
                 printf("════════════════════════════════════════════════════════════════════════════\n");
             }
         }
