@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "relatorios.h"
 #include "pacientes.h"
@@ -51,6 +52,8 @@ char tela_relatorios(void) {
         "5. Lista geral de Agendamentos\n"
         "6. Lista de Pacientes por Idade\n"
         "7. Lista de Consultas por Médico\n"
+        "8. Lista de Dietas por Calorias\n"
+        "9. Lista de Agendamentos por CPF\n"
         "0. Voltar ao Menu Principal";
 
     exibir_moldura_titulo("Relatórios");
