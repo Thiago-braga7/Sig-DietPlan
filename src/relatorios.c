@@ -52,6 +52,8 @@ char tela_relatorios(void) {
         "5. Lista geral de Agendamentos\n"
         "6. Lista de Pacientes por Idade\n"
         "7. Lista de Consultas por Médico\n"
+        "8. Lista de Dietas por Calorias\n"
+        "9. Lista de Agendamentos por Paciente\n"
         "0. Voltar ao Menu Principal";
 
     exibir_moldura_titulo("Relatórios");
