@@ -25,15 +25,33 @@ void modulo_relatorios(void) {
         opcao = tela_relatorios();
 
         switch(opcao) {
-            case '1': listar_pacientes(); break;
-            case '2': listar_dietas(); break;
-            case '3': listar_profissionais(); break;
-            case '4': listar_consultas(); break;
-            case '5': listar_agendamentos(); break;
-            case '6': listar_pacientes_idade(); break;
-            case '7': listar_consultas_medico(); break;
-            case '8': listar_dietas_calorias(); break;
-            case '9': listar_agendamentos_paciente(); break;
+            case '1':
+                listar_pacientes();
+                break;
+            case '2':
+                listar_dietas();
+                break;
+            case '3':
+                listar_profissionais();
+                break;
+            case '4':
+                listar_consultas();
+                break;
+            case '5':
+                listar_agendamentos();
+                break;
+            case '6':
+                listar_pacientes_idade();
+                break;
+            case '7':
+                listar_consultas_medico();
+                break;
+            case '8':
+                listar_dietas_calorias();
+                break;
+            case '9':
+                listar_agendamentos_paciente();
+                break;
         }
     } while (opcao != '0');  
 }
@@ -57,7 +75,7 @@ char tela_relatorios(void) {
     exibir_moldura_titulo("Relatórios");
     exibir_moldura_conteudo(menu);
 
-    printf("║ Escolha a opção desejada: ");
+    printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
     getchar();
 
