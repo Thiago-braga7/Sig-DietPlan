@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "relatorios.h"
 #include "pacientes.h"
@@ -34,7 +35,7 @@ void modulo_relatorios(void) {
             case '6': listar_pacientes_idade(); break;
             case '7': listar_consultas_medico(); break;
             case '8': listar_dietas_calorias(); break;
-            case '9': listar_agendamentos_cpf(); break;
+            case '9': listar_agendamentos_paciente(); break;
         }
     } while (opcao != '0');  
 }
@@ -379,11 +380,14 @@ void listar_dietas_calorias(void) {
 }
 
 
-void listar_agendamentos_cpf(void) {
+void listar_agendamentos_paciente(void) {
     FILE *arq_agendamentos;
-    Agendamento* ag;
+    FILE *arq_pacientes;
+    Agendamento *ag;
+    Paciente *pac;
 
     ag = (Agendamento*) malloc(sizeof(Agendamento));
+    pac = (Paciente*) malloc(sizeof(Paciente));
 
     char cpf_busca[13];
 
@@ -407,8 +411,26 @@ void listar_agendamentos_cpf(void) {
         if (ag->status) {
             if (strcmp(ag->cpf, cpf_busca) == 0) {
                 encontrado = 1;
+
+                arq_pacientes = fopen("data/arq_pacientes.dat", "rb");
+                
+                if (arq_pacientes != NULL) {
+                    while (fread(pac, sizeof(Paciente), 1, arq_pacientes)) {
+                        if (pac->status && strcmp(pac->cpf, cpf_busca) == 0) {
+                            break;
+                        }
+                    }
+                    fclose(arq_pacientes);
+                }
+
                 printf("\n");
-                exibir_agendamento(ag);
+                printf("Paciente:               %s\n", pac->nome);
+                printf("ID do Agendamento:                %d\n", ag->id_agendamento);
+                printf("Data:              %s\n", ag->data);
+                printf("Hora:              %s\n", ag->hora);
+                printf("Tipo:              %s\n", ag->tipo);
+                printf("Profissional:      %s\n", ag->profissional);
+                printf("Observações:       %s\n", ag->observacoes);
                 printf("\n");
                 printf("════════════════════════════════════════════════════════════════════════════\n");
             }
@@ -423,6 +445,7 @@ void listar_agendamentos_cpf(void) {
     free(ag);
     pausar();
 }
+
 
 
 void listar_profissionais_sexo(void) {
