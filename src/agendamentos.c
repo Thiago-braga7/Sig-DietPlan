@@ -158,14 +158,12 @@ void alterar_agendamento(void){
     int valido;
     char opcao;
     char continuar;
-
     bool encontrado = false;
 
     ag = (Agendamento*)malloc(sizeof(Agendamento));
 
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Alteração");
-
     printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca); 
     getchar();
@@ -202,99 +200,43 @@ void alterar_agendamento(void){
 
                 switch (opcao){
                     case '1':
-                        do{
-                            printf("Novo CPF do Paciente(Apenas Números):\n");
-                            scanf("%s", ag->cpf); 
-                            getchar();
-
-                            valido = validar_cpf(ag->cpf);
-
-                            if(valido == 0){
-                                printf("CPF inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_cpf(ag->cpf);
                         break;
                     case '2':
-                        do{
-                            printf("Nova Data (DDMMAAAA): ");
-                            scanf("%s", ag->data);
-                            getchar();
-
-                            valido = valida_data(ag->data);
-
-                            if(valido == 0){
-                                printf("Data inválida! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_data(ag->data);
                         break;
                     case '3':
-                        printf("Nova Hora (HH:MM): ");
-                        do{
-                            printf("Nova Hora (08:00 - 18:00): ");
-                            scanf("%s", ag->hora); 
-                            getchar();
-
-                            valido = validar_hora(ag->hora);
-
-                            if(valido == 0){
-                                printf("Hora inválida! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_hora(ag->hora);
                         break;
                     case '4':
-                         do{
-                            printf("Novo Tipo de Agendamento:\n");
-                            scanf(" %50[^\n]", ag->tipo); 
-                            getchar();
-
-                            valido = validar_nome(ag->tipo);
-
-                            if(valido == 0){
-                                printf("Texto inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_tipo(ag->tipo);
                         break;
                     case '5':
-                        do{
-                            printf("Novo Profissional: \n");
-                            scanf(" %50[^\n]", ag->profissional); 
-                            getchar();
-
-                            valido = validar_nome(ag->profissional);
-
-                            if(valido == 0){
-                                printf("Nome inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_profissional(ag->profissional);
                         break;
                     case '6':
-                        do{
-                            printf("Novas Observações: ");
-                            scanf("%200[^\n]", ag->observacoes); 
-                            getchar();
-
-                            valido = validar_observacao(ag->observacoes);
-
-                            if(valido == 0){
-                                printf("Texto Digitado inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        ler_observacoes(ag->observacoes);
                         break;
+
                     default:
                         printf("Opção inválida!\n");
                         break;
                 }
-                printf("\n    Dados atualizados    \n");
+
+                printf("\nDados atualizados\n");
                 exibir_agendamento(ag);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
                 continuar = confirmar_acao(continuar); 
+
                 if(continuar == 0){
                     printf("Opção inválida! Digite apenas S ou N.\n");
                 }
+                
             } while (continuar == 'S');
         }
+        
         fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
     }
 
@@ -305,10 +247,12 @@ void alterar_agendamento(void){
         remove("data/arq_agendamentos.dat");
         rename("data/arq_agendamentos_temp.dat", "data/arq_agendamentos.dat");
         printf("Agendamento alterado com sucesso!\n");
+        
     } else {
         remove("data/arq_agendamentos_temp.dat");
         printf("\nAgendamento não encontrado!\n");
     }
+
     free(ag);
     pausar();
 }
@@ -320,7 +264,6 @@ void excluir_agendamento(void){
 
     int id_busca;
     char resposta;
-
     bool encontrado = false;
 
     ag = (Agendamento*)malloc(sizeof(Agendamento));
@@ -328,7 +271,7 @@ void excluir_agendamento(void){
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Exclusão");
     printf("Informe o ID do Agendamento: ");
-    scanf("%d", &id_busca); 
+    scanf("%d", &id_busca);
     getchar();
     
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "r+b");
@@ -388,7 +331,6 @@ void excluir_agendamento_fisico(void) {
 
     int id_busca;
     char resposta;
-
     bool excluido = false;
     bool encontrado = false;
 
@@ -400,7 +342,6 @@ void excluir_agendamento_fisico(void) {
     printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
     getchar();
-
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     arq_agendamentos_temp = fopen("data/arq_agendamentos_temp.dat", "wb");
@@ -457,7 +398,7 @@ void excluir_agendamento_fisico(void) {
 
     if (encontrado == false) {
         printf("\nAgendamento não encontrado!\n");
-        
+
     } else if (excluido == true) {
         printf("\nExclusão física concluída!\n");
     }
