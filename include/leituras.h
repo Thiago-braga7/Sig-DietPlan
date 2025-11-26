@@ -17,4 +17,5 @@ void ler_dieta(char *);
 void ler_calorias(float );
 void ler_refeicoes(char *);
 void ler_crn(char *);
+
 #endif
