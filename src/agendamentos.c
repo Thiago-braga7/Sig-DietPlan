@@ -186,15 +186,16 @@ void alterar_agendamento(void){
 
                 const char *menu_alt =
                     "\nQual campo deseja alterar?\n"
-                    "1. CPF do Paciente\n"
+                    "1. CPF\n"
                     "2. Data\n"
                     "3. Hora\n"
                     "4. Tipo\n"
                     "5. Profissional\n"
-                    "6. Observações\n"
-                    "Escolha uma opção: ";
+                    "6. Observações\n";
 
                 exibir_moldura_conteudo(menu_alt);
+
+                printf("Escolha uma opção: ");
                 scanf(" %c", &opcao);
                 getchar();
 
@@ -279,7 +280,6 @@ void excluir_agendamento(void){
     if (arq_agendamentos == NULL){
         printf("Erro na criação do arquivo\n");
         return;
-        
     }
 
     while(fread(ag, sizeof(Agendamento),1, arq_agendamentos)){
