@@ -40,10 +40,10 @@ void modulo_consultas(void) {
 }
 
 
-
 // Exibe o menu de opções do módulo de consultas e retorna a opção escolhida
-char tela_consultas(void){
+char tela_consultas(void) {
     char opcao;
+
     const char *menu =
         "1. Cadastrar consulta\n"
         "2. Buscar consulta\n"
@@ -62,9 +62,8 @@ char tela_consultas(void){
 }
 
 
-
 // Realiza o cadastro de uma nova consulta
-void cadastrar_consulta(void){
+void cadastrar_consulta(void) {
     FILE *arq_consulta;
     Consulta *con;
     
@@ -120,9 +119,8 @@ void cadastrar_consulta(void){
 }
 
 
-
 // Busca e exibe uma consulta pelo ID
-void buscar_consulta(void){
+void buscar_consulta(void) {
     FILE * arq_consulta;
     Consulta * con;
     
@@ -166,9 +164,8 @@ void buscar_consulta(void){
 }
 
 
-
 // Permite alterar os dados de uma consulta existente
-void alterar_consulta(void){
+void alterar_consulta(void) {
     FILE *arq_consulta;
     FILE *arq_consulta_temp;
 
@@ -266,9 +263,8 @@ void alterar_consulta(void){
 }
 
 
-
 // Marca uma consulta como excluída logicamente (status = false)
-void excluir_consulta(void){
+void excluir_consulta(void) {
     FILE *arq_consulta;
     Consulta * con;
 
@@ -298,7 +294,6 @@ void excluir_consulta(void){
         if ((id_busca == con->id_consulta) && (con->status == true)) {
             exibir_moldura_titulo("Consulta encontrada!\n");
             exibir_consulta(con);
-            printf("════════════════════════════════════════════════════════════════════════════\n");   
             encontrado = true;
 
             do {
@@ -315,9 +310,9 @@ void excluir_consulta(void){
                 con->status = false;
                 fseek(arq_consulta, (-1)*sizeof(Consulta), SEEK_CUR);
                 fwrite(con, sizeof(Consulta), 1, arq_consulta);
-                    exibir_moldura_titulo("Consulta excluída com sucesso!\n");
+                exibir_moldura_titulo("Consulta excluída com sucesso!\n");
             }else{
-                    exibir_moldura_titulo("Operação de exclusão cancelada!\n");
+                exibir_moldura_titulo("Operação de exclusão cancelada!\n");
             }
             break;
         }
@@ -333,20 +328,18 @@ void excluir_consulta(void){
 }
 
 
-
 // Exclui fisicamente uma consulta inativa do arquivo
 void excluir_consulta_fisica(void) {
     FILE * arq_consulta;
     FILE * arq_consulta_temp;
 
     Consulta * con;
+    con = (Consulta*) malloc(sizeof(Consulta));
 
     int id_busca;
-    bool encontrado;
-    int excluida;
     char resposta;
-
-    con = (Consulta*) malloc(sizeof(Consulta));
+    bool encontrado = false;
+    bool excluida = false;
 
     limpar_tela();
     printf("\n");
@@ -354,9 +347,6 @@ void excluir_consulta_fisica(void) {
     printf("Informe o ID da Consulta: ");
     scanf("%d", &id_busca);
     getchar();
-    
-    encontrado = false;
-    excluida = false;
     
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
     arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
@@ -375,6 +365,7 @@ void excluir_consulta_fisica(void) {
 
             if (con->status == true) {
                 printf("Status: Ativa \n");
+
             } else {
                 printf("Status: Inativa \n");
             }
@@ -388,19 +379,23 @@ void excluir_consulta_fisica(void) {
                     if (resposta == 0) {
                         printf("Opção inválida! Digite apenas S ou N.\n");
                     }
+
                 } while (resposta == 0);
 
                 if (resposta == 'S') {
                     exibir_moldura_titulo("Consulta excluída com sucesso!\n");
                     excluida = true;
+
                 } else {
                     printf("\nOperação cancelada. A consulta foi mantida.\n");
                     fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
                 }
+
             } else {
                 printf("\nA consulta está ativa, portanto não pode ser excluída fisicamente.\n");
                 fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
             }
+
         } else {
             fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
         }
@@ -415,13 +410,13 @@ void excluir_consulta_fisica(void) {
 
     if (encontrado == false) {
         exibir_moldura_titulo("Consulta não encontrada!\n");
+        
     } else if (excluida == true) {
         exibir_moldura_titulo("Consulta excluída com sucesso!\n");
     }
 
     pausar();
 }
-
 
 
 // Exibe os dados de uma consulta formatados

@@ -38,7 +38,7 @@ void modulo_agendamentos(void) {
 }
 
 
-char tela_agendamentos(void){
+char tela_agendamentos(void) {
     char opcao;
 
     const char *menu =
@@ -60,7 +60,7 @@ char tela_agendamentos(void){
 }
 
 
-void cadastrar_agendamento(void){
+void cadastrar_agendamento(void) {
     FILE * arq_agendamentos;
     Agendamento * ag;
     
@@ -70,7 +70,7 @@ void cadastrar_agendamento(void){
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     
      // Créditos: função adaptada do Gemini
-    if (arq_agendamentos != NULL){
+    if (arq_agendamentos != NULL) {
         fseek(arq_agendamentos, 0, SEEK_END);  
 
         long num_registros = ftell(arq_agendamentos) / sizeof(Agendamento);
@@ -107,7 +107,7 @@ void cadastrar_agendamento(void){
 }
 
 
-void buscar_agendamento(void){
+void buscar_agendamento(void) {
     FILE * arq_agendamentos;
     Agendamento * ag;
 
@@ -148,7 +148,7 @@ void buscar_agendamento(void){
 }
 
 
-void alterar_agendamento(void){
+void alterar_agendamento(void) {
     FILE * arq_agendamentos;
     FILE * arq_agendamentos_temp;
 
@@ -176,7 +176,7 @@ void alterar_agendamento(void){
         return;
     }
 
-     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
+    while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
         if((ag->id_agendamento == id_busca) && (ag->status == true)){
             encontrado = true;
             do {
@@ -259,7 +259,7 @@ void alterar_agendamento(void){
 }
 
 
-void excluir_agendamento(void){
+void excluir_agendamento(void) {
     FILE * arq_agendamentos;
     Agendamento * ag;
 
@@ -407,7 +407,7 @@ void excluir_agendamento_fisico(void) {
 }
 
 
-void exibir_agendamento(const Agendamento * ag){
+void exibir_agendamento(const Agendamento * ag) {
     if (ag == NULL) {
         printf("Erro: agendamento inexistente!\n");
         return;
