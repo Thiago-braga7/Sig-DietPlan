@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+
 #include "dietas.h"
 #include "validacoes.h"
-#include <string.h>
 #include "leituras.h"
-#define True 1
-#define False 0
+#include "uteis.h"
+
 
 void modulo_dietas(void) {
     char opcao;
@@ -21,6 +23,7 @@ void modulo_dietas(void) {
         }
     } while (opcao != '0');  
 }
+
 
 char tela_dietas(void){
     char opcao;
@@ -79,7 +82,7 @@ void cadastrar_dieta(void){
     printf("///                        ID gerado: %02d                                    ///\n", dt->id_dieta);
     printf("///////////////////////////////////////////////////////////////////////////////\n");
 
-    dt->status = True;
+    dt->status = true;
 
     arq_dietas = fopen("data/arq_dietas.dat", "a+b");
     if (arq_dietas == NULL){
@@ -96,8 +99,9 @@ void cadastrar_dieta(void){
 void buscar_dieta(void){
     FILE * arq_dietas;
     Dieta * dt;
+
     int id_busca;
-    int encontrado;
+    bool encontrado = false;
 
     dt = (Dieta*) malloc(sizeof(Dieta));
     
@@ -112,7 +116,6 @@ void buscar_dieta(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    encontrado = False;
     arq_dietas = fopen("data/arq_dietas.dat", "rb");
 
     if (arq_dietas == NULL){
@@ -120,14 +123,14 @@ void buscar_dieta(void){
         return;
     }
     while (fread(dt, sizeof(Dieta), 1, arq_dietas)){
-        if ((dt->id_dieta == id_busca) && (dt->status == True)){
+        if ((dt->id_dieta == id_busca) && (dt->status == true)){
             printf("///                        Dieta Encontrada!                                ///\n");
             exibir_dieta(dt);
-            encontrado = True;
+            encontrado = true;
             break;
         }
     }
-    if (encontrado == False){
+    if (encontrado == false){
         printf("\nDieta não encontrada!\n");
     }
 
@@ -140,11 +143,12 @@ void alterar_dieta(void){
     FILE *arq_dietas;
     FILE *arq_dietas_temp;
     Dieta * dt;
+
     int id_busca;
-    int encontrado;
     char opcao;
     char continuar;
     int valido;
+    bool encontrado = false;
 
     dt = (Dieta*) malloc(sizeof(Dieta));
     
@@ -159,7 +163,6 @@ void alterar_dieta(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    encontrado = False;
 
     arq_dietas = fopen("data/arq_dietas.dat", "rb");
     arq_dietas_temp = fopen("data/arq_dietas_temp.dat", "wb");
@@ -170,8 +173,8 @@ void alterar_dieta(void){
     }
 
     while(fread(dt, sizeof(Dieta), 1, arq_dietas)){
-        if((dt->id_dieta == id_busca) && (dt->status == True)){
-            encontrado = True;
+        if((dt->id_dieta == id_busca) && (dt->status == true)){
+            encontrado = true;
 
             do{
                 limpar_tela();
@@ -247,7 +250,7 @@ void alterar_dieta(void){
     fclose(arq_dietas);
     fclose(arq_dietas_temp);  
 
-    if(encontrado == True){
+    if(encontrado == true){
         remove("data/arq_dietas.dat");
         rename("data/arq_dietas_temp.dat", "data/arq_dietas.dat");
         printf("\nDieta alterada com sucesso!\n");
@@ -262,9 +265,11 @@ void alterar_dieta(void){
 void excluir_dieta(void){
     FILE * arq_dietas;
     Dieta * dt;
+
     int id_busca;
-    int encontrado;
     char resposta;
+    bool encontrado = false;
+
 
     dt = (Dieta*) malloc(sizeof(Dieta));
 
@@ -279,7 +284,6 @@ void excluir_dieta(void){
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    encontrado = False;
     
     arq_dietas = fopen("data/arq_dietas.dat", "r+b");
     
@@ -289,10 +293,10 @@ void excluir_dieta(void){
     }
 
     while(fread(dt, sizeof(Dieta),1, arq_dietas)){
-        if((dt->id_dieta == id_busca) && (dt->status == True)){
+        if((dt->id_dieta == id_busca) && (dt->status == true)){
             printf("///                        Dieta Encontrada!                                ///\n");
             exibir_dieta(dt);
-            encontrado = True;
+            encontrado = true;
 
             do {
                 printf("\nDeseja realmente excluir esta dieta? (S/N): ");
@@ -304,7 +308,7 @@ void excluir_dieta(void){
                 }
             } while(resposta == 0);
             if (resposta == 'S'){
-                dt->status = False;
+                dt->status = false;
                 fseek(arq_dietas, (-1)*sizeof(Dieta), SEEK_CUR);
                 fwrite(dt, sizeof(Dieta), 1, arq_dietas);
                 printf("\nDieta excluída com sucesso!\n");
@@ -314,7 +318,7 @@ void excluir_dieta(void){
             break;
         }
     }
-    if (encontrado == False){
+    if (encontrado == false){
         printf("\nDieta não encontrada!\n");
     }
     fclose(arq_dietas);
@@ -328,10 +332,11 @@ void excluir_dieta_fisica(void) {
     FILE * arq_dietas;
     FILE * arq_dietas_temp;
     Dieta * dt;
+
     int id_busca;
-    int encontrado;
-    int excluida;
     char resposta;
+    bool encontrado = false;
+    bool excluida = false;
 
     dt = (Dieta*) malloc(sizeof(Dieta));
 
@@ -346,8 +351,6 @@ void excluir_dieta_fisica(void) {
     scanf("%d", &id_busca);
     getchar();
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    encontrado = False;
-    excluida = False;
     
     arq_dietas = fopen("data/arq_dietas.dat", "rb");
     arq_dietas_temp = fopen("data/arq_dietas_temp.dat", "wb");
@@ -361,15 +364,15 @@ void excluir_dieta_fisica(void) {
         if (dt->id_dieta == id_busca) {
             printf("///                        Dieta Encontrada!                                ///\n");
             exibir_dieta(dt);
-            encontrado = True;
+            encontrado = true;
 
-            if (dt->status == True) {
+            if (dt->status == true) {
                 printf("Status: Ativa \n");
             } else {
                 printf("Status: Inativa \n");
             }
 
-            if (dt->status == False) {
+            if (dt->status == false) {
                 do {
                     printf("\nDeseja realmente excluir esta dieta (fisicamente)? (S/N): ");
                     scanf(" %c", &resposta);
@@ -382,7 +385,7 @@ void excluir_dieta_fisica(void) {
 
                 if (resposta == 'S') {
                     printf("\nDieta excluída com sucesso!\n");
-                    excluida = True;
+                    excluida = true;
                 } else {
                     printf("\nOperação cancelada. A dieta foi mantida.\n");
                     fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
@@ -403,9 +406,9 @@ void excluir_dieta_fisica(void) {
     remove("data/arq_dietas.dat");
     rename("data/arq_dietas_temp.dat", "data/arq_dietas.dat");
 
-    if (encontrado == False) {
+    if (encontrado == false) {
         printf("\nDieta não encontrada!\n");
-    } else if (excluida == True) {
+    } else if (excluida == true) {
         printf("\nExclusão física concluída!\n");
     }
 
