@@ -64,6 +64,7 @@ char tela_dietas(void){
     return opcao;
 }
 
+
 void cadastrar_dieta(void){
     FILE *arq_dietas;
     Dieta* dt;
@@ -108,6 +109,7 @@ void cadastrar_dieta(void){
     pausar();
 }
 
+
 void buscar_dieta(void){
     FILE * arq_dietas;
     Dieta * dt;
@@ -134,6 +136,7 @@ void buscar_dieta(void){
         printf("Erro na criação do arquivo\n");
         return;
     }
+    
     while (fread(dt, sizeof(Dieta), 1, arq_dietas)){
         if ((dt->id_dieta == id_busca) && (dt->status == true)){
             printf("///                        Dieta Encontrada!                                ///\n");
@@ -142,6 +145,7 @@ void buscar_dieta(void){
             break;
         }
     }
+
     if (encontrado == false){
         printf("\nDieta não encontrada!\n");
     }
@@ -150,6 +154,7 @@ void buscar_dieta(void){
     free(dt);
     pausar();
 }
+
 
 void alterar_dieta(void){
     FILE *arq_dietas;
@@ -274,6 +279,7 @@ void alterar_dieta(void){
     pausar();
 }
 
+
 void excluir_dieta(void){
     FILE * arq_dietas;
     Dieta * dt;
@@ -281,7 +287,6 @@ void excluir_dieta(void){
     int id_busca;
     char resposta;
     bool encontrado = false;
-
 
     dt = (Dieta*) malloc(sizeof(Dieta));
 
@@ -318,13 +323,16 @@ void excluir_dieta(void){
                 if(resposta == 0){
                     printf("Opção inválida! Digite apenas S ou N.\n");
                 }
+
             } while(resposta == 0);
-            if (resposta == 'S'){
+
+            if (resposta == 'S') {
                 dt->status = false;
                 fseek(arq_dietas, (-1)*sizeof(Dieta), SEEK_CUR);
                 fwrite(dt, sizeof(Dieta), 1, arq_dietas);
                 printf("\nDieta excluída com sucesso!\n");
-            } else{
+
+            } else {
                 printf("\nOperação de exclusão cancelada.\n");
             }
             break;
@@ -337,7 +345,6 @@ void excluir_dieta(void){
     free(dt);
     pausar();
 }
-
 
 
 void excluir_dieta_fisica(void) {
@@ -380,6 +387,7 @@ void excluir_dieta_fisica(void) {
 
             if (dt->status == true) {
                 printf("Status: Ativa \n");
+
             } else {
                 printf("Status: Inativa \n");
             }
@@ -393,19 +401,23 @@ void excluir_dieta_fisica(void) {
                     if (resposta == 0) {
                         printf("Opção inválida! Digite apenas S ou N.\n");
                     }
+
                 } while (resposta == 0);
 
                 if (resposta == 'S') {
                     printf("\nDieta excluída com sucesso!\n");
                     excluida = true;
+
                 } else {
                     printf("\nOperação cancelada. A dieta foi mantida.\n");
                     fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
                 }
+
             } else {
                 printf("\nA dieta está ativa, portanto não pode ser excluída fisicamente.\n");
                 fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
             }
+
         } else {
             fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
         }
@@ -420,12 +432,14 @@ void excluir_dieta_fisica(void) {
 
     if (encontrado == false) {
         printf("\nDieta não encontrada!\n");
+        
     } else if (excluida == true) {
         printf("\nExclusão física concluída!\n");
     }
 
     pausar(); 
 }
+
 
 void exibir_dieta(const Dieta * dt){
     if (dt == NULL) {
