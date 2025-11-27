@@ -14,13 +14,25 @@ void modulo_dietas(void) {
     do {
         limpar_tela();
         opcao = tela_dietas();
+
         switch(opcao) {
-            case '1': cadastrar_dieta(); break;
-            case '2': buscar_dieta(); break;
-            case '3': alterar_dieta(); break;
-            case '4': excluir_dieta(); break;
-            case '5': excluir_dieta_fisica(); break;
+            case '1':
+                cadastrar_dieta();
+                break;
+            case '2':
+                buscar_dieta();
+                break;
+            case '3':
+                alterar_dieta();
+                break;
+            case '4':
+                excluir_dieta();
+                break;
+            case '5':
+                excluir_dieta_fisica();
+                break;
         }
+        
     } while (opcao != '0');  
 }
 
