@@ -155,7 +155,6 @@ void alterar_agendamento(void) {
     Agendamento * ag;
 
     int id_busca;
-    int valido;
     char opcao;
     char continuar;
     bool encontrado = false;

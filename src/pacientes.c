@@ -42,6 +42,7 @@ void modulo_pacientes(void) {
 // Exibe o menu de opções do módulo de pacientes e retorna a opção escolhida
 char tela_pacientes(void){
     char opcao;
+
     const char *menu =
         "1. Cadastrar Paciente\n"
         "2. Buscar Paciente\n"
@@ -56,6 +57,7 @@ char tela_pacientes(void){
     scanf(" %c", &opcao);
     getchar();
     pausar();
+    
     return opcao;
 }
 

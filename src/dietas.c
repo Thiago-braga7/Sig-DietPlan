@@ -164,7 +164,6 @@ void alterar_dieta(void){
     int id_busca;
     char opcao;
     char continuar;
-    int valido;
     bool encontrado = false;
 
     dt = (Dieta*) malloc(sizeof(Dieta));
@@ -195,7 +194,7 @@ void alterar_dieta(void){
 
             do{
                 limpar_tela();
-                printf("\n    Dados atuais da dieta    \n");
+                exibir_moldura_titulo("Dados atuais da dieta");
                 exibir_dieta(dt);
 
                 printf("\nQual campo deseja alterar?\n");
@@ -208,58 +207,31 @@ void alterar_dieta(void){
 
                 switch (opcao) {
                     case '1':
-                        do{
-                            printf("Novo Nome da Dieta: ");
-                            scanf(" %50s", dt->nome_dieta); 
-                            getchar();
-
-                            valido = validar_nome(dt->nome_dieta);
-
-                            if(valido == 0){
-                                printf("Nome inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        validar_nome(dt->nome_dieta);
                         break;
                     case '2':
-                        do{
-                            printf("Novo Total de Calorias: ");
-                            scanf("%f", &dt->calorias);
-                            getchar();
-
-                            valido = validar_calorias(dt->calorias);
-
-                            if(valido == 0){
-                                printf("Calorias inválidas! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        validar_calorias(dt->calorias);
                         break;
                     case '3':
-                        do{
-                            printf("Nova descrição das Refeições: ");
-                            scanf("%200[^\n]", dt->refeicoes);
-                            getchar();
-
-                            valido = validar_observacao(dt->refeicoes);
-
-                            if(valido == 0){
-                                printf("Texto Digitado inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        validar_observacao(dt->refeicoes);
                         break;
                     default:
                         printf("Opção inválida!\n");
                         break;
                 }
-                printf("\n    Dados atualizados   \n");
+
+                printf("\nDados atualizados\n");
                 exibir_dieta(dt);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
                 getchar();
                 continuar = confirmar_acao(continuar);
+
                 if(continuar == 0){
                     printf("Opção inválida! Digite apenas S ou N.\n");
                 }
+                
             } while(continuar == 'S');
         }
         fwrite(dt, sizeof(Dieta), 1, arq_dietas_temp);
@@ -271,10 +243,12 @@ void alterar_dieta(void){
         remove("data/arq_dietas.dat");
         rename("data/arq_dietas_temp.dat", "data/arq_dietas.dat");
         printf("\nDieta alterada com sucesso!\n");
+
     } else{
         remove("data/arq_dietas_temp.dat");
         printf("\nDieta não encontrada!\n");
     }
+
     free(dt);
     pausar();
 }
@@ -432,7 +406,7 @@ void excluir_dieta_fisica(void) {
 
     if (encontrado == false) {
         printf("\nDieta não encontrada!\n");
-        
+
     } else if (excluida == true) {
         printf("\nExclusão física concluída!\n");
     }
