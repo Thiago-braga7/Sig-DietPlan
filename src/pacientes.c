@@ -38,7 +38,6 @@ void modulo_pacientes(void) {
 }
 
 
-
 // Exibe o menu de opções do módulo de pacientes e retorna a opção escolhida
 char tela_pacientes(void){
     char opcao;
@@ -100,7 +99,6 @@ void cadastrar_paciente(void){
 }
 
 
-
 // Busca e exibe um paciente pelo CPF
 void buscar_paciente(void){
     FILE * arq_paciente;
@@ -145,7 +143,6 @@ void buscar_paciente(void){
     free(pac);
     getchar();
 }
-
  
 
 // Permite alterar os dados de um paciente existente
@@ -254,8 +251,7 @@ void alterar_paciente(void){
     free(pac);
     pausar();
 }
-
-        
+     
    
 // Marca um paciente como excluído logicamente (status = false)
 void excluir_paciente(void){
@@ -324,7 +320,6 @@ void excluir_paciente(void){
     free(pac);
     pausar();
 }
-
 
 
 // Exibe os dados de um paciente formatados
