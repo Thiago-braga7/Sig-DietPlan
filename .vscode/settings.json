@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "agendamentos.h": "c",
-        "profissionais.h": "c"
-    }
+    ".clang-format": "yaml"
+    },
+    "editor.formatOnSave": true,
+    "C_Cpp.formatting": "clangFormat"
 }

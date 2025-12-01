@@ -1,0 +1,116 @@
+---
+# Créditos: ChatGPT e Gemini
+
+#############################################
+#              CONFIGURAÇÃO C/C++           #
+#############################################
+
+# Linguagem: C/C++
+Language:              Cpp
+
+# Base: estilo LLVM (limpo, moderno e amplamente aceito)
+BasedOnStyle:          LLVM
+
+#############################################
+#                IDENTAÇÃO                  #
+#############################################
+
+# 4 espaços = padrão mais aceito para C em projetos profissionais
+IndentWidth:           4
+TabWidth:              4
+UseTab:                Never          # Nunca use TABs reais, apenas espaços
+ContinuationIndentWidth: 4            # Indentação em quebras de linha
+
+IndentCaseLabels:      true           # case dentro do switch
+IndentGotoLabels:      false
+IndentPPDirectives:    AfterHash      # #define e #include alinhados
+
+#############################################
+#          TAMANHO / QUEBRA DE LINHA        #
+#############################################
+
+ColumnLimit:           100            # 100 = ideal para código limpo em telas modernas
+
+AllowShortBlocksOnASingleLine:  Never
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine:   false
+AllowShortFunctionsOnASingleLine: None
+
+BreakBeforeBinaryOperators:     All   # quebra antes de operadores (melhor leitura)
+BreakStringLiterals:            true
+
+#############################################
+#                  CHAVES                   #
+#############################################
+
+# Attach = if (x) { ... } -> estilo amplamente usado em C
+BreakBeforeBraces:     Attach
+
+BraceWrapping:
+  AfterFunction:       true   # função abre em nova linha
+  AfterControlStatement: false
+  BeforeElse:          false
+  IndentBraces:        false
+
+#############################################
+#              ESPAÇAMENTO                  #
+#############################################
+
+SpaceAfterCStyleCast:        true
+SpaceBeforeParens:           ControlStatements
+SpacesBeforeTrailingComments: 1
+
+SpacesInParentheses:         false
+SpacesInSquareBrackets:      false
+SpaceInEmptyParentheses:     false
+SpacesInAngles:              false
+
+#############################################
+#           PONTEIROS E REFERÊNCIAS         #
+#############################################
+
+PointerAlignment:            Right     # int *ptr; (padrão mais clássico do C)
+ReferenceAlignment:          Left
+
+#############################################
+#          ALINHAMENTOS IMPORTANTES         #
+#############################################
+
+AlignAfterOpenBracket:       Align
+AlignOperands:               true
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignTrailingComments:       true
+AlignEscapedNewlines:        Right
+
+#############################################
+#                  INCLUDES                 #
+#############################################
+
+SortIncludes:                true
+IncludeBlocks:               Regroup
+
+IncludeCategories:
+  - Regex: '^<.*\.h>'        # includes padrão
+    Priority: 1
+  - Regex: '^".*"'           # includes locais
+    Priority: 2
+  - Regex: '.*'
+    Priority: 3
+
+#############################################
+#            COMENTÁRIOS                    #
+#############################################
+
+ReflowComments:              true     # arruma comentários longos
+CommentPragmas:              '^ IWYU pragma:' 
+
+#############################################
+#               OUTROS                      #
+#############################################
+
+KeepEmptyLinesAtTheStartOfBlocks: false
+FixNamespaceComments:          false
+SpacesInContainerLiterals:     false
+
+...
