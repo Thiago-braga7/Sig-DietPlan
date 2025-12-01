@@ -13,10 +13,6 @@
 #include "leituras.h"
 
 
-#define RESET   "\033[0m"
-#define GREEN   "\033[32m"
-
-
 void modulo_relatorios(void) {
     char opcao;
 
@@ -33,7 +29,6 @@ void modulo_relatorios(void) {
         }
     } while (opcao != '0');  
 }
-
 
 
 char tela_relatorios(void) {
@@ -56,7 +51,6 @@ char tela_relatorios(void) {
 
     return opcao;
 }
-
 
 
 // Lista todos os pacientes ativos
@@ -97,7 +91,6 @@ void listar_pacientes(void) {
 
     pausar();
 }
-
 
 
 void listar_dietas(void) {
