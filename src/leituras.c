@@ -8,7 +8,7 @@ void ler_nome(char *nome) {
     int valido = 0;
 
     do{
-        printf("///                                 Nome:                                   ///\n");
+        printf("Nome: \n");
         scanf(" %50s", nome); 
         getchar();
 
@@ -25,7 +25,7 @@ void ler_cpf(char *cpf) {
     int valido = 0;
 
     do{
-        printf("///                        CPF (Apenas números):                            ///\n");
+        printf("CPF (Apenas números): \n");
         scanf(" %s", cpf); 
         getchar();
 
@@ -42,7 +42,7 @@ void ler_tel(char *tel) {
     int valido = 0;
     
     do{
-        printf("///                         Telefone (Apenas números):                      ///\n");
+        printf("Telefone (Apenas números):  \n");
         scanf(" %11s", tel); 
         getchar();
 
@@ -59,7 +59,7 @@ void ler_idade(char *idade) {
     int valido = 0;
 
     do{
-        printf("///                         Idade:                                          ///\n");
+        printf("Idade: \n");
         scanf("%s", idade); 
         getchar();
 
@@ -76,7 +76,7 @@ void ler_peso(float* peso) {
     int valido = 0;
 
     do{
-        printf("///                       Peso (kg):                                      ///\n");
+        printf("Peso (kg): \n");
         scanf("%f", peso); 
         getchar();
 
@@ -93,7 +93,7 @@ void ler_altura(float* altura) {
     int valido = 0;
     
     do{
-        printf("///                      Altura (m):                                     ///\n");
+        printf("Altura (m): \n");
         scanf("%f", altura); 
         getchar();
 
@@ -109,7 +109,7 @@ void ler_altura(float* altura) {
 void ler_data(char *data){
     int valido = 0;
     do {
-        printf("///                         Data (DD/MM/AAAA):                              ///\n");
+        printf("Data (DD/MM/AAAA):  \n");
         scanf("%10s", data);
         getchar();
 
@@ -125,7 +125,7 @@ void ler_data(char *data){
 void ler_hora(char *hora){
     int valido = 0;
     do{
-        printf("///                         Hora de Atendimento(08:00 - 18:00):            ///\n");
+        printf("Hora de Atendimento(08:00 - 18:00): \n");
         scanf("%s", hora); 
         getchar();
 
@@ -141,7 +141,7 @@ void ler_hora(char *hora){
 void ler_tipo(char *tipo){
     int valido = 0;
     do{
-        printf("///                         Tipo de Agendamento:                            ///\n");
+        printf("Tipo de Agendamento: \n");
         scanf(" %50[^\n]", tipo); 
         getchar();
 
@@ -157,7 +157,7 @@ void ler_tipo(char *tipo){
 void ler_profissional(char *profissional){
     int valido = 0;
      do{
-        printf("///                         Profissional Responsável:                       ///\n");
+        printf("Profissional Responsável: \n");
         scanf(" %50[^\n]", profissional); 
         getchar();
 
@@ -173,7 +173,7 @@ void ler_profissional(char *profissional){
 void ler_observacoes(char *observacoes){
     int valido = 0;
     do{
-        printf("///                         Observações:                                   ///\n");
+        printf("Observações: \n");
         scanf("%200[^\n]", observacoes); 
         getchar();
 
@@ -189,7 +189,7 @@ void ler_observacoes(char *observacoes){
 void ler_medico(char *medico){
     int valido = 0;
     do{
-        printf("///                         Nome do Médico:                                  ///\n");
+        printf("Nome do Médico: \n");
         scanf(" %50s", medico); 
         getchar();
 
@@ -205,7 +205,7 @@ void ler_medico(char *medico){
 void ler_dieta(char *nome_dieta){
     int valido = 0;
     do{
-        printf("///                         Nome da Dieta:                                  ///\n");
+        printf("Nome da Dieta: \n");
         scanf(" %50s", nome_dieta); 
         getchar();
 
@@ -221,7 +221,7 @@ void ler_dieta(char *nome_dieta){
 void ler_calorias(float calorias){
     int valido = 0;
     do{
-        printf("///                         Total de Calorias:                              ///\n");
+        printf("Total de Calorias: \n");
         scanf("%f", &calorias);
         getchar();
 
@@ -237,7 +237,7 @@ void ler_calorias(float calorias){
 void ler_refeicoes(char *refeicoes){
     int valido = 0;
     do{
-        printf("///                         Refeições (breve descrição):                    ///\n");
+        printf("Refeições (breve descrição): \n");
         scanf("%200[^\n]", refeicoes);
         getchar();
 
@@ -253,7 +253,7 @@ void ler_refeicoes(char *refeicoes){
 void ler_crn(char *crn){
     int valido = 0;
      do{
-        printf("///                         CRN(Formato: CRN-X/XXXXX ):                     ///\n");
+        printf("CRN(Formato: CRN-X/XXXXX ): \n");
         scanf(" %11s", crn);
         getchar();
         valido = valida_crn(crn);
