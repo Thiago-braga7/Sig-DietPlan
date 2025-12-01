@@ -5,23 +5,24 @@
 #include "uteis.h"
 
 
+void sobre(void) {
+    const char *info =
+        "Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação\n"
+        "da UFRN, para auxiliar no planejamento e acompanhamento de dietas.\n"
+        "Ele permite:\n"
+        "- Cadastro de pacientes e profissionais\n"
+        "- Gestão de dietas\n"
+        "- Agendamento de consultas\n"
+        "- Relatórios completos\n";
 
-
-void sobre(void){
     exibir_moldura_titulo("SIG-DietPlan");
-    printf("Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN,\n");
-    printf("para auxiliar no planejamento e acompanhamento de dietas.\n\n");    
-    printf("Ele permite:\n");
-    printf("• Cadastro de usuários\n");
-    printf("• Gestão dieta\n");
-    printf("• Registro de consumos diários\n");
-    printf("• Agendamento de consultas\n\n");
+    exibir_moldura_conteudo(info);
+
     pausar();
 }
 
 
-
-void sair(void){
+void sair(void) {
     const char *info =
         "Obrigado por utilizar o SIG-DietPlan\n"
         "Até a próxima!\n"
