@@ -34,6 +34,7 @@ void modulo_pacientes(void) {
             case '3': alterar_paciente(); break;
             case '4': excluir_paciente(); break;
         }
+
     } while (opcao != '0');  
 }
 
@@ -59,7 +60,6 @@ char tela_pacientes(void){
     
     return opcao;
 }
-
 
 
 // Realiza o cadastro de um novo paciente
@@ -237,6 +237,7 @@ void alterar_paciente(void){
         }
         fwrite(pac, sizeof(Paciente), 1, arq_paciente_temp);
     }
+    
     fclose(arq_paciente);
     fclose(arq_paciente_temp);
 
