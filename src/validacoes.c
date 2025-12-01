@@ -26,7 +26,6 @@ void limpar_tela(void){
 void pausar(void) {
     printf("\nPressione ENTER para continuar...");
     getchar();
-    getchar();
 }
 
 
