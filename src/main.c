@@ -77,7 +77,3 @@ void menu_principal(void){
     exibir_moldura_titulo("Planejamento de Dietas");
     exibir_moldura_conteudo(menu);
 }
-
-
-
-
