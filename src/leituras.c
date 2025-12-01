@@ -3,7 +3,6 @@
 #include "validacoes.h"
 
 
-
 void ler_nome(char *nome) {
     int valido = 0;
 
