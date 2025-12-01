@@ -21,11 +21,21 @@ void modulo_relatorios(void) {
         opcao = tela_relatorios();
 
         switch(opcao) {
-            case '1': listar_pacientes(); break;
-            case '2': listar_dietas(); break;
-            case '3': listar_profissionais(); break;
-            case '4': listar_consultas(); break;
-            case '5': listar_agendamentos(); break;
+            case '1':
+                listar_pacientes();
+                break;
+            case '2':
+                listar_dietas();
+                break;
+            case '3':
+                listar_profissionais();
+                break;
+            case '4':
+                listar_consultas();
+                break;
+            case '5':
+                listar_agendamentos();
+                break;
         }
     } while (opcao != '0');  
 }
@@ -45,7 +55,7 @@ char tela_relatorios(void) {
     exibir_moldura_titulo("Relatórios");
     exibir_moldura_conteudo(menu);
 
-    printf("║ Escolha a opção desejada: ");
+    printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
     getchar();
 
@@ -59,6 +69,7 @@ void listar_pacientes(void) {
     Paciente* pac;
 
     pac = (Paciente*)malloc(sizeof(Paciente));
+    
     bool encontrado = 0;
 
     limpar_tela();
@@ -124,7 +135,6 @@ void listar_dietas(void) {
 }
 
 
-
 void listar_profissionais(void) {
     FILE * arq_profissionais;
     Profissional * pf;
@@ -155,7 +165,6 @@ void listar_profissionais(void) {
 
     pausar();
 }
-
 
 
 // Lista todas as consultas ativas
@@ -190,7 +199,6 @@ void listar_consultas(void){
 
     pausar();
 }
-
 
 
 void listar_agendamentos(void){
