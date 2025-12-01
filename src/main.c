@@ -11,14 +11,12 @@
 #include "uteis.h"
 
 
-
-
 void menu_principal(void);
 
 int main(void){
     char opcao;
+    
     sobre();
-
     do {
         menu_principal();
         printf("Escolha uma opção: ");
@@ -26,14 +24,27 @@ int main(void){
         getchar();
 
         switch(opcao){
-            case '1': modulo_pacientes(); break;
-            case '2': modulo_dietas(); break;
-            case '3': modulo_profissionais(); break;
-            case '4': modulo_consultas(); break;
-            case '5': modulo_agendamentos(); break;
-            case '6': modulo_relatorios(); break;
-            case '0': sair(); break;
-            
+            case '1':
+                modulo_pacientes();
+                break;
+            case '2':
+                modulo_dietas();
+                break;
+            case '3':
+                modulo_profissionais();
+                break;
+            case '4':
+                modulo_consultas();
+                break;
+            case '5':
+                modulo_agendamentos();
+                break;
+            case '6':
+                modulo_relatorios();
+                break;
+            case '0':
+                sair();
+                break;
         }
     } while(opcao != '0');
 
@@ -43,9 +54,6 @@ int main(void){
 
 
 void menu_principal(void){
-    limpar_tela();
-    printf("\n");
-
     const char *cabecalho =
         "Universidade Federal do Rio Grande do Norte\n"
         "Centro de Ensino Superior do Seridó\n"
@@ -64,6 +72,7 @@ void menu_principal(void){
         "6. Relatórios\n"
         "0. Sair\n";
 
+    limpar_tela();
     exibir_moldura_conteudo(cabecalho);
     exibir_moldura_titulo("Planejamento de Dietas");
     exibir_moldura_conteudo(menu);
