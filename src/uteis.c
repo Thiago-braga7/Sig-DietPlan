@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 
-// Largura total
 #define LARGURA 75
 
-// Conta a "largura visual" real da string UTF-8 (acentos contam como 1)
+
+// Conta a largura da string na tela, para não quebrar alinhamento da moldura
 int largura_visual(const char *texto) {
     int largura = 0;
     unsigned char c;
     while ((c = *texto++)) {
-        // Se for byte de continuação UTF-8 (10xxxxxx), ignora
+        // Ignora bytes extras dos acentos UTF-8 (10xxxxxx)
         if ((c & 0xC0) != 0x80){
             largura++;
         }
@@ -18,10 +18,10 @@ int largura_visual(const char *texto) {
 }
 
 
-
 // Moldura apenas com o título
 void exibir_moldura_titulo(const char *titulo) {
     int i;
+
     printf("╔");
     for (i = 0; i < LARGURA; i++){
         printf("═");
@@ -30,16 +30,16 @@ void exibir_moldura_titulo(const char *titulo) {
 
     int titulo_len = largura_visual(titulo);
     int espacos = (LARGURA - titulo_len) / 2;
+
     printf("║%*s""%s""%*s║\n",
            espacos, "", titulo, LARGURA - espacos - titulo_len, "");
-
     printf("╚");
+
     for (i = 0; i < LARGURA; i++){
         printf("═");
     }
     printf("╝""\n");
 }
-
 
 
 // Moldura apenas com o conteúdo
