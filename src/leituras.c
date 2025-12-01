@@ -17,6 +17,7 @@ void ler_nome(char *nome) {
         if(valido == 0){
             printf("Nome inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -34,6 +35,7 @@ void ler_cpf(char *cpf) {
         if(valido == 0){
             printf("CPF inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -51,6 +53,7 @@ void ler_tel(char *tel) {
         if(valido == 0){
             printf("Telefone inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -68,6 +71,7 @@ void ler_idade(char *idade) {
         if(valido == 0){
             printf("Idade inválida! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -85,6 +89,7 @@ void ler_peso(float* peso) {
         if(valido == 0){
             printf("Peso inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -102,6 +107,7 @@ void ler_altura(float* altura) {
         if(valido == 0){
             printf("Altura inválida! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -118,6 +124,7 @@ void ler_data(char *data){
         if (valido == 0) {
             printf("Data inválida! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -134,6 +141,7 @@ void ler_hora(char *hora){
         if(valido == 0){
             printf("Hora inválida! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -150,6 +158,7 @@ void ler_tipo(char *tipo){
         if(valido == 0){
             printf("Texto inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -166,6 +175,7 @@ void ler_profissional(char *profissional){
         if(valido == 0){
             printf("Nome inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -182,6 +192,7 @@ void ler_observacoes(char *observacoes){
         if(valido == 0){
             printf("Texto Digitado inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -198,6 +209,7 @@ void ler_medico(char *medico){
         if(valido == 0){
             printf("Nome inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -214,6 +226,7 @@ void ler_dieta(char *nome_dieta){
         if(valido == 0){
             printf("Nome inválido! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -230,6 +243,7 @@ void ler_calorias(float calorias){
         if(valido == 0){
             printf("Calorias inválidas! Digite novamente! \n");
         }
+
     } while (valido == 0);
 }
 
@@ -246,6 +260,7 @@ void ler_refeicoes(char *refeicoes){
         if(valido == 0){
             printf("Texto Digitado inválido! Digite novamente! \n");
         }
+        
     } while (valido == 0);
 }
 
