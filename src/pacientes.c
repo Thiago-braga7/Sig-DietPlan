@@ -83,7 +83,7 @@ void cadastrar_paciente(void) {
     ler_nome(pac->nome);
     ler_cpf(pac->cpf);
     ler_tel(pac->tel);
-    ler_idade(pac->idade);
+    ler_idade(&pac->idade);
     ler_peso(&pac->peso);
     ler_altura(&pac->altura);
 
@@ -215,7 +215,7 @@ void alterar_paciente(void) {
                         ler_tel(pac->tel);
                         break;
                     case '4':
-                        ler_idade(pac->idade);
+                        ler_idade(&pac->idade);
                         break;
                     case '5':
                         ler_peso(&pac->peso);
@@ -340,7 +340,7 @@ void exibir_paciente(const Paciente *pac) {
     printf("Nome: %s\n", pac->nome);
     printf("CPF: %s\n", pac->cpf);
     printf("Telefone: %s\n", pac->tel);
-    printf("Idade: %s\n", pac->idade);
+    printf("Idade: %d\n", pac->idade);
     printf("Peso: %.2f\n", pac->peso);
     printf("Altura: %.2f\n", pac->altura);
 }

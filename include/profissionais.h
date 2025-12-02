@@ -9,6 +9,7 @@ struct profissional {
     char cpf[13];
     char tel[12];
     char crn[12];
+    char sexo;
     int status;
 };
 

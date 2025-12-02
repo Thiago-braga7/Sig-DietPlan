@@ -56,6 +56,7 @@ char tela_relatorios(void) {
     exibir_moldura_conteudo(menu);
 
     printf("Escolha a opção desejada: ");
+    printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
     getchar();
 
@@ -234,5 +235,162 @@ void listar_agendamentos(void) {
     fclose(arq_agendamentos);
     free(ag);
 
+    pausar();
+}
+
+
+
+void listar_dietas_calorias(void) {
+    FILE *arq_dietas;
+    Dieta* dt;
+
+    dt = (Dieta*) malloc(sizeof(Dieta));
+    bool encontrado = 0;
+
+    int calorias_min;
+    int calorias_max;
+
+    limpar_tela();
+    exibir_moldura_titulo("Dietas - Lista por Calorias");
+    
+    printf("Digite a quantidade mínima de calorias: ");
+    scanf("%d", &calorias_min);
+
+    printf("Digite a quantidade máxima de calorias: ");
+    scanf("%d", &calorias_max);
+
+    arq_dietas = fopen("data/arq_dietas.dat", "rb");    
+    if (arq_dietas == NULL) {
+        exibir_moldura_titulo("Nenhuma dieta cadastrada ainda");
+        free(dt);
+        return;
+    }
+
+    while (fread(dt, sizeof(Dieta), 1, arq_dietas)){
+        if (dt->status) {
+            if (dt->calorias >= calorias_min && dt->calorias <= calorias_max) {
+                encontrado = 1;
+                printf("\n");
+                exibir_dieta(dt);
+                printf("\n");
+                printf("════════════════════════════════════════════════════════════════════════════\n");
+            }
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhuma dieta encontrada nesse intervalo de calorias");
+    }
+
+    fclose(arq_dietas);
+    free(dt);
+
+    pausar();
+}
+
+
+void listar_agendamentos_paciente(void) {
+    FILE *arq_agendamentos;
+    FILE *arq_pacientes;
+    Agendamento *ag;
+    Paciente *pac;
+
+    ag = (Agendamento*) malloc(sizeof(Agendamento));
+    pac = (Paciente*) malloc(sizeof(Paciente));
+
+    char cpf_busca[13];
+
+    limpar_tela();
+    exibir_moldura_titulo("Agendamentos - Lista por CPF");
+
+    printf("Digite o CPF do paciente (Apenas Números): ");
+    scanf("%s", cpf_busca);
+    getchar();
+
+    printf("║ %-30s ║ %15s ║ %11s ║ %7s ║ %10s ║ %12s ║ %14s ║\n", "Nome", "ID Agendamento", "Data", "Hora", "Tipo", "Profissional", "Observações");
+    printf("═════════════════════════════════════════════════════════════════════════════\n");
+
+    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");    
+    if (arq_agendamentos == NULL) {
+        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
+        free(ag);
+        return;
+    }
+
+    bool encontrado = 0;
+
+    while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
+        if (ag->status) {
+            if (strcmp(ag->cpf, cpf_busca) == 0) {
+                encontrado = 1;
+
+                arq_pacientes = fopen("data/arq_pacientes.dat", "rb");
+                
+                if (arq_pacientes != NULL) {
+                    while (fread(pac, sizeof(Paciente), 1, arq_pacientes)) {
+                        if (pac->status && strcmp(pac->cpf, cpf_busca) == 0) {
+                            break;
+                        }
+                    }
+                    fclose(arq_pacientes);
+                }
+
+                printf("║ %-30s ║ %15d ║ %11s ║ %7s ║ %10s ║ %12s ║ %12s ║\n",
+                pac->nome, ag->id_agendamento, ag->data, ag->hora, ag->tipo, ag->profissional, ag->observacoes);
+                printf("════════════════════════════════════════════════════════════════════════════\n");
+            }
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhum agendamento encontrado para esse CPF");
+    }
+
+    fclose(arq_agendamentos);
+    free(ag);
+    pausar();
+}
+
+
+
+void listar_profissionais_sexo(void) {
+    FILE *arq;
+    Profissional *pf;
+    char sexo_busca;
+    bool encontrado = false;
+
+    pf = (Profissional*) malloc(sizeof(Profissional));
+    if (!pf) return;
+
+    limpar_tela();
+    exibir_moldura_titulo("Profissionais - Lista por Sexo");
+
+    printf("Digite o sexo para buscar (M/F/O): ");
+    scanf(" %c", &sexo_busca);
+    sexo_busca = toupper((unsigned char)sexo_busca);
+    while (getchar() != '\n');
+
+    arq = fopen("data/arq_profissionais.dat", "rb");
+    if (arq == NULL) {
+        exibir_moldura_titulo("Nenhum profissional cadastrado ainda");
+        free(pf);
+        return;
+    }
+
+    while (fread(pf, sizeof(Profissional), 1, arq)) {
+        if (pf->status && pf->sexo == sexo_busca) {
+            encontrado = true;
+            printf("\n");
+            exibir_profissional(pf);
+            printf("\n════════════════════════════════════════════════════════════════════════════\n");
+        }
+    }
+
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhum profissional encontrado para esse sexo");
+    }
+
+    fclose(arq);
+    free(pf);
     pausar();
 }
