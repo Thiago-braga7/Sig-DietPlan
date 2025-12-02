@@ -24,5 +24,6 @@ void listar_consultas(void);
 void listar_consultas_medico(void);
 void listar_agendamentos(void);
 void listar_agendamentos_paciente(void);
+void listar_agendamentos_ordenado(void);
 
 #endif
