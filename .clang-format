@@ -1,114 +1,71 @@
 ---
-# Créditos: ChatGPT e Gemini
+# Créditos: adaptado do Gemini
 
-#############################################
-#              CONFIGURAÇÃO C/C++           #
-#############################################
-
-# Linguagem: C/C++
+# CONFIGURAÇÃO GERAL
 Language: Cpp
-
-# Base: estilo LLVM (limpo, moderno e amplamente aceito)
+Standard: Latest
 BasedOnStyle: LLVM
 
-#############################################
-#                IDENTAÇÃO                  #
-#############################################
-
-# 4 espaços = padrão mais aceito para C em projetos profissionais
+# INDENTAÇÃO
 IndentWidth: 4
 TabWidth: 4
-UseTab: Never # Nunca use TABs reais, apenas espaços
-ContinuationIndentWidth: 4 # Indentação em quebras de linha
+UseTab: Never
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
 
-IndentCaseLabels: true # case dentro do switch
-IndentGotoLabels: false
-IndentPPDirectives: AfterHash # #define e #include alinhados
-
-#############################################
-#          TAMANHO / QUEBRA DE LINHA        #
-#############################################
-
-ColumnLimit: 100 # 100 = ideal para código limpo em telas modernas
-
+# TAMANHO / QUEBRA DE LINHA
+ColumnLimit: 100
 AllowShortBlocksOnASingleLine: Never
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
 
-BreakBeforeBinaryOperators: All # quebra antes de operadores (melhor leitura)
+# OPERADORES
+BreakBeforeBinaryOperators: NonAssignment
 BreakStringLiterals: true
 
-#############################################
-#                  CHAVES                   #
-#############################################
+# ARGUMENTOS E PARÂMETROS
+BinPackArguments: false
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false
 
-# Attach = if (x) { ... } -> estilo amplamente usado em C
-BreakBeforeBraces: Attach
-
+# CHAVES
+BreakBeforeBraces: Linux
 BraceWrapping:
-  AfterFunction: true # função abre em nova linha
   AfterControlStatement: false
   BeforeElse: false
   IndentBraces: false
 
-#############################################
-#              ESPAÇAMENTO                  #
-#############################################
-
-SpaceAfterCStyleCast: true
+# ESPAÇAMENTO
+MaxEmptyLinesToKeep: 2
 SpaceBeforeParens: ControlStatements
-SpacesBeforeTrailingComments: 1
-
+SpacesBeforeTrailingComments: 2
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 SpaceInEmptyParentheses: false
-SpacesInAngles: false
 
-#############################################
-#           PONTEIROS E REFERÊNCIAS         #
-#############################################
-
-PointerAlignment: Right # int *ptr; (padrão mais clássico do C)
-ReferenceAlignment: Left
-
-#############################################
-#          ALINHAMENTOS IMPORTANTES         #
-#############################################
-
+# ALINHAMENTOS
+PointerAlignment: Right
 AlignAfterOpenBracket: Align
-AlignOperands: true
+AlignOperands: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignTrailingComments: true
 AlignEscapedNewlines: Right
 
-#############################################
-#                  INCLUDES                 #
-#############################################
-
+# INCLUDES
 SortIncludes: true
 IncludeBlocks: Regroup
-
 IncludeCategories:
-  - Regex: '^<.*\.h>' # includes padrão
+  - Regex: '^<.*\.h>'
     Priority: 1
-  - Regex: '^".*"' # includes locais
+  - Regex: "^<.*"
     Priority: 2
   - Regex: ".*"
     Priority: 3
 
-#############################################
-#            COMENTÁRIOS                    #
-#############################################
-
-ReflowComments: true # arruma comentários longos
-CommentPragmas: "^ IWYU pragma:"
-
-#############################################
-#               OUTROS                      #
-#############################################
-
+# OUTROS
+ReflowComments: true
 KeepEmptyLinesAtTheStartOfBlocks: false
-FixNamespaceComments: false
 SpacesInContainerLiterals: false
