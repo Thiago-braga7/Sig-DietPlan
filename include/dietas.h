@@ -18,6 +18,6 @@ void buscar_dieta(void);
 void alterar_dieta(void);
 void excluir_dieta(void);
 void excluir_dieta_fisica(void);
-void exibir_dieta(const Dieta * dt);
+void exibir_dieta(const Dieta *dt);
 
 #endif

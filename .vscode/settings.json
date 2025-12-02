@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        ".clang-format": "yaml",
+        "leituras.h": "c",
+        "agendamentos.h": "c"
+    },
+    "editor.formatOnSave": true,
+    "C_Cpp.formatting": "clangFormat"
+}

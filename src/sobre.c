@@ -1,34 +1,34 @@
+#include "sobre.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "sobre.h"
+
+#include "uteis.h"
 #include "validacoes.h"
 
 
+void sobre(void) {
+    const char *info = "Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação\n"
+                       "da UFRN, para auxiliar no planejamento e acompanhamento de dietas.\n"
+                       "Ele permite:\n"
+                       "- Cadastro de pacientes e profissionais\n"
+                       "- Gestão de dietas\n"
+                       "- Agendamento de consultas\n"
+                       "- Relatórios completos\n";
 
-// créditos:Text Art
+    exibir_moldura_titulo("SIG-DietPlan");
+    exibir_moldura_conteudo(info);
 
-void sobre(void){
-    printf("====================================================\n");
-    printf("                  Sig - DietPlan                    \n");
-    printf("====================================================\n");
-    printf("Sig-DietaPlan é um sistema desenvolvido na disciplina de Programação da UFRN,\n");
-    printf("para auxiliar no planejamento e acompanhamento de dietas.\n\n");    
-    printf("Ele permite:\n");
-    printf("  • Cadastro de usuários\n");
-    printf("  • Gestão dieta\n");
-    printf("  • Registro de consumos diários\n");
-    printf("  • Agendamento de consultas\n\n");
-    printf("====================================================\n\n");
     pausar();
 }
-void sair(void){
+
+
+void sair(void) {
+    const char *info = "Obrigado por utilizar o SIG-DietPlan\n"
+                       "Até a próxima!\n"
+                       "Instagram: @thiago.braga9a | @gabrieluchoa_1 | @wallisonvsdias\n"
+                       "GitHub: Thiago-braga7 | GabrielUchoa17 | wallisonvsdias\n";
+
     limpar_tela();
-    printf("\n");
-    printf("//////////////////////////////////////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                   Obrigado por utilizar o Sig - DietPlan                               ///\n");            
-    printf("///                                            Até a proxima!                                              ///\n");
-    printf("///                          📷 Instagram: @thiago.braga9a | @gabrieluchoa_1 | @wallisonvsdias             ///\n");
-    printf("///          🐙 GitHub: github.com/Thiago-braga7 | github.com/GabrielUchoa17 | github.com/wallisonvsdias   ///\n");
-    printf("///                                                                                                        ///\n");
-    printf("//////////////////////////////////////////////////////////////////////////////////////////////////////////////\n");
+    exibir_moldura_conteudo(info);
 }
