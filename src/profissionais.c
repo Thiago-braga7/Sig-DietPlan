@@ -4,6 +4,7 @@
 #include "validacoes.h"
 #include <string.h>
 #include "leituras.h"
+#include "uteis.h"
 #define True 1
 #define False 0
 
@@ -23,22 +24,20 @@ void modulo_profissionais(void) {
 
 char tela_profissionais(void){
     char opcao;
+    const char *menu =
+        "1. Cadastrar Profissional\n"
+        "2. Buscar Profissional\n"
+        "3. Alterar Dados do Profissional\n"
+        "4. Excluir Profissional\n"
+        "0. Voltar ao menu principal\n";
+
     limpar_tela();
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Profissionais  = = = = =                    ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                    1. Cadastrar Profissional                            ///\n");
-    printf("///                    2. Buscar Profissional                               ///\n");
-    printf("///                    3. Alterar Profissional                              ///\n");
-    printf("///                    4. Excluir Profissional                              ///\n");
-    printf("///                    0. Voltar ao Menu Principal                          ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                      Escolha a opção desejada:                          ///\n");
-    scanf("%c", &opcao);
+    exibir_moldura_titulo("Profissionais");
+    exibir_moldura_conteudo(menu);
+    printf("Escolha a opção desejada: ");
+    scanf(" %c", &opcao);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    pausar();
     return opcao;
 }
 
@@ -60,19 +59,14 @@ void cadastrar_profissional(void){
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Profissional                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = =  Cadastrar Profissional = = = = =             ///\n");
-    printf("///                                                                         ///\n");
+    exibir_moldura_titulo("Cadastro - Profissionais");
     ler_nome(pf->nome);
     ler_cpf(pf->cpf);
     ler_tel(pf->tel);
     ler_crn(pf->crn);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("                    Profissional Cadastrado com Sucesso!                       \n");
-    printf("///                        ID gerado: %02d                                    ///\n", pf->id_profissional);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
+    printf("Paciente cadastrado com sucesso!\n");
+    printf("ID gerado: %02d\n", pf->id_profissional);
 
     pf->status = True;
 
@@ -99,15 +93,11 @@ void buscar_profissional(void){
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                Profissional                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                  = = = = =  Buscar Profissional  = = = = =              ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                       Informe o ID do Profissional:                     ///\n");
+    exibir_moldura_titulo("Busca - Profissionais");
+    printf("Informe o ID do Profissional: \n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
     encontrado = False;
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
 
@@ -117,7 +107,7 @@ void buscar_profissional(void){
     }
     while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
         if ((pf->id_profissional == id_busca) && (pf->status == True)){
-            printf("///                        Profissional Encontrado!                         ///\n");
+            printf("Profissional Encontrado!\n");
             exibir_profissional(pf);
             encontrado = True;
             break;
@@ -147,15 +137,11 @@ void alterar_profissional(void){
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                               Profissionais                             ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Alterar Dados do Profissional = = = = =       ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                          Informe o ID:                                  ///\n");
+    exibir_moldura_titulo("Alteração - Profissionais");
+    printf("Informe o ID: \n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+
     encontrado = False;
 
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
@@ -172,7 +158,7 @@ void alterar_profissional(void){
 
             do{
                 limpar_tela();
-                printf("\n    Dados atuais do profissional    \n");
+                printf("\nDados atuais do profissional\n");
                 exibir_profissional(pf);
 
                 printf("\nQual campo deseja alterar?\n");
@@ -186,72 +172,34 @@ void alterar_profissional(void){
 
                 switch (opcao) {
                     case '1':
-                        do{
-                            printf("Novo nome: ");
-                            scanf(" %50s", pf->nome); 
-                            getchar();
-
-                            valido = validar_nome(pf->nome);
-
-                            if(valido == 0){
-                                printf("Nome inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        validar_nome(pf->nome);
                         break;
                     case '2':
-                        do{
-                            printf("Novo CPF(Apenas Números):                 \n");
-                            scanf("%s", pf->cpf); 
-                            getchar();
-
-                            valido = validar_cpf(pf->cpf);
-
-                            if(valido == 0){
-                                printf("CPF inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        validar_cpf(pf->cpf);
                         break;
                     case '3':
-                        do{
-                            printf("\nNovo Telefone (Apenas números):                      \n");
-                            scanf(" %11s", pf->tel); 
-                            getchar();
-
-                            valido = valida_telefone(pf->tel);
-
-                            if(valido == 0){
-                                printf("Telefone inválido! Digite novamente! \n");
-                            }
-                        } while (valido == 0);
+                        valida_telefone(pf->tel);
                         break;
                     case '4':
-                        do{
-                            printf("\nNovo CRN(Formato: CRN-X/XXXXX ):                     \n");
-                            scanf(" %11s", pf->crn);
-                            getchar();
-                            valido = valida_crn(pf->crn);
-
-                            if (valido == 0){
-                                printf("\nCRN inválido! Digite novamente! \n");
-                            }
-
-                        } while (valido == 0);
+                        valida_crn(pf->crn);
                         break;
                     default:
                         printf("Opção inválida!\n");
                         break;
                 }
 
-                printf("\n    Dados atualizados   \n");
+                printf("\nDados atualizados\n");
                 exibir_profissional(pf);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
                 getchar();
                 continuar = confirmar_acao(continuar);
+
                 if(continuar == 0){
                     printf("Opção inválida! Digite apenas S ou N.\n");
                 }
+                
             } while (continuar == 'S');
         }
         fwrite(pf, sizeof(Profissional), 1, arq_profissionais_temp);
@@ -264,6 +212,7 @@ void alterar_profissional(void){
         remove("data/arq_profissionais.dat");
         rename("data/arq_profissionais_temp.dat", "data/arq_profissionais.dat");
         printf("///                    Profissional alterado com sucesso!                      ///\n");
+    
     } else {
         remove("data/arq_profissionais_temp.dat");
         printf("\nProfissional não encontrado!\n");
@@ -283,15 +232,10 @@ void excluir_profissional(void){
 
     limpar_tela();
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                             Profissionais                               ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                 = = = = = Excluir Profissional = = = = =                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                         Informe o ID do Profissional:                   ///\n");
+    exibir_moldura_titulo("Exclusão - Profissionais");
+    printf("Informe o ID do Profissional: \n");
     scanf("%d", &id_busca);
     getchar();
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
     encontrado = False;
     pausar();
 
@@ -304,7 +248,7 @@ void excluir_profissional(void){
 
     while(fread(pf, sizeof(Profissional),1, arq_profissionais)){
         if((pf->id_profissional == id_busca) && (pf->status == True)){
-            printf("///                        Profissional Encontrado!                       ///\n");
+            printf("Profissional Encontrado!\n");
             exibir_profissional(pf);
             encontrado = True;
 
