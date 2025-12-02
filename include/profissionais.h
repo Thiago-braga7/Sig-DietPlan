@@ -18,6 +18,6 @@ void cadastrar_profissional(void);
 void buscar_profissional(void);
 void alterar_profissional(void);
 void excluir_profissional(void);
-void exibir_profissional(const Profissional * pf);
+void exibir_profissional(const Profissional *pf);
 
 #endif
