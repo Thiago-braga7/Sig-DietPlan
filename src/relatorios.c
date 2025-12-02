@@ -37,8 +37,6 @@ void modulo_relatorios(void) {
         opcao = tela_relatorios();
 
         switch (opcao) {
-            case '0':
-                break;
             case '1':
                 relatorios_pacientes();
                 break;
