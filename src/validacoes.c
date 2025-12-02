@@ -61,12 +61,12 @@ int valida_telefone(char *fone) {
 }
 
 
-int valida_idade(int idade){
-  if(idade > 0 && idade <= 130){
-    return 1;
-  } else{
-    return 0;
-  }
+int valida_idade(int idade) {
+    if (idade > 0 && idade <= 130) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 
