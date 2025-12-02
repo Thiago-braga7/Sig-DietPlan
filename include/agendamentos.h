@@ -21,6 +21,6 @@ void buscar_agendamento(void);
 void alterar_agendamento(void);
 void excluir_agendamento(void);
 void excluir_agendamento_fisico(void);
-void exibir_agendamento(const Agendamento * ag);
+void exibir_agendamento(const Agendamento *ag);
 
 #endif

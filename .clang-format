@@ -1,0 +1,71 @@
+---
+# Créditos: adaptado do Gemini
+
+# CONFIGURAÇÃO GERAL
+Language: Cpp
+Standard: Latest
+BasedOnStyle: LLVM
+
+# INDENTAÇÃO
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
+
+# TAMANHO / QUEBRA DE LINHA
+ColumnLimit: 100
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+
+# OPERADORES
+BreakBeforeBinaryOperators: NonAssignment
+BreakStringLiterals: true
+
+# ARGUMENTOS E PARÂMETROS
+BinPackArguments: false
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false
+
+# CHAVES
+BreakBeforeBraces: Attach
+BraceWrapping:
+  AfterControlStatement: false
+  BeforeElse: false
+  IndentBraces: false
+
+# ESPAÇAMENTO
+MaxEmptyLinesToKeep: 2
+SpaceBeforeParens: ControlStatements
+SpacesBeforeTrailingComments: 2
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceInEmptyParentheses: false
+
+# ALINHAMENTOS
+PointerAlignment: Right
+AlignAfterOpenBracket: Align
+AlignOperands: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignTrailingComments: true
+AlignEscapedNewlines: Right
+
+# INCLUDES
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  - Regex: "^<.*"
+    Priority: 2
+  - Regex: ".*"
+    Priority: 3
+
+# OUTROS
+ReflowComments: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+SpacesInContainerLiterals: false
