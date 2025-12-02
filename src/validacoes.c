@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 
+
 // Funcões criadas por Thiago
 char confirmar_acao(char valor) {
     valor = toupper(valor);
@@ -17,14 +18,17 @@ char confirmar_acao(char valor) {
     return 0;
 }
 
+
 void limpar_tela(void) {
     system("clear||cls");
 }
+
 
 void pausar(void) {
     printf("\nPressione ENTER para continuar...");
     getchar();
 }
+
 
 // Formato CRN-X/XXXXX
 int valida_crn(char *crn) {
@@ -41,6 +45,7 @@ int valida_crn(char *crn) {
     return 1;
 }
 
+
 // Créditos: função adaptada de Flávius Gorgônio (Projeto Língua Solta 2020.2)
 int valida_telefone(char *fone) {
     if (strlen(fone) != 11) {
@@ -54,6 +59,7 @@ int valida_telefone(char *fone) {
     }
     return 1;
 }
+
 
 int valida_idade(char *digito) {
     int len = strlen(digito);
@@ -75,6 +81,7 @@ int valida_idade(char *digito) {
         return 0;
     }
 }
+
 
 int valida_mes(char *mes) {
     int len = strlen(mes);
@@ -98,6 +105,7 @@ int valida_mes(char *mes) {
     }
 }
 
+
 int ano_bissexto(int ano) {
     if (ano % 400 == 0) {
         return 1;
@@ -109,6 +117,7 @@ int ano_bissexto(int ano) {
         return 0;
     }
 }
+
 
 // Créditos: função adaptada de Flávius Gorgônio (Projeto Língua Solta 2020.2)
 int valida_dia(int dia, int mes, int ano) {
@@ -133,18 +142,20 @@ int valida_dia(int dia, int mes, int ano) {
     return 1;
 }
 
+
 // Créditos: Gemini. Peguei essa função para saber o ano atual;
 /* Explicação: Conta os segundos desde 1970 até a data atual, converte para a data atual, subtrai
 com 1900(por causa do tm_year), aí depois somamos novamente com 1900 para termos o ano atual.
 */
 int ano_atual() {
-    time_t     segundos_atuais = time(NULL); // Pega o tempo atual em segundos desde 01/01/1970
-    struct tm *data_atual
-        = localtime(&segundos_atuais); // Converte para a data_atual/hora local (estrutura tm)
+    time_t segundos_atuais = time(NULL);  // Pega o tempo atual em segundos desde 01/01/1970
+    struct tm *data_atual =
+        localtime(&segundos_atuais);  // Converte para a data_atual/hora local (estrutura tm)
 
     return data_atual->tm_year
-           + 1900; // tm_year é anos desde 1900, então somamos 1900 para obter o ano real
+           + 1900;  // tm_year é anos desde 1900, então somamos 1900 para obter o ano real
 }
+
 
 // Essa função foi criada para validar apenas o ano atual e (ano atual + 1)
 int valida_ano(int ano) {
@@ -157,6 +168,7 @@ int valida_ano(int ano) {
     }
 }
 
+
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
 int valida_data(char *data) {
     int len, dia, mes, ano;
@@ -164,7 +176,7 @@ int valida_data(char *data) {
     if (len != 10) {
         return 0;
     }
-    
+
     // Espera-se o formato DD/MM/AAAA
     if (!isdigit(data[0]) || !isdigit(data[1]) || data[2] != '/' || !isdigit(data[3])
         || !isdigit(data[4]) || data[5] != '/' || !isdigit(data[6]) || !isdigit(data[7])
@@ -185,11 +197,11 @@ int valida_data(char *data) {
 
     // Créditos: Função Adaptada do Gemini
     // Verifica se a data já passou;
-    time_t     segundos_atuais = time(NULL);
-    struct tm *data_atual      = localtime(&segundos_atuais);
-    int        dia_atual       = data_atual->tm_mday;
-    int        mes_atual       = data_atual->tm_mon + 1; // pega os meses de 0 a 11;
-    int        ano_atual_val   = data_atual->tm_year + 1900;
+    time_t segundos_atuais = time(NULL);
+    struct tm *data_atual = localtime(&segundos_atuais);
+    int dia_atual = data_atual->tm_mday;
+    int mes_atual = data_atual->tm_mon + 1;  // pega os meses de 0 a 11;
+    int ano_atual_val = data_atual->tm_year + 1900;
 
     if (ano == ano_atual_val) {
         if (mes < mes_atual) {
@@ -202,6 +214,7 @@ int valida_data(char *data) {
     return 1;
 }
 
+
 int validar_hora(const char *hora) {
     if (strlen(hora) != 5) {
         return 0;
@@ -213,6 +226,7 @@ int validar_hora(const char *hora) {
             if (hora[i] != ':') {
                 return 0;
             }
+
         } else {
             if (!isdigit(hora[i])) {
                 return 0;
@@ -220,7 +234,7 @@ int validar_hora(const char *hora) {
         }
     }
 
-    int horas   = (hora[0] - '0') * 10 + (hora[1] - '0');
+    int horas = (hora[0] - '0') * 10 + (hora[1] - '0');
     int minutos = (hora[3] - '0') * 10 + (hora[4] - '0');
 
     if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
@@ -231,18 +245,21 @@ int validar_hora(const char *hora) {
     if (horas < 8 || horas > 18 || (horas == 18 && minutos > 0)) {
         return 0;
     }
+
     return 1;
 }
+
 
 int validar_calorias(float calorias) {
     if (calorias > 0.0 && calorias < 10000.0) {
         return 1;
     }
+
     return 0;
 }
 
-// Funções criadas por Wallison
-// Com auxílio do ChatGPT
+
+// Funções criadas por Wallison, auxílio do ChatGPT
 int validar_nome(const char *nome) {
     setlocale(LC_CTYPE, "");
 
@@ -266,6 +283,7 @@ int validar_nome(const char *nome) {
     return 1;
 }
 
+
 int validar_cpf(char *cpf) {
     int i;
     int tamanho = strlen(cpf);
@@ -285,6 +303,7 @@ int validar_cpf(char *cpf) {
     return 1;
 }
 
+
 int validar_peso(float peso) {
     // Permite apenas valores positivos
     if (peso <= 0) {
@@ -299,6 +318,7 @@ int validar_peso(float peso) {
     return 1;
 }
 
+
 int validar_altura(float altura) {
     // Permite apenas valores positivos
     if (altura <= 0) {
@@ -312,6 +332,7 @@ int validar_altura(float altura) {
 
     return 1;
 }
+
 
 // Créditos: Essa função eu tomei como base a Função ler_nome criada por Walisson;
 int validar_observacao(const char *obs) {

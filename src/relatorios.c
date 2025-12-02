@@ -1,16 +1,17 @@
+#include "relatorios.h"
+
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-#include "relatorios.h"
-#include "pacientes.h"
-#include "dietas.h"
-#include "profissionais.h"
-#include "consultas.h"
 #include "agendamentos.h"
+#include "consultas.h"
+#include "dietas.h"
+#include "leituras.h"
+#include "pacientes.h"
+#include "profissionais.h"
 #include "uteis.h"
 #include "validacoes.h"
-#include "leituras.h"
 
 
 void modulo_relatorios(void) {
@@ -20,7 +21,7 @@ void modulo_relatorios(void) {
         limpar_tela();
         opcao = tela_relatorios();
 
-        switch(opcao) {
+        switch (opcao) {
             case '1':
                 listar_pacientes();
                 break;
@@ -37,20 +38,19 @@ void modulo_relatorios(void) {
                 listar_agendamentos();
                 break;
         }
-    } while (opcao != '0');  
+    } while (opcao != '0');
 }
 
 
 char tela_relatorios(void) {
     char opcao;
 
-    const char *menu =
-        "1. Lista geral de Pacientes\n"
-        "2. Lista geral de Dietas\n"
-        "3. Lista geral de Profissionais\n"
-        "4. Lista geral de Consultas\n"
-        "5. Lista geral de Agendamentos\n"
-        "0. Voltar ao Menu Principal";
+    const char *menu = "1. Lista geral de Pacientes\n"
+                       "2. Lista geral de Dietas\n"
+                       "3. Lista geral de Profissionais\n"
+                       "4. Lista geral de Consultas\n"
+                       "5. Lista geral de Agendamentos\n"
+                       "0. Voltar ao Menu Principal";
 
     exibir_moldura_titulo("Relatórios");
     exibir_moldura_conteudo(menu);
@@ -66,30 +66,31 @@ char tela_relatorios(void) {
 // Lista todos os pacientes ativos
 void listar_pacientes(void) {
     FILE *arq_paciente;
-    Paciente* pac;
+    Paciente *pac;
 
-    pac = (Paciente*)malloc(sizeof(Paciente));
-    
+    pac = (Paciente *)malloc(sizeof(Paciente));
+
     bool encontrado = 0;
 
     limpar_tela();
     exibir_moldura_titulo("Pacientes - Lista Geral");
-    
 
-    arq_paciente = fopen("data/arq_pacientes.dat", "rb");    
+
+    arq_paciente = fopen("data/arq_pacientes.dat", "rb");
     if (arq_paciente == NULL) {
         exibir_moldura_titulo("Nenhum paciente cadastrado ainda");
         free(pac);
         return;
     }
 
-    while (fread(pac, sizeof(Paciente), 1, arq_paciente)){
+    while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (pac->status) {
             encontrado = 1;
             printf("\n");
             exibir_paciente(pac);
             printf("\n");
-            printf("════════════════════════════════════════════════════════════════════════════\n");
+            printf(
+                "════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
@@ -106,10 +107,10 @@ void listar_pacientes(void) {
 
 void listar_dietas(void) {
     FILE *arq_dietas;
-    Dieta* dt;
+    Dieta *dt;
 
-    dt = (Dieta*) malloc(sizeof(Dieta));
-    
+    dt = (Dieta *)malloc(sizeof(Dieta));
+
     arq_dietas = fopen("data/arq_dietas.dat", "rb");
     if (arq_dietas == NULL) {
         exibir_moldura_titulo("Nenhuma dieta cadastrada ainda");
@@ -125,7 +126,8 @@ void listar_dietas(void) {
             printf("\n");
             exibir_dieta(dt);
             printf("\n");
-            printf("════════════════════════════════════════════════════════════════════════════\n");
+            printf(
+                "════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
@@ -136,11 +138,11 @@ void listar_dietas(void) {
 
 
 void listar_profissionais(void) {
-    FILE * arq_profissionais;
-    Profissional * pf;
+    FILE *arq_profissionais;
+    Profissional *pf;
 
-    pf = (Profissional*) malloc(sizeof(Profissional));
-    
+    pf = (Profissional *)malloc(sizeof(Profissional));
+
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
     if (arq_profissionais == NULL) {
         exibir_moldura_titulo("Nenhum profissional cadastrado ainda");
@@ -151,12 +153,13 @@ void listar_profissionais(void) {
     limpar_tela();
     exibir_moldura_titulo("Profissionais - Lista Geral");
 
-    while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
-        if (pf->status == true){
+    while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
+        if (pf->status == true) {
             printf("\n");
             exibir_profissional(pf);
             printf("\n");
-            printf("════════════════════════════════════════════════════════════════════════════\n");            
+            printf(
+                "════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
@@ -168,12 +171,12 @@ void listar_profissionais(void) {
 
 
 // Lista todas as consultas ativas
-void listar_consultas(void){
+void listar_consultas(void) {
     FILE *arq_consulta;
-    Consulta* con;
+    Consulta *con;
 
-    con = (Consulta*) malloc(sizeof(Consulta));
-    
+    con = (Consulta *)malloc(sizeof(Consulta));
+
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
 
     if (arq_consulta == NULL) {
@@ -186,11 +189,12 @@ void listar_consultas(void){
     exibir_moldura_titulo("Consultas - Lista Geral");
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
-        if (con->status == true) {  
+        if (con->status == true) {
             printf("\n");
             exibir_consulta(con);
             printf("\n");
-            printf("════════════════════════════════════════════════════════════════════════════\n");   
+            printf(
+                "════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 
@@ -201,12 +205,12 @@ void listar_consultas(void){
 }
 
 
-void listar_agendamentos(void){
-    FILE * arq_agendamentos;
-    Agendamento * ag;
+void listar_agendamentos(void) {
+    FILE *arq_agendamentos;
+    Agendamento *ag;
 
-    ag = (Agendamento*) malloc(sizeof(Agendamento));
-    
+    ag = (Agendamento *)malloc(sizeof(Agendamento));
+
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     if (arq_agendamentos == NULL) {
         exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
@@ -217,12 +221,13 @@ void listar_agendamentos(void){
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Lista Geral");
 
-    while(fread(ag, sizeof(Agendamento), 1, arq_agendamentos)){
-        if (ag->status == true){
+    while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
+        if (ag->status == true) {
             printf("\n");
             exibir_agendamento(ag);
             printf("\n");
-            printf("════════════════════════════════════════════════════════════════════════════\n");   
+            printf(
+                "════════════════════════════════════════════════════════════════════════════\n");
         }
     }
 

@@ -1,19 +1,22 @@
+#include "leituras.h"
+
 #include <stdio.h>
 #include <string.h>
+
 #include "validacoes.h"
 
 
 void ler_nome(char *nome) {
     int valido = 0;
 
-    do{
+    do {
         printf("Nome: \n");
-        scanf(" %50s", nome); 
+        scanf(" %50s", nome);
         getchar();
 
         valido = validar_nome(nome);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Nome inválido! Digite novamente! \n");
         }
 
@@ -24,14 +27,14 @@ void ler_nome(char *nome) {
 void ler_cpf(char *cpf) {
     int valido = 0;
 
-    do{
+    do {
         printf("CPF (Apenas números): \n");
-        scanf(" %s", cpf); 
+        scanf(" %s", cpf);
         getchar();
 
         valido = validar_cpf(cpf);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("CPF inválido! Digite novamente! \n");
         }
 
@@ -41,15 +44,15 @@ void ler_cpf(char *cpf) {
 
 void ler_tel(char *tel) {
     int valido = 0;
-    
-    do{
+
+    do {
         printf("Telefone (Apenas números):  \n");
-        scanf(" %11s", tel); 
+        scanf(" %11s", tel);
         getchar();
 
         valido = valida_telefone(tel);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Telefone inválido! Digite novamente! \n");
         }
 
@@ -60,14 +63,14 @@ void ler_tel(char *tel) {
 void ler_idade(char *idade) {
     int valido = 0;
 
-    do{
+    do {
         printf("Idade: \n");
-        scanf("%s", idade); 
+        scanf("%s", idade);
         getchar();
 
         valido = valida_idade(idade);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Idade inválida! Digite novamente! \n");
         }
 
@@ -75,17 +78,17 @@ void ler_idade(char *idade) {
 }
 
 
-void ler_peso(float* peso) {
+void ler_peso(float *peso) {
     int valido = 0;
 
-    do{
+    do {
         printf("Peso (kg): \n");
-        scanf("%f", peso); 
+        scanf("%f", peso);
         getchar();
 
         valido = validar_peso(*peso);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Peso inválido! Digite novamente! \n");
         }
 
@@ -93,17 +96,17 @@ void ler_peso(float* peso) {
 }
 
 
-void ler_altura(float* altura) {
+void ler_altura(float *altura) {
     int valido = 0;
-    
-    do{
+
+    do {
         printf("Altura (m): \n");
-        scanf("%f", altura); 
+        scanf("%f", altura);
         getchar();
 
         valido = validar_altura(*altura);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Altura inválida! Digite novamente! \n");
         }
 
@@ -111,7 +114,7 @@ void ler_altura(float* altura) {
 }
 
 
-void ler_data(char *data){
+void ler_data(char *data) {
     int valido = 0;
     do {
         printf("Data (DD/MM/AAAA):  \n");
@@ -128,16 +131,16 @@ void ler_data(char *data){
 }
 
 
-void ler_hora(char *hora){
+void ler_hora(char *hora) {
     int valido = 0;
-    do{
+    do {
         printf("Hora de Atendimento(08:00 - 18:00): \n");
-        scanf("%s", hora); 
+        scanf("%s", hora);
         getchar();
 
         valido = validar_hora(hora);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Hora inválida! Digite novamente! \n");
         }
 
@@ -145,16 +148,16 @@ void ler_hora(char *hora){
 }
 
 
-void ler_tipo(char *tipo){
+void ler_tipo(char *tipo) {
     int valido = 0;
-    do{
+    do {
         printf("Tipo de Agendamento: \n");
-        scanf(" %50[^\n]", tipo); 
+        scanf(" %50[^\n]", tipo);
         getchar();
 
         valido = validar_nome(tipo);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Texto inválido! Digite novamente! \n");
         }
 
@@ -162,16 +165,16 @@ void ler_tipo(char *tipo){
 }
 
 
-void ler_profissional(char *profissional){
+void ler_profissional(char *profissional) {
     int valido = 0;
-     do{
+    do {
         printf("Profissional Responsável: \n");
-        scanf(" %50[^\n]", profissional); 
+        scanf(" %50[^\n]", profissional);
         getchar();
 
         valido = validar_nome(profissional);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Nome inválido! Digite novamente! \n");
         }
 
@@ -179,16 +182,16 @@ void ler_profissional(char *profissional){
 }
 
 
-void ler_observacoes(char *observacoes){
+void ler_observacoes(char *observacoes) {
     int valido = 0;
-    do{
+    do {
         printf("Observações: \n");
-        scanf("%200[^\n]", observacoes); 
+        scanf("%200[^\n]", observacoes);
         getchar();
 
         valido = validar_observacao(observacoes);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Texto Digitado inválido! Digite novamente! \n");
         }
 
@@ -196,16 +199,16 @@ void ler_observacoes(char *observacoes){
 }
 
 
-void ler_medico(char *medico){
+void ler_medico(char *medico) {
     int valido = 0;
-    do{
+    do {
         printf("Nome do Médico: \n");
-        scanf(" %50s", medico); 
+        scanf(" %50s", medico);
         getchar();
 
         valido = validar_nome(medico);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Nome inválido! Digite novamente! \n");
         }
 
@@ -213,16 +216,16 @@ void ler_medico(char *medico){
 }
 
 
-void ler_dieta(char *nome_dieta){
+void ler_dieta(char *nome_dieta) {
     int valido = 0;
-    do{
+    do {
         printf("Nome da Dieta: \n");
-        scanf(" %50s", nome_dieta); 
+        scanf(" %50s", nome_dieta);
         getchar();
 
         valido = validar_nome(nome_dieta);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Nome inválido! Digite novamente! \n");
         }
 
@@ -230,16 +233,16 @@ void ler_dieta(char *nome_dieta){
 }
 
 
-void ler_calorias(float calorias){
+void ler_calorias(float calorias) {
     int valido = 0;
-    do{
+    do {
         printf("Total de Calorias: \n");
         scanf("%f", &calorias);
         getchar();
 
         valido = validar_calorias(calorias);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Calorias inválidas! Digite novamente! \n");
         }
 
@@ -247,32 +250,32 @@ void ler_calorias(float calorias){
 }
 
 
-void ler_refeicoes(char *refeicoes){
+void ler_refeicoes(char *refeicoes) {
     int valido = 0;
-    do{
+    do {
         printf("Refeições (breve descrição): \n");
         scanf("%200[^\n]", refeicoes);
         getchar();
 
         valido = validar_observacao(refeicoes);
 
-        if(valido == 0){
+        if (valido == 0) {
             printf("Texto Digitado inválido! Digite novamente! \n");
         }
-        
+
     } while (valido == 0);
 }
 
 
-void ler_crn(char *crn){
+void ler_crn(char *crn) {
     int valido = 0;
-     do{
+    do {
         printf("CRN(Formato: CRN-X/XXXXX ): \n");
         scanf(" %11s", crn);
         getchar();
         valido = valida_crn(crn);
 
-        if (valido == 0){
+        if (valido == 0) {
             printf("CRN inválido! Digite novamente! \n");
         }
 

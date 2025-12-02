@@ -31,7 +31,7 @@ BinPackParameters: false
 AllowAllParametersOfDeclarationOnNextLine: false
 
 # CHAVES
-BreakBeforeBraces: Linux
+BreakBeforeBraces: Attach
 BraceWrapping:
   AfterControlStatement: false
   BeforeElse: false

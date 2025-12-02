@@ -10,7 +10,7 @@ int largura_visual(const char *texto) {
     unsigned char c;
     while ((c = *texto++)) {
         // Ignora bytes extras dos acentos UTF-8 (10xxxxxx)
-        if ((c & 0xC0) != 0x80){
+        if ((c & 0xC0) != 0x80) {
             largura++;
         }
     }
@@ -23,7 +23,7 @@ void exibir_moldura_titulo(const char *titulo) {
     int i;
 
     printf("╔");
-    for (i = 0; i < LARGURA; i++){
+    for (i = 0; i < LARGURA; i++) {
         printf("═");
     }
     printf("╗\n");
@@ -31,14 +31,21 @@ void exibir_moldura_titulo(const char *titulo) {
     int titulo_len = largura_visual(titulo);
     int espacos = (LARGURA - titulo_len) / 2;
 
-    printf("║%*s""%s""%*s║\n",
-           espacos, "", titulo, LARGURA - espacos - titulo_len, "");
+    printf("║%*s"
+           "%s"
+           "%*s║\n",
+           espacos,
+           "",
+           titulo,
+           LARGURA - espacos - titulo_len,
+           "");
     printf("╚");
 
-    for (i = 0; i < LARGURA; i++){
+    for (i = 0; i < LARGURA; i++) {
         printf("═");
     }
-    printf("╝""\n");
+    printf("╝"
+           "\n");
 }
 
 
@@ -47,7 +54,7 @@ void exibir_moldura_conteudo(const char *conteudo) {
     int i;
 
     printf("╔");
-    for (i = 0; i < LARGURA; i++){
+    for (i = 0; i < LARGURA; i++) {
         printf("═");
     }
     printf("╗\n");
@@ -57,7 +64,7 @@ void exibir_moldura_conteudo(const char *conteudo) {
     while (*p) {
         const char *inicio = p;
         int len = 0;
-        while (p[len] != '\n' && p[len] != '\0'){
+        while (p[len] != '\n' && p[len] != '\0') {
             len++;
         }
 
@@ -66,15 +73,17 @@ void exibir_moldura_conteudo(const char *conteudo) {
         linha[len] = '\0';
 
         int vis = largura_visual(linha);
-        int espacos_finais = LARGURA - 1 - vis; // margem direita ajustada
+        int espacos_finais = LARGURA - 1 - vis;  // margem direita ajustada
 
         printf("║ %s%*s║\n", linha, espacos_finais, "");
 
         p += len;
-        if (*p == '\n') p++;
+        if (*p == '\n')
+            p++;
     }
 
     printf("╚");
-    for (i = 0; i < LARGURA; i++) printf("═");
+    for (i = 0; i < LARGURA; i++)
+        printf("═");
     printf("╝\n");
 }
