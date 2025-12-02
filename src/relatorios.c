@@ -20,6 +20,12 @@ typedef struct NovoProfissional {
     struct NovoProfissional *prox;
 } NovoProfissional;
 
+typedef struct AgendamentoNode {
+    Agendamento ag;
+    struct AgendamentoNode *prox;
+} AgendamentoNode;
+
+
 //CRUDS de relatórios
 void modulo_relatorios(void) {
     char opcao;
@@ -259,6 +265,7 @@ char tela_relatorios_agendamentos(void) {
     const char *menu =
         "1.  Lista Geral de Agendamentos\n"
         "2.  Lista de Agendamentos por Paciente \n"
+        "3.  Lista de Agendamentos Ordenada por ID \n"
         "0. Voltar ao Menu Anterior\n";
 
     exibir_moldura_titulo("Relatórios");
@@ -758,5 +765,81 @@ void listar_agendamentos_paciente(void) {
 
     fclose(arq_agendamentos);
     free(ag);
+    pausar();
+}
+
+
+void listar_agendamentos_ordenado(void) {
+    FILE *arq;
+    Agendamento ag;
+    AgendamentoNode *lista = NULL;
+    AgendamentoNode *novo, *ant, *atual;
+
+    arq = fopen("data/arq_agendamentos.dat", "rb");
+    if (arq == NULL) {
+        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
+        pausar();
+        return;
+    }
+
+    limpar_tela();
+    exibir_moldura_titulo("Agendamentos - Lista Dinâmica (ordenada por ID)");
+
+    while (fread(&ag, sizeof(Agendamento), 1, arq)) {
+        if (!ag.status) continue;
+
+        novo = (AgendamentoNode*) malloc(sizeof(AgendamentoNode));
+        if (!novo) {
+            atual = lista;
+            while (atual) {
+                AgendamentoNode *tmp = atual->prox;
+                free(atual);
+                atual = tmp;
+            }
+            fclose(arq);
+            exibir_moldura_titulo("Erro: memória insuficiente");
+            pausar();
+            return;
+        }
+        novo->ag = ag;
+        novo->prox = NULL;
+
+        if (lista == NULL || novo->ag.id_agendamento < lista->ag.id_agendamento) {
+            novo->prox = lista;
+            lista = novo;
+        } else {
+            ant = lista;
+            atual = lista->prox;
+            while (atual != NULL && atual->ag.id_agendamento <= novo->ag.id_agendamento) {
+                ant = atual;
+                atual = atual->prox;
+            }
+            ant->prox = novo;
+            novo->prox = atual;
+        }
+    }
+
+    fclose(arq);
+
+    if (lista == NULL) {
+        exibir_moldura_titulo("Nenhum agendamento ativo encontrado");
+        pausar();
+        return;
+    }
+
+    atual = lista;
+    while (atual != NULL) {
+        printf("\n");
+        exibir_agendamento(&atual->ag);
+        printf("\n════════════════════════════════════════════════════════════════════════════\n");
+        atual = atual->prox;
+    }
+    atual = lista;
+    while (atual != NULL) {
+        AgendamentoNode *tmp = atual->prox;
+        free(atual);
+        atual = tmp;
+    }
+
     pausar();
 }
