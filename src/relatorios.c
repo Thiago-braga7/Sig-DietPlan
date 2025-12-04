@@ -13,6 +13,7 @@
 #include "leituras.h"
 #include "pacientes.h"
 #include "profissionais.h"
+#include "relatorios/relatorios_pacientes.h"
 #include "uteis.h"
 #include "validacoes.h"
 
@@ -51,25 +52,6 @@ void modulo_relatorios(void) {
                 break;
             case '5':
                 relatorios_agendamentos();
-                break;
-        }
-    } while (opcao != '0');
-}
-
-
-void relatorios_pacientes(void) {
-    char opcao;
-
-    do {
-        limpar_tela();
-        opcao = tela_relatorios_pacientes();
-
-        switch (opcao) {
-            case '1':
-                listar_pacientes();
-                break;
-            case '2':
-                listar_pacientes_idade();
                 break;
         }
     } while (opcao != '0');
@@ -177,29 +159,11 @@ char tela_relatorios(void) {
 }
 
 
-char tela_relatorios_pacientes(void) {
-    char opcao;
-
-    const char *menu = "1.  Lista Geral de Pacientes\n"
-                       "2.  Lista de Pacientes por Idade \n"
-                       "0. Voltar ao Menu Anterior\n";
-
-    exibir_moldura_titulo("Relatórios");
-    exibir_moldura_conteudo(menu);
-
-    printf("Escolha a opção desejada: ");
-    scanf(" %c", &opcao);
-    getchar();
-
-    return opcao;
-}
-
-
 char tela_relatorios_dietas(void) {
     char opcao;
 
-    const char *menu = "1.  Lista Geral de Dietas\n"
-                       "2.  Lista de Dietas por Calorias \n"
+    const char *menu = "1. Lista Geral de Dietas\n"
+                       "2. Lista de Dietas por Calorias \n"
                        "0. Voltar ao Menu Anterior\n";
 
     exibir_moldura_titulo("Relatórios");
@@ -216,9 +180,9 @@ char tela_relatorios_dietas(void) {
 char tela_relatorios_profissionais(void) {
     char opcao;
 
-    const char *menu = "1.  Lista Geral de Profissionais\n"
-                       "2.  Lista de Profissionais por Sexo \n"
-                       "3.  Lista de Profissionais Ordenada por Nome \n"
+    const char *menu = "1. Lista Geral de Profissionais\n"
+                       "2. Lista de Profissionais por Sexo \n"
+                       "3. Lista de Profissionais Ordenada por Nome \n"
                        "0. Voltar ao Menu Anterior\n";
 
     exibir_moldura_titulo("Relatórios");
@@ -235,8 +199,8 @@ char tela_relatorios_profissionais(void) {
 char tela_relatorios_consultas(void) {
     char opcao;
 
-    const char *menu = "1.  Lista Geral de Consultas\n"
-                       "2.  Lista de Consultas por Médico \n"
+    const char *menu = "1. Lista Geral de Consultas\n"
+                       "2. Lista de Consultas por Médico \n"
                        "0. Voltar ao Menu Anterior\n";
 
     exibir_moldura_titulo("Relatórios");
@@ -254,9 +218,9 @@ char tela_relatorios_consultas(void) {
 char tela_relatorios_agendamentos(void) {
     char opcao;
 
-    const char *menu = "1.  Lista Geral de Agendamentos\n"
-                       "2.  Lista de Agendamentos por Paciente \n"
-                       "3.  Lista de Agendamentos Ordenada por ID \n"
+    const char *menu = "1. Lista Geral de Agendamentos\n"
+                       "2. Lista de Agendamentos por Paciente \n"
+                       "3. Lista de Agendamentos Ordenada por ID \n"
                        "0. Voltar ao Menu Anterior\n";
 
     exibir_moldura_titulo("Relatórios");
@@ -267,90 +231,6 @@ char tela_relatorios_agendamentos(void) {
     getchar();
 
     return opcao;
-}
-
-
-// Lista todos os pacientes ativos
-void listar_pacientes(void) {
-    FILE *arq_paciente;
-    Paciente *pac;
-
-    pac = (Paciente *)malloc(sizeof(Paciente));
-    bool encontrado = 0;
-
-    limpar_tela();
-    exibir_moldura_titulo("Pacientes - Lista Geral");
-
-    printf("║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
-    printf("═════════════════════════════════════════════════════════════════════════════\n");
-
-    arq_paciente = fopen("data/arq_pacientes.dat", "rb");
-    if (arq_paciente == NULL) {
-        exibir_moldura_titulo("Nenhum paciente cadastrado ainda");
-        free(pac);
-        return;
-    }
-
-    while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
-        if (pac->status) {
-            encontrado = 1;
-            printf("║ %-30s ║ %-12s ║ %7d ║ %6.2f ║ %6.2f ║\n",
-                   pac->nome,
-                   pac->cpf,
-                   pac->idade,
-                   pac->peso,
-                   pac->altura);
-        }
-    }
-
-    if (!encontrado) {
-        exibir_moldura_titulo("Nenhum paciente ativo encontrado");
-    }
-
-    fclose(arq_paciente);
-    free(pac);
-
-    pausar();
-}
-
-
-void listar_pacientes_idade(void) {
-    FILE *arq_paciente;
-    Paciente *pac;
-
-    bool encontrado = 0;
-
-    pac = (Paciente *)malloc(sizeof(Paciente));
-
-    limpar_tela();
-    exibir_moldura_titulo("Pacientes - Lista Geral");
-
-    arq_paciente = fopen("data/arq_pacientes.dat", "rb");
-    if (arq_paciente == NULL) {
-        exibir_moldura_titulo("Nenhum paciente cadastrado ainda");
-        free(pac);
-        return;
-    }
-
-    while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
-        if (pac->status) {
-            encontrado = 1;
-            printf("\n");
-            exibir_paciente(pac);
-            printf("\n");
-            printf("═══════════════════════════════════════════════════════════════════════════"
-                   "═\n");
-        }
-    }
-
-    if (!encontrado) {
-        exibir_moldura_titulo("Nenhum paciente ativo encontrado");
-    }
-
-    fclose(arq_paciente);
-    free(pac);
-
-    pausar();
 }
 
 
