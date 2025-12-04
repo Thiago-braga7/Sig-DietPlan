@@ -1,5 +1,6 @@
 #include "leituras.h"
 
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -50,7 +51,7 @@ void ler_tel(char *tel) {
         scanf(" %11s", tel);
         getchar();
 
-        valido = valida_telefone(tel);
+        valido = validar_telefone(tel);
 
         if (valido == 0) {
             printf("Telefone inválido! Digite novamente! \n");
@@ -63,12 +64,12 @@ void ler_tel(char *tel) {
 void ler_idade(int *idade) {
     int valido = 0;
 
-    do{
+    do {
         printf("///                         Idade:                                          ///\n");
-        scanf("%d", idade); 
+        scanf("%d", idade);
         getchar();
 
-        valido = valida_idade(idade);
+        valido = validar_idade(idade);
 
         if (valido == 0) {
             printf("Idade inválida! Digite novamente! \n");
@@ -121,7 +122,7 @@ void ler_data(char *data) {
         scanf("%10s", data);
         getchar();
 
-        valido = valida_data(data);
+        valido = validar_data(data);
 
         if (valido == 0) {
             printf("Data inválida! Digite novamente! \n");
@@ -273,11 +274,27 @@ void ler_crn(char *crn) {
         printf("CRN(Formato: CRN-X/XXXXX ): \n");
         scanf(" %11s", crn);
         getchar();
-        valido = valida_crn(crn);
+        valido = validar_crn(crn);
 
         if (valido == 0) {
             printf("CRN inválido! Digite novamente! \n");
         }
 
+    } while (valido == 0);
+}
+
+
+void ler_sexo(char *sexo) {
+    int valido = 0;
+    do {
+        printf("Sexo(M/F/O): \n");
+        scanf(" %c", sexo);
+        getchar();
+        *sexo = toupper(*sexo);
+        valido = validar_sexo(*sexo);
+
+        if (valido == 0) {
+            printf("Sexo inválido! Digite novamente! \n");
+        }
     } while (valido == 0);
 }

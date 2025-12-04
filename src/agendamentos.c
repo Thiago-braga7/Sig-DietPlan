@@ -53,7 +53,7 @@ char tela_agendamentos(void) {
     exibir_moldura_conteudo(menu);
 
     printf("Escolha a opção desejada: ");
-    scanf("%c", &opcao);
+    scanf(" %c", &opcao);
     getchar();
 
     return opcao;
@@ -125,7 +125,7 @@ void buscar_agendamento(void) {
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
 
     if (arq_agendamentos == NULL) {
-        printf("Erro na criação do arquivo\n");
+        printf("Erro na abertura do arquivo\n");
         return;
     }
 
@@ -172,6 +172,7 @@ void alterar_agendamento(void) {
 
     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL) {
         printf("Erro na criação do arquivo\n");
+        free(ag);
         return;
     }
 

@@ -31,7 +31,7 @@ void pausar(void) {
 
 
 // Formato CRN-X/XXXXX
-int valida_crn(char *crn) {
+int validar_crn(char *crn) {
     if (strlen(crn) != 11) {
         return 0;
     }
@@ -47,7 +47,7 @@ int valida_crn(char *crn) {
 
 
 // Créditos: função adaptada de Flávius Gorgônio (Projeto Língua Solta 2020.2)
-int valida_telefone(char *fone) {
+int validar_telefone(char *fone) {
     if (strlen(fone) != 11) {
         return 0;
     }
@@ -61,7 +61,7 @@ int valida_telefone(char *fone) {
 }
 
 
-int valida_idade(int idade) {
+int validar_idade(int idade) {
     if (idade > 0 && idade <= 130) {
         return 1;
     } else {
@@ -70,7 +70,7 @@ int valida_idade(int idade) {
 }
 
 
-int valida_mes(char *mes) {
+int validar_mes(char *mes) {
     int len = strlen(mes);
 
     if (strlen(mes) == 0) {
@@ -107,7 +107,7 @@ int ano_bissexto(int ano) {
 
 
 // Créditos: função adaptada de Flávius Gorgônio (Projeto Língua Solta 2020.2)
-int valida_dia(int dia, int mes, int ano) {
+int validar_dia(int dia, int mes, int ano) {
     if ((dia < 1) || (mes < 1) || (mes > 12)) {
         return 0;
     }
@@ -145,7 +145,7 @@ int ano_atual() {
 
 
 // Essa função foi criada para validar apenas o ano atual e (ano atual + 1)
-int valida_ano(int ano) {
+int validar_ano(int ano) {
     int atual = ano_atual();
 
     if ((ano == atual) || (ano == atual + 1)) {
@@ -157,7 +157,7 @@ int valida_ano(int ano) {
 
 
 // Créditos : Função adaptada de(Flávius Gorgônio) Projeto Língua Solta 2020.2;
-int valida_data(char *data) {
+int validar_data(char *data) {
     int len, dia, mes, ano;
     len = strlen(data);
     if (len != 10) {
@@ -175,10 +175,10 @@ int valida_data(char *data) {
     mes = (data[3] - '0') * 10 + (data[4] - '0');
     ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + (data[8] - '0') * 10 + (data[9] - '0');
 
-    if (!valida_dia(dia, mes, ano)) {
+    if (!validar_dia(dia, mes, ano)) {
         return 0;
     }
-    if (!valida_ano(ano)) {
+    if (!validar_ano(ano)) {
         return 0;
     }
 
@@ -341,5 +341,14 @@ int validar_observacao(const char *obs) {
 
         return 0;
     }
+    return 1;
+}
+
+
+int validar_sexo(char sexo) {
+    if (sexo != 'M' && sexo != 'F' && sexo != 'O') {
+        return 0;
+    }
+
     return 1;
 }

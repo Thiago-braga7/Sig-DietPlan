@@ -1,13 +1,14 @@
 #include "profissionais.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "leituras.h"
 #include "uteis.h"
-#define True 1
-#define False 0
+#include "validacoes.h"
+
 
 void modulo_profissionais(void) {
     char opcao;
@@ -31,14 +32,14 @@ void modulo_profissionais(void) {
     } while (opcao != '0');
 }
 
+
 char tela_profissionais(void) {
     char opcao;
-    const char *menu =
-        "1. Cadastrar Profissional\n"
-        "2. Buscar Profissional\n"
-        "3. Alterar Dados do Profissional\n"
-        "4. Excluir Profissional\n"
-        "0. Voltar ao menu principal\n";
+    const char *menu = "1. Cadastrar Profissional\n"
+                       "2. Buscar Profissional\n"
+                       "3. Alterar Dados do Profissional\n"
+                       "4. Excluir Profissional\n"
+                       "0. Voltar ao menu principal\n";
 
     limpar_tela();
     exibir_moldura_titulo("Profissionais");
@@ -49,6 +50,7 @@ char tela_profissionais(void) {
     pausar();
     return opcao;
 }
+
 
 void cadastrar_profissional(void) {
     FILE *arq_profissionais;
@@ -68,27 +70,18 @@ void cadastrar_profissional(void) {
 
     limpar_tela();
     printf("\n");
+
     exibir_moldura_titulo("Cadastro - Profissionais");
     ler_nome(pf->nome);
     ler_cpf(pf->cpf);
     ler_tel(pf->tel);
     ler_crn(pf->crn);
-    do {
-        printf("///                         Sexo (M/F/O):                                 ///\n");
-        scanf(" %c", &pf->sexo);
-        getchar();
-        pf->sexo = toupper(pf->sexo);
-        if (pf->sexo != 'M' && pf->sexo != 'F' && pf->sexo != 'O') {
-            printf("Sexo inválido! Digite novamente! \n");
-        }
-    } while (pf->sexo != 'M' && pf->sexo != 'F' && pf->sexo != 'O');
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("                    Profissional Cadastrado com Sucesso!                       \n");
-    printf("///                        ID gerado: %02d                                    ///\n",
-           pf->id_profissional);
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    ler_sexo(&pf->sexo);
 
-    pf->status = True;
+    printf("Profissional Cadastrado com Sucesso!\n");
+    printf("ID gerado: %02d\n", pf->id_profissional);
+
+    pf->status = true;
 
     arq_profissionais = fopen("data/arq_profissionais.dat", "a+b");
     if (arq_profissionais == NULL) {
@@ -118,22 +111,22 @@ void buscar_profissional(void) {
     scanf("%d", &id_busca);
     getchar();
 
-    encontrado = False;
+    encontrado = false;
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
 
     if (arq_profissionais == NULL) {
         printf("Erro na abertura do arquivo\n");
         return;
     }
-    while(fread(pf, sizeof(Profissional), 1, arq_profissionais)){
-        if ((pf->id_profissional == id_busca) && (pf->status == True)){
+    while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
+        if ((pf->id_profissional == id_busca) && (pf->status == true)) {
             printf("Profissional Encontrado!\n");
             exibir_profissional(pf);
-            encontrado = True;
+            encontrado = true;
             break;
         }
     }
-    if (encontrado == False) {
+    if (encontrado == false) {
         printf("\nProfissional não encontrado!\n");
     }
 
@@ -142,16 +135,17 @@ void buscar_profissional(void) {
     pausar();
 }
 
+
 void alterar_profissional(void) {
     FILE *arq_profissionais;
     FILE *arq_profissionais_temp;
 
     Profissional *pf;
+
     int id_busca;
     int encontrado;
     char opcao;
     char continuar;
-    int valido;
 
     pf = (Profissional *)malloc(sizeof(Profissional));
 
@@ -162,7 +156,7 @@ void alterar_profissional(void) {
     scanf("%d", &id_busca);
     getchar();
 
-    encontrado = False;
+    encontrado = false;
 
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
     arq_profissionais_temp = fopen("data/arq_profissionais_temp.dat", "wb");
@@ -173,8 +167,8 @@ void alterar_profissional(void) {
     }
 
     while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
-        if ((pf->id_profissional == id_busca) && (pf->status == True)) {
-            encontrado = True;
+        if ((pf->id_profissional == id_busca) && (pf->status == true)) {
+            encontrado = true;
 
             do {
                 limpar_tela();
@@ -192,16 +186,16 @@ void alterar_profissional(void) {
 
                 switch (opcao) {
                     case '1':
-                        validar_nome(pf->nome);
+                        ler_nome(pf->nome);
                         break;
                     case '2':
-                        validar_cpf(pf->cpf);
+                        ler_cpf(pf->cpf);
                         break;
                     case '3':
-                        valida_telefone(pf->tel);
+                        ler_tel(pf->tel);
                         break;
                     case '4':
-                        valida_crn(pf->crn);
+                        ler_crn(pf->crn);
                         break;
                     default:
                         printf("Opção inválida!\n");
@@ -216,10 +210,10 @@ void alterar_profissional(void) {
                 getchar();
                 continuar = confirmar_acao(continuar);
 
-                if(continuar == 0){
+                if (continuar == 0) {
                     printf("Opção inválida! Digite apenas S ou N.\n");
                 }
-                
+
             } while (continuar == 'S');
         }
         fwrite(pf, sizeof(Profissional), 1, arq_profissionais_temp);
@@ -228,11 +222,11 @@ void alterar_profissional(void) {
     fclose(arq_profissionais);
     fclose(arq_profissionais_temp);
 
-    if (encontrado == True) {
+    if (encontrado == true) {
         remove("data/arq_profissionais.dat");
         rename("data/arq_profissionais_temp.dat", "data/arq_profissionais.dat");
-        printf("///                    Profissional alterado com sucesso!                      ///\n");
-    
+        printf("Profissional alterado com sucesso!\n");
+
     } else {
         remove("data/arq_profissionais_temp.dat");
         printf("\nProfissional não encontrado!\n");
@@ -240,6 +234,7 @@ void alterar_profissional(void) {
     free(pf);
     pausar();
 }
+
 
 void excluir_profissional(void) {
     FILE *arq_profissionais;
@@ -256,7 +251,7 @@ void excluir_profissional(void) {
     printf("Informe o ID do Profissional: \n");
     scanf("%d", &id_busca);
     getchar();
-    encontrado = False;
+    encontrado = false;
     pausar();
 
     arq_profissionais = fopen("data/arq_profissionais.dat", "r+b");
@@ -266,11 +261,11 @@ void excluir_profissional(void) {
         return;
     }
 
-    while(fread(pf, sizeof(Profissional),1, arq_profissionais)){
-        if((pf->id_profissional == id_busca) && (pf->status == True)){
+    while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
+        if ((pf->id_profissional == id_busca) && (pf->status == true)) {
             printf("Profissional Encontrado!\n");
             exibir_profissional(pf);
-            encontrado = True;
+            encontrado = true;
 
             do {
                 printf("\nDeseja realmente excluir este Profissional? (S/N): ");
@@ -283,7 +278,7 @@ void excluir_profissional(void) {
             } while (resposta == 0);
 
             if (resposta == 'S') {
-                pf->status = False;
+                pf->status = false;
                 fseek(arq_profissionais, (-1) * sizeof(Profissional), SEEK_CUR);
                 fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
                 printf("\nProfissional excluído com sucesso!\n");
@@ -294,7 +289,7 @@ void excluir_profissional(void) {
         }
     }
 
-    if (encontrado == False) {
+    if (encontrado == false) {
         printf("\nProfissional não encontrado!\n");
     }
     fclose(arq_profissionais);
@@ -314,5 +309,4 @@ void exibir_profissional(const Profissional *pf) {
     printf("Telefone:   %s\n", pf->tel);
     printf("CRN:        %s\n", pf->crn);
     printf("Sexo:       %c\n", pf->sexo);
-
 }
