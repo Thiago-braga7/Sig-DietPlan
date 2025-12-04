@@ -13,14 +13,17 @@
 #include "leituras.h"
 #include "pacientes.h"
 #include "profissionais.h"
-#include "relatorios/relatorios_agendamentos.h"
-#include "relatorios/relatorios_dietas.h"
-#include "relatorios/relatorios_pacientes.h"
-#include "relatorios/relatorios_profissionais.h"
 #include "uteis.h"
 #include "validacoes.h"
 
-// CRUDS de relatórios
+#include "relatorios/relatorios_agendamentos.h"
+#include "relatorios/relatorios_consultas.h"
+#include "relatorios/relatorios_dietas.h"
+#include "relatorios/relatorios_pacientes.h"
+#include "relatorios/relatorios_profissionais.h"
+
+
+
 void modulo_relatorios(void) {
     char opcao;
 
@@ -49,26 +52,6 @@ void modulo_relatorios(void) {
 }
 
 
-void relatorios_consultas(void) {
-    char opcao;
-
-    do {
-        limpar_tela();
-        opcao = tela_relatorios_consultas();
-
-        switch (opcao) {
-            case '1':
-                listar_consultas();
-                break;
-            case '2':
-                listar_consultas_medico();
-                break;
-        }
-    } while (opcao != '0');
-}
-
-
-// Telas de relatórios
 char tela_relatorios(void) {
     char opcao;
 
@@ -87,99 +70,4 @@ char tela_relatorios(void) {
     getchar();
 
     return opcao;
-}
-
-
-char tela_relatorios_consultas(void) {
-    char opcao;
-
-    const char *menu = "1. Lista Geral de Consultas\n"
-                       "2. Lista de Consultas por Médico \n"
-                       "0. Voltar ao Menu Anterior\n";
-
-    exibir_moldura_titulo("Relatórios");
-    exibir_moldura_conteudo(menu);
-
-    printf("Escolha a opção desejada: ");
-    printf("Escolha a opção desejada: ");
-    scanf(" %c", &opcao);
-    getchar();
-
-    return opcao;
-}
-
-
-// Lista todas as consultas ativas
-void listar_consultas(void) {
-    FILE *arq_consulta;
-    Consulta *con;
-
-    con = (Consulta *)malloc(sizeof(Consulta));
-
-    arq_consulta = fopen("data/arq_consulta.dat", "rb");
-
-    if (arq_consulta == NULL) {
-        exibir_moldura_titulo("Nenhuma consulta cadastrada ainda");
-        free(con);
-        return;
-    }
-
-    limpar_tela();
-    exibir_moldura_titulo("Consultas - Lista Geral");
-
-    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
-        if (con->status == true) {
-            printf("\n");
-            exibir_consulta(con);
-            printf("\n");
-            printf("═══════════════════════════════════════════════════════════════════════════"
-                   "═\n");
-        }
-    }
-
-    fclose(arq_consulta);
-    free(con);
-
-    pausar();
-}
-
-
-void listar_consultas_medico(void) {
-    FILE *arq_consulta;
-    Consulta *con;
-
-    con = (Consulta *)malloc(sizeof(Consulta));
-
-    char med_busca[50];
-
-    arq_consulta = fopen("data/arq_consulta.dat", "rb");
-
-    printf("Digite o nome do médico: \n");
-    scanf("%s", med_busca);
-
-    if (arq_consulta == NULL) {
-        exibir_moldura_titulo("Nenhuma consulta cadastrada ainda");
-        free(con);
-        return;
-    }
-
-    limpar_tela();
-    exibir_moldura_titulo("Consultas - Lista Médico");
-
-    while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
-        if (con->status == true) {
-            if (strcmp(med_busca, con->medico) == 0) {
-                printf("\n");
-                exibir_consulta(con);
-                printf("\n");
-                printf("═══════════════════════════════════════════════════════════════════"
-                       "═════════\n");
-            }
-        }
-    }
-
-    fclose(arq_consulta);
-    free(con);
-
-    pausar();
 }
