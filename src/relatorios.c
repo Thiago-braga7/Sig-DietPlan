@@ -52,10 +52,6 @@ void modulo_relatorios(void) {
             case '5':
                 relatorios_agendamentos();
                 break;
-            default:
-                exibir_moldura_titulo("Opção inválida");
-                pausar();
-                break;
         }
     } while (opcao != '0');
 }
