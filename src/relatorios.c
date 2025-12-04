@@ -13,15 +13,13 @@
 #include "leituras.h"
 #include "pacientes.h"
 #include "profissionais.h"
-#include "uteis.h"
-#include "validacoes.h"
-
 #include "relatorios/relatorios_agendamentos.h"
 #include "relatorios/relatorios_consultas.h"
 #include "relatorios/relatorios_dietas.h"
 #include "relatorios/relatorios_pacientes.h"
 #include "relatorios/relatorios_profissionais.h"
-
+#include "uteis.h"
+#include "validacoes.h"
 
 
 void modulo_relatorios(void) {

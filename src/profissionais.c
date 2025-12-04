@@ -46,8 +46,7 @@ char tela_profissionais(void) {
     exibir_moldura_conteudo(menu);
     printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
-    getchar();
-    pausar();
+    limpar_buffer_entrada();
     return opcao;
 }
 
@@ -69,25 +68,23 @@ void cadastrar_profissional(void) {
     }
 
     limpar_tela();
-    printf("\n");
-
     exibir_moldura_titulo("Cadastro - Profissionais");
     ler_nome(pf->nome);
     ler_cpf(pf->cpf);
     ler_tel(pf->tel);
     ler_crn(pf->crn);
     ler_sexo(&pf->sexo);
-
-    printf("Profissional Cadastrado com Sucesso!\n");
-    printf("ID gerado: %02d\n", pf->id_profissional);
-
     pf->status = true;
 
     arq_profissionais = fopen("data/arq_profissionais.dat", "a+b");
     if (arq_profissionais == NULL) {
-        printf("Erro na criação do arquivo\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo");
+        free(pf);
         return;
     }
+
+    exibir_moldura_titulo("Profissional Cadastrado com Sucesso!");
+    printf("\nID gerado: %02d\n", pf->id_profissional);
 
     fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
     fclose(arq_profissionais);
@@ -105,29 +102,29 @@ void buscar_profissional(void) {
     pf = (Profissional *)malloc(sizeof(Profissional));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Busca - Profissionais");
-    printf("Informe o ID do Profissional: \n");
+    printf("Informe o ID do Profissional: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     encontrado = false;
     arq_profissionais = fopen("data/arq_profissionais.dat", "rb");
 
     if (arq_profissionais == NULL) {
-        printf("Erro na abertura do arquivo\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo");
+        free(pf);
         return;
     }
     while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
         if ((pf->id_profissional == id_busca) && (pf->status == true)) {
-            printf("Profissional Encontrado!\n");
+            exibir_moldura_titulo("Profissional Encontrado!");
             exibir_profissional(pf);
             encontrado = true;
             break;
         }
     }
     if (encontrado == false) {
-        printf("\nProfissional não encontrado!\n");
+        exibir_moldura_titulo("Profissional não encontrado!");
     }
 
     fclose(arq_profissionais);
@@ -150,11 +147,10 @@ void alterar_profissional(void) {
     pf = (Profissional *)malloc(sizeof(Profissional));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Alteração - Profissionais");
-    printf("Informe o ID: \n");
+    printf("Informe o ID do Profissional: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     encontrado = false;
 
@@ -162,7 +158,8 @@ void alterar_profissional(void) {
     arq_profissionais_temp = fopen("data/arq_profissionais_temp.dat", "wb");
 
     if (arq_profissionais == NULL || arq_profissionais_temp == NULL) {
-        printf("Erro na abertura dos arquivos\n");
+        exibir_moldura_titulo("Erro na abertura dos arquivos");
+        free(pf);
         return;
     }
 
@@ -172,17 +169,18 @@ void alterar_profissional(void) {
 
             do {
                 limpar_tela();
-                printf("\nDados atuais do profissional\n");
+                exibir_moldura_titulo("Dados atuais do profissional");
                 exibir_profissional(pf);
 
-                printf("\nQual campo deseja alterar?\n");
-                printf("1. Nome\n");
-                printf("2. CPF\n");
-                printf("3. Telefone\n");
-                printf("4. CRN\n");
+                const char *menu_alt = "\nQual campo deseja alterar?\n"
+                                       "1. Nome\n"
+                                       "2. CPF\n"
+                                       "3. Telefone\n"
+                                       "4. CRN\n";
+                exibir_moldura_conteudo(menu_alt);
                 printf("Escolha uma opção: ");
                 scanf(" %c", &opcao);
-                getchar();
+                limpar_buffer_entrada();
 
                 switch (opcao) {
                     case '1':
@@ -198,20 +196,19 @@ void alterar_profissional(void) {
                         ler_crn(pf->crn);
                         break;
                     default:
-                        printf("Opção inválida!\n");
+                        exibir_moldura_titulo("Opção inválida!");
                         break;
                 }
 
-                printf("\nDados atualizados\n");
+                exibir_moldura_titulo("Dados atualizados");
                 exibir_profissional(pf);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
-                getchar();
-                continuar = confirmar_acao(continuar);
+                limpar_buffer_entrada();
 
                 if (continuar == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
 
             } while (continuar == 'S');
@@ -225,11 +222,11 @@ void alterar_profissional(void) {
     if (encontrado == true) {
         remove("data/arq_profissionais.dat");
         rename("data/arq_profissionais_temp.dat", "data/arq_profissionais.dat");
-        printf("Profissional alterado com sucesso!\n");
+        exibir_moldura_titulo("Profissional alterado com sucesso!");
 
     } else {
         remove("data/arq_profissionais_temp.dat");
-        printf("\nProfissional não encontrado!\n");
+        exibir_moldura_titulo("Profissional não encontrado!");
     }
     free(pf);
     pausar();
@@ -246,34 +243,33 @@ void excluir_profissional(void) {
     pf = (Profissional *)malloc(sizeof(Profissional));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Exclusão - Profissionais");
-    printf("Informe o ID do Profissional: \n");
+    printf("Informe o ID do Profissional: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
     encontrado = false;
-    pausar();
 
     arq_profissionais = fopen("data/arq_profissionais.dat", "r+b");
 
     if (arq_profissionais == NULL) {
-        printf("Erro na abertura do arquivo\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo");
+        free(pf);
         return;
     }
 
     while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
         if ((pf->id_profissional == id_busca) && (pf->status == true)) {
-            printf("Profissional Encontrado!\n");
+            exibir_moldura_titulo("Profissional Encontrado!");
             exibir_profissional(pf);
             encontrado = true;
 
             do {
                 printf("\nDeseja realmente excluir este Profissional? (S/N): ");
                 scanf(" %c", &resposta);
-                resposta = confirmar_acao(resposta);
+                limpar_buffer_entrada();
 
                 if (resposta == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
             } while (resposta == 0);
 
@@ -281,16 +277,16 @@ void excluir_profissional(void) {
                 pf->status = false;
                 fseek(arq_profissionais, (-1) * sizeof(Profissional), SEEK_CUR);
                 fwrite(pf, sizeof(Profissional), 1, arq_profissionais);
-                printf("\nProfissional excluído com sucesso!\n");
+                exibir_moldura_titulo("Profissional excluído com sucesso!");
             } else {
-                printf("\nOperação de exclusão cancelada.\n");
+                exibir_moldura_titulo("Operação de exclusão cancelada.");
             }
             break;
         }
     }
 
     if (encontrado == false) {
-        printf("\nProfissional não encontrado!\n");
+        exibir_moldura_titulo("Profissional não encontrado!");
     }
     fclose(arq_profissionais);
     free(pf);
@@ -300,7 +296,7 @@ void excluir_profissional(void) {
 
 void exibir_profissional(const Profissional *pf) {
     if (pf == NULL) {
-        printf("Erro: profisional inexistente!\n");
+        exibir_moldura_titulo("Erro: profisional inexistente!");
         return;
     }
     printf("ID:         %d\n", pf->id_profissional);

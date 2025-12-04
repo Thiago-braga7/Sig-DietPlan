@@ -14,12 +14,6 @@ typedef struct AgendamentoNode {
     struct AgendamentoNode *prox;
 } AgendamentoNode;
 
-// Protótipos de funções estáticas
-static char tela_relatorios_agendamentos(void);
-static void listar_agendamentos(void);
-static void listar_agendamentos_paciente(void);
-static void listar_agendamentos_ordenado(void);
-
 void relatorios_agendamentos(void) {
     char opcao;
 
@@ -41,7 +35,7 @@ void relatorios_agendamentos(void) {
     } while (opcao != '0');
 }
 
-static char tela_relatorios_agendamentos(void) {
+char tela_relatorios_agendamentos(void) {
     char opcao;
 
     const char *menu = "1. Lista Geral de Agendamentos\n"
@@ -54,12 +48,12 @@ static char tela_relatorios_agendamentos(void) {
 
     printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
-    getchar();
+    limpar_buffer_entrada();
 
     return opcao;
 }
 
-static void listar_agendamentos(void) {
+void listar_agendamentos(void) {
     FILE *arq_agendamentos;
     Agendamento *ag;
 
@@ -74,24 +68,33 @@ static void listar_agendamentos(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Lista Geral");
+    printf(
+        "║ %-4s ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n", "ID", "CPF", "Data", "Hora", "Profissional");
+    printf("════════════════════════════════════════════════════════════════════════\n");
 
+    bool encontrado = false;
     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
         if (ag->status == true) {
-            printf("\n");
-            exibir_agendamento(ag);
-            printf("\n");
-            printf("═══════════════════════════════════════════════════════════════════════════"
-                   "═════\n");
+            encontrado = true;
+            printf("║ %-4d ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",
+                   ag->id_agendamento,
+                   ag->cpf,
+                   ag->data,
+                   ag->hora,
+                   ag->profissional);
         }
     }
 
+    if (!encontrado) {
+        exibir_moldura_titulo("Nenhum agendamento ativo encontrado");
+    }
     fclose(arq_agendamentos);
     free(ag);
 
     pausar();
 }
 
-static void listar_agendamentos_paciente(void) {
+void listar_agendamentos_paciente(void) {
     FILE *arq_agendamentos;
     FILE *arq_pacientes;
     Agendamento *ag;
@@ -107,7 +110,7 @@ static void listar_agendamentos_paciente(void) {
 
     printf("Digite o CPF do paciente (Apenas Números): ");
     scanf("%s", cpf_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     printf("║ %-30s ║ %15s ║ %11s ║ %7s ║ %10s ║ %12s ║ %14s ║\n",
            "Nome",
@@ -169,7 +172,7 @@ static void listar_agendamentos_paciente(void) {
     pausar();
 }
 
-static void listar_agendamentos_ordenado(void) {
+void listar_agendamentos_ordenado(void) {
     FILE *arq;
     Agendamento ag;
     AgendamentoNode *lista = NULL;
@@ -181,9 +184,8 @@ static void listar_agendamentos_ordenado(void) {
         pausar();
         return;
     }
-
     limpar_tela();
-    exibir_moldura_titulo("Agendamentos - Lista Dinâmica (ordenada por ID)");
+    exibir_moldura_titulo("Agendamentos - Lista Ordenada por ID");
 
     while (fread(&ag, sizeof(Agendamento), 1, arq)) {
         if (!ag.status)
@@ -220,18 +222,26 @@ static void listar_agendamentos_ordenado(void) {
             novo->prox = atual;
         }
     }
-
     fclose(arq);
 
     if (lista == NULL) {
         exibir_moldura_titulo("Nenhum agendamento ativo encontrado");
     } else {
+        printf("║ %-4s ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",
+               "ID",
+               "CPF",
+               "Data",
+               "Hora",
+               "Profissional");
+        printf("════════════════════════════════════════════════════════════════════════\n");
         atual = lista;
         while (atual != NULL) {
-            printf("\n");
-            exibir_agendamento(&atual->ag);
-            printf("\n═════════════════════════════════════════════════════════════════════════"
-                   "═══\n");
+            printf("║ %-4d ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",
+                   atual->ag.id_agendamento,
+                   atual->ag.cpf,
+                   atual->ag.data,
+                   atual->ag.hora,
+                   atual->ag.profissional);
             atual = atual->prox;
         }
     }
@@ -243,6 +253,5 @@ static void listar_agendamentos_ordenado(void) {
         free(atual);
         atual = tmp;
     }
-
     pausar();
 }

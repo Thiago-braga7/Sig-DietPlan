@@ -3,7 +3,7 @@
 
 int validar_crn(char *);
 int validar_telefone(char *);
-int validar_idade(int *);
+int validar_idade(int);
 int validar_mes(char *);
 int ano_bissexto(int);
 int ano_atual(int);

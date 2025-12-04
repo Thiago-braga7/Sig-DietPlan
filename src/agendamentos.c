@@ -54,7 +54,7 @@ char tela_agendamentos(void) {
 
     printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
-    getchar();
+    limpar_buffer_entrada();
 
     return opcao;
 }
@@ -89,19 +89,21 @@ void cadastrar_agendamento(void) {
     ler_profissional(ag->profissional);
     ler_observacoes(ag->observacoes);
 
-    exibir_moldura_titulo("Agendamento cadastrado com sucesso");
-    printf("ID gerado: %02d\n", ag->id_agendamento);
     ag->status = true;
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "a+b");
 
     if (arq_agendamentos == NULL) {
-        printf("Erro na criação do arquivo\n");
+        exibir_moldura_titulo("Erro na criação do arquivo");
+        free(ag);
         return;
     }
 
     fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos);
     fclose(arq_agendamentos);
+
+    exibir_moldura_titulo("Agendamento cadastrado com sucesso");
+    printf("\nID gerado: %02d\n", ag->id_agendamento);
     free(ag);
     pausar();
 }
@@ -120,12 +122,12 @@ void buscar_agendamento(void) {
     exibir_moldura_titulo("Agendamentos - Busca");
     printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
 
     if (arq_agendamentos == NULL) {
-        printf("Erro na abertura do arquivo\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo");
         return;
     }
 
@@ -139,7 +141,7 @@ void buscar_agendamento(void) {
     }
 
     if (encontrado == false) {
-        printf("\nAgendamento não encontrado!\n");
+        exibir_moldura_titulo("Agendamento não encontrado!");
     }
 
     fclose(arq_agendamentos);
@@ -165,13 +167,13 @@ void alterar_agendamento(void) {
     exibir_moldura_titulo("Agendamentos - Alteração");
     printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     arq_agendamentos_temp = fopen("data/arq_agendamentos_temp.dat", "wb");
 
     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL) {
-        printf("Erro na criação do arquivo\n");
+        exibir_moldura_titulo("Erro na criação do arquivo");
         free(ag);
         return;
     }
@@ -196,7 +198,7 @@ void alterar_agendamento(void) {
 
                 printf("Escolha uma opção: ");
                 scanf(" %c", &opcao);
-                getchar();
+                limpar_buffer_entrada();
 
                 switch (opcao) {
                     case '1':
@@ -219,19 +221,19 @@ void alterar_agendamento(void) {
                         break;
 
                     default:
-                        printf("Opção inválida!\n");
+                        exibir_moldura_titulo("Opção inválida!");
                         break;
                 }
 
-                printf("\nDados atualizados\n");
+                exibir_moldura_titulo("Dados atualizados");
                 exibir_agendamento(ag);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
-                continuar = confirmar_acao(continuar);
+                limpar_buffer_entrada();
 
                 if (continuar == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
 
             } while (continuar == 'S');
@@ -246,11 +248,11 @@ void alterar_agendamento(void) {
     if (encontrado == true) {
         remove("data/arq_agendamentos.dat");
         rename("data/arq_agendamentos_temp.dat", "data/arq_agendamentos.dat");
-        printf("Agendamento alterado com sucesso!\n");
+        exibir_moldura_titulo("Agendamento alterado com sucesso!");
 
     } else {
         remove("data/arq_agendamentos_temp.dat");
-        printf("\nAgendamento não encontrado!\n");
+        exibir_moldura_titulo("Agendamento não encontrado!");
     }
 
     free(ag);
@@ -272,12 +274,12 @@ void excluir_agendamento(void) {
     exibir_moldura_titulo("Agendamentos - Exclusão");
     printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "r+b");
 
     if (arq_agendamentos == NULL) {
-        printf("Erro na criação do arquivo\n");
+        exibir_moldura_titulo("Erro na criação do arquivo");
         return;
     }
 
@@ -290,10 +292,10 @@ void excluir_agendamento(void) {
             do {
                 printf("\nDeseja realmente excluir este Agendamento? (S/N): ");
                 scanf(" %c", &resposta);
-                resposta = confirmar_acao(resposta);
+                limpar_buffer_entrada();
 
                 if (resposta == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
 
             } while (resposta == 0);
@@ -302,10 +304,10 @@ void excluir_agendamento(void) {
                 ag->status = false;
                 fseek(arq_agendamentos, (-1) * sizeof(Agendamento), SEEK_CUR);
                 fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos);
-                printf("\nAgendamento excluído com sucesso!\n");
+                exibir_moldura_titulo("Agendamento excluído com sucesso!");
 
             } else {
-                printf("\nOperação de exclusão cancelada.\n");
+                exibir_moldura_titulo("Operação de exclusão cancelada.");
             }
 
             break;
@@ -313,7 +315,7 @@ void excluir_agendamento(void) {
     }
 
     if (encontrado == false) {
-        printf("\nAgendamento não encontrado!\n");
+        exibir_moldura_titulo("Agendamento não encontrado!");
     }
 
     fclose(arq_agendamentos);
@@ -340,20 +342,20 @@ void excluir_agendamento_fisico(void) {
 
     printf("Informe o ID do Agendamento: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     arq_agendamentos_temp = fopen("data/arq_agendamentos_temp.dat", "wb");
 
     if (arq_agendamentos == NULL || arq_agendamentos_temp == NULL) {
-        printf("Erro ao abrir arquivos!\n");
+        exibir_moldura_titulo("Erro ao abrir arquivos!");
         free(ag);
         return;
     }
 
     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
         if (ag->id_agendamento == id_busca) {
-            printf("Agendamento encontrado!\n");
+            exibir_moldura_titulo("Agendamento encontrado!");
             exibir_agendamento(ag);
             encontrado = true;
 
@@ -361,25 +363,26 @@ void excluir_agendamento_fisico(void) {
                 do {
                     printf("\nDeseja realmente excluir este Agendamento (fisicamente)? (S/N): ");
                     scanf(" %c", &resposta);
-                    resposta = confirmar_acao(resposta);
+                    limpar_buffer_entrada();
 
                     if (resposta == 0) {
-                        printf("Opção inválida! Digite apenas S ou N.\n");
+                        exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                     }
 
                 } while (resposta == 0);
 
                 if (resposta == 'S') {
-                    printf("\nAgendamento excluído fisicamente com sucesso!\n");
+                    exibir_moldura_titulo("Agendamento excluído fisicamente com sucesso!");
                     excluido = true;
 
                 } else {
-                    printf("\nOperação cancelada. O agendamento foi mantido.\n");
+                    exibir_moldura_titulo("Operação cancelada. O agendamento foi mantido.");
                     fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
                 }
 
             } else {
-                printf("\nO agendamento está ativo, portanto não pode ser excluído fisicamente.\n");
+                exibir_moldura_titulo(
+                    "O agendamento está ativo, portanto não pode ser excluído fisicamente.");
                 fwrite(ag, sizeof(Agendamento), 1, arq_agendamentos_temp);
             }
 
@@ -396,10 +399,10 @@ void excluir_agendamento_fisico(void) {
     rename("data/arq_agendamentos_temp.dat", "data/arq_agendamentos.dat");
 
     if (encontrado == false) {
-        printf("\nAgendamento não encontrado!\n");
+        exibir_moldura_titulo("Agendamento não encontrado!");
 
     } else if (excluido == true) {
-        printf("\nExclusão física concluída!\n");
+        exibir_moldura_titulo("Exclusão física concluída!");
     }
 
     pausar();
@@ -408,7 +411,7 @@ void excluir_agendamento_fisico(void) {
 
 void exibir_agendamento(const Agendamento *ag) {
     if (ag == NULL) {
-        printf("Erro: agendamento inexistente!\n");
+        exibir_moldura_titulo("Erro: agendamento inexistente!");
         return;
     }
 
