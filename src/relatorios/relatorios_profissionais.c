@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 
 #include "profissionais.h"
 #include "uteis.h"
@@ -69,14 +69,14 @@ void listar_profissionais(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Profissionais - Lista Geral");
-    printf("║ %-4s ║ %-30s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
-    printf("══════════════════════════════════════════════════════════════════════════════════\n");
+    printf("║ %-4s ║ %-29s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
+    exibir_linha_separadora();
 
     bool encontrado = false;
     while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
         if (pf->status == true) {
             encontrado = true;
-            printf("║ %-4d ║ %-30s ║ %-12s ║ %-12s ║ %-4c ║\n",
+            printf("║ %-4d ║ %-29s ║ %-12s ║ %-12s ║ %-4c ║\n",
                    pf->id_profissional,
                    pf->nome,
                    pf->cpf,
@@ -116,13 +116,13 @@ void listar_profissionais_ordenado(void) {
             novo->dados = pf;
             novo->prox = NULL;
 
-            if (lista == NULL || strcasecmp(novo->dados.nome, lista->dados.nome) < 0) {
+            if (lista == NULL || strcmp(novo->dados.nome, lista->dados.nome) < 0) {
                 novo->prox = lista;
                 lista = novo;
             } else {
                 ant = lista;
                 atual = lista->prox;
-                while (atual != NULL && strcasecmp(atual->dados.nome, novo->dados.nome) < 0) {
+                while (atual != NULL && strcmp(atual->dados.nome, novo->dados.nome) < 0) {
                     ant = atual;
                     atual = atual->prox;
                 }
@@ -137,8 +137,7 @@ void listar_profissionais_ordenado(void) {
         exibir_moldura_titulo("Nenhum profissional ativo encontrado");
     } else {
         printf("║ %-4s ║ %-30s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
-        printf(
-            "══════════════════════════════════════════════════════════════════════════════════\n");
+        exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
             printf("║ %-4d ║ %-30s ║ %-12s ║ %-12s ║ %-4c ║\n",
@@ -189,7 +188,7 @@ void listar_profissionais_sexo(void) {
 
     printf("\n");
     printf("║ %-4s ║ %-30s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
-    printf("══════════════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     while (fread(pf, sizeof(Profissional), 1, arq)) {
         if (pf->status && pf->sexo == sexo_busca) {

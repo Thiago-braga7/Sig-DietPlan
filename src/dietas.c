@@ -44,7 +44,7 @@ char tela_dietas(void) {
                        "2. Buscar Dieta\n"
                        "3. Alterar Dieta\n"
                        "4. Excluir Dieta\n"
-                       "5. Listar Dietas\n"
+                       "5. Excluir Dieta(Física)\n"
                        "0. Voltar ao Menu Principal\n";
 
     limpar_tela();

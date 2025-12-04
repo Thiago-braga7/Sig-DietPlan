@@ -76,8 +76,7 @@ void listar_consultas(void) {
            "Médico",
            "Data",
            "Hora");
-    printf(
-        "══════════════════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->status == true) {
@@ -132,13 +131,13 @@ void listar_consultas_ordenado_paciente(void) {
             novo->consulta = con;
             novo->prox = NULL;
 
-            if (lista == NULL || strcasecmp(novo->consulta.nome, lista->consulta.nome) < 0) {
+            if (lista == NULL || strcmp(novo->consulta.nome, lista->consulta.nome) < 0) {
                 novo->prox = lista;
                 lista = novo;
             } else {
                 ant = lista;
                 atual = lista->prox;
-                while (atual != NULL && strcasecmp(atual->consulta.nome, novo->consulta.nome) < 0) {
+                while (atual != NULL && strcmp(atual->consulta.nome, novo->consulta.nome) < 0) {
                     ant = atual;
                     atual = atual->prox;
                 }
@@ -158,8 +157,7 @@ void listar_consultas_ordenado_paciente(void) {
                "Médico",
                "Data",
                "Hora");
-        printf("═══════════════════════════════════════════════════════════════════════════════════"
-               "═══\n");
+        exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
             printf("║ %-4d ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
@@ -219,8 +217,7 @@ void listar_consultas_medico(void) {
            "Médico",
            "Data",
            "Hora");
-    printf(
-        "══════════════════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->status == true && strcmp(med_busca, con->medico) == 0) {

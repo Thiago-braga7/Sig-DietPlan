@@ -19,13 +19,24 @@ char confirmar_acao(char valor) {
 
 
 void limpar_tela(void) {
-    system("clear||cls");
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+// Limpa o buffer de entrada do teclado, descartando caracteres até o \n ou EOF
+void limpar_buffer_entrada(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
 }
 
 
 void pausar(void) {
     printf("\nPressione ENTER para continuar...");
-    getchar();
+    limpar_buffer_entrada();
 }
 
 
@@ -111,4 +122,14 @@ void exibir_moldura_conteudo(const char *conteudo) {
     for (i = 0; i < LARGURA; i++)
         printf("═");
     printf("╝\n");
+}
+
+// Exibe uma linha separadora com a mesma largura da moldura
+void exibir_linha_separadora(void) {
+    int i;
+    printf("╠");
+    for (i = 0; i < LARGURA; i++) {
+        printf("═");
+    }
+    printf("╣\n");
 }

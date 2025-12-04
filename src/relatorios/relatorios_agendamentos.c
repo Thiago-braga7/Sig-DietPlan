@@ -70,7 +70,7 @@ void listar_agendamentos(void) {
     exibir_moldura_titulo("Agendamentos - Lista Geral");
     printf(
         "║ %-4s ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n", "ID", "CPF", "Data", "Hora", "Profissional");
-    printf("════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     bool encontrado = false;
     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
@@ -120,7 +120,7 @@ void listar_agendamentos_paciente(void) {
            "Tipo",
            "Profissional",
            "Observações");
-    printf("═════════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
     if (arq_agendamentos == NULL) {
@@ -156,8 +156,7 @@ void listar_agendamentos_paciente(void) {
                        ag->tipo,
                        ag->profissional,
                        ag->observacoes);
-                printf("═══════════════════════════════════════════════════════════════════"
-                       "═════════\n");
+                exibir_linha_separadora();
             }
         }
     }
@@ -233,7 +232,7 @@ void listar_agendamentos_ordenado(void) {
                "Data",
                "Hora",
                "Profissional");
-        printf("════════════════════════════════════════════════════════════════════════\n");
+        exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
             printf("║ %-4d ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",

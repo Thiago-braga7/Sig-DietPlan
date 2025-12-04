@@ -66,7 +66,7 @@ void listar_pacientes(void) {
     exibir_moldura_titulo("Pacientes - Lista Geral");
 
     printf("║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
-    printf("═════════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");
     if (arq_paciente == NULL) {
@@ -131,13 +131,13 @@ void listar_pacientes_ordenado_nome(void) {
         novo->pac = pac;
         novo->prox = NULL;
 
-        if (lista == NULL || strcasecmp(novo->pac.nome, lista->pac.nome) < 0) {
+        if (lista == NULL || strcmp(novo->pac.nome, lista->pac.nome) < 0) {
             novo->prox = lista;
             lista = novo;
         } else {
             ant = lista;
             atual = lista->prox;
-            while (atual != NULL && strcasecmp(atual->pac.nome, novo->pac.nome) < 0) {
+            while (atual != NULL && strcmp(atual->pac.nome, novo->pac.nome) < 0) {
                 ant = atual;
                 atual = atual->prox;
             }
@@ -155,7 +155,7 @@ void listar_pacientes_ordenado_nome(void) {
     } else {
         printf(
             "║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
-        printf("═════════════════════════════════════════════════════════════════════════════\n");
+        exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
             printf("║ %-30s ║ %-12s ║ %7d ║ %6.2f ║ %6.2f ║\n",
@@ -205,7 +205,7 @@ void listar_pacientes_por_faixa_idade(void) {
 
     printf("\n");
     printf("║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
-    printf("═════════════════════════════════════════════════════════════════════════════\n");
+    exibir_linha_separadora();
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (pac->status && pac->idade >= idade_min && pac->idade <= idade_max) {
