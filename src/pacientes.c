@@ -63,8 +63,7 @@ char tela_pacientes(void) {
     exibir_moldura_conteudo(menu);
     printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
-    getchar();
-    pausar();
+    limpar_buffer_entrada();
 
     return opcao;
 }
@@ -77,7 +76,6 @@ void cadastrar_paciente(void) {
     pac = (Paciente *)malloc(sizeof(Paciente));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Pacientes - Cadastro");
 
     ler_nome(pac->nome);
@@ -92,17 +90,15 @@ void cadastrar_paciente(void) {
     arq_paciente = fopen("data/arq_pacientes.dat", "ab");
 
     if (arq_paciente == NULL) {
-        printf("Erro na criação do arquivo!\n");
+        exibir_moldura_titulo("Erro na criação do arquivo!");
         free(pac);
         return;
     }
 
     fwrite(pac, sizeof(Paciente), 1, arq_paciente);
     fclose(arq_paciente);
+    exibir_moldura_titulo("Paciente cadastrado com sucesso!");
     free(pac);
-
-    printf("Paciente cadastrado com sucesso!\n");
-
     pausar();
 }
 
@@ -118,24 +114,23 @@ void buscar_paciente(void) {
     pac = (Paciente *)malloc(sizeof(Paciente));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Pacientes - Busca");
 
     ler_cpf(cpf_busca);
-    pausar();
 
     encontrado = false;
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");
 
     if (arq_paciente == NULL) {
-        printf("Erro na abertura do arquivo!\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo!");
+        free(pac);
         return;
     }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == true) {
-            printf("Paciente encontrado!\n");
+            exibir_moldura_titulo("Paciente encontrado!");
             exibir_paciente(pac);
 
             encontrado = true;
@@ -144,12 +139,12 @@ void buscar_paciente(void) {
     }
 
     if (encontrado == false) {
-        printf("\nPaciente não encontrado!\n");
+        exibir_moldura_titulo("Paciente não encontrado!");
     }
 
     fclose(arq_paciente);
     free(pac);
-    getchar();
+    pausar();
 }
 
 
@@ -167,7 +162,6 @@ void alterar_paciente(void) {
     pac = (Paciente *)malloc(sizeof(Paciente));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Pacientes - Alteração");
     ler_cpf(cpf_busca);
 
@@ -178,17 +172,17 @@ void alterar_paciente(void) {
 
 
     if (arq_paciente == NULL || arq_paciente_temp == NULL) {
-        printf("Erro na abertura do arquivo!\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo!");
+        free(pac);
         return;
     }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == true) {
             encontrado = true;
-
             do {
                 limpar_tela();
-                printf("Paciente encontrado\n");
+                exibir_moldura_titulo("Paciente encontrado");
                 exibir_paciente(pac);
 
                 const char *menu_alt = "\nQual campo deseja alterar?\n"
@@ -224,20 +218,19 @@ void alterar_paciente(void) {
                         ler_altura(&pac->altura);
                         break;
                     default:
-                        printf("Opção inválida!\n");
+                        exibir_moldura_titulo("Opção inválida!");
                         break;
                 }
 
-                printf("\n");
-                printf("Dados Atualizados:\n");
+                exibir_moldura_titulo("Dados Atualizados");
                 exibir_paciente(pac);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
-                continuar = confirmar_acao(continuar);
+                limpar_buffer_entrada();
 
                 if (continuar == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
 
             } while (continuar == 'S');
@@ -251,10 +244,10 @@ void alterar_paciente(void) {
     if (encontrado) {
         remove("data/arq_pacientes.dat");
         rename("data/arq_pacientes_temp.dat", "data/arq_pacientes.dat");
-        printf("Paciente Alterado com sucesso!\n");
+        exibir_moldura_titulo("Paciente Alterado com sucesso!");
     } else {
         remove("data/arq_pacientes_temp.dat");
-        printf("Paciente não encontrado!\n");
+        exibir_moldura_titulo("Paciente não encontrado!");
     }
     free(pac);
     pausar();
@@ -272,7 +265,6 @@ void excluir_paciente(void) {
 
     limpar_tela();
 
-    printf("\n");
     exibir_moldura_titulo("Pacientes - Exclusão");
     ler_cpf(cpf_busca);
 
@@ -280,47 +272,48 @@ void excluir_paciente(void) {
 
     pac = malloc(sizeof(Paciente));
     if (pac == NULL) {
-        printf("Erro de alocação de memória!\n");
+        exibir_moldura_titulo("Erro de alocação de memória!");
         return;
     }
 
     arq_paciente = fopen("data/arq_pacientes.dat", "r+b");
 
     if (arq_paciente == NULL) {
-        printf("Erro na abertura do arquivo!\n");
+        exibir_moldura_titulo("Erro na abertura do arquivo!");
+        free(pac);
         return;
     }
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (strcmp(pac->cpf, cpf_busca) == 0 && pac->status == true) {
-            printf("Paciente encontrado\n");
+            exibir_moldura_titulo("Paciente encontrado");
             exibir_paciente(pac);
 
             encontrado = true;
-        }
 
-        do {
-            printf("\nDeseja realmente excluir esse paciente? (S/N): ");
-            scanf(" %c", &resposta);
-            resposta = confirmar_acao(resposta);
+            do {
+                printf("\nDeseja realmente excluir esse paciente? (S/N): ");
+                scanf(" %c", &resposta);
+                limpar_buffer_entrada();
 
-            if (resposta == 0) {
-                printf("Opção inválida! Digite apenas S ou N.\n");
+                if (resposta == 0) {
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
+                }
+            } while (resposta == 0);
+
+            if (resposta == 'S') {
+                pac->status = false;
+                fseek(arq_paciente, (-1) * sizeof(Paciente), SEEK_CUR);
+                fwrite(pac, sizeof(Paciente), 1, arq_paciente);
+                exibir_moldura_titulo("Paciente excluído com sucesso!");
+            } else {
+                exibir_moldura_titulo("Operação de exclusão cancelada!");
             }
-        } while (resposta == 0);
-
-        if (resposta == 'S') {
-            pac->status = false;
-            fseek(arq_paciente, (-1) * sizeof(Paciente), SEEK_CUR);
-            fwrite(pac, sizeof(Paciente), 1, arq_paciente);
-            printf("Paciente excluído com sucesso!\n");
-        } else {
-            printf("Operação de exclusão cancelada!\n");
+            break;  // Sai do while após encontrar e tratar o paciente
         }
-        break;
     }
 
-    if (encontrado == false) {
+    if (!encontrado) {
         exibir_moldura_titulo("Erro: paciente inexistente");
     }
 

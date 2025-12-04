@@ -44,7 +44,7 @@ char tela_dietas(void) {
                        "2. Buscar Dieta\n"
                        "3. Alterar Dieta\n"
                        "4. Excluir Dieta\n"
-                       "5. Listar Dietas\n"
+                       "5. Excluir Dieta(Física)\n"
                        "0. Voltar ao Menu Principal\n";
 
     limpar_tela();
@@ -80,7 +80,7 @@ void cadastrar_dieta(void) {
     printf("\n");
     exibir_moldura_titulo("Dietas - Cadastro");
     ler_dieta(dt->nome_dieta);
-    ler_calorias(dt->calorias);
+    ler_calorias(&dt->calorias);
     ler_refeicoes(dt->refeicoes);
     exibir_moldura_titulo("Dieta cadastrada com sucesso!");
     printf("\nID gerado: %02d\n", dt->id_dieta);
@@ -186,13 +186,13 @@ void alterar_dieta(void) {
 
                 switch (opcao) {
                     case '1':
-                        validar_nome(dt->nome_dieta);
+                        ler_dieta(dt->nome_dieta);
                         break;
                     case '2':
-                        validar_calorias(dt->calorias);
+                        ler_calorias(&dt->calorias);
                         break;
                     case '3':
-                        validar_observacao(dt->refeicoes);
+                        ler_refeicoes(dt->refeicoes);
                         break;
                     default:
                         printf("Opção inválida!\n");

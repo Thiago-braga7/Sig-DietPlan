@@ -22,7 +22,7 @@ int main(void) {
         menu_principal();
         printf("Escolha uma opção: ");
         scanf(" %c", &opcao);
-        getchar();
+        limpar_buffer_entrada();
 
         switch (opcao) {
             case '1':

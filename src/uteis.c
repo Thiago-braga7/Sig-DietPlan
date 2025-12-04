@@ -1,7 +1,43 @@
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define LARGURA 75
+
+
+// Funcões criadas por Thiago
+char confirmar_acao(char valor) {
+    valor = toupper(valor);
+
+    if (valor == 'S' || valor == 'N') {
+        return valor;
+    }
+
+    return 0;
+}
+
+
+void limpar_tela(void) {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+// Limpa o buffer de entrada do teclado, descartando caracteres até o \n ou EOF
+void limpar_buffer_entrada(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
+}
+
+
+void pausar(void) {
+    printf("\nPressione ENTER para continuar...");
+    limpar_buffer_entrada();
+}
 
 
 // Conta a largura da string na tela, para não quebrar alinhamento da moldura
@@ -86,4 +122,14 @@ void exibir_moldura_conteudo(const char *conteudo) {
     for (i = 0; i < LARGURA; i++)
         printf("═");
     printf("╝\n");
+}
+
+// Exibe uma linha separadora com a mesma largura da moldura
+void exibir_linha_separadora(void) {
+    int i;
+    printf("╠");
+    for (i = 0; i < LARGURA; i++) {
+        printf("═");
+    }
+    printf("╣\n");
 }

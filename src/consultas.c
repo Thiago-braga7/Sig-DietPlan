@@ -67,7 +67,7 @@ char tela_consultas(void) {
 
     printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
-    getchar();
+    limpar_buffer_entrada();
     return opcao;
 }
 
@@ -108,19 +108,21 @@ void cadastrar_consulta(void) {
     ler_medico(con->medico);
     ler_observacoes(con->observacoes);
 
-    exibir_moldura_titulo("Consulta cadastrada com sucesso");
-
     con->status = true;
 
     arq_consulta = fopen("data/arq_consulta.dat", "a+b");
 
     if (arq_consulta == NULL) {
-        printf("Erro na criação do arquivo\n");
+        exibir_moldura_titulo("Erro na criação do arquivo");
+        free(con);
         return;
     }
 
     if (fwrite(con, sizeof(Consulta), 1, arq_consulta) != 1) {
-        printf("Erro ao salvar consulta.\n");
+        exibir_moldura_titulo("Erro ao salvar consulta.");
+    } else {
+        exibir_moldura_titulo("Consulta cadastrada com sucesso");
+        printf("\nID gerado: %02d\n", con->id_consulta);
     }
 
     fclose(arq_consulta);
@@ -141,23 +143,24 @@ void buscar_consulta(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Consultas - Busca");
+    printf("Informe o ID da consulta: ");
     scanf("%d", &id_busca);
-    getchar();
-    pausar();
+    limpar_buffer_entrada();
 
     encontrado = false;
 
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
 
     if (arq_consulta == NULL) {
-        printf("Erro na criacao do arquivo\n");
+        exibir_moldura_titulo("Erro na criacao do arquivo");
+        free(con);
         getchar();
         return;
     }
 
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if ((id_busca == con->id_consulta) && (con->status == true)) {
-            printf("Consulta encontrada\n");
+            exibir_moldura_titulo("Consulta encontrada");
             exibir_consulta(con);
             encontrado = true;
             break;
@@ -165,12 +168,12 @@ void buscar_consulta(void) {
     }
 
     if (!encontrado) {
-        printf("\nConsulta não encontrada!\n");
+        exibir_moldura_titulo("Consulta não encontrada!");
     }
 
     fclose(arq_consulta);
     free(con);
-    getchar();
+    pausar();
 }
 
 
@@ -188,9 +191,11 @@ void alterar_consulta(void) {
 
     con = (Consulta *)malloc(sizeof(Consulta));
 
+    limpar_tela();
     exibir_moldura_titulo("Consultas - Alteração");
+    printf("Informe o ID da consulta: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     encontrado = false;
 
@@ -198,7 +203,8 @@ void alterar_consulta(void) {
     arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
 
     if (arq_consulta == NULL || arq_consulta_temp == NULL) {
-        printf("Erro na busca do arquivo\n");
+        exibir_moldura_titulo("Erro na busca do arquivo");
+        free(con);
         return;
     }
 
@@ -207,18 +213,19 @@ void alterar_consulta(void) {
             encontrado = true;
             do {
                 limpar_tela();
-                printf("\nDados atuais da consulta\n");
+                exibir_moldura_titulo("Dados atuais da consulta");
                 exibir_consulta(con);
 
-                printf("\nQual campo deseja alterar?\n");
-                printf("1. Nome\n");
-                printf("2. Data\n");
-                printf("3. Hora\n");
-                printf("4. Médico\n");
-                printf("5. Observações\n");
+                const char *menu_alt = "\nQual campo deseja alterar?\n"
+                                       "1. Nome\n"
+                                       "2. Data\n"
+                                       "3. Hora\n"
+                                       "4. Médico\n"
+                                       "5. Observações\n";
+                exibir_moldura_conteudo(menu_alt);
                 printf("Escolha uma opção: ");
                 scanf(" %c", &opcao);
-                getchar();
+                limpar_buffer_entrada();
 
                 switch (opcao) {
                     case '1':
@@ -237,20 +244,19 @@ void alterar_consulta(void) {
                         ler_observacoes(con->observacoes);
                         break;
                     default:
-                        printf("Opção inválida!\n");
+                        exibir_moldura_titulo("Opção inválida!");
                         break;
                 }
 
-                printf("\nDados atualizados\n");
+                exibir_moldura_titulo("Dados atualizados");
                 exibir_consulta(con);
 
                 printf("\nDeseja alterar outro campo? (S/N): ");
                 scanf(" %c", &continuar);
-                getchar();
-                continuar = confirmar_acao(continuar);
+                limpar_buffer_entrada();
 
                 if (continuar == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
             } while (continuar == 'S');
         }
@@ -263,10 +269,10 @@ void alterar_consulta(void) {
     if (encontrado == true) {
         remove("data/arq_consulta.dat");
         rename("data/arq_consulta_temp.dat", "data/arq_consulta.dat");
-        printf("\nConsulta alterada com sucesso!\n");
+        exibir_moldura_titulo("Consulta alterada com sucesso!");
     } else {
         remove("data/arq_consulta_temp.dat");
-        printf("\nConsulta não encontrada!\n");
+        exibir_moldura_titulo("Consulta não encontrada!");
     }
     free(con);
     pausar();
@@ -285,18 +291,18 @@ void excluir_consulta(void) {
     con = (Consulta *)malloc(sizeof(Consulta));
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Consultas - Exclusão");
     printf("Informe o ID da consulta: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     encontrado = false;
 
     arq_consulta = fopen("data/arq_consulta.dat", "r+b");
 
     if (arq_consulta == NULL) {
-        printf("Erro na busca do arquivo\n");
+        exibir_moldura_titulo("Erro na busca do arquivo");
+        free(con);
         return;
     }
 
@@ -309,10 +315,10 @@ void excluir_consulta(void) {
             do {
                 printf("\nDeseja realmente excluir esta consulta? (S/N): ");
                 scanf(" %c", &resposta);
-                resposta = confirmar_acao(resposta);
+                limpar_buffer_entrada();
 
                 if (resposta == 0) {
-                    printf("Opção inválida! Digite apenas S ou N.\n");
+                    exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                 }
             } while (resposta == 0);
 
@@ -352,17 +358,17 @@ void excluir_consulta_fisica(void) {
     bool excluida = false;
 
     limpar_tela();
-    printf("\n");
     exibir_moldura_titulo("Consultas - Exclusão Física");
     printf("Informe o ID da Consulta: ");
     scanf("%d", &id_busca);
-    getchar();
+    limpar_buffer_entrada();
 
     arq_consulta = fopen("data/arq_consulta.dat", "rb");
     arq_consulta_temp = fopen("data/arq_consulta_temp.dat", "wb");
 
     if (arq_consulta == NULL || arq_consulta_temp == NULL) {
-        printf("Erro ao abrir arquivos!\n");
+        exibir_moldura_titulo("Erro ao abrir arquivos!");
+        free(con);
         return;
     }
 
@@ -374,35 +380,35 @@ void excluir_consulta_fisica(void) {
             encontrado = true;
 
             if (con->status == true) {
-                printf("Status: Ativa \n");
+                exibir_moldura_titulo("Status: Ativa");
 
             } else {
-                printf("Status: Inativa \n");
+                exibir_moldura_titulo("Status: Inativa");
             }
 
             if (con->status == false) {
                 do {
                     printf("\nDeseja realmente excluir esta consulta (fisicamente)? (S/N): ");
                     scanf(" %c", &resposta);
-                    resposta = confirmar_acao(resposta);
-
+                    limpar_buffer_entrada();
                     if (resposta == 0) {
-                        printf("Opção inválida! Digite apenas S ou N.\n");
+                        exibir_moldura_titulo("Opção inválida! Digite apenas S ou N.");
                     }
 
                 } while (resposta == 0);
 
                 if (resposta == 'S') {
-                    exibir_moldura_titulo("Consulta excluída com sucesso!\n");
+                    exibir_moldura_titulo("Consulta excluída com sucesso!");
                     excluida = true;
 
                 } else {
-                    printf("\nOperação cancelada. A consulta foi mantida.\n");
+                    exibir_moldura_titulo("Operação cancelada. A consulta foi mantida.");
                     fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
                 }
 
             } else {
-                printf("\nA consulta está ativa, portanto não pode ser excluída fisicamente.\n");
+                exibir_moldura_titulo(
+                    "A consulta está ativa, portanto não pode ser excluída fisicamente.");
                 fwrite(con, sizeof(Consulta), 1, arq_consulta_temp);
             }
 
@@ -422,7 +428,7 @@ void excluir_consulta_fisica(void) {
         exibir_moldura_titulo("Consulta não encontrada!\n");
 
     } else if (excluida == true) {
-        exibir_moldura_titulo("Consulta excluída com sucesso!\n");
+        exibir_moldura_titulo("Exclusão física concluída!");
     }
 
     pausar();

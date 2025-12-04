@@ -12,8 +12,11 @@ DATADIR = data
 TARGET = $(BUILDDIR)/sig-dietplan
 
 # Lista automática de todos os .c dentro de src/
-SRC = $(wildcard $(SRCDIR)/*.c)
-OBJ = $(SRC:$(SRCDIR)/%.c=$(BUILDDIR)/%.o)
+# Usa 'find' para buscar recursivamente todos os arquivos .c em SRCDIR
+SRC = $(shell find $(SRCDIR) -name '*.c')
+
+# Gera a lista de arquivos objeto, mantendo a estrutura de pastas em BUILDDIR
+OBJ = $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SRC))
 
 
 
@@ -27,8 +30,10 @@ $(TARGET): $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $^
 
 # Compilação dos .c para .o
-$(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+# Cria as subpastas necessárias em build antes de compilar
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 # Cria a pasta build automaticamente se não existir
 $(BUILDDIR):
