@@ -1,9 +1,6 @@
 #ifndef VALIDACOES_H
 #define VALIDACOES_H
 
-char confirmar_acao(char);
-void limpar_tela(void);
-void pausar(void);
 int validar_crn(char *);
 int validar_telefone(char *);
 int validar_idade(int *);

@@ -7,29 +7,6 @@
 #include <time.h>
 
 
-// Funcões criadas por Thiago
-char confirmar_acao(char valor) {
-    valor = toupper(valor);
-
-    if (valor == 'S' || valor == 'N') {
-        return valor;
-    }
-
-    return 0;
-}
-
-
-void limpar_tela(void) {
-    system("clear||cls");
-}
-
-
-void pausar(void) {
-    printf("\nPressione ENTER para continuar...");
-    getchar();
-}
-
-
 // Formato CRN-X/XXXXX
 int validar_crn(char *crn) {
     if (strlen(crn) != 11) {

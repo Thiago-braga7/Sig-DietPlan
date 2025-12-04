@@ -1,7 +1,32 @@
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define LARGURA 75
+
+
+// Funcões criadas por Thiago
+char confirmar_acao(char valor) {
+    valor = toupper(valor);
+
+    if (valor == 'S' || valor == 'N') {
+        return valor;
+    }
+
+    return 0;
+}
+
+
+void limpar_tela(void) {
+    system("clear||cls");
+}
+
+
+void pausar(void) {
+    printf("\nPressione ENTER para continuar...");
+    getchar();
+}
 
 
 // Conta a largura da string na tela, para não quebrar alinhamento da moldura

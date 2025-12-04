@@ -13,6 +13,7 @@
 #include "leituras.h"
 #include "pacientes.h"
 #include "profissionais.h"
+#include "relatorios/relatorios_agendamentos.h"
 #include "relatorios/relatorios_pacientes.h"
 #include "uteis.h"
 #include "validacoes.h"
@@ -22,11 +23,6 @@ typedef struct NovoProfissional {
     Profissional dados;
     struct NovoProfissional *prox;
 } NovoProfissional;
-
-typedef struct AgendamentoNode {
-    Agendamento ag;
-    struct AgendamentoNode *prox;
-} AgendamentoNode;
 
 
 // CRUDS de relatórios
@@ -118,25 +114,6 @@ void relatorios_consultas(void) {
 }
 
 
-void relatorios_agendamentos(void) {
-    char opcao;
-
-    do {
-        limpar_tela();
-        opcao = tela_relatorios_agendamentos();
-
-        switch (opcao) {
-            case '1':
-                listar_agendamentos();
-                break;
-            case '2':
-                listar_agendamentos_paciente();
-                break;
-        }
-    } while (opcao != '0');
-}
-
-
 // Telas de relatórios
 char tela_relatorios(void) {
     char opcao;
@@ -207,25 +184,6 @@ char tela_relatorios_consultas(void) {
     exibir_moldura_conteudo(menu);
 
     printf("Escolha a opção desejada: ");
-    printf("Escolha a opção desejada: ");
-    scanf(" %c", &opcao);
-    getchar();
-
-    return opcao;
-}
-
-
-char tela_relatorios_agendamentos(void) {
-    char opcao;
-
-    const char *menu = "1. Lista Geral de Agendamentos\n"
-                       "2. Lista de Agendamentos por Paciente \n"
-                       "3. Lista de Agendamentos Ordenada por ID \n"
-                       "0. Voltar ao Menu Anterior\n";
-
-    exibir_moldura_titulo("Relatórios");
-    exibir_moldura_conteudo(menu);
-
     printf("Escolha a opção desejada: ");
     scanf(" %c", &opcao);
     getchar();
@@ -544,195 +502,6 @@ void listar_consultas_medico(void) {
 
     fclose(arq_consulta);
     free(con);
-
-    pausar();
-}
-
-
-// Listas agendamentos
-void listar_agendamentos(void) {
-    FILE *arq_agendamentos;
-    Agendamento *ag;
-
-    ag = (Agendamento *)malloc(sizeof(Agendamento));
-
-    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
-    if (arq_agendamentos == NULL) {
-        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
-        free(ag);
-        return;
-    }
-
-    limpar_tela();
-    exibir_moldura_titulo("Agendamentos - Lista Geral");
-
-    while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
-        if (ag->status == true) {
-            printf("\n");
-            exibir_agendamento(ag);
-            printf("\n");
-            printf("═══════════════════════════════════════════════════════════════════════"
-                   "═════\n");
-        }
-    }
-
-    fclose(arq_agendamentos);
-    free(ag);
-
-    pausar();
-}
-
-
-void listar_agendamentos_paciente(void) {
-    FILE *arq_agendamentos;
-    FILE *arq_pacientes;
-    Agendamento *ag;
-    Paciente *pac;
-
-    ag = (Agendamento *)malloc(sizeof(Agendamento));
-    pac = (Paciente *)malloc(sizeof(Paciente));
-
-    char cpf_busca[13];
-
-    limpar_tela();
-    exibir_moldura_titulo("Agendamentos - Lista por CPF");
-
-    printf("Digite o CPF do paciente (Apenas Números): ");
-    scanf("%s", cpf_busca);
-    getchar();
-
-    printf("║ %-30s ║ %15s ║ %11s ║ %7s ║ %10s ║ %12s ║ %14s ║\n",
-           "Nome",
-           "ID Agendamento",
-           "Data",
-           "Hora",
-           "Tipo",
-           "Profissional",
-           "Observações");
-    printf("═════════════════════════════════════════════════════════════════════════════\n");
-
-    arq_agendamentos = fopen("data/arq_agendamentos.dat", "rb");
-    if (arq_agendamentos == NULL) {
-        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
-        free(ag);
-        return;
-    }
-
-    bool encontrado = 0;
-
-    while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
-        if (ag->status) {
-            if (strcmp(ag->cpf, cpf_busca) == 0) {
-                encontrado = 1;
-
-                arq_pacientes = fopen("data/arq_pacientes.dat", "rb");
-
-                if (arq_pacientes != NULL) {
-                    while (fread(pac, sizeof(Paciente), 1, arq_pacientes)) {
-                        if (pac->status && strcmp(pac->cpf, cpf_busca) == 0) {
-                            break;
-                        }
-                    }
-                    fclose(arq_pacientes);
-                }
-
-                printf("║ %-30s ║ %15d ║ %11s ║ %7s ║ %10s ║ %12s ║ %12s ║\n",
-                       pac->nome,
-                       ag->id_agendamento,
-                       ag->data,
-                       ag->hora,
-                       ag->tipo,
-                       ag->profissional,
-                       ag->observacoes);
-                printf("═══════════════════════════════════════════════════════════════════"
-                       "═════════\n");
-            }
-        }
-    }
-
-    if (!encontrado) {
-        exibir_moldura_titulo("Nenhum agendamento encontrado para esse CPF");
-    }
-
-    fclose(arq_agendamentos);
-    free(ag);
-    pausar();
-}
-
-
-void listar_agendamentos_ordenado(void) {
-    FILE *arq;
-    Agendamento ag;
-    AgendamentoNode *lista = NULL;
-    AgendamentoNode *novo, *ant, *atual;
-
-    arq = fopen("data/arq_agendamentos.dat", "rb");
-    if (arq == NULL) {
-        exibir_moldura_titulo("Nenhum agendamento cadastrado ainda");
-        pausar();
-        return;
-    }
-
-    limpar_tela();
-    exibir_moldura_titulo("Agendamentos - Lista Dinâmica (ordenada por ID)");
-
-    while (fread(&ag, sizeof(Agendamento), 1, arq)) {
-        if (!ag.status)
-            continue;
-
-        novo = (AgendamentoNode *)malloc(sizeof(AgendamentoNode));
-        if (!novo) {
-            atual = lista;
-            while (atual) {
-                AgendamentoNode *tmp = atual->prox;
-                free(atual);
-                atual = tmp;
-            }
-            fclose(arq);
-            exibir_moldura_titulo("Erro: memória insuficiente");
-            pausar();
-            return;
-        }
-        novo->ag = ag;
-        novo->prox = NULL;
-
-        if (lista == NULL || novo->ag.id_agendamento < lista->ag.id_agendamento) {
-            novo->prox = lista;
-            lista = novo;
-        } else {
-            ant = lista;
-            atual = lista->prox;
-            while (atual != NULL && atual->ag.id_agendamento <= novo->ag.id_agendamento) {
-                ant = atual;
-                atual = atual->prox;
-            }
-            ant->prox = novo;
-            novo->prox = atual;
-        }
-    }
-
-    fclose(arq);
-
-    if (lista == NULL) {
-        exibir_moldura_titulo("Nenhum agendamento ativo encontrado");
-        pausar();
-        return;
-    }
-
-    atual = lista;
-    while (atual != NULL) {
-        printf("\n");
-        exibir_agendamento(&atual->ag);
-        printf("\n═════════════════════════════════════════════════════════════════════════"
-               "═══\n");
-        atual = atual->prox;
-    }
-    atual = lista;
-    while (atual != NULL) {
-        AgendamentoNode *tmp = atual->prox;
-        free(atual);
-        atual = tmp;
-    }
 
     pausar();
 }

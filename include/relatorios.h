@@ -12,7 +12,6 @@ char tela_relatorios_pacientes(void);
 char tela_relatorios_dietas(void);
 char tela_relatorios_profissionais(void);
 char tela_relatorios_consultas(void);
-char tela_relatorios_agendamentos(void);
 void listar_pacientes(void);
 void listar_pacientes_idade(void);
 void listar_dietas(void);
@@ -22,8 +21,5 @@ void listar_profissionais_sexo(void);
 void listar_profissionais_ordenado(void);
 void listar_consultas(void);
 void listar_consultas_medico(void);
-void listar_agendamentos(void);
-void listar_agendamentos_paciente(void);
-void listar_agendamentos_ordenado(void);
 
 #endif
