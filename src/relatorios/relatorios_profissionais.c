@@ -69,14 +69,14 @@ void listar_profissionais(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Profissionais - Lista Geral");
-    printf("║ %-4s ║ %-29s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
+    printf("║ %-3s ║ %-30s ║ %-12s ║ %-12s ║ %-5s \n", "ID", "Nome", "CPF", "CRN", "Sexo");
     exibir_linha_separadora();
 
     bool encontrado = false;
     while (fread(pf, sizeof(Profissional), 1, arq_profissionais)) {
         if (pf->status == true) {
             encontrado = true;
-            printf("║ %-4d ║ %-29s ║ %-12s ║ %-12s ║ %-4c ║\n",
+            printf("║ %-3d ║ %-30s ║ %-12s ║ %-12s ║ %-5c \n",
                    pf->id_profissional,
                    pf->nome,
                    pf->cpf,
@@ -136,11 +136,11 @@ void listar_profissionais_ordenado(void) {
     if (lista == NULL) {
         exibir_moldura_titulo("Nenhum profissional ativo encontrado");
     } else {
-        printf("║ %-4s ║ %-30s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
+        printf("║ %-3s ║ %-30s ║ %-12s ║ %-12s ║ %-5s \n", "ID", "Nome", "CPF", "CRN", "Sexo");
         exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
-            printf("║ %-4d ║ %-30s ║ %-12s ║ %-12s ║ %-4c ║\n",
+            printf("║ %-3d ║ %-30s ║ %-12s ║ %-12s ║ %-5c \n",
                    atual->dados.id_profissional,
                    atual->dados.nome,
                    atual->dados.cpf,
@@ -187,13 +187,13 @@ void listar_profissionais_sexo(void) {
     }
 
     printf("\n");
-    printf("║ %-4s ║ %-30s ║ %-12s ║ %-12s ║ %-4s ║\n", "ID", "Nome", "CPF", "CRN", "Sexo");
+    printf("║ %-3s ║ %-30s ║ %-12s ║ %-12s ║ %-5s \n", "ID", "Nome", "CPF", "CRN", "Sexo");
     exibir_linha_separadora();
 
     while (fread(pf, sizeof(Profissional), 1, arq)) {
         if (pf->status && pf->sexo == sexo_busca) {
             encontrado = true;
-            printf("║ %-4d ║ %-30s ║ %-12s ║ %-12s ║ %-4c ║\n",
+            printf("║ %-3d ║ %-30s ║ %-12s ║ %-12s ║ %-5c \n",
                    pf->id_profissional,
                    pf->nome,
                    pf->cpf,

@@ -65,7 +65,12 @@ void listar_pacientes(void) {
     limpar_tela();
     exibir_moldura_titulo("Pacientes - Lista Geral");
 
-    printf("║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
+    printf("║ %-25s ║ %-12s ║ %-5s ║ %-10s ║ %-10s \n",
+           "Nome",
+           "CPF",
+           "Idade",
+           "Peso(kg)",
+           "Altura(m)");
     exibir_linha_separadora();
 
     arq_paciente = fopen("data/arq_pacientes.dat", "rb");
@@ -78,7 +83,7 @@ void listar_pacientes(void) {
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (pac->status) {
             encontrado = 1;
-            printf("║ %-30s ║ %-12s ║ %7d ║ %6.2f ║ %6.2f ║\n",
+            printf("║ %-25s ║ %-12s ║ %-5d ║ %-10.2f ║ %-10.2f \n",
                    pac->nome,
                    pac->cpf,
                    pac->idade,
@@ -153,12 +158,16 @@ void listar_pacientes_ordenado_nome(void) {
     if (lista == NULL) {
         exibir_moldura_titulo("Nenhum paciente ativo encontrado");
     } else {
-        printf(
-            "║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
+        printf("║ %-25s ║ %-12s ║ %-5s ║ %-10s ║ %-10s \n",
+               "Nome",
+               "CPF",
+               "Idade",
+               "Peso(kg)",
+               "Altura(m)");
         exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
-            printf("║ %-30s ║ %-12s ║ %7d ║ %6.2f ║ %6.2f ║\n",
+            printf("║ %-25s ║ %-12s ║ %-5d ║ %-10.2f ║ %-10.2f \n",
                    atual->pac.nome,
                    atual->pac.cpf,
                    atual->pac.idade,
@@ -204,13 +213,18 @@ void listar_pacientes_por_faixa_idade(void) {
     }
 
     printf("\n");
-    printf("║ %-30s ║ %-12s ║ %-7s ║ %-6s ║ %-6s ║\n", "Nome", "CPF", "Idade", "Peso", "Altura");
+    printf("║ %-25s ║ %-12s ║ %-5s ║ %-10s ║ %-10s \n",
+           "Nome",
+           "CPF",
+           "Idade",
+           "Peso(kg)",
+           "Altura(m)");
     exibir_linha_separadora();
 
     while (fread(pac, sizeof(Paciente), 1, arq_paciente)) {
         if (pac->status && pac->idade >= idade_min && pac->idade <= idade_max) {
             encontrado = true;
-            printf("║ %-30s ║ %-12s ║ %7d ║ %6.2f ║ %6.2f ║\n",
+            printf("║ %-25s ║ %-12s ║ %-5d ║ %-10.2f ║ %-10.2f \n",
                    pac->nome,
                    pac->cpf,
                    pac->idade,

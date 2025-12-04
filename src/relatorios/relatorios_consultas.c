@@ -70,7 +70,7 @@ void listar_consultas(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Consultas - Lista Geral");
-    printf("║ %-4s ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
+    printf("║ %-3s ║ %-22s ║ %-22s ║ %-10s ║ %-8s \n",
            "ID",
            "Nome Paciente",
            "Médico",
@@ -81,7 +81,7 @@ void listar_consultas(void) {
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->status == true) {
             encontrado = true;
-            printf("║ %-4d ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
+            printf("║ %-3d ║ %-22s ║ %-22s ║ %-10s ║ %-8s \n",
                    con->id_consulta,
                    con->nome,
                    con->medico,
@@ -151,7 +151,7 @@ void listar_consultas_ordenado_paciente(void) {
     if (lista == NULL) {
         exibir_moldura_titulo("Nenhuma consulta ativa encontrada");
     } else {
-        printf("║ %-4s ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
+        printf("║ %-3s ║ %-22s ║ %-22s ║ %-10s ║ %-8s \n",
                "ID",
                "Nome Paciente",
                "Médico",
@@ -160,7 +160,7 @@ void listar_consultas_ordenado_paciente(void) {
         exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
-            printf("║ %-4d ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
+            printf("║ %-3d ║ %-22s ║ %-22s ║ %-10s ║ %-8s \n",
                    atual->consulta.id_consulta,
                    atual->consulta.nome,
                    atual->consulta.medico,
@@ -211,7 +211,7 @@ void listar_consultas_medico(void) {
     }
 
     printf("\n");
-    printf("║ %-4s ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
+    printf("║ %-3s ║ %-22s ║ %-22s ║ %-10s ║ %-8s \n",
            "ID",
            "Nome Paciente",
            "Médico",
@@ -222,7 +222,7 @@ void listar_consultas_medico(void) {
     while (fread(con, sizeof(Consulta), 1, arq_consulta)) {
         if (con->status == true && strcmp(med_busca, con->medico) == 0) {
             encontrado = true;
-            printf("║ %-4d ║ %-25s ║ %-25s ║ %-11s ║ %-8s ║\n",
+            printf("║ %-3d ║ %-22s ║ %-22s ║ %-10s ║ %-8s \n",
                    con->id_consulta,
                    con->nome,
                    con->medico,

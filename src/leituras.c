@@ -235,14 +235,14 @@ void ler_dieta(char *nome_dieta) {
 }
 
 
-void ler_calorias(float calorias) {
+void ler_calorias(float *calorias) {
     int valido;
     do {
         printf("Total de Calorias: \n");
-        scanf("%f", &calorias);
+        scanf("%f", calorias);
         limpar_buffer_entrada();
 
-        valido = validar_calorias(calorias);
+        valido = validar_calorias(*calorias);
 
         if (valido == 0) {
             exibir_moldura_titulo("Calorias inválidas! Digite novamente!");

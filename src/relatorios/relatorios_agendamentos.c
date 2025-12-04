@@ -68,15 +68,14 @@ void listar_agendamentos(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Agendamentos - Lista Geral");
-    printf(
-        "║ %-4s ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n", "ID", "CPF", "Data", "Hora", "Profissional");
+    printf("║ %-3s ║ %-12s ║ %-10s ║ %-8s ║ %-31s \n", "ID", "CPF", "Data", "Hora", "Profissional");
     exibir_linha_separadora();
 
     bool encontrado = false;
     while (fread(ag, sizeof(Agendamento), 1, arq_agendamentos)) {
         if (ag->status == true) {
             encontrado = true;
-            printf("║ %-4d ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",
+            printf("║ %-3d ║ %-12s ║ %-10s ║ %-8s ║ %-31s \n",
                    ag->id_agendamento,
                    ag->cpf,
                    ag->data,
@@ -112,7 +111,7 @@ void listar_agendamentos_paciente(void) {
     scanf("%s", cpf_busca);
     limpar_buffer_entrada();
 
-    printf("║ %-30s ║ %15s ║ %11s ║ %7s ║ %10s ║ %12s ║ %14s ║\n",
+    printf("║ %-12s ║ %-3s ║ %-10s ║ %-8s ║ %-10s ║ %-12s ║ %-8s \n",
            "Nome",
            "ID Agendamento",
            "Data",
@@ -148,7 +147,7 @@ void listar_agendamentos_paciente(void) {
                     fclose(arq_pacientes);
                 }
 
-                printf("║ %-30s ║ %15d ║ %11s ║ %7s ║ %10s ║ %12s ║ %12s ║\n",
+                printf("║ %-12s ║ %-14d ║ %-10s ║ %-8s ║ %-10s ║ %-12s ║ %-8.8s \n",
                        pac->nome,
                        ag->id_agendamento,
                        ag->data,
@@ -226,7 +225,7 @@ void listar_agendamentos_ordenado(void) {
     if (lista == NULL) {
         exibir_moldura_titulo("Nenhum agendamento ativo encontrado");
     } else {
-        printf("║ %-4s ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",
+        printf("║ %-3s ║ %-12s ║ %-10s ║ %-8s ║ %-31s \n",
                "ID",
                "CPF",
                "Data",
@@ -235,7 +234,7 @@ void listar_agendamentos_ordenado(void) {
         exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
-            printf("║ %-4d ║ %-12s ║ %-11s ║ %-8s ║ %-20s ║\n",
+            printf("║ %-3d ║ %-12s ║ %-10s ║ %-8s ║ %-31s \n",
                    atual->ag.id_agendamento,
                    atual->ag.cpf,
                    atual->ag.data,

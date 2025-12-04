@@ -67,14 +67,14 @@ void listar_dietas(void) {
 
     limpar_tela();
     exibir_moldura_titulo("Dietas - Lista Geral");
-    printf("║ %-4s ║ %-25s ║ %-10s ║ %-30s ║\n", "ID", "Nome da Dieta", "Calorias", "Refeições");
+    printf("║ %-3s ║ %-20s ║ %-10s ║ %-31s \n", "ID", "Nome da Dieta", "Calorias", "Refeições");
     exibir_linha_separadora();
 
     bool encontrado = false;
     while (fread(dt, sizeof(Dieta), 1, arq_dietas)) {
         if (dt->status == true) {
             encontrado = true;
-            printf("║ %-4d ║ %-25s ║ %-10.2f ║ %-30.30s ║\n",
+            printf("║ %-3d ║ %-20s ║ %-10.2f ║ %-31.31s \n",
                    dt->id_dieta,
                    dt->nome_dieta,
                    dt->calorias,
@@ -118,16 +118,14 @@ void listar_dietas_calorias(void) {
     }
 
     printf("\n");
-    printf("║ %-4s ║ %-25s ║ %-10s ║ %-30s ║\n", "ID", "Nome da Dieta", "Calorias", "Refeições");
-    printf("║ %-3s ║ %-20s ║ %-10s ║ %-31s ║\n", "ID", "Nome da Dieta", "Calorias", "Refeições");
+    printf("║ %-3s ║ %-20s ║ %-10s ║ %-31s \n", "ID", "Nome da Dieta", "Calorias", "Refeições");
     exibir_linha_separadora();
 
     while (fread(dt, sizeof(Dieta), 1, arq_dietas)) {
         if (dt->status) {
             if (dt->calorias >= calorias_min && dt->calorias <= calorias_max) {
                 encontrado = 1;
-                printf("║ %-4d ║ %-25s ║ %-10.2f ║ %-30.30s ║\n",
-                printf("║ %-3d ║ %-20s ║ %-10.2f ║ %-31.31s ║\n",
+                printf("║ %-3d ║ %-20s ║ %-10.2f ║ %-31.31s \n",
                        dt->id_dieta,
                        dt->nome_dieta,
                        dt->calorias,
@@ -198,14 +196,11 @@ void listar_dietas_ordenado_nome(void) {
     if (lista == NULL) {
         exibir_moldura_titulo("Nenhuma dieta ativa encontrada");
     } else {
-        printf(
-            "║ %-4s ║ %-25s ║ %-10s ║ %-30s ║\n", "ID", "Nome da Dieta", "Calorias", "Refeições");
-        printf("║ %-3s ║ %-20s ║ %-10s ║ %-31s ║\n", "ID", "Nome da Dieta", "Calorias", "Refeições");
+        printf("║ %-3s ║ %-25s ║ %-10s ║ %-47s\n", "ID", "Nome da Dieta", "Calorias", "Refeições");
         exibir_linha_separadora();
         atual = lista;
         while (atual != NULL) {
-            printf("║ %-4d ║ %-25s ║ %-10.2f ║ %-30.30s ║\n",
-            printf("║ %-3d ║ %-20s ║ %-10.2f ║ %-31.31s ║\n",
+            printf("║ %-3d ║ %-25s ║ %-10.2f ║ %-47.47s\n",
                    atual->dieta.id_dieta,
                    atual->dieta.nome_dieta,
                    atual->dieta.calorias,
